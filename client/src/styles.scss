@@ -1,1 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
+// Root variables
+:root{
+    // Colors
+     --colors{
+        --main-color: #c4e455;
+        --main-color-dark: #484209;
+        --main-color-light: #e9efd1;
+    };
+    
+    // Fonts
+    --regular{
+        --font-family: 'Belanosima', sans-serif;
+    }
+}
+
+// Global Reset
+*, *::before, *::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// Setting the font-size to 16px through the 62.5 trick
+html, body {
+    height: 100%;
+    font-size: 62.5%;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+}
+
+// Setting up the font on the whole website
+body {
+  font-family: 'Belanosima', sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: var(--main-color);
+}
+
+// Resetting the links styling
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Resetting the list styling
+ul, ol {
+  list-style: none;
+}
+
+// Setting up the form styling to inherit the font
+input, textarea, select, button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border: none;
+  outline: none;
+}
+
+// Styling tables
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+

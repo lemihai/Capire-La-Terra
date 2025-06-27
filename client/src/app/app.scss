@@ -1,0 +1,46 @@
+:host{
+    position: relative;
+}
+
+nav {
+  background-color: var(--main-color);
+  position: fixed;
+  width: 64rem;
+  height: 3.2rem;
+  top: 2rem;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  margin: 2.4rem auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  a {
+    color: #133703;
+    height: 0.1rem;
+    width: 10rem;
+    text-align: center;
+    background-color: #133703;
+    transition: 0.32s ease-out;
+  }
+
+  a:hover {
+    height: 3.2rem;
+    color: #d6e8cf;
+    background-color: #338610;
+    transition: all 0.24s ease-out;
+  }
+
+  // Definig the backgorund image
+  .logo {
+    height: 5vh;
+    width: 5vw;
+    background-image: url("../../../design/logo.png");
+    mix-blend-mode: lighten;
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+  }
+}
