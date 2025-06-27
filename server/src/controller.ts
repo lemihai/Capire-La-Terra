@@ -14,4 +14,6 @@ exec("python3 ./scraper/bots/NSB/scraper-controller.py", (error, stdout) => {
   }
 });
 
+// TEST
+
 // const jwt = require("jsonwebtoken");
