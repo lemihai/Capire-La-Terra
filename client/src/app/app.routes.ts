@@ -3,9 +3,11 @@ import { LoginPage } from './login-page/login-page';
 import { AdminDashboard } from './admin-dashboard/admin-dashboard';
 import { LandingPage } from './landing-page/landing-page';
 import { AboutUs } from './about-us/about-us';
+import { LatestNewsPage } from './latest-news-page/latest-news-page';
 
 export const routes: Routes = [
     { path: '', component: LandingPage, title: 'Home Page' },
+    { path: 'latest-news', component: LatestNewsPage, title: 'Latest News' },
     { path: 'login', component: LoginPage, title: 'Login Page' },
     { path: 'admin', component: AdminDashboard, title:'Admin Page' },
     { path: 'about-us', component: AboutUs, title:'About Us Page' }

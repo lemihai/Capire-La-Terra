@@ -1,11 +1,12 @@
+
 nav {
   position: fixed;
-  width: 100%;
+  width: 100vw;
   height: 7.2rem;
   right: 0;
   left: 0;
   z-index: 1;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +16,7 @@ nav {
     width: 100%;
     height: 0.1rem;
     background-color: #262804;
-    opacity: .32;
+    opacity: 0.32;
   }
 
   ul {
@@ -29,42 +30,40 @@ nav {
       width: 0.1rem;
       height: 100%;
       background-color: #262804;
-      opacity: .32;
+      opacity: 0.32;
     }
 
     li {
       text-transform: capitalize;
-      padding-top: .2rem;
-      width: 24rem;
+      padding-top: 0.2rem;
+      width: 10vw;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: .2s ease-out;
+      transition: 0.2s ease-out;
       // backdrop-filter: blur(0px);
 
       a {
         font-size: 2.4rem;
         font-weight: 600;
-        color: #283D16;
-        transition: .16s ease-out;
+        color: #283d16;
+        transition: 0.16s ease-out;
         border-bottom: 1px solid #284b0900;
       }
     }
 
-    li:hover{
+    li:hover {
       background-color: #26280416;
-      transition: .2s ease-out;
+      transition: 0.2s ease-out;
       cursor: pointer;
       // backdrop-filter: blur(2px);
 
-      a{
+      a {
         color: #314e17;
-        margin-bottom: .2rem;
-        transition: .16s ease-out;
+        margin-bottom: 0.2rem;
+        transition: 0.16s ease-out;
         border-bottom: 1px solid #284b09;
-          
-
       }
     }
 
@@ -78,4 +77,12 @@ nav {
       background-repeat: no-repeat;
     }
   }
+}
+
+nav:hover > 
+.nav-line,
+.links-line {
+  background-color: #67c811;
+  opacity: 1;
+  transition: 0.2s ease-out;
 }
