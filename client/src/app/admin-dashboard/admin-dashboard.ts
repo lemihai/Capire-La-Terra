@@ -4,10 +4,11 @@ import { MainView } from './main-view/main-view';
 import { NewsView } from './news-view/news-view';
 import { RobotsView } from './robots-view/robots-view';
 import { Settings } from './settings/settings';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [EpisodesView, MainView, NewsView, RobotsView, Settings],
+  imports: [EpisodesView, MainView, NewsView, RobotsView, Settings, RouterOutlet, RouterLink],
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.scss'
 })
