@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  db:
+    image: mongodb/mongodb-community-server:7.0.0-ubi8
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - inner
+
+  backend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=mongodb://db:27017/capirelaterra
+      # Optional: Add any environment variables needed for development, e.g., NODE_ENV=development
+    depends_on:
+      - db
+    volumes:
+      - .:/app # Mount the backend code into the container
+      # This anonymous volume ensures node_modules inside the container
+      # doesn't get overwritten by a potentially different node_modules on the host.
+      # It also effectively caches node_modules, which speeds up rebuilds.
+      - /app/node_modules
+    networks:
+      - inner
+      - outer
+
+  frontend:
+    build:
+      context: ../client
+      dockerfile: dockerfile
+    # Map container port 4200 to host port 4200
+    ports:
+      - "4200:4200"
+    depends_on:
+      # Still good to ensure backend starts first if frontend needs it for initial data
+      - backend
+    volumes:
+      - ../client:/app # Mount the frontend code into the container
+      # Anonymous volume for node_modules
+      - /app/node_modules
+    networks:
+      - outer
+
+volumes:
+  mongodb_data:
+
+networks:
+  inner:
+  outer:

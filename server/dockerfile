@@ -1,13 +1,17 @@
 FROM node:latest
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package*.json ./
+COPY ./package*.json ./
 
 RUN npm install
 
-COPY . .
+# COPY . /app/
+
+# RUN npm run build
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+# CMD ["npm", "start"]
+CMD ["npx", "ts-node", "--files","src/server.ts"]
+# npx ts-node src/server.ts

@@ -21,7 +21,7 @@ let dbName = "";
 export async function connectToDatabase() {
   // keeping the uri, client and database inside of the function
   // TODO: move them outside of the function in the .env
-  const uri = "mongodb://localhost:27017";
+  const uri = "mongodb://db:27017";
   const client = new mongoDB.MongoClient(uri);
   const database = client.db("capirelaterra");
   try {
