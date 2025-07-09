@@ -17,9 +17,9 @@ app.use(router);
 
 connectToDatabase()
   .then(() => {
-    app.listen(5200, () => {
+    app.listen(3000, () => {
       console.log(
-        `Server running at http://localhost:5200... and connected to the database`
+        `Server running at http://localhost:3000... and connected to the database`
       );
     });
   })

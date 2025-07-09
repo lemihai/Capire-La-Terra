@@ -1,0 +1,75 @@
+.robot-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    gap: 3.2rem;
+
+    .title {
+      color: #262804;
+      font-size: 2.4rem;
+    }
+
+    .status {
+      display: flex;
+      flex-direction: row;
+      gap: 0.8rem;
+      align-items: center;
+
+      .status-dot {
+        height: 8px;
+        width: 8px;
+        border-radius: 8px;
+        background-color: #51d90d;
+      }
+
+      p {
+        color: #262804;
+      }
+    }
+
+    button{
+        width: 8rem;
+        height: 3.2rem;
+    }
+  }
+
+  .line {
+    width: 100%;
+    height: 0.1rem;
+    background-color: #262804;
+    opacity: 0.32;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .target {
+      font-size: 1.6rem;
+      color: #262804;
+      display: flex;
+      flex-direction: row;
+      gap: 0.8rem;
+    }
+
+    .latest {
+      display: flex;
+      flex-direction: row;
+      gap: 0.8rem;
+      justify-content: flex-end;
+      align-items: center;
+
+      .line-separation {
+        width: 0.1rem;
+        height: 1.6rem;
+        background-color: #262804;
+        opacity: 0.32;
+      }
+    }
+  }
+}

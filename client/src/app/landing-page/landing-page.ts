@@ -8,7 +8,7 @@ import { Information } from './information/information';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [Background, IntroText, AudioPlayerComponent, LastEpisode, Seasons, Information],
+  imports: [Background, IntroText, LastEpisode, Seasons, Information],
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.scss'
 })

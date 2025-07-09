@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EpisodeComponent } from './episode-component/episode-component';
+import { EpisodesService } from './episode.service';
 
 @Component({
   selector: 'app-episodes-view',
@@ -7,6 +8,20 @@ import { EpisodeComponent } from './episode-component/episode-component';
   templateUrl: './episodes-view.html',
   styleUrl: './episodes-view.scss'
 })
-export class EpisodesView {
+export class EpisodesView implements OnInit{
+  private episodesService = inject(EpisodesService);
 
+  episodes: any[] = [];
+
+  ngOnInit(){
+    this.episodesService.getEpisodes().subscribe({
+      next: (response) => {
+        this.episodes = response;
+        console.log(this.episodes);
+      }, 
+      error: (error) => {
+        console.log('there was an error!' + error);
+      }
+    })
+  }
 }

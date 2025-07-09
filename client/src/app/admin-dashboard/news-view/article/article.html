@@ -1,28 +1,22 @@
 <div class="article">
   <div class="header">
-    <h1 class="title">Article Title</h1>
+    <h1 class="title">{{ article.title }}</h1>
     <div class="header-line"></div>
     <div class="container-horizontal">
-      <p class="author-text">Ilie Bolo</p>
-      <p class="article-date">date</p>
+      <p class="author-text">Author: {{ article.author }}</p>
+      <p class="article-date">{{ article.date }} :date</p>
     </div>
   </div>
 
   <div class="text-container">
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
+      {{article.text}}
     </p>
   </div>
   <div class="line"></div>
   <div class="url-link-container">
     <img src="../assets/link-outline.svg" alt="Link_icon"/>
     <!-- <ion-icon name="link-outline"></ion-icon> -->
-    <a> link_to_page </a>
+    <a> {{article.url}} </a>
   </div>
 </div>

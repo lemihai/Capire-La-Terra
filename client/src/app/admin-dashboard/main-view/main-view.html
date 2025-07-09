@@ -1,5 +1,9 @@
 <div class="main-view-container">
-    <app-robots-component />
-    <app-article />
-    <app-episode-component />
+  <app-robots-component />
+  <div class="article-container">
+    @for(article of articles; track article._id){
+    <app-article [article]="article" />
+    }
+  </div>
+  <app-episode-component />
 </div>
