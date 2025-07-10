@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Article } from './article/article';
+import { Article, ArticleComponent } from './article/article';
 import { NewsService } from './news.service';
 
 @Component({
   selector: 'app-news-view',
-  imports: [Article],
+  imports: [ArticleComponent],
   templateUrl: './news-view.html',
   styleUrl: './news-view.scss',
 })

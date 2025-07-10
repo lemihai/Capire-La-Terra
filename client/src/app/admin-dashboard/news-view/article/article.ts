@@ -16,7 +16,7 @@ export interface Article {
   templateUrl: './article.html',
   styleUrl: './article.scss',
 })
-export class Article {
+export class ArticleComponent {
   @Input() article!: Article;
   // private articleService = inject(NewsService)
 

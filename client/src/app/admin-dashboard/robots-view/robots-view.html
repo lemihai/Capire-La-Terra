@@ -1,8 +1,5 @@
 <div class="robots-view-container">
-  <app-robots-component />
-  <app-robots-component />
-  <app-robots-component />
-  <app-robots-component />
-  <app-robots-component />
-  <app-robots-component />
+  @for(robot of robots; track robot._id){
+  <app-robots-component [robot]="robot" />
+  }
 </div>

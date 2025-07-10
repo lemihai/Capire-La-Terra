@@ -16,7 +16,10 @@
   </div>
   <div class="sidebar-line"></div>
   <div class="content">
-    <div class="breadcrumbs">path/path</div>
+    <div class="content-top">
+      <div class="breadcrumbs">path/path</div>
+      <button (click)="onLatestNewsClick()">Latest News</button>  
+    </div>
     <div class="content-line-horizontal"></div>
     <div class="display-content">
         <router-outlet />

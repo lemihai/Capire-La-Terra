@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RobotsComponent } from './robots-component/robots-component';
+import { Robot, RobotsComponent } from './robots-component/robots-component';
 import { RobotsService } from './robots.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { RobotsService } from './robots.service';
 export class RobotsView implements OnInit {
   private robotsService = inject(RobotsService);
 
-  robots: any[] = [];
+  robots: Robot[] = [];
 
   ngOnInit() {
     this.robotsService.getRobots().subscribe({

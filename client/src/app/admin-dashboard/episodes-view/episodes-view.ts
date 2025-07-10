@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { EpisodeComponent } from './episode-component/episode-component';
+import { Episode, EpisodeComponent } from './episode-component/episode-component';
 import { EpisodesService } from './episode.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { EpisodesService } from './episode.service';
 export class EpisodesView implements OnInit{
   private episodesService = inject(EpisodesService);
 
-  episodes: any[] = [];
+  episodes: Episode[] = [];
 
   ngOnInit(){
     this.episodesService.getEpisodes().subscribe({
