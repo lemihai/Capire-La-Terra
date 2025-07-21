@@ -28,7 +28,7 @@ articleRouter.get("/articles", async (_req, res) => {
 
 articleRouter.get("/scrape", async (_req, res) => {
   try {
-    // storing the result of the call in the articles cosntant
+    // storing the result of the call in the articles constant
     const articles = await collections?.articles?.find({}).toArray();
     const result = "Hello from the server";
 

@@ -1,20 +1,45 @@
-FROM node:latest
+# Use the Playwright base image
+FROM mcr.microsoft.com/playwright:v1.54.0-noble
 
+# Set the working directory inside the container
 WORKDIR /app
 
+# Copy package files first to leverage Docker cache
 COPY ./package*.json ./
 
-RUN apt-get update && apt-get install
+# Update package lists and install system dependencies
+# Using a single RUN command to reduce layers and avoid cache issues
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    # Add any additional system dependencies here
+    && rm -rf /var/lib/apt/lists/*
+
+# # Install and build TypeScript
+# RUN npm install -g typescript
+# RUN tsc --init
+# # RUN tsc 
+
+# Install Node.js dependencies
 RUN npm install
+
+# Initialize Playwright
 RUN npm init playwright@latest
-RUN npx playwright install
 
-# COPY . /app/
+# Install Playwright browsers
+RUN npx playwright install --with-deps
 
+# Copy the rest of the application code
+COPY . .
+
+RUN npx tsc
+
+# Build the application (if needed)
 # RUN npm run build
 
+# Expose the port the app runs on
 EXPOSE 3000
 
+# Command to run the application
+# CMD ["npx", "ts-node", "--files", "src/server.ts"]
 # CMD ["npm", "start"]
-CMD ["npx", "ts-node", "--files","src/server.ts"]
-# npx ts-node src/server.ts
+CMD ["npx", "tsx", "src/server.ts"]

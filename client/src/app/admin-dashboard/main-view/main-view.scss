@@ -8,10 +8,11 @@
   .article-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 1.6rem;
 
     app-article {
-      width: 100%;
+      width: 32%;
     //   height: 200%;
     }
   }

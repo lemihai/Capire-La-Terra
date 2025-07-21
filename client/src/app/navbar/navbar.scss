@@ -1,88 +1,167 @@
-
-nav {
-  position: fixed;
+:host {
   width: 100vw;
   height: 7.2rem;
-  right: 0;
-  left: 0;
+  position: fixed;
   z-index: 1;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .nav-line {
-    width: 100%;
-    height: 0.1rem;
-    background-color: #262804;
-    opacity: 0.32;
-  }
-
-  ul {
-    height: 100%;
+  nav {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 0rem 24rem;
+    flex-direction: column;
 
-    .links-line {
-      width: 0.1rem;
-      height: 100%;
-      background-color: #262804;
-      opacity: 0.32;
+    .hz-line {
+      position: relative;
+      width: 100%;
+      height: 0.1rem;
+      background-color: #26280432;
+      opacity: 1;
     }
 
-    li {
-      text-transform: capitalize;
-      padding-top: 0.2rem;
-      width: 10vw;
-      height: 100%;
+    ul {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: 0.2s ease-out;
-      // backdrop-filter: blur(0px);
+      flex-direction: row;
 
-      a {
-        font-size: 2.4rem;
-        font-weight: 600;
-        color: #283d16;
-        transition: 0.16s ease-out;
-        border-bottom: 1px solid #284b0900;
+      .empty-box {
+        min-width: 16rem;
+        height: 7.2rem;
+        background-color: #f1f3e6;
       }
-    }
 
-    li:hover {
-      background-color: #26280416;
-      transition: 0.2s ease-out;
-      cursor: pointer;
-      // backdrop-filter: blur(2px);
-
-      a {
-        color: #314e17;
-        margin-bottom: 0.2rem;
-        transition: 0.16s ease-out;
-        border-bottom: 1px solid #284b09;
+      .vl-line {
+        min-width: 0.1rem;
+        height: auto;
+        background-color: #26280432;
+        opacity: 1;
       }
-    }
 
-    img {
-      height: 5vh;
-      width: 5vw;
-      // background-image: url("../../../public/assets/logo.png");
-      mix-blend-mode: lighten;
-      background-size: cover;
-      background-position: start;
-      background-repeat: no-repeat;
+      li {
+        width: 100%;
+        height: 7.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f1f3e6;
+        min-width: 8rem;
+        max-width: 32rem;
+        text-transform: capitalize;
+        padding-top: 0.2rem;
+
+        .inner-border {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 7.2rem;
+          width: 100%;
+          transform: translateY(-.1rem);
+          border: 0.1rem solid #26280400;
+          transition: 0.24s ease-out;
+        }
+
+        .vl-line-button-inner {
+          min-width: 0.1rem;
+          min-height: 0px;
+          background-color: #26280432;
+          opacity: 1;
+          transition: 0.24s ease-out;
+        }
+
+        .vl-line-button-inner:first-child {
+          transform: translateX(-0.1rem);
+        }
+
+        .vl-line-button-inner:last-child {
+          transform: translateX(0.1rem);
+        }
+
+        a {
+          width: auto;
+          margin: auto auto auto auto;
+          padding-top: 0.2rem;
+          font-size: 2.4rem;
+          font-weight: 600;
+          color: #283d16;
+          transition: 0.16s ease-out;
+          border-bottom: 0.1rem solid #26280400;
+          text-align: center;
+        }
+
+        /* Add this for the custom hover line */
+        &::after {
+          content: "";
+          z-index: 2;
+          top: 7.3rem;
+          position: fixed;
+          width: 0rem; /* Initially no width */
+          height: 0.1rem; /* Thickness of the line */
+          background-color: #26280432; /* Color of the hover line */
+          transition: 0.32s ease-out; /* Animation for width */
+          opacity: 1;
+        }
+
+        &::before {
+          content: "";
+          z-index: 2;
+          top: 0rem;
+          position: fixed;
+          width: 0rem; /* Initially no width */
+          height: 0.1rem; /* Thickness of the line */
+          background-color: #26280432; /* Color of the hover line */
+          transition: 0.32s ease-out; /* Animation for width */
+          opacity: 1;
+        }
+      }
+
+      li:hover {
+        background-color: #ffffff00;
+        transition: 0.2s ease-out;
+        cursor: pointer;
+
+        .inner-border {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 96%;
+          width: 97%;
+          transform: translateY(-.1rem);
+          border: 0.1rem solid #262804;
+          transition: .32s ease-out;
+        }
+
+        .vl-line-button-inner {
+          min-width: 0.1rem;
+          min-height: 7.4rem;
+          // transform: translateY(-.1rem);
+          background-color: #262804;
+          opacity: 1;
+          transition: 0.24s ease-out;
+        }
+
+        a {
+          color: #01570a;
+          transform: translateY(-0.3rem);
+          transition: 0.16s ease-out;
+          border-bottom: 0.1rem solid #262804;
+          text-shadow: 0px 0.4rem 12rem #262804;
+        }
+
+        &::after {
+          width: 250vw; /* Initially no width */
+          height: 0.1rem; /* Thickness of the line */
+          background-color: #262804; /* Color of the hover line */
+          transition: 1s ease-out;
+          opacity: 1;
+        }
+
+        &::before {
+          width: 250vw; /* Initially no width */
+          height: 0.1rem; /* Thickness of the line */
+          background-color: #262804; /* Color of the hover line */
+          transition: 1s ease-out; /* Animation for width */
+          opacity: 1;
+        }
+      }
+
+      img {
+      }
     }
   }
-}
-
-nav:hover > 
-.nav-line,
-.links-line {
-  background-color: #67c811;
-  opacity: 1;
-  transition: 0.2s ease-out;
 }
