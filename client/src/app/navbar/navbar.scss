@@ -7,6 +7,7 @@
   nav {
     display: flex;
     flex-direction: column;
+    // scale: (0.8);
 
     .hz-line {
       position: relative;
@@ -21,9 +22,9 @@
       flex-direction: row;
 
       .empty-box {
-        min-width: 16rem;
+        min-width: 24rem;
         height: 7.2rem;
-        background-color: #f1f3e6;
+        background-color: #ffffff;
       }
 
       .vl-line {
@@ -39,7 +40,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #f1f3e6;
+        background-color: #ffffff;
         min-width: 8rem;
         max-width: 32rem;
         text-transform: capitalize;
@@ -120,10 +121,11 @@
           justify-content: center;
           align-items: center;
           height: 96%;
-          width: 97%;
-          transform: translateY(-.1rem);
-          border: 0.1rem solid #262804;
-          transition: .32s ease-out;
+          width: 100%;
+          margin: .0rem .16rem ;
+          // transform: translateY(-.1rem);
+          border: 0.1rem solid #01570a;
+          transition: .16s ease-out;
         }
 
         .vl-line-button-inner {
@@ -140,6 +142,7 @@
           transform: translateY(-0.3rem);
           transition: 0.16s ease-out;
           border-bottom: 0.1rem solid #262804;
+          
           text-shadow: 0px 0.4rem 12rem #262804;
         }
 

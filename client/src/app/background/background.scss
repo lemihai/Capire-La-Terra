@@ -1,0 +1,235 @@
+// Definig the backgorund image
+.image {
+  padding: 0rem;
+  margin: 0rem;
+  height: 230vh;
+  width: 100vw;
+  z-index: 0;
+
+  /*
+  background-image: url("../../../public/assets/background_image@2x.png");
+  background-size: cover;
+  background-position: start;
+  background-repeat: no-repeat;
+*/
+  position: relative;
+  margin-top: 0px;
+  opacity: 1;
+
+  display: grid;
+
+  #smooth-content {
+    position: relative; /* Crucial for absolute positioning of children */
+    /* Other styles like min-height or height might be needed to create scrollable space */
+    min-height: 200vh; /* Example: Make it tall enough to scroll and see the effect */
+    overflow: hidden; /* Helps prevent scrollbars if layers extend beyond view initially */
+    display: grid;
+  }
+
+  .filter-1 {
+    height: 230vh;
+    width: 100vw;
+  }
+
+  .layer-1 {
+    background-image: url("../../../public/assets/background_webp/layer_1.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -2;
+  }
+
+  .layer-2 {
+    background-image: url("../../../public/assets/background_webp/layer_2.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -3;
+  }
+
+  .layer-3 {
+    background-image: url("../../../public/assets/background_webp/layer_3.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -4;
+  }
+
+  .layer-4 {
+    background-image: url("../../../public/assets/background_webp/layer_4.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -5;
+  }
+
+  .layer-5 {
+    background-image: url("../../../public/assets/background_webp/layer_5.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -6;
+  }
+
+  .layer-6 {
+    background-image: url("../../../public/assets/background_webp/layer_6.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -7;
+  }
+
+  .layer-7 {
+    background-image: url("../../../public/assets/background_webp/layer_7.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -8;
+  }
+
+  .layer-8 {
+    background-image: url("../../../public/assets/background_webp/layer_8.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -9;
+  }
+
+  .layer-9 {
+    background-image: url("../../../public/assets/background_webp/layer_9.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -10;
+  }
+
+  .layer-10 {
+    background-image: url("../../../public/assets/background_webp/layer_10.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -11;
+  }
+
+  .layer-11 {
+    background-image: url("../../../public/assets/background_webp/layer_11.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -12;
+  }
+
+  .layer-12 {
+    background-image: url("../../../public/assets/background_webp/layer_12.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -13;
+  }
+
+  .layer-13 {
+    background-image: url("../../../public/assets/background_webp/layer_13.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -14;
+  }
+
+  .layer-14 {
+    background-image: url("../../../public/assets/background_webp/layer_14.webp");
+    background-size: cover;
+    background-position: start;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+
+    z-index: -15;
+  }
+}
+
+// :host{
+//     background-color: bisque;
+//     height: 40px;
+//     width: 40px;
+// }
