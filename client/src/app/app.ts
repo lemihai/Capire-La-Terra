@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { Navbar } from './navbar/navbar';
 import { LandingPage } from './landing-page/landing-page';
 import { LoginPage } from './login-page/login-page';
@@ -8,24 +8,33 @@ import { RouterOutlet } from '@angular/router';
 import { Footer } from './footer/footer';
 import { Background } from './background/background';
 
-// import { gsap } from 'gsap';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// // ScrollSmoother requires ScrollTrigger
-// import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Navbar, Footer, Background],
   templateUrl: './app.html',
   styleUrl: './app.scss',
-})
-export class App {
-  protected title = 'client';
+    // changeDetection: ChangeDetectionStrategy.OnPush, // <-- Add this line
 
-  // smoother = ScrollSmoother.create({
-  //   smooth: 2,
-  //   effects: true,
-  //   normalizeScroll: true,
-  // });
+})
+export class App implements AfterViewInit {
+  constructor(private ngZone: NgZone) {}
+  
+  ngAfterViewInit() {
+    this.ngZone.runOutsideAngular(() => {
+      gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+      ScrollSmoother.create({
+        wrapper: '#smooth-wrapper',
+        content: '#smooth-content',
+        smooth: 2,
+        effects: true,
+        normalizeScroll: true,
+      });
+    });
+  }
 }

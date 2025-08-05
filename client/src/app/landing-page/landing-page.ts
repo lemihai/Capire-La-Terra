@@ -13,5 +13,5 @@ import { Information } from './information/information';
   styleUrl: './landing-page.scss'
 })
 export class LandingPage {
-
+  
 }
