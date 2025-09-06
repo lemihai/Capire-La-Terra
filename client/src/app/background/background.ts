@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, ChangeDetectionStrategy, NgZone } from '@angular/core';
 import { gsap } from 'gsap';
 
 // import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,9 +12,10 @@ import { gsap } from 'gsap';
   imports: [],
   templateUrl: './background.html',
   styleUrl: './background.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Background {
-  a = 'image';
+  // a = 'image';
 
   // DO NOT DELETE
   // Initilizing the constructor and the ngafterviewInit thing in here leads

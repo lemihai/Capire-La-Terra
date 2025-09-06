@@ -1,4 +1,9 @@
-import { Component, NgZone, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  NgZone,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Navbar } from './navbar/navbar';
 import { LandingPage } from './landing-page/landing-page';
 import { LoginPage } from './login-page/login-page';
@@ -12,18 +17,16 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
-
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Navbar, Footer, Background],
   templateUrl: './app.html',
   styleUrl: './app.scss',
-    // changeDetection: ChangeDetectionStrategy.OnPush, // <-- Add this line
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App implements AfterViewInit {
   constructor(private ngZone: NgZone) {}
-  
+
   ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
