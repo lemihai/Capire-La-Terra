@@ -1,7 +1,8 @@
 import {
   Component,
-  NgZone,
   AfterViewInit,
+  DestroyRef,
+  inject,
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { Navbar } from './navbar/navbar';
@@ -25,19 +26,25 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App implements AfterViewInit {
-  constructor(private ngZone: NgZone) {}
+  private destroyRef = inject(DestroyRef);
 
   ngAfterViewInit() {
-    this.ngZone.runOutsideAngular(() => {
-      gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+    // No need for NgZone.runOutsideAngular in zoneless mode
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-      ScrollSmoother.create({
-        wrapper: '#smooth-wrapper',
-        content: '#smooth-content',
-        smooth: 2,
-        effects: true,
-        normalizeScroll: true,
-      });
+    const smoother = ScrollSmoother.create({
+      wrapper: '#smooth-wrapper',
+      content: '#smooth-content',
+      smooth: 2,
+      effects: true,
+      ease: "ease.out",
+      normalizeScroll: true,
+    });
+
+    // Clean up on component destruction
+    this.destroyRef.onDestroy(() => {
+      smoother.kill();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     });
   }
 }

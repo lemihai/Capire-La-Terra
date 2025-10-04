@@ -17,6 +17,8 @@
   opacity: 1;
 
   display: grid;
+  will-change: transform;
+  
 
   #smooth-content {
     position: relative; /* Crucial for absolute positioning of children */
@@ -24,6 +26,7 @@
     min-height: 200vh; /* Example: Make it tall enough to scroll and see the effect */
     overflow: hidden; /* Helps prevent scrollbars if layers extend beyond view initially */
     display: grid;
+    will-change: transform;
   }
 
   .filter-1 {
@@ -39,6 +42,7 @@
 
     z-index: -1;
     opacity: .32;
+    will-change: transform;
   }
 
   .layer-1 {
@@ -53,6 +57,7 @@
     grid-row: 1;
 
     z-index: -2;
+    will-change: transform;
   }
 
   .layer-2 {
@@ -67,6 +72,7 @@
     grid-row: 1;
 
     z-index: -3;
+    will-change: transform;
   }
 
   .layer-3 {
@@ -81,6 +87,7 @@
     grid-row: 1;
 
     z-index: -4;
+    will-change: transform;
   }
 
   .layer-4 {
@@ -95,6 +102,7 @@
     grid-row: 1;
 
     z-index: -5;
+    will-change: transform;
   }
 
   .layer-5 {
@@ -109,6 +117,7 @@
     grid-row: 1;
 
     z-index: -6;
+    will-change: transform;
   }
 
   .layer-6 {
@@ -123,6 +132,7 @@
     grid-row: 1;
 
     z-index: -7;
+    will-change: transform;
   }
 
   .layer-7 {
@@ -137,6 +147,7 @@
     grid-row: 1;
 
     z-index: -8;
+    will-change: transform;
   }
 
   .layer-8 {
@@ -151,6 +162,7 @@
     grid-row: 1;
 
     z-index: -9;
+    will-change: transform;
   }
 
   .layer-9 {
@@ -165,6 +177,7 @@
     grid-row: 1;
 
     z-index: -10;
+    will-change: transform;
   }
 
   .layer-10 {
@@ -179,6 +192,7 @@
     grid-row: 1;
 
     z-index: -11;
+    will-change: transform;
   }
 
   .layer-11 {
@@ -193,6 +207,7 @@
     grid-row: 1;
 
     z-index: -12;
+    will-change: transform;
   }
 
   .layer-12 {
@@ -207,6 +222,7 @@
     grid-row: 1;
 
     z-index: -13;
+    will-change: transform;
   }
 
   .layer-13 {
@@ -221,6 +237,7 @@
     grid-row: 1;
 
     z-index: -14;
+    will-change: transform;
   }
 
   .layer-14 {
@@ -235,6 +252,7 @@
     grid-row: 1;
 
     z-index: -15;
+    will-change: transform;
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, NgZone } from '@angular/core';
+import { Component, ChangeDetectionStrategy} from '@angular/core';
 import { gsap } from 'gsap';
 
 // import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -15,25 +15,5 @@ import { gsap } from 'gsap';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Background {
-  // a = 'image';
-
-  // DO NOT DELETE
-  // Initilizing the constructor and the ngafterviewInit thing in here leads
-  // to better performance. 
-
-  // constructor(private ngZone: NgZone) {}
-
-  // ngAfterViewInit() {
-  //   this.ngZone.runOutsideAngular(() => {
-  //     console.log("Triggered")
-  //     // Initialize ScrollSmoother after the view has been initialized
-  //     ScrollSmoother.create({
-  //       wrapper: '#smooth-wrapper',
-  //       content: '#smooth-content',
-  //       smooth: 2,
-  //       effects: true,
-  //       normalizeScroll: true,
-  //     });
-  //   });
-  // }
+  
 }

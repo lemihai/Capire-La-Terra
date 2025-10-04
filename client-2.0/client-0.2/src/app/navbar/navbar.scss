@@ -1,0 +1,109 @@
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  color: #484209;
+
+  .top_cutout {
+    position: absolute;
+    width: 100vw;
+    padding: 0rem 0.8rem;
+    position: sticky;
+    top: 0rem;
+    // box-shadow: 0px 8px 24px #0e3c0732;
+
+    display: flex;
+    flex-direction: row;
+    z-index: 99;
+    border-top: 0.8rem solid #e9efd1;
+
+    .left_corner {
+      height: 2.4rem;
+      width: 2.4rem;
+      //   box-shadow: 0px 8px 24px #0e3c0732;
+      transform: scaleX(-1);
+    }
+
+    .middle_bar {
+      width: 100%;
+      height: 0rem;
+      background-color: #e9efd1;
+    }
+
+    .right_corner {
+      //   box-shadow: 0px 8px 24px #0e3c0732;
+      height: 2.4rem;
+      width: 2.4rem;
+    }
+  }
+
+  ul {
+    position: relative; /* Position the navbar correctly on top of the content */
+    top: -1rem;
+    width: calc(100% - 4rem);
+    height: 4.8rem;
+    margin-right: auto;
+    margin-left: auto;
+    z-index: 10;
+    border-radius: 1.6rem;
+    background-color: #e9efd1;
+    box-shadow: 0rem 0rem 0rem 0.32rem #e9efd180, 0rem 0.2rem 3.2rem #0e3c0724;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: 6.4rem;
+
+    li {
+      //   height: 100%;
+      //   display: flex;
+      //   justify-content: center;
+      //   flex-direction: row;
+      //   align-items: center;
+      //   gap: 6.4rem;
+      // --font-family: 'Climate Crisis', sans-serif !important;
+    }
+
+    .temperature {
+      display: flex;
+      flex-direction: row;
+      gap: 1.2rem;
+      align-items: center;
+      height: calc(4.8rem - .8rem);
+      width: auto;
+      margin: .8rem;
+      padding: 1.2rem;
+
+      background-color: #d5252516;
+      border-radius: 1.2rem;
+    }
+
+    .temp-indicator {
+      height: 0.8rem;
+      width: 0.8rem;
+      background-color: #d52525;
+      border-radius: 0.8rem;
+      box-shadow: 0rem 0rem 0rem 0.32rem #efd1d180, 0rem 0.2rem 3.2rem #0e3c0724;
+    }
+    .temp-indic-a {
+       display: flex;
+      flex-direction: row;
+      gap: .2rem;
+      align-items: center;
+      padding-bottom: .3rem;
+      
+    }
+
+    .temp-text {
+      color: #d52525;
+      text-shadow: 0rem 0rem 0rem 1rem #de4a4a80;
+      font-size: 3.2rem;
+    }
+    .temp-text-n {
+      // color: #d52525;
+      text-shadow: 0rem 0rem 0rem 1rem #de4a4a80;
+      font-size: 2.4rem;
+    }
+  }
+}

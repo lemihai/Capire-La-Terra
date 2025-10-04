@@ -11,6 +11,6 @@ import { Information } from './information/information';
   imports: [IntroText, LastEpisode, Seasons, Information],
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingPage {}

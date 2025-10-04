@@ -1,0 +1,15 @@
+.main-a {
+  // Ensure this has enough height to enable scrolling
+  height: 300vh;
+  background-color: #e9efd1;
+  position: relative;
+
+  // display: flex;
+  // flex-direction: row;
+}
+
+// app-audio-player {
+//   z-index: 10;
+//   position: fixed;
+//   bottom: 1.6rem;
+// }
