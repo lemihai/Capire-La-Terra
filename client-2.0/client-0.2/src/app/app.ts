@@ -15,11 +15,17 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { LandingPage } from './landing-page/landing-page';
 import { Navbar } from './navbar/navbar';
 import { AudioPlayer } from './audio-player/audio-player';
+import { Footer } from "./footer/footer";
+
+import { RouterOutlet } from '@angular/router';
+
+
+
 
 @Component({
   selector: 'app-root',
   standalone: true, // Use standalone components
-  imports: [LandingPage, Navbar, AudioPlayer],
+  imports: [RouterOutlet, LandingPage, Navbar, AudioPlayer, Footer],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -78,4 +84,5 @@ export class App{
   // }
 
   // // ... (rest of your component code)
+
 }

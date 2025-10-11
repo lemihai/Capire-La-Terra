@@ -1,0 +1,143 @@
+<div id="smooth-wrapper">
+  <div id="smooth-content">
+    <div class="seasons-container">
+      <h1>Seasons</h1>
+      <div class="season-list">
+        <div class="season-selector {{ focused }}"></div>
+        <button class="season {{ se1active }}" (click)="focuss1()">Season 1</button>
+        <button class="season {{ se2active }}" (click)="focuss2()">Season 2</button>
+        <button class="season {{ se3active }}" (click)="focuss3()">Season 3</button>
+      </div>
+    </div>
+    <div class="separator-line"></div>
+    <div class="episodes-container">
+      <div class="season-hero">
+        <div class="content">
+          <div class="top-container">
+            <h1>{{ episodes[0].name }}</h1>
+            <div class="episode-separator-line"></div>
+            <div class="details">
+              <p>17-09-2025</p>
+              <div class="separator-line"></div>
+              <p>Sofia Lutteri</p>
+              <div class="separator-line"></div>
+              <p>4:08</p>
+            </div>
+          </div>
+          <div class="controls">
+            <button (click)="play()" class="play-button {{ expandButton }}">
+              @if (isPlaying == "true"){
+
+              <svg
+                width="16"
+                height="18"
+                viewBox="0 0 16 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 2.09536V15.9046C1 16.7351 1.82642 17.2627 2.507 16.8646L14.5581 9.79951C15.1473 9.45428 15.1473 8.54572 14.5581 8.20049L2.507 1.13538C1.82642 0.737289 1 1.2649 1 2.09536Z"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-miterlimit="10"
+                />
+              </svg>
+              } @else{
+
+              <svg
+                width="26"
+                height="26"
+                viewBox="0 0 26 26"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.999 0.199219C20.0659 0.199219 25.7988 5.9322 25.7988 12.999C25.7988 20.0659 20.0659 25.7988 12.999 25.7988C5.9322 25.7988 0.199219 20.0659 0.199219 12.999C0.199219 5.9322 5.9322 0.199219 12.999 0.199219ZM12.999 1.79883C6.81585 1.79883 1.79883 6.81585 1.79883 12.999C1.79883 19.1822 6.81585 24.1992 12.999 24.1992C19.1822 24.1992 24.1992 19.1822 24.1992 12.999C24.1992 6.81585 19.1822 1.79883 12.999 1.79883ZM9.99902 8.19922C10.4409 8.19922 10.7988 8.5572 10.7988 8.99902V16.999C10.7988 17.4409 10.4409 17.7988 9.99902 17.7988C9.5572 17.7988 9.19922 17.4409 9.19922 16.999V8.99902C9.19922 8.5572 9.5572 8.19922 9.99902 8.19922ZM15.999 8.19922C16.4409 8.19922 16.7988 8.5572 16.7988 8.99902V16.999C16.7988 17.4409 16.4409 17.7988 15.999 17.7988C15.5572 17.7988 15.1992 17.4409 15.1992 16.999V8.99902C15.1992 8.5572 15.5572 8.19922 15.999 8.19922Z"
+                  fill="black"
+                />
+              </svg>
+              }
+            </button>
+            <div class="track-container">
+              <div class="timer">
+                <p>00:00</p>
+                <p>04:08</p>
+              </div>
+              <app-audio-track />
+            </div>
+          </div>
+        </div>
+      </div>
+      @for (episode of episodes; track episode.id) {
+
+      <div class="episode">
+        <img
+          ngSrc="assets/episode_placeholder.png"
+          height="192"
+          width="192"
+          alt="episode_image"
+          class="episode-image"
+        />
+        <div class="episode-content">
+          <div class="top-container">
+            <h3 class="episode-title">{{ episode.name }}</h3>
+            <div class="episode-separator-line"></div>
+            <div class="episode-details">
+              <p class="details-text">16-03-2021</p>
+              <div class="separator-line"></div>
+              <p class="details-text">Sofia Lutteri</p>
+              <div class="separator-line"></div>
+              <p class="details-text">3:21 minutes</p>
+            </div>
+            <p class="episode-description">{{ episode.description }}</p>
+          </div>
+          <div class="controls">
+            <button (click)="play()" class="play-button {{ expandButton }}">
+              @if (isPlaying == "true"){
+
+              <svg
+                width="16"
+                height="18"
+                viewBox="0 0 16 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 2.09536V15.9046C1 16.7351 1.82642 17.2627 2.507 16.8646L14.5581 9.79951C15.1473 9.45428 15.1473 8.54572 14.5581 8.20049L2.507 1.13538C1.82642 0.737289 1 1.2649 1 2.09536Z"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-miterlimit="10"
+                />
+              </svg>
+              } @else{
+
+              <svg
+                width="26"
+                height="26"
+                viewBox="0 0 26 26"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.999 0.199219C20.0659 0.199219 25.7988 5.9322 25.7988 12.999C25.7988 20.0659 20.0659 25.7988 12.999 25.7988C5.9322 25.7988 0.199219 20.0659 0.199219 12.999C0.199219 5.9322 5.9322 0.199219 12.999 0.199219ZM12.999 1.79883C6.81585 1.79883 1.79883 6.81585 1.79883 12.999C1.79883 19.1822 6.81585 24.1992 12.999 24.1992C19.1822 24.1992 24.1992 19.1822 24.1992 12.999C24.1992 6.81585 19.1822 1.79883 12.999 1.79883ZM9.99902 8.19922C10.4409 8.19922 10.7988 8.5572 10.7988 8.99902V16.999C10.7988 17.4409 10.4409 17.7988 9.99902 17.7988C9.5572 17.7988 9.19922 17.4409 9.19922 16.999V8.99902C9.19922 8.5572 9.5572 8.19922 9.99902 8.19922ZM15.999 8.19922C16.4409 8.19922 16.7988 8.5572 16.7988 8.99902V16.999C16.7988 17.4409 16.4409 17.7988 15.999 17.7988C15.5572 17.7988 15.1992 17.4409 15.1992 16.999V8.99902C15.1992 8.5572 15.5572 8.19922 15.999 8.19922Z"
+                  fill="black"
+                />
+              </svg>
+              }
+            </button>
+            <div class="track-container">
+              <div class="timer">
+                <p>00:00</p>
+                <p>04:08</p>
+              </div>
+              <app-audio-track />
+            </div>
+          </div>
+        </div>
+      </div>
+      } @empty {
+      <li>There are no episodes.</li>
+      }
+    </div>
+  </div>
+</div>

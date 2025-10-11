@@ -1,0 +1,37 @@
+.footer {
+  height: 70vh;
+  width: 97vw;
+  background-color: #272c09;
+  color: #e9efd1;
+  margin: 1.6rem;
+  position: absolute;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 3.2rem;
+  padding: 4.8rem 1.6rem 1.6rem 1.6rem;
+
+  .column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+  }
+
+  .separator-line {
+    width: 100%;
+    height: 0.16rem;
+    background-color: #e9efd116;
+  }
+
+  .title {
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+
+  p {
+    opacity: 0.64;
+  }
+}

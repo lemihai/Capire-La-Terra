@@ -1,5 +1,5 @@
 :host {
-  height: auto;
+  // height: auto;
   width: 100%;
   // display: block; /* Make sure the host element fills the space */
 }
@@ -15,12 +15,15 @@
     will-change: transform;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    // width: 90vw;
   }
 }
 
 .main {
   // Ensure this has enough height to enable scrolling
-  height: 300vh;
+  // height: auto;
+
   // position: relative; /* All children are positioned relative to this */
   display: flex;
   flex-direction: column;
@@ -65,25 +68,33 @@
     border-radius: 2rem;
   }
 
-  img:nth-of-type(3) {
-    // Could delete
-    top: -4rem !important;
-  }
-  img:nth-of-type(1) {
+  .bottom-fade-filter {
     // Could delete
     // background-color: rgba(255, 0, 0, 0.508);
-    z-index: 1;
-    height: 400vh !important;
-    top: 0rem !important;
-    // position: absolute;
-    backdrop-filter: blur(4px);
+    z-index: 1 !important;
+    height: auto !important;
+    top: 0vh !important;
+    // background-color: rgba(255, 0, 0, 0.205) !important;
   }
 
-  @for $i from 1 through 11 {
+  // Repositioning images to offset the scroll speed from GSAP
+
+  img:nth-of-type(2) {
+    top: 3rem !important;
+  }
+
+  img:nth-of-type(3) {
+    top: 2rem !important;
+  }
+  img:nth-of-type(4) {
+    top: 1rem !important;
+  }
+
+  @for $i from 2 through 11 {
     img:nth-of-type(#{$i}) {
       // rotate: calc(#{$i} * 2deg);
-      // top: calc(#{$i} * 16px);
-      transform: translateY(calc(#{$i} * 2.4px));
+      top: calc(#{$i} * -2.4px) !important;
+      transform: translateY(calc(#{$i} * 0.24rem));
     }
   }
 
@@ -141,12 +152,14 @@
 
 .scroll-trigger-a {
   position: absolute;
-  background-color: red;
+  // background-color: red;
   height: 50px;
   width: 50px;
   right: 3.2rem;
   top: 0;
+  pointer-events: none;
 }
+
 .snap-element-a {
   position: absolute;
   background-color: red;
@@ -516,7 +529,7 @@
   }
 
   .news-section {
-    width: 100vw;
+    width: 90vw;
     height: 90vh;
     display: flex;
     flex-direction: row;
@@ -542,7 +555,7 @@
       display: flex;
       justify-content: start;
       align-items: center;
-      padding: .8rem;
+      padding: 0.8rem;
 
       img {
         height: 100%;
@@ -551,17 +564,25 @@
 
       .text-overlay {
         // position: absolute;
+
         background-color: #e9efd1;
         height: auto;
-        width: 16vw;
+        width: 50%;
         border-radius: 0.8rem;
         padding: 0.8rem;
 
+        .details-row {
+          display: flex;
+          flex-direction: row;
+          gap: 0.8rem;
+          opacity: 0.56;
+        }
+
         .text {
-          font-size: 5.6rem;
+          font-size: 8rem;
           font-weight: bold;
           width: 100%;
-          color: #272c09
+          color: #272c09;
         }
 
         p {
@@ -580,7 +601,82 @@
       border-radius: 1.6rem;
       overflow: hidden;
 
-      padding: 1.6rem;
+      padding: 5.6rem 8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+
+      .separator-line {
+        width: 100%;
+        background-color: #272c0916;
+        height: 0.16rem;
+        border-radius: 0.8rem;
+      }
+
+      .latest-news-list {
+        display: flex;
+        flex-direction: row;
+        gap: 3.2rem;
+      }
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        gap: 3.2rem;
+      }
+
+      .articles-separator-line {
+        height: 100%;
+        width: 0.16rem;
+        background-color: #272c0916;
+        border-radius: 0.8rem;
+      }
+
+      .news-article {
+        .title {
+          font-size: 2.4rem;
+          color: #272c09;
+        }
+
+        .article-meta-details {
+          display: flex;
+          flex-direction: row;
+          gap: 0.8rem;
+          opacity: 0.56;
+          .meta-details-author {
+            font-size: 1.4rem;
+          }
+          .meta-details-date {
+            font-size: 1.4rem;
+          }
+          .meta-details-source {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.8rem;
+            .source-image {
+              height: 1.6rem;
+              width: 1.6rem;
+              background-color: #859e21;
+              border-radius: 0.24rem;
+            }
+
+            p {
+              font-size: 1.4rem;
+            }
+
+            svg {
+              height: 1.6rem;
+              width: 1.6rem;
+              padding-bottom: 0.16rem;
+
+              path {
+                stroke-width: 0.24rem;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

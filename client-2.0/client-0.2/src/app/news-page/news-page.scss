@@ -1,0 +1,17 @@
+:host {
+  height: auto;
+  width: 100%;
+}
+
+#smooth-wrapper {
+  #smooth-content {
+    will-change: transform;
+    display: flex;
+    flex-direction: column;
+    height: 300vh;
+    // position: relative; /* All children are positioned relative to this */
+    justify-content: flex-start;
+    position: relative;
+    // background-color: #e9efd1;
+  }
+}

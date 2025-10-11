@@ -1,7 +1,8 @@
 <nav class="navbar">
+  <!-- 
   <div class="top_cutout">
     <div class="left_corner">
-      <!-- <svg src="../../../public/assets/corner_cutout.svg" alt=""></svg> -->
+      
       <svg
         width="24"
         height="24"
@@ -14,7 +15,7 @@
     </div>
     <div class="middle_bar"></div>
     <div class="right_corner">
-      <!-- <svg src="../../../public/assets/corner_cutout.svg" alt=""></svg> -->
+      
       <svg
         width="24"
         height="24"
@@ -26,9 +27,18 @@
       </svg>
     </div>
   </div>
+  -->
+  
   <ul class="navbar_physical">
-    <li class="navbar_button">Home</li>
-    <li class="navbar_button">News</li>
+    <li routerLink="/">
+      <a>Home</a>
+    </li>
+    <li routerLink="/episodes-page">
+      <a>Episodes</a>
+    </li>
+    <li routerLink="/news-page">
+      <a>news</a>
+    </li>
     <li class="navbar_button">About Us</li>
     <li class="navbar_button">Logo</li>
     <li class="navbar_button">Admin</li>

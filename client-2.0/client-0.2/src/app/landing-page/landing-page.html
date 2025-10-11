@@ -3,89 +3,85 @@
     <div class="main">
       <div class="background">
         <div class="image">
-          <h1 data-speed="0.8">Benvenuto a capire la terra</h1>
+          <h1 data-speed="1.1">Benvenuto a capire la terra</h1>
           <div class="black-filter"></div>
-          <!-- <div class="filter-1" data-speed="clamp(1)"></div> -->
           <img
             ngSrc="assets/background_filters/layer_1.png"
             fill
             priority
-            data-speed="1.5"
-            alt="Layer 1"
-          />
-          <img
-            ngSrc="assets/background_webp/layer_14.webp"
-            fill
-            priority
-            data-speed="0.1"
-            alt="Layer 1"
-          />
-          <!-- <img ngSrc="assets/background_webp/layer_13.webp" fill priority data-speed="0.2" alt="Layer 2" /> -->
-          <!-- <img ngSrc="assets/background_webp/layer_12.webp" fill priority data-speed="0.3" alt="Layer 3" /> -->
-          <img
-            ngSrc="assets/background_webp/layer_11.webp"
-            fill
-            priority
-            data-speed="0.4"
-            alt="Layer 4"
+            data-speed="1.8"
+            alt="parallax fade in filter"
+            class="bottom-fade-filter"
           />
           <img
             ngSrc="assets/background_webp/layer_10.webp"
             fill
             priority
-            data-speed="0.5"
-            alt="Layer 5"
+            data-speed="0.1"
+            alt="Layer 10"
           />
-          <!-- <img ngSrc="assets/background_webp/layer_9.webp" fill priority data-speed="0.6" alt="Layer 6" /> -->
+          <img
+            ngSrc="assets/background_webp/layer_9.webp"
+            fill
+            priority
+            data-speed="0.2"
+            alt="Layer 9"
+          />
           <img
             ngSrc="assets/background_webp/layer_8.webp"
             fill
             priority
-            data-speed="0.7"
+            data-speed="0.3"
+            alt="Layer 8"
+          />
+          <img
+            ngSrc="assets/background_webp/layer_7.webp"
+            fill
+            priority
+            data-speed="0.4"
             alt="Layer 7"
           />
-          <!-- <img ngSrc="assets/background_webp/layer_7.webp" fill priority data-speed="0.8" alt="Layer 8" /> -->
           <img
             ngSrc="assets/background_webp/layer_6.webp"
             fill
             priority
-            data-speed="0.9"
-            alt="Layer 9"
+            data-speed="0.5"
+            alt="Layer 6"
           />
           <img
             ngSrc="assets/background_webp/layer_5.webp"
             fill
             priority
-            data-speed="1.0"
-            alt="Layer 10"
+            data-speed="0.6"
+            alt="Layer 5"
           />
           <img
             ngSrc="assets/background_webp/layer_4.webp"
             fill
             priority
-            data-speed="1.1"
-            alt="Layer 11"
+            data-speed="0.7"
+            alt="Layer 4"
           />
           <img
             ngSrc="assets/background_webp/layer_3.webp"
             fill
             priority
-            data-speed="1.2"
-            alt="Layer 12"
+            data-speed="0.8"
+            alt="Layer 3"
           />
           <img
             ngSrc="assets/background_webp/layer_2.webp"
             fill
             priority
-            data-speed="1.3"
-            alt="Layer 13"
+            data-speed="1"
+            alt="Layer 2"
           />
           <img
             ngSrc="assets/background_webp/layer_1.webp"
             fill
             priority
             data-speed="1.4"
-            alt="Layer 14"
+            alt="Layer 1"
           />
         </div>
       </div>
@@ -282,37 +278,98 @@
 
         <div class="news-section">
           <div class="news-section-left">
-            
             <!-- No need for an image if having a background image on the div -->
             <!-- <img
               src="assets/article-illustration-1.jpg"
               alt="episode_image"
               class="bakcground_image"
             /> -->
-            
+
             <div class="text-overlay">
               <p class="text">This is a title</p>
-              <p>Sofia Lutteri</p>
-              <p>25-09-2025</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+              </p>
+              <div class="details-row">
+                <p>Sofia Lutteri</p>
+                <p>25-09-2025</p>
+                <p>www.iuvrbeaivberb.com</p>
+              </div>
             </div>
           </div>
           <div class="news-section-right">
             <h1>Latest climate news</h1>
             <div class="separator-line"></div>
             <div class="latest-news-list">
-              <div class="news-article">
-                <p class="title">this is a news article</p>
-                <p class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris n
-                </p>
-                <!-- Add : author, date, source. These are not news, re updates, basically we just summarise what happens around the world in climate terms -->
+              <div class="column">
+                @for (article of articles; track article.id){
+                <div class="news-article">
+                  <p class="title">{{ article.title }}</p>
+                  <div class="article-meta-details">
+                    <p class="meta-details-author">{{ article.author }}</p>
+                    <p class="meta-details-date">{{ article.date }}</p>
+                    <div class="meta-details-source">
+                      <div class="source-image"></div>
+                      <p>
+                        {{ article.source }}
+                      </p>
+                      <svg
+                        width="32"
+                        height="32"
+                        viewBox="0 0 32 32"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M24 14V25.5C24 25.8283 23.9353 26.1534 23.8097 26.4567C23.6841 26.76 23.4999 27.0356 23.2678 27.2678C23.0356 27.4999 22.76 27.6841 22.4567 27.8097C22.1534 27.9353 21.8283 28 21.5 28H6.5C5.83696 28 5.20107 27.7366 4.73223 27.2678C4.26339 26.7989 4 26.163 4 25.5V10.5C4 9.83696 4.26339 9.20107 4.73223 8.73223C5.20107 8.26339 5.83696 8 6.5 8H16.9675"
+                          stroke="black"
+                          stroke-width="1.6"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M21 4H28V11"
+                          stroke="black"
+                          stroke-width="1.6"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M14 18L27.5 4.5"
+                          stroke="black"
+                          stroke-width="1.6"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <p class="description">
+                    {{ article.summary }}
+                  </p>
+                </div>
+                }
               </div>
+              <!-- <div class="articles-separator-line"></div> -->
+
+              <!-- <div class="column">
+                @for (article of articles; track article.id){
+                <div class="news-article">
+                  <p class="title">{{ article.title }}</p>
+                  <p class="description">
+                    {{ article.summary }}
+                  </p>
+                
+                </div>
+                }
+              </div> -->
             </div>
           </div>
         </div>
       </div>
     </div>
+    <app-footer />
   </div>
 </div>

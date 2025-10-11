@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+// Root variables
+:root {
+  // Colors
+  --main-color: #c4e455;
+  --main-color-dark: #484209;
+  --main-color-dark-16: #48420916;
+  --main-color-light: #e9efd1;
+
+  // Fonts
+  --main-font-family: 'Belanosima', sans-serif;
+
+  --font-size-small: 1.4rem;
+  --font-size-regular: 1.6rem;
+  --font-size-heading: 2rem;
+
+  // Breakpoints
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+
+  // Transitions
+  --transition-8: 0.08s ease-out;
+  --transition-16: 0.16s ease-out;
+  --transition-24: 0.24s ease-out;
+  --transition-32: 0.32s ease-out;
+}
