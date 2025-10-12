@@ -13,10 +13,11 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { Footer } from "../footer/footer";
+import { EpisodesListComponent } from "./episodes-list.component/episodes-list.component";
 
 @Component({
   selector: 'app-landing-page',
-  imports: [NgOptimizedImage, Footer],
+  imports: [NgOptimizedImage, Footer, EpisodesListComponent],
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.scss',
 })
@@ -201,6 +202,8 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
     },
   ];
 
+  changeanimation = ""
+
   ngOnInit() {
     // Register GSAP plugins here once
     this.ngZone.runOutsideAngular(() => {
@@ -213,6 +216,9 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
     if (this.smoother) {
       this.smoother.kill();
     }
+
+    this.changeanimation = ".on-destroy-test"
+
   }
 
   // ... (your existing imports and component setup)
@@ -252,7 +258,9 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
       // gsap.set('.background', { rotate: 0 });
 
       let tl = gsap.timeline();
-      // tl.to('.background', { height: '80vh', duration: 2, ease: 'power2.out' });
+      tl.to('.background', { height: '16vh', duration: 6, ease: 'power2.out' });
+      tl.to('.scroll-trigger-b', { top: '8vh', duration: 2, ease: 'power2.out' });
+      // tl.to('.line-container', { height: '0px', duration: 6, ease: 'power2.out' }, 1);
       // tl.to('.bottom-fade-filter', {top: '6vh', duration: 1, ease: 'power2.out'})
       // tl.to('.content', { top: '56vh', duration: 10, ease: 'power2.out' }); //wait 1 second
 
@@ -261,7 +269,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         trigger: '.scroll-trigger-a',
         start: 'top top',
         // end: '+=400',
-        end: '+=300',
+        end: '+=600',
         // pin: '.snap-element-a',
         pin: true,
         scrub: true,
@@ -269,6 +277,73 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         // snap: 2,
       });
 
+      let tl2 = gsap.timeline()
+      tl2.to('.hero-h1', { height: '0px', width:'0px', y: -0, skewX: 32, skewY: 8, rotate: 0, duration: 2, ease: 'power2.out' });
+      // tl2.to('.latest-news-h1', { height: '0px', duration: 2, ease: 'power2.out' });
+      
+      // Scroll triggers for the sides 
+      ScrollTrigger.create({
+        animation: tl2,
+        trigger: '.scroll-trigger-b',
+        start: 'center center',
+        // end: '+=400',
+        end: '+=180',
+        // pin: '.snap-element-a',
+        pin: true,
+        scrub: true,
+        anticipatePin: 1,
+        // snap: 2,
+      });
+      
+      let tl3 = gsap.timeline()
+      tl3.to('.episodes-text-h1', { height: '120px', width: '600px', y: 0, skewX: 0, skewY:0, rotate:0, duration: 2, ease: 'power2.out' });
+      // Scroll triggers for the sides 
+      ScrollTrigger.create({
+        animation: tl3,
+        trigger: '.scroll-trigger-c',
+        start: 'center center',
+        // end: '+=400',
+        end: '+=180',
+        // pin: '.snap-element-a',
+        pin: true,
+        scrub: true,
+        anticipatePin: 1,
+        // snap: 2,
+      });
+
+      let tl4 = gsap.timeline()
+      tl4.to('.episodes-text-h1', { height: '0px', width: '0px', y: 0, skewX: 32, skewY:8, rotate:0, duration: 2, ease: 'power2.out' });
+      
+      tl.to('.scroll-trigger-b', { y: -24, duration: 2, ease: 'power2.out' });
+      // Scroll triggers for the sides 
+      ScrollTrigger.create({
+        animation: tl4,
+        trigger: '.scroll-trigger-d',
+        start: 'center center',
+        // end: '+=400',
+        end: '+=180',
+        // pin: '.snap-element-a',
+        pin: true,
+        scrub: true,
+        anticipatePin: 1,
+        // snap: 2,
+      });
+
+      let tl5 = gsap.timeline();
+      tl5.to('.latest-news-h1', { height: '120px', width: '600px', y: 0, skewX: 0, skewY:0, rotate:0, duration: 2, ease: 'power2.out' });
+
+      ScrollTrigger.create({
+        animation: tl5,
+        trigger: '.scroll-trigger-e',
+        start: 'center center',
+        // end: '+=400',
+        end: '+=180',
+        // pin: '.snap-element-a',
+        pin: true,
+        scrub: true,
+        anticipatePin: 1,
+        // snap: 2,
+      });
       // gsap.to('.section-b-content', {
       //   scrollTrigger: {
       //     trigger: '.section-b-content',
