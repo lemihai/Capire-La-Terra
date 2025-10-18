@@ -1,0 +1,39 @@
+<button (click)="play()" class="play-button {{ expandButton }}">
+  @if (isPlaying == "true"){
+
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M11 9.95844V22.0416C11 22.7682 11.7084 23.2299 12.2917 22.8815L22.6212 16.6996C23.1263 16.3975 23.1263 15.6025 22.6212 15.3004L12.2917 9.11845C11.7084 8.77013 11 9.23179 11 9.95844Z"
+      stroke="black"
+      stroke-width="1.6"
+      stroke-miterlimit="10"
+    />
+  </svg>
+
+  } @else{
+
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M24 16C24 11.5833 20.4167 8 16 8C11.5833 8 8 11.5833 8 16C8 20.4167 11.5833 24 16 24C20.4167 24 24 20.4167 24 16Z"
+      stroke="black"
+      stroke-width="1.6"
+      stroke-miterlimit="10"
+    />
+    <path
+      d="M14 13.333V18.6663"
+      stroke="black"
+      stroke-width="1.6"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+    />
+    <path
+      d="M18 13.333V18.6663"
+      stroke="black"
+      stroke-width="1.6"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+    />
+  </svg>
+
+  }
+</button>

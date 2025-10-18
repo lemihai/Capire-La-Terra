@@ -6,7 +6,7 @@ import {
   OnInit,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { AudioTrack } from './audio-track/audio-track';
+import { AudioTrack } from '../shared/components/audio-track/audio-track';
 
 import { NgOptimizedImage } from '@angular/common';
 import { gsap } from 'gsap';

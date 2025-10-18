@@ -1,10 +1,81 @@
-:host{
-    height: 100vh;
-    // width: calc(100% - .8rem);
-    width: 100%;
-    background-color: #ff000023;
-    color: var(--main-color-dark);
-    margin: 0rem 0rem;
+:host {
+  height: 100vh;
+  // width: calc(100% - .8rem);
+  width: 100%;
+  // background-color: #ff000023;
+  color: var(--main-color-dark);
+  margin: 0rem 0rem;
 
-    padding-left: 50vw;
+  padding-left: 50vw;
+
+  .episode-list {
+    height: 100%;
+    width: 100%;
+    padding: 24rem 16rem 16rem 0rem;
+  }
+
+  .season-hero {
+    // height: 50vh !important;
+    width: 100%;
+    background-image: url('../../../../public/assets/article-illustration-1.jpg');
+    background-size: cover; /* Options: contain, cover, auto, 50% */
+    background-position: center; /* Options: top, bottom, left, right, center */
+    background-repeat: no-repeat; /* Options: repeat, repeat-x, repeat-y, no-repeat */
+    border-radius: 1.6rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: end;
+
+    padding: 24vh 0.4rem 0.4rem 0.4rem;
+
+    h1 {
+      font-size: 2.4rem;
+      color: #323d06;
+      padding-left: 0.4rem;
+      height: auto;
+    }
+
+    .content {
+      background-color: #e9efd1;
+      border-radius: 1.2rem;
+      padding: 0.4rem 0.8rem 0.8rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: auto;
+
+      .episode-separator-line {
+        width: 100%;
+        height: 0.16rem;
+        background-color: #323d0632;
+        border-radius: 0.8rem;
+      }
+
+      .top-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .details {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.8rem;
+        opacity: 0.64;
+
+        .separator-line {
+          height: 1.2rem;
+          width: 0.16rem;
+          background-color: #323d0664;
+          border-radius: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .controls {
+    background-color: #ff000016;
+    height: 8rem;
+  }
 }

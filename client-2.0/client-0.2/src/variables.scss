@@ -3,9 +3,23 @@
 :root {
   // Colors
   --main-color: #c4e455;
-  --main-color-dark: #484209;
-  --main-color-dark-16: #48420916;
+  --main-color-32: #c4e45532;
+  --main-color-16: #c4e45516;
+  --main-color-dark: #384605;
+  --main-color-dark-08: #38460508;
+  --main-color-dark-16: #38460516;
+  --main-color-dark-24: #38460524;
+  --main-color-dark-32: #38460532;
+  --main-color-dark-64: #38460564;
   --main-color-light: #e9efd1;
+
+  // hover colors
+  --main-color-dark-hover: #596e0c;
+  --main-color-light-hover: #ffffff;
+
+  // Shadows
+  --main-shadow: 0px 2px 8px var(--main-color-dark-16);
+  --darker-shadow: 0px 2px 8px var(--main-color-dark-32);
 
   // Fonts
   --main-font-family: 'Belanosima', sans-serif;
@@ -22,9 +36,14 @@
   --breakpoint-xl: 1200px;
   --breakpoint-xxl: 1400px;
 
+  --cubic-bezzier-a: cubic-bezier(0, 0.99, 0.53, 1);
+
   // Transitions
-  --transition-8: 0.08s ease-out;
-  --transition-16: 0.16s ease-out;
-  --transition-24: 0.24s ease-out;
-  --transition-32: 0.32s ease-out;
+  --transition-8: all 0.08s ease-out;
+  --transition-16: all 0.16s ease-out;
+  --transition-24: all 0.24s ease-out;
+  --transition-32: all 0.32s ease-out;
+  --transition-64: all 0.64s ease-out;
+  --transition-120: all 1.2s ease-out;
+  --transition-160: all 1.6s var(--cubic-bezzier-a);
 }

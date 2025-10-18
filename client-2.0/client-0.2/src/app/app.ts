@@ -14,10 +14,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { LandingPage } from './landing-page/landing-page';
 import { Navbar } from './navbar/navbar';
-import { AudioPlayer } from './audio-player/audio-player';
 import { Footer } from "./footer/footer";
 
 import { RouterOutlet } from '@angular/router';
+import { GlobalAudioPlayerComponent } from "./global-audio-player.component/global-audio-player.component";
 
 
 
@@ -25,7 +25,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true, // Use standalone components
-  imports: [RouterOutlet, LandingPage, Navbar, AudioPlayer, Footer],
+  imports: [RouterOutlet, LandingPage, Navbar, Footer, GlobalAudioPlayerComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,0 +1,57 @@
+@use '../../../../variables.scss' as *;
+
+:host {
+  height: 3.2rem !important;
+  width: 3.2rem !important;
+
+  // minimum values
+  min-height: 3.2rem !important;
+  min-width: 3.2rem !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 0.8rem;
+  // padding: .4rem;
+}
+
+.play-button {
+  height: 100%;
+  width: 100%;
+  background-color: var(--main-color-dark);
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: var(--transition-24);
+  svg {
+    transition: var(--transition-24);
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    path {
+      stroke: var(--main-color-light) !important;
+      transition: var(--transition-24);
+    }
+  }
+}
+
+.play-button:hover {
+  transition: var(--transition-24);
+  background-color: var(--main-color-dark-hover);
+  cursor: pointer;
+  box-shadow: var(--darker-shadow);
+
+  svg {
+    transition: var(--transition-24);
+    scale: 1.1;
+
+    path {
+      transition: var(--transition-24);
+      stroke: var(--main-color-light-hover) !important;
+    }
+  }
+}

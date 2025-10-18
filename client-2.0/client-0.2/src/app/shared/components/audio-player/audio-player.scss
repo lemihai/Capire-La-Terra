@@ -1,0 +1,25 @@
+@use '../../../../variables.scss' as *;
+
+:host{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    
+    gap: 1.6rem;
+    height: 4rem;
+    background-color: var(--main-color-16);
+    // background-color: red;
+    border: 1px solid var(--main-color-32);
+    padding: .32rem 1rem .32rem .32rem;
+    border-radius: 1.2rem;
+
+    .audio-player-timer{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: .32rem;
+
+        font-size: 1.4rem;
+    }
+}

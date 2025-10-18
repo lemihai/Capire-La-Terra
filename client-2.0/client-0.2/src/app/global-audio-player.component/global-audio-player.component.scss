@@ -1,0 +1,276 @@
+@use '../../variables.scss' as *;
+
+:host {
+  position: fixed;
+  bottom: 3.2rem;
+  // background-color: red;
+  left: 8rem;
+  right: 8rem;
+
+  z-index: 20;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  height: 4rem;
+
+  .wrapper {
+    // background-color: rgb(17, 103, 103);
+    height: 4rem;
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // background-color: red !important;
+
+    position: relative;
+
+    .app-button {
+      z-index: 1 !important;
+      //   box-shadow: var(--main-shadow);
+    }
+
+    // ******************************
+    // -------- AUDIO PLAYER --------
+    // ******************************
+
+    .player-wrapper {
+      position: absolute;
+      bottom: 0rem;
+
+      height: 4rem;
+      width: 4rem;
+      background-color: var(--main-color-dark-16);
+      z-index: 0 !important;
+
+      border-radius: 1.2rem;
+      border: 1px solid var(--main-color-dark-16);
+      transition: var(--transition-160);
+      padding: 0.4rem;
+
+      // ROW
+      .rw {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        &:hover {
+          cursor: default;
+          .extender-button {
+            .chevron-left {
+              cursor: pointer;
+              background-color: var(--main-color);
+              scale: 1.1;
+              border-radius: 0.8rem;
+              margin-right: 1rem;
+              transition: var(--transition-16);
+            }
+            .chevron-right {
+              cursor: pointer;
+              background-color: var(--main-color);
+              scale: 1.1;
+              border-radius: 0.8rem;
+              margin-left: 1rem;
+              transition: var(--transition-16);
+            }
+            transition: var(--transition-16);
+            // width: 4rem;
+          }
+        }
+      }
+
+      // COLUMN
+      .cl {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        position: relative;
+
+        .collapser-button {
+          display: none;
+          opacity: 0;
+          margin: 0;
+          padding: 0;
+          width: 4rem;
+          height: 1rem;
+          bottom: 0rem;
+          border-radius: 0.8rem;
+
+          background-color: var(--main-color-dark-16);
+          border: 1px solid var(--main-color-dark-16);
+          position: absolute;
+          transition: var(--transition-16);
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .chevron-top {
+            height: 2.4rem;
+            width: 100%;
+            transition: var(--transition-16);
+          }
+
+          &:hover {
+            background-color: var(--main-color-dark-hover);
+            border: 1px solid var(--main-color);
+            cursor: pointer;
+
+            .chevron-top {
+              //   background-color: var(--main-color);
+              scale: 1.1;
+              //   border-radius: 0.8rem;
+              //   margin-right: 1rem;
+              transition: var(--transition-16);
+
+              path {
+                stroke: var(--main-color-light);
+              }
+            }
+          }
+        }
+      }
+
+      .extender-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+
+        border-radius: 0.8rem;
+
+        transition: var(--transition-16);
+
+        .chevron-left {
+          height: 2.4rem;
+          width: 100%;
+          transition: var(--transition-16);
+        }
+
+        .chevron-right {
+          height: 2.4rem;
+          width: 100%;
+          transition: var(--transition-16);
+        }
+
+        // &:hover {
+        //   .chevron-left{
+        //     background-color: var(--main-color);
+        //     scale: 1.1;
+        //     border-radius: .8rem;
+        //     margin-right: 1rem;
+        //     transition: var(--transition-16);
+        //   }
+        //   .chevron-right {
+        //     background-color: var(--main-color);
+        //     scale: 1.1;
+        //     border-radius: .8rem;
+        //     margin-left: 1rem;
+        //     transition: var(--transition-16);
+        //   }
+        //   transition: var(--transition-16);
+        //   // width: 4rem;
+
+        // }
+      }
+
+      .cl-extender-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2.4rem;
+        width: 100%;
+
+        .chevron-top {
+          height: 2.4rem;
+          width: 100%;
+        }
+      }
+
+      // ************************************************************
+      // ---------- THE CONTENT INSIDE OF THE AUDIO PLAYER ----------
+      // ************************************************************
+      .player-wrapper-inside {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    // HOVER STATE OF THE WRAPPER AND EXTENSION TO THE PLAYER WRAPPER
+
+    &:hover {
+      scale: 1.1;
+      transition: var(--transition-32);
+    }
+
+    &:hover .player-wrapper {
+      //   height: 5.6rem;
+      width: 8.8rem;
+      bottom: 0rem;
+      background-color: #ff000032;
+      transition: var(--transition-8);
+
+      .cl {
+        // width: 10vw !important;
+      }
+    }
+  }
+  //min max
+}
+
+.TEMPORARY {
+  opacity: 0.32;
+}
+// .wrapper:hover  .player-wrapper {
+//   height: 5.6rem;
+//   width: 7.2rem;
+//   bottom: 0rem;
+//   background-color: #ff000032;
+
+//   // border: 1.6px solid var(--main-color-dark-24);
+//   transition: var(--transition-8);
+//   // transition: all .24 ease-out;
+// }
+
+.player-wrapper-extended {
+
+  .player-wrapper {
+    width: 32vw !important;
+    height: 8.8rem !important;
+    background-color: #25e82832 !important;
+    transition: var(--transition-32);
+
+    .rw {
+      .cl {
+        .player-wrapper-inside {
+        }
+
+        .collapser-button {
+          height: 1.6rem !important;
+          bottom: -2.4rem !important;
+          opacity: 1 !important;
+          display: flex !important;
+          transition: var(--transition-16);
+        }
+      }
+      .extender-button {
+        display: none !important;
+        transition: all 1s ease-in-out;
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  &:hover{
+    scale: 1.0 !important;
+  }
+}
