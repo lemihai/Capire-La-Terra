@@ -1,50 +1,89 @@
 import {
   Component,
   AfterViewInit,
-  DestroyRef,
-  inject,
+  NgZone,
+  OnDestroy,
+  OnInit,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Navbar } from './navbar/navbar';
-import { LandingPage } from './landing-page/landing-page';
-import { LoginPage } from './login-page/login-page';
-import { AdminDashboard } from './admin-dashboard/admin-dashboard';
-import { AboutUs } from './about-us/about-us';
-import { RouterOutlet } from '@angular/router';
-import { Footer } from './footer/footer';
-import { Background } from './background/background';
+
+import { NgOptimizedImage } from '@angular/common';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { LandingPage } from './landing-page/landing-page';
+import { Navbar } from './navbar/navbar';
+import { Footer } from "./footer/footer";
+
+import { RouterOutlet } from '@angular/router';
+import { GlobalAudioPlayerComponent } from "./global-audio-player.component/global-audio-player.component";
+import { UIStatContainer } from "./ui-stat-container/ui-stat-container";
+
+
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, Footer, Background],
+  standalone: true, // Use standalone components
+  imports: [RouterOutlet, LandingPage, Navbar, Footer, GlobalAudioPlayerComponent, UIStatContainer],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App implements AfterViewInit {
-  private destroyRef = inject(DestroyRef);
+export class App{
+  // private smoother: ScrollSmoother | null = null;
 
-  ngAfterViewInit() {
-    // No need for NgZone.runOutsideAngular in zoneless mode
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+  // constructor(private ngZone: NgZone) {}
 
-    const smoother = ScrollSmoother.create({
-      wrapper: '#smooth-wrapper',
-      content: '#smooth-content',
-      smooth: 2,
-      effects: true,
-      ease: "ease.out",
-      normalizeScroll: true,
-    });
+  // ngOnInit() {
+  //   // Register GSAP plugins here once
+  //   this.ngZone.runOutsideAngular(() => {
+  //     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+  //   });
+  // }
 
-    // Clean up on component destruction
-    this.destroyRef.onDestroy(() => {
-      smoother.kill();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    });
-  }
+  // ngOnDestroy() {
+  //   // Kill the smoother and triggers to prevent memory leaks
+  //   if (this.smoother) {
+  //     this.smoother.kill();
+  //   }
+  // }
+
+  // // ... (your existing imports and component setup)
+
+  // ngAfterViewInit() {
+  //   this.ngZone.runOutsideAngular(() => {
+  //     // Create the smoother instance
+  //     this.smoother = ScrollSmoother.create({
+  //       wrapper: '#smooth-wrapper',
+  //       content: '#smooth-content',
+  //       smooth: 1,
+  //       effects: true,
+  //       normalizeScroll: true,
+  //       ignoreMobileResize: true,
+  //       smoothTouch: false,
+  //     });
+
+  //     // GSAP ScrollTrigger for parallax effect on each image
+  //     gsap.utils.toArray('[data-speed]').forEach((img) => {
+  //       // Cast the 'img' variable to HTMLElement to satisfy TypeScript
+  //       const element = img as HTMLElement;
+
+  //       gsap.to(element, {
+  //         y: (i, target) => -100 * parseFloat(target.getAttribute('data-speed') as string),
+  //         ease: 'none',
+  //         scrollTrigger: {
+  //           trigger: element,
+  //           start: 'top bottom',
+  //           end: 'bottom top',
+  //           scrub: true,
+  //         },
+  //       });
+  //     });
+  //   });
+  // }
+
+  // // ... (rest of your component code)
+
 }

@@ -1,0 +1,24 @@
+:host{
+  min-height: 100vh;
+  will-change: transform;
+}
+
+.hero-component{
+  position: absolute;
+  width: 50%;
+  height: 16rem;
+  font-weight: 600;
+  top: 16vh;
+  right: 0rem;
+  left: 0rem;
+
+}
+
+.audio-test-2{
+  height: 50px;
+}
+
+.audio-test{
+  height: 40px;
+  width: 50vw;
+}

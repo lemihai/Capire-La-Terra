@@ -1,106 +1,56 @@
-<!-- <nav>
-  <div class="empty-box"></div>
-  <div class="nav-line"></div>
-  <ul class="nav-links">
-    <div class="links-line"></div>
-    <li routerLink="/">
-      <a>Home</a>
-    </li>
-    <div class="links-line"></div>
-    <li routerLink="/latest-news">
-      <a>News</a>
-    </li>
-    <div class="links-line"></div>
-    <li routerLink="/about-us">
-      <a>about us</a>
-    </li>
-    <div class="links-line"></div>
-    <li routerLink="/">
-       <img src="../../../../design/logo.png" alt="logo" /> -->
-<!--
-    </li>
-    <div class="links-line"></div>
-    <li routerLink="/admin/admin-dashboard">
-      <a>admin</a>
-    </li>
-    <div class="links-line"></div>
-    <li routerLink="/login">
-      <a>login</a>
-    </li>
-    <div class="links-line"></div>
-  </ul>
-  <div class="nav-line"></div>
-  <div class="empty-box"></div>
-</nav> -->
+<nav class="navbar">
+  <div class="top_cutout">
+    <div class="left_corner">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M24 24C24 10.7452 13.2548 0 0 0H24V24Z" fill="#e9efd1" />
+      </svg>
+    </div>
+    <div class="middle_bar"></div>
+    <div class="right_corner">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M24 24C24 10.7452 13.2548 0 0 0H24V24Z" fill="#e9efd1" />
+      </svg>
+    </div>
+  </div>
 
-<nav>
-  <div class="hz-line">
-    <div class="hz-line-under-home"></div>
-    <div class="hz-line-under-news"></div>
-    <div class="hz-line-under-aboutus"></div>
-    <div class="hz-line-under-logo"></div>
-    <div class="hz-line-under-admin"></div>
-    <div class="hz-line-under-login"></div>
-  </div>
-  <ul class="nav-links">
-    <div class="empty-box"></div>
-    <div class="vl-line"></div>
-    <li routerLink="/">
-      <div class="vl-line-button-inner"></div>
-      <div class="inner-border">
-        <a>Home</a>
+  <ul
+    class="navbar_physical"
+    #navbar
+    [style.background]="backgroundColor"
+    [style.transform]="`translateY(${translateY})`"
+    [style.scale]="scale"
+    [style.opacity]="opacity"
+    [style.width]="width"
+  >
+    <li (click)="navigateToHome()"><a>Home</a></li>
+  <li (click)="navigateToEpisodesPage()"><a>Episodes</a></li>
+  <li (click)="navigateToNewsPage()"><a>News</a></li>
+    <li class="navbar_button">About Us</li>
+    <li class="navbar_button">Logo</li>
+    <li class="navbar_button">Admin</li>
+    <li class="navbar_button">CO2 of website</li>
+    <li class="navbar_button">Energy score</li>
+    <li class="navbar_button">language</li>
+    <li class="navbar_button">login</li>
+    <li class="temperature">
+      <div class="temp-indicator"></div>
+      <div class="temp-indic-a">
+        <p class="temp-text">1.52</p>
+        <p class="">&deg;</p>
+        <p class="temp-text-n">C</p>
       </div>
-      <div class="vl-line-button-inner"></div>
     </li>
-    <div class="vl-line"></div>
-    <li routerLink="/latest-news">
-      <div class="vl-line-button-inner"></div>
-      <div class="inner-border">
-        <a>News</a>
-      </div>
-      <div class="vl-line-button-inner"></div>
-    </li>
-    <div class="vl-line"></div>
-    <li routerLink="/about-us">
-      <div class="vl-line-button-inner"></div>
-      <div class="inner-border">
-        <a>about us</a>
-      </div>
-      <div class="vl-line-button-inner"></div>
-    </li>
-    <div class="vl-line"></div>
-    <li routerLink="/">
-      <div class="vl-line-button-inner"></div>
-      <div class="inner-border">
-        <a>logo</a>
-      </div>
-      <div class="vl-line-button-inner"></div>
-    </li>
-    <div class="vl-line"></div>
-    <li routerLink="/admin/admin-dashboard">
-      <div class="vl-line-button-inner"></div>
-      <div class="inner-border">
-        <a>admin</a>
-      </div>
-      <div class="vl-line-button-inner"></div>
-    </li>
-    <div class="vl-line"></div>
-    <li routerLink="/login">
-      <div class="vl-line-button-inner"></div>
-      <div class="inner-border">
-        <a>login</a>
-      </div>
-      <div class="vl-line-button-inner"></div>
-    </li>
-    <div class="vl-line"></div>
-    <div class="empty-box"></div>
   </ul>
-  <div class="hz-line">
-    <div class="hz-line-under-home"></div>
-    <div class="hz-line-under-news"></div>
-    <div class="hz-line-under-aboutus"></div>
-    <div class="hz-line-under-logo"></div>
-    <div class="hz-line-under-admin"></div>
-    <div class="hz-line-under-login"></div>
-  </div>
 </nav>
