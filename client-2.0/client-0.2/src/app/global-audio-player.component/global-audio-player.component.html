@@ -1,8 +1,18 @@
-<div class="wrapper {{ extended }}">
+<div
+  class="wrapper {{ extended }}"
+  [style.transform]="`translate(${translateX}, ${translateY})`"
+  [style.scale]="scale"
+  [style.opacity]="opacity"
+>
   <!-- <div class="player-play-button-wrapper"> -->
-  <app-play-button class="app-button TEMPORARY" />
+  <app-play-button
+    (click)="play()"
+    class="app-button"
+    [(triggeredThroughTrack)]="trackTriggeredPlay"
+  />
+
   <!-- </div> -->
-  <div class="player-wrapper ">
+  <div class="player-wrapper">
     <div class="rw">
       <div (click)="extend()" class="extender-button">
         <svg
@@ -23,28 +33,69 @@
         </svg>
       </div>
       <div class="cl">
-        <!-- <div class="cl-extender-button">
-          <svg
-          class="chevron-top"
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M24 20L16 12L8 20"
-              stroke="black"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+        <div class="player-wrapper-inside">
+          <div class="inside-cl">
+            <div class="timer-text">
+              <p>
+                {{ currentTime.minutes }}
+              </p>
+              :
+              <p>
+                {{ currentTime.seconds }}
+              </p>
+            </div>
+            <app-audio-track
+              [audioTrackWidth]="audioTrackWidth"
+              [audioTime]="duration.initial"
+              (audioTrackClicked)="handleTrackClicked($event)"
+              [currentTimeMin]="currentTime.minutes"
+              [currentTimeSec]="currentTime.seconds"
             />
-          </svg>
-        </div> -->
-        <div class="player-wrapper-inside"></div>
+            <div class="timer-text">
+              <p>
+                {{ duration.minutes }}
+              </p>
+              :
+              <p>
+                {{ duration.seconds }}
+              </p>
+            </div>
+            <audio #audioPlayer controls src="audio/freepik-sermon-in-folds.mp3"></audio>
+          </div>
+          <div class="inside-cl">
+            <div class="episode-details-container">
+              <img
+                ngSrc="assets/episode_placeholder.png"
+                height="40"
+                width="40"
+                alt="episode_image"
+                class="episode-image"
+              />
+
+              <div class="episode-title">
+                <p>Perche si chiamamo la crisi climatica</p>
+                <div class="episode-season-details-container">
+                  <p>S1</p>
+                  <!-- <div class="eps-separator-line"></div> -->
+                  <p>E12</p>
+                  <!-- <div class="eps-separator-line"></div> -->
+                  <app-profile-card />
+                  <!-- <p>Sofia Lutteri</p> -->
+                </div>
+              </div>
+            </div>
+            <div class="player-controls-container">
+              <app-one-forward-button />
+              <app-tensec-forward (click)="forwardTenSec()" />
+              <app-volume-button (volumeSet)="setVolume($event)" />
+              <app-tensec-backward (click)="backTenSec()" />
+              <app-one-backward-button />
+            </div>
+          </div>
+        </div>
         <div (click)="extend()" class="collapser-button">
-            <svg
-          class="chevron-top"
+          <svg
+            class="chevron-top"
             width="32"
             height="32"
             viewBox="0 0 32 32"

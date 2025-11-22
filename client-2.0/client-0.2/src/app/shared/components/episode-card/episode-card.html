@@ -1,0 +1,122 @@
+@if(cardType == 'small'){
+
+<div class="episode small">
+  <div class="play">
+    <app-play-button />
+  </div>
+  <p class="episode-number">#2 -</p>
+  <p class="episode-title">This is a title pam pam pam tram pam</p>
+  <div class="profile-card-wrapper">
+    <app-profile-card class="episode-author" />
+  </div>
+  <p class="episode-duration">3:46</p>
+
+  <!-- Adding these kills the whole app scroll -->
+  <!-- <app-audio-track [audioTrackWidth]="audioTrackWidth" /> -->
+  <app-audio-track [audioTrackWidth]="100" />
+</div>
+} @if(cardType == 'medium'){
+
+<div class="episode medium">
+  <div class="episode-image" style="background-image: url('/assets/episode_placeholder.png')">
+    <!-- <img
+      class="episode-image"
+      ngSrc="assets/episode_placeholder.png"
+      height="128"
+      width="128"
+      alt="episode_image"
+      class="episode-image"
+    /> -->
+    <!-- <div class="episode-image-action">few</div> -->
+    <div class="episode-image-filter"></div>
+  </div>
+  <div class="episode-content-wrapper">
+    <!-- <div class="column-wrapper"> -->
+    <div class="top-container">
+      <div class="title-wrapper">
+        <div class="play-button-wrapper">
+          <app-play-button />
+        </div>
+        <h2 class="episode-number">#2</h2>
+        <h2 class="episode-number">-</h2>
+        <h2 class="episode-title">This is a title</h2>
+      </div>
+    </div>
+    <div class="bottom-container">
+      <div class="app-profile-card-wrapper">
+        <div class="app-profile-card-wrapper-for-transform">
+          <app-profile-card class="aaa" />
+        </div>
+      </div>
+      <div class="separator-line"></div>
+      <p class="date">14/12/2001</p>
+      <div class="separator-line"></div>
+      <p class="topic">topic 1</p>
+      <!-- <div class="separator-line"></div> -->
+      <!-- <app-source /> -->
+
+      <p class="episode-duration">3:46</p>
+      <div class="audio-track-wrapper" #audioTrackWrapper>
+        <app-audio-track [audioTrackWidth]="audioTrackWidth" />
+      </div>
+    </div>
+    <!-- </div> -->
+  </div>
+</div>
+} @if(cardType == 'large'){
+
+<div class="episode large" style="background-image: url('/assets/article-illustration-1.jpg')">
+  <div class="episode-large-filter">
+    <div class="episode-large-content-wrapper">
+      <div class="top-container">
+        <div class="title-wrapper">
+          <!-- <div class="play-button-wrapper">
+            <app-play-button />
+          </div> -->
+          <h2 class="episode-number">#2</h2>
+          <h2 class="episode-number">-</h2>
+          <h2 class="episode-title">This is a title</h2>
+        </div>
+      </div>
+      <div class="bottom-container">
+        <div class="app-profile-card-wrapper">
+          <div class="app-profile-card-wrapper-for-transform">
+            <app-profile-card class="aaa" />
+          </div>
+        </div>
+        <div class="separator-line"></div>
+        <p class="date">14/12/2001</p>
+        <div class="separator-line"></div>
+        <p class="topic">topic 1</p>
+        <!-- <div class="separator-line"></div> -->
+        <!-- <app-source /> -->
+      </div>
+      <div class="audio-track-wrapper-large" #audioTrackWrapper>
+        <p class="episode-duration">3:46</p>
+        <app-audio-track [audioTrackWidth]="audioTrackWidthLarge" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="season-hero">
+  <div class="content">
+    <div class="top-container">
+      <h1>#1 - {{ episodes[0].name }}</h1>
+      <div class="episode-separator-line"></div>
+      <div class="details">
+        <p>17-09-2025</p>
+        <div class="separator-line"></div>
+        <p>Sofia Lutteri</p>
+        <div class="separator-line"></div>
+        <p>4:08</p>
+      </div>
+    </div>
+     <div class="controls"> -->
+<!-- this is the app audio player component -->
+<!-- <app-audio-player /> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+
+}

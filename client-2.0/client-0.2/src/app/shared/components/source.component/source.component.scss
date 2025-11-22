@@ -1,0 +1,24 @@
+.source {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 0.8rem;
+
+  img {
+    height: 1.6rem;
+    width: 1.6rem;
+    background-image: url('../../../../../public/assets/article-illustration-1.jpg');
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+
+    border-radius: 0.4rem;
+  }
+
+  .source-text {
+    font-size: 1.4rem;
+    opacity: 0.64;
+  }
+}

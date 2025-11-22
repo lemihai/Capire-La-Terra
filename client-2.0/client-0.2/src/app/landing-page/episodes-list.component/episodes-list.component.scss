@@ -1,5 +1,7 @@
+@use '../../../variables.scss' as *;
+
 :host {
-  height: 100vh;
+  height: 80vh;
   // width: calc(100% - .8rem);
   width: 100%;
   // background-color: #ff000023;
@@ -7,11 +9,34 @@
   margin: 0rem 0rem;
 
   padding-left: 50vw;
+  // z-index: 20;
+
+  .episode-list-wrapper {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    // padding: 0rem 16rem 16rem 0rem;
+
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: flex-start;
+    // gap: 2.4rem;
+    // background-color: red;
+  }
 
   .episode-list {
     height: 100%;
     width: 100%;
-    padding: 24rem 16rem 16rem 0rem;
+    padding: 0rem 16rem 16rem 0rem;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: center;
+    // align-items: flex-start;
+    gap: 2.4rem;
+    // background-color: red;
   }
 
   .season-hero {
@@ -78,4 +103,20 @@
     background-color: #ff000016;
     height: 8rem;
   }
+}
+
+.season-episode-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.4rem;
+
+  background-color: var(--main-color-dark-16);
+  border: 1px solid var(--main-color-dark-16);
+
+  border-radius: 1.6rem;
+
+  padding: 0.8rem;
+  z-index: 50;
 }

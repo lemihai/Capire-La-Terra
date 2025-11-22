@@ -1,0 +1,98 @@
+@use '../../../../variables.scss' as *;
+
+button {
+  width: auto;
+  height: 4rem;
+
+  padding: 0.8rem 1.2rem;
+  background-color: var(--main-color-dark);
+  border: 1px solid var(--main-color-dark);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+
+  border-radius: 1.2rem;
+  transition: var(--transition-160);
+
+  min-height: 4rem;
+
+  p {
+    color: var(--main-color-light);
+    text-overflow: clip;
+    white-space: nowrap;
+  }
+
+  svg {
+    height: 2.4rem;
+    width: 2.4rem;
+    path {
+      stroke: var(--main-color-light);
+    }
+  }
+
+  .arrow-right {
+    height: 2.4rem;
+    width: 2.4rem;
+    path {
+      stroke: var(--main-color-light);
+    }
+  }
+
+  .open-right {
+    height: 2rem;
+    width: 2rem;
+    transition: var(--transition-160);
+
+    path {
+      transition: var(--transition-160);
+    }
+    path:nth-child(2) {
+    }
+    path:nth-child(3) {
+    }
+  }
+
+  &:hover {
+    background-color: var(--main-color-dark-hover);
+    border: 1px solid var(--main-color-hover);
+    cursor: pointer;
+    z-index: 30 !important;
+    transition: var(--transition-160);
+    gap: 1.2rem;
+
+    p {
+      color: var(--main-color-light-hover);
+    }
+
+    .arrow-right {
+      transition: var(--transition-16);
+      path {
+        stroke-width: 0.24rem;
+        transition: var(--transition-16);
+        // stroke: var(--main-color);
+      }
+    }
+
+    .open-right {
+      height: 2rem;
+      width: 2rem;
+      transition: var(--transition-16);
+
+      path {
+        transition: var(--transition-16);
+        stroke-width: 0.24rem;
+      }
+
+      path:nth-child(2) {
+        transform: translate(2px, -2px);
+        stroke: var(--main-color);
+      }
+      path:nth-child(3) {
+        transform: translate(2px, -2px);
+        stroke: var(--main-color);
+      }
+    }
+  }
+}

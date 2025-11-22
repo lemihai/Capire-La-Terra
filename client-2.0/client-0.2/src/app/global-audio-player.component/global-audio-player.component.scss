@@ -2,7 +2,7 @@
 
 :host {
   position: fixed;
-  bottom: 3.2rem;
+  bottom: 1.6rem;
   // background-color: red;
   left: 8rem;
   right: 8rem;
@@ -26,9 +26,11 @@
     // background-color: red !important;
 
     position: relative;
+    transition: var(--transition-160);
 
     .app-button {
       z-index: 1 !important;
+      transition: var(--transition-32);
       //   box-shadow: var(--main-shadow);
     }
 
@@ -48,7 +50,11 @@
       border-radius: 1.2rem;
       border: 1px solid var(--main-color-dark-16);
       transition: var(--transition-160);
-      padding: 0.4rem;
+      padding: 0.32rem;
+
+      //   backdrop-filter
+      backdrop-filter: blur(0.4rem);
+      box-shadow: var(--main-shadow-32);
 
       // ROW
       .rw {
@@ -58,24 +64,40 @@
         justify-content: space-between;
         align-items: center;
 
+        // padding: 0rem;
+
         &:hover {
-          cursor: default;
+          //   cursor: default;
           .extender-button {
+            // width:30%;
+            cursor: pointer;
             .chevron-left {
               cursor: pointer;
-              background-color: var(--main-color);
-              scale: 1.1;
-              border-radius: 0.8rem;
-              margin-right: 1rem;
+              //   width: 2rem;
+              background-color: var(--main-color-hover);
+              border-radius: 0.8rem 0.4rem 0.4rem 0.8rem;
+              margin-right: 0.64rem;
               transition: var(--transition-16);
+
+              path {
+                scale: 1.1;
+                stroke: var(--main-color-light);
+                stroke-width: 0.32rem;
+              }
             }
             .chevron-right {
+              //   width: 2rem;
               cursor: pointer;
-              background-color: var(--main-color);
-              scale: 1.1;
-              border-radius: 0.8rem;
-              margin-left: 1rem;
+              background-color: var(--main-color-hover);
+              border-radius: 0.4rem 0.8rem 0.8rem 0.4rem;
+              margin-left: 0.64rem;
               transition: var(--transition-16);
+
+              path {
+                scale: 1.1;
+                stroke: var(--main-color-light);
+                stroke-width: 0.32rem;
+              }
             }
             transition: var(--transition-16);
             // width: 4rem;
@@ -102,7 +124,7 @@
           width: 4rem;
           height: 1rem;
           bottom: 0rem;
-          border-radius: 0.8rem;
+          border-radius: 0.4rem 0.4rem 0.8rem 0.8rem;
 
           background-color: var(--main-color-dark-16);
           border: 1px solid var(--main-color-dark-16);
@@ -117,22 +139,39 @@
             height: 2.4rem;
             width: 100%;
             transition: var(--transition-16);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+            // height: 100% !important;
+            // width: 100% !important;
+
+            path {
+              transition: var(--transition-16);
+            }
           }
 
           &:hover {
-            background-color: var(--main-color-dark-hover);
+            scale: 1.1;
+            background-color: var(--main-color-hover);
             border: 1px solid var(--main-color);
             cursor: pointer;
 
             .chevron-top {
               //   background-color: var(--main-color);
-              scale: 1.1;
+              scale: 1;
               //   border-radius: 0.8rem;
               //   margin-right: 1rem;
               transition: var(--transition-16);
 
               path {
+                scale: 1.1;
                 stroke: var(--main-color-light);
+                stroke-width: 0.32rem;
+                transition: var(--transition-16);
+                transform: translate(-0.1rem, -0.16rem);
               }
             }
           }
@@ -151,15 +190,22 @@
         transition: var(--transition-16);
 
         .chevron-left {
-          height: 2.4rem;
+          height: 100%;
           width: 100%;
           transition: var(--transition-16);
+          margin-right: 0.4rem;
+          svg {
+          }
         }
 
         .chevron-right {
-          height: 2.4rem;
+          height: 100%;
           width: 100%;
           transition: var(--transition-16);
+          //   background-color: red !important;
+          margin-left: 0.4rem;
+          svg {
+          }
         }
 
         // &:hover {
@@ -202,6 +248,7 @@
       .player-wrapper-inside {
         height: 100%;
         width: 100%;
+        display: none;
       }
     }
 
@@ -214,13 +261,13 @@
 
     &:hover .player-wrapper {
       //   height: 5.6rem;
-      width: 8.8rem;
+      width: 8rem;
       bottom: 0rem;
-      background-color: #ff000032;
+      background-color: var(--main-color-dark-16);
       transition: var(--transition-8);
 
       .cl {
-        // width: 10vw !important;
+        width: 132% !important;
       }
     }
   }
@@ -242,16 +289,157 @@
 // }
 
 .player-wrapper-extended {
+  transition: var(--transition-32);
+
+  .app-button {
+    transform: translateY(-0.24rem);
+    transition: var(--transition-32);
+  }
 
   .player-wrapper {
-    width: 32vw !important;
+    width: 48rem !important;
     height: 8.8rem !important;
-    background-color: #25e82832 !important;
+    background-color: var(--main-color-dark-16) !important;
     transition: var(--transition-32);
+    color: var(--main-color-dark);
 
     .rw {
       .cl {
         .player-wrapper-inside {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+
+          .inside-cl {
+            // background-color: #ff000016;
+            height: 100%;
+            width: 100%;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 0.8rem;
+
+            //min-max values
+
+            max-height: 100%;
+
+            audio {
+              display: none;
+            }
+
+            .timer-text {
+              width: 3.2rem;
+              font-size: 1.2rem;
+              display: flex;
+            }
+
+            .timer-text:nth-child(1) {
+              // background-color: aqua;
+              text-align: left ;
+              justify-content: flex-start;
+            }
+            
+            .timer-text:nth-child(3) {
+              // background-color: red;
+                justify-content: flex-end;
+                text-align: right ;
+            }
+
+            .episode-details-container {
+              height: 100%;
+              width: 100%;
+              // max-width: 20rem;
+              max-height: 3.8rem;
+
+              display: flex;
+              flex-direction: row;
+              justify-items: flex-start;
+              gap: 0.8rem;
+              align-items: center;
+
+              img {
+                max-height: 100%;
+                height: 3.8rem;
+                width: 3.8rem;
+                border-radius: 0.8rem;
+              }
+
+              .episode-title {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                p {
+                  mask-image: linear-gradient(
+                    90deg,
+                    rgba(0, 0, 0, 1) 0%,
+                    rgba(0, 0, 0, 1) 88%,
+                    rgba(0, 0, 0, 0) 100%
+                  );
+                  width: 16.4rem;
+                  text-wrap: nowrap;
+                  font-size: var(--font-size-small);
+                  line-height: 1.6rem;
+
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: clip;
+                }
+
+                .episode-season-details-container {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: flex-start;
+                  align-items: center;
+                  gap: 0.8rem;
+
+                  p {
+                    font-size: 1.2rem;
+                    width: auto;
+                    opacity: 0.64;
+                  }
+
+                  .eps-separator-line {
+                    background-color: var(--main-color-dark);
+                    width: 0.16rem;
+                    height: 0.8rem;
+                    border-radius: 1rem;
+                    opacity: 0.64;
+                  }
+                }
+              }
+            }
+
+            .player-controls-container {
+              width: 100%;
+              display: flex;
+              flex-direction: row-reverse;
+              justify-items: flex-start;
+              align-items: center;
+              gap: 0.8rem;
+              margin-right: 0.16rem;
+            }
+          }
+
+          .inside-cl:first-child {
+            padding: 0.8rem;
+            border-radius: 0.8rem 0.8rem 0.4rem 0.4rem;
+            // background-color: #e9efd164;
+            // height: 64%;
+          }
+          .inside-cl:last-child {
+            // padding: .4rem;
+            gap: 4.8rem !important;
+            border-radius: 0.4rem 0.4rem 0.8rem 0.8rem;
+          }
         }
 
         .collapser-button {
@@ -259,7 +447,7 @@
           bottom: -2.4rem !important;
           opacity: 1 !important;
           display: flex !important;
-          transition: var(--transition-16);
+          transition: var(--transition-160);
         }
       }
       .extender-button {
@@ -270,7 +458,8 @@
     }
   }
 
-  &:hover{
-    scale: 1.0 !important;
+  // Not really hovering over
+  &:hover {
+    scale: 1 !important;
   }
 }

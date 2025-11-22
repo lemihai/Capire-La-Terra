@@ -18,6 +18,7 @@ import { Footer } from "./footer/footer";
 
 import { RouterOutlet } from '@angular/router';
 import { GlobalAudioPlayerComponent } from "./global-audio-player.component/global-audio-player.component";
+import { UIStatContainer } from "./ui-stat-container/ui-stat-container";
 
 
 
@@ -25,7 +26,7 @@ import { GlobalAudioPlayerComponent } from "./global-audio-player.component/glob
 @Component({
   selector: 'app-root',
   standalone: true, // Use standalone components
-  imports: [RouterOutlet, LandingPage, Navbar, Footer, GlobalAudioPlayerComponent],
+  imports: [RouterOutlet, LandingPage, Navbar, Footer, GlobalAudioPlayerComponent, UIStatContainer],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

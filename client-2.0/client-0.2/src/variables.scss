@@ -4,6 +4,7 @@
   // Colors
   --main-color: #c4e455;
   --main-color-32: #c4e45532;
+  --main-color-24: #c4e45524;
   --main-color-16: #c4e45516;
   --main-color-dark: #384605;
   --main-color-dark-08: #38460508;
@@ -14,15 +15,18 @@
   --main-color-light: #e9efd1;
 
   // hover colors
+  --main-color-hover: #9cc40a;
   --main-color-dark-hover: #596e0c;
   --main-color-light-hover: #ffffff;
 
   // Shadows
-  --main-shadow: 0px 2px 8px var(--main-color-dark-16);
-  --darker-shadow: 0px 2px 8px var(--main-color-dark-32);
+  --main-shadow: 0rem 0.02rem 0.8rem var(--main-color-dark-16);
+  --darker-shadow: 0rem 0.02rem 0.08rem var(--main-color-dark-32);
 
   // Fonts
   --main-font-family: 'Belanosima', sans-serif;
+  --secondary-font-family: "Climate Crisis", sans-serif;
+  --tertiary-font-family: "Sofia Sans", sans-serif;
 
   --font-size-small: 1.4rem;
   --font-size-regular: 1.6rem;

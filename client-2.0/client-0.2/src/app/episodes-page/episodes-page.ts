@@ -7,15 +7,18 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { AudioTrack } from '../shared/components/audio-track/audio-track';
+import { Button } from '../shared/buttons/button/button';
+import { EpisodeCard } from '../shared/components/episode-card/episode-card';
 
 import { NgOptimizedImage } from '@angular/common';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import CustomEase from 'gsap/CustomEase';
 
 @Component({
   selector: 'app-episodes-page',
-  imports: [NgOptimizedImage, AudioTrack],
+  imports: [NgOptimizedImage, AudioTrack, Button, EpisodeCard],
   templateUrl: './episodes-page.html',
   styleUrl: './episodes-page.scss',
 })
@@ -31,6 +34,11 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
   isPlaying = 'true';
   topPartDisabled = '';
   expandButton = '';
+
+  // For animations in gsap
+  time = 1.24;
+  ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
+  // ease = 'power3.out';
 
   play() {
     if (this.isPlaying == 'true') {
@@ -151,6 +159,156 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
         ignoreMobileResize: true,
         smoothTouch: false,
       });
+      setTimeout(() => {
+        gsap.to('.hero-h1', {
+          height: '120px',
+          width: '48rem',
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.episodes-list', {
+          height: 'auto',
+          opacity: 1,
+          minHeight: '100vh',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.hero-h1A', {
+          height: '120px',
+          width: '26rem',
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.season-h1', {
+          height: '120px',
+          width: '128px',
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.medium', {
+          height: '8rem',
+          minWidth: '40rem',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.header-dropdown', {
+          height: '120px',
+          width: '22rem',
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+
+        gsap.to('h2', {
+          width: 'auto',
+          height: 'auto',
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.app-profile-card-wrapper-for-transform', {
+          width: 'auto',
+          height: 'auto',
+          translateX: 0,
+          translateY: 0,
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.date', {
+          width: 'auto',
+          height: 'auto',
+          translateX: 0,
+          translateY: 0,
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.topic', {
+          width: 'auto',
+          height: 'auto',
+          translateX: 0,
+          translateY: 0,
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.bottom-container', {
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.episode-image', {
+          width: '6.4rem',
+          minWidth: '6.4rem',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.separator-line', {
+          height: '1rem',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.audio-track-wrapper', {
+          translateX: 0,
+          translateY: 0,
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          opacity: 1,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: 'auto',
+        });
+        // INTRODUCE SCALE TO AVOID THE WEIRD WARPS
+        gsap.to('.audio-track-wrapper-large', {
+          // width: '100%',
+          translateX: 0,
+          translateY: 0,
+          skewX: 0,
+          skewY: 0,
+          scale: 1,
+          rotate: 0,
+          opacity: 1,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: 'auto',
+        });
+      }, 800);
     });
   }
 }

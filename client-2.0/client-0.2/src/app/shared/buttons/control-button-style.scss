@@ -1,0 +1,60 @@
+@use '../../../variables.scss' as *;
+
+:host {
+  height: 3.2rem !important;
+  width: 3.2rem !important;
+
+  // minimum values
+  min-height: 3.2rem !important;
+  min-width: 3.2rem !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 0.8rem;
+  // padding: .4rem;
+}
+
+.control-button {
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff00;
+  border: 1px solid #38460500;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: var(--transition-24);
+  svg {
+    transition: var(--transition-24);
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    path {
+      stroke: var(--main-color-dark) !important;
+      transition: var(--transition-24);
+    }
+  }
+}
+
+.control-button:hover {
+  transition: var(--transition-24);
+  background-color: var(--main-color-16);
+  border: 1px solid #38460516;
+  cursor: pointer;
+  box-shadow: var(--darker-shadow);
+  // scale: 1.1;
+
+  svg {
+    transition: var(--transition-24);
+    scale: 1.1;
+
+    path {
+      transition: var(--transition-24);
+      stroke: var(--main-color-dark-hover) !important;
+    }
+  }
+}

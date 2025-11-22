@@ -1,0 +1,21 @@
+.profile-wrapper{
+    width: auto;
+    min-width: 9.3rem;
+
+    display: flex;
+    flex: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .4rem;
+
+    .profile-image{
+        height: 1.6rem;
+        width: 1.6rem;
+        border-radius: .9rem;
+    }
+
+    p{
+        font-size: 1.4rem;
+        opacity: .64;
+    }
+}

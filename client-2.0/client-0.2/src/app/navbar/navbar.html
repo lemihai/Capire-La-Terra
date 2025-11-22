@@ -1,8 +1,6 @@
 <nav class="navbar">
-  
   <div class="top_cutout">
     <div class="left_corner">
-      
       <svg
         width="24"
         height="24"
@@ -15,7 +13,6 @@
     </div>
     <div class="middle_bar"></div>
     <div class="right_corner">
-      
       <svg
         width="24"
         height="24"
@@ -27,18 +24,19 @@
       </svg>
     </div>
   </div>
-  
-  
-  <ul class="navbar_physical">
-    <li routerLink="/">
-      <a>Home</a>
-    </li>
-    <li routerLink="/episodes-page">
-      <a>Episodes</a>
-    </li>
-    <li routerLink="/news-page">
-      <a>news</a>
-    </li>
+
+  <ul
+    class="navbar_physical"
+    #navbar
+    [style.background]="backgroundColor"
+    [style.transform]="`translateY(${translateY})`"
+    [style.scale]="scale"
+    [style.opacity]="opacity"
+    [style.width]="width"
+  >
+    <li (click)="navigateToHome()"><a>Home</a></li>
+  <li (click)="navigateToEpisodesPage()"><a>Episodes</a></li>
+  <li (click)="navigateToNewsPage()"><a>News</a></li>
     <li class="navbar_button">About Us</li>
     <li class="navbar_button">Logo</li>
     <li class="navbar_button">Admin</li>

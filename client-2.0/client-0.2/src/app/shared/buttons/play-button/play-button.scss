@@ -41,9 +41,10 @@
 
 .play-button:hover {
   transition: var(--transition-24);
-  background-color: var(--main-color-dark-hover);
+  background-color: var(--main-color-hover);
   cursor: pointer;
   box-shadow: var(--darker-shadow);
+  scale: 1.1;
 
   svg {
     transition: var(--transition-24);
@@ -51,7 +52,7 @@
 
     path {
       transition: var(--transition-24);
-      stroke: var(--main-color-light-hover) !important;
+      stroke: var(--main-color-light) !important;
     }
   }
 }

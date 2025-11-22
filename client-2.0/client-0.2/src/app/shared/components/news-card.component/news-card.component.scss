@@ -1,0 +1,257 @@
+@use '../../../../variables.scss' as *;
+
+:host {
+}
+
+.card-wrapper {
+  color: var(--main-color-dark);
+
+  transition: var(--transition-160);
+}
+
+.card-wrapper.small {
+  // background-color: red;
+
+  transition: var(--transition-160);
+  .news-card-wrapper {
+    height: auto;
+    background-color: #38460500;
+    border: 1px solid #38460500;
+    border-radius: 1.6rem;
+    padding: 0.8rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    transition: var(--transition-160);
+
+    .card-image {
+      width: 0rem !important;
+      height: 10.8rem !important;
+
+      background-image: url('../../../../../public/assets/episode_placeholder.png');
+      background-size: cover; /* Ensures the image covers the entire div */
+      background-position: center; /* Centers the image */
+      background-repeat: no-repeat; /* Prevents the image from repeating */
+
+      border-radius: 0.8rem;
+      transition: var(--transition-160);
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      gap: 0.4rem;
+      transition: var(--transition-160);
+      width: 100%;
+
+      .card-title-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        transition: var(--transition-160);
+
+        //   gap: 0.4rem;
+        .card-title {
+          font-size: 2rem;
+          transition: var(--transition-160);
+        }
+
+        .title-icon {
+          height: 2.4rem;
+          width: 0rem;
+          overflow: hidden;
+          transition: var(--transition-160);
+
+          scale: 0.32;
+          svg {
+            height: 2rem;
+            width: 2rem;
+            transition: var(--transition-160);
+            path {
+              stroke-width: 0.16rem;
+              stroke: var(--main-color-dark);
+              transition: var(--transition-160);
+            }
+          }
+        }
+      }
+
+      .separator-line {
+        width: 100%;
+        height: 0.16rem;
+        background-color: var(--main-color-dark-32);
+      }
+
+      .article-text {
+        font-family: var(--tertiary-font-family) !important;
+        font-size: 1.4rem;
+        // line-height: 1.8rem;
+
+        height: 4.3rem;
+        white-space: normal;
+        text-overflow: clip;
+        overflow: hidden;
+      }
+
+      .card-details {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        gap: 0.8rem;
+
+        .separator-line {
+          height: 1.2rem;
+          width: 0.18rem;
+          background-color: var(--main-color-dark-32);
+        }
+
+        .card-date {
+          font-size: 1.4rem !important;
+          opacity: 0.64;
+        }
+
+        .sources {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+
+          gap: 0.8rem;
+
+          overflow: hidden;
+
+          p:first-child {
+            font-size: 1.4rem !important;
+            opacity: 0.64;
+          }
+
+          .source {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+
+            gap: 0.8rem;
+
+            .source-image {
+              height: 1.6rem;
+              width: 1.6rem;
+              background-image: url('../../../../../public/assets/article-illustration-1.jpg');
+              background-size: cover; /* Ensures the image covers the entire div */
+              background-position: center; /* Centers the image */
+              background-repeat: no-repeat; /* Prevents the image from repeating */
+
+              border-radius: 0.4rem;
+            }
+
+            .source-text {
+              font-size: 1.4rem;
+              opacity: 0.64;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    transition: var(--transition-160);
+    .news-card-wrapper {
+      background-color: var(--main-color-light);
+      border: 1px solid var(--main-color-dark-32);
+
+      padding: 0.8rem 0.8rem;
+
+      transition: var(--transition-160);
+      //   gap: 0.8rem;
+
+      .card-image {
+        margin-right: 0.8rem;
+        width: 24% !important;
+        height: 11.2rem !important;
+
+        border-radius: 0.8rem;
+        transition: var(--transition-160);
+      }
+
+      .card-container {
+        transition: var(--transition-160);
+        .card-title-wrapper {
+          transition: all 0.32s cubic-bezier(0, 0.99, 0.53, 1);
+          .card-title {
+            transition: all 0.32s cubic-bezier(0, 0.99, 0.53, 1);
+          }
+
+          .title-icon {
+            transition: all 0.32s cubic-bezier(0, 0.99, 0.53, 1);
+            height: 2.4rem;
+            width: 2.4rem;
+
+            scale: 1;
+            svg {
+              margin-top: 0.24rem;
+              height: 2rem;
+              width: 2rem;
+              transition: all 0.32s cubic-bezier(0, 0.99, 0.53, 1);
+              path {
+                transition: all 0.32s cubic-bezier(0, 0.99, 0.53, 1);
+                stroke-width: 0.24rem;
+              }
+
+              path:nth-child(2) {
+                transform: translate(2px, -2px);
+                stroke: var(--main-color-dark-hover);
+              }
+              path:nth-child(3) {
+                transform: translate(2px, -2px);
+                stroke: var(--main-color-dark-hover);
+              }
+            }
+          }
+        }
+
+        .separator-line {
+        }
+
+        .article-text {
+        }
+
+        .card-details {
+          .separator-line {
+          }
+
+          .card-date {
+          }
+
+          .sources {
+            p:first-child {
+            }
+
+            .source {
+              .source-image {
+              }
+
+              .source-text {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.small {
+  // background-color: var(--main-color-dark-16);
+}
