@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ObjectId } from "mongodb";
 import cors from "cors";
-import { collections } from "../database";
+import { collections } from "../database.js";
 
 export const episodeRouter = Router();
 episodeRouter.use(cors());
@@ -17,6 +17,7 @@ episodeRouter.get("/episodes", async (_req, res) => {
     // the episode variable awaits for all the objects in the collection episodes and then makes them an array.
     // Then the response is being sent to the client
     const episodes = await collections?.episodes?.find({}).toArray();
+    console.log(episodes);
 
     res.status(200).send(episodes);
   } catch (error) {

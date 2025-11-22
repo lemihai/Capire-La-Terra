@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { ObjectId } from "mongodb";
 import cors from "cors";
-import { main_scraper } from "../scraper/main";
-import { collections } from "../database";
+import { main_scraper } from "../scraper/main.js";
+import { collections } from "../database.js";
 
 export const articleRouter = Router();
 articleRouter.use(cors());

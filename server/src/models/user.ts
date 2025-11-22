@@ -1,8 +1,10 @@
 import * as mongodb from "mongodb";
 
 export interface User {
-  id: mongodb.ObjectId;
+  // id: mongodb.ObjectId;
   name: string;
-  age: number;
+  username: string;
+  password: string;
+  // age: number;
   // device_binding: string[];
 }

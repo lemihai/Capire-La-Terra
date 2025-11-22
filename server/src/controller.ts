@@ -1,5 +1,5 @@
-import { Article } from "./models/article";
-import { News } from "./models/news";
+import { Article } from "./models/article.js";
+import { News } from "./models/news.js";
 import { exec } from "child_process";
 
 // Calling the controller, python script

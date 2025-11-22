@@ -1,0 +1,27 @@
+<div class="test">{{ RespText }};</div>
+
+<form>
+  <div>
+    <label>
+      Email
+      <input type="email" />
+    </label>
+  </div>
+
+  <div>
+    <label>
+      Password
+      <input type="password" />
+    </label>
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox" />
+      Remember me
+    </label>
+  </div>
+</form>
+<button (click)="login('testusername', 'passswordtest')">Log in fail</button>
+<button (click)="login('admin', 'password')">Log in succss</button>
+<button (click)="test()">test</button>

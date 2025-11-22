@@ -1,20 +1,20 @@
 import { chromium, Page } from "playwright";
-import { newsWebsitesRouter } from "../routes/news.routes";
-import { collections } from "../database";
+import { newsWebsitesRouter } from "../routes/news.routes.js";
+import { collections } from "../database.js";
 import { ObjectId } from "mongodb";
 // function imports
 // import * as scrapers from "./bots";
-import { aljazeeraScraper } from "./bots/aljazeera";
-import { woodcentralScraper } from "./bots/woodcentral";
-import { cleanTechnicaScraper } from "./bots/cleantechnica";
-import { climatelinksScraper } from "./bots/climatelinks";
-import { cnnclimateScraper } from "./bots/cnnclimate";
-import { euronewsScraper } from "./bots/euronews";
-import { ieaScraper } from "./bots/iea";
-import { mongabayScraper } from "./bots/mongabay";
-import { natureClimateChangeScraper } from "./bots/natureclimatechange";
-import { theguardianScraper } from "./bots/theguardian";
-import { gristScraper } from "./bots/grist";
+import { aljazeeraScraper } from "./bots/aljazeera.js";
+import { woodcentralScraper } from "./bots/woodcentral.js";
+import { cleanTechnicaScraper } from "./bots/cleantechnica.js";
+import { climatelinksScraper } from "./bots/climatelinks.js";
+import { cnnclimateScraper } from "./bots/cnnclimate.js";
+import { euronewsScraper } from "./bots/euronews.js";
+import { ieaScraper } from "./bots/iea.js";
+import { mongabayScraper } from "./bots/mongabay.js";
+import { natureClimateChangeScraper } from "./bots/natureclimatechange.js";
+import { theguardianScraper } from "./bots/theguardian.js";
+import { gristScraper } from "./bots/grist.js";
 
 // Setting up the URL
 

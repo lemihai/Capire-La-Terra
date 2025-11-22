@@ -35,15 +35,15 @@
     [style.width]="width"
   >
     <li (click)="navigateToHome()"><a>Home</a></li>
-  <li (click)="navigateToEpisodesPage()"><a>Episodes</a></li>
-  <li (click)="navigateToNewsPage()"><a>News</a></li>
+    <li (click)="navigateToEpisodesPage()"><a>Episodes</a></li>
+    <li (click)="navigateToNewsPage()"><a>News</a></li>
     <li class="navbar_button">About Us</li>
     <li class="navbar_button">Logo</li>
     <li class="navbar_button">Admin</li>
-    <li class="navbar_button">CO2 of website</li>
+    <!-- <li class="navbar_button">CO2 of website</li>
     <li class="navbar_button">Energy score</li>
-    <li class="navbar_button">language</li>
-    <li class="navbar_button">login</li>
+    <li class="navbar_button">language</li> -->
+    <li (click)="nagivateToLoginPage()" class="navbar_button">login</li>
     <li class="temperature">
       <div class="temp-indicator"></div>
       <div class="temp-indic-a">

@@ -1,6 +1,6 @@
 import { chromium, Page, Locator } from "playwright";
-import { collections } from "../../database";
-import { Article } from "../../models/article";
+import { collections } from "../../database.js";
+import { Article } from "../../models/article.js";
 import * as mongoDB from "mongodb";
 import { networkInterfaces } from "os";
 import { parse } from "path";

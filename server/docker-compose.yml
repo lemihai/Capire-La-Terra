@@ -1,3 +1,4 @@
+# THIS IS DOCKER.COMPOSE
 version: "3.8"
 
 services:
@@ -27,6 +28,7 @@ services:
       # doesn't get overwritten by a potentially different node_modules on the host.
       # It also effectively caches node_modules, which speeds up rebuilds.
       - /app/node_modules
+    command: npm run dev
     networks:
       - inner
       - outer

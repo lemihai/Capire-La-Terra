@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ObjectId } from "mongodb";
 import cors from "cors";
-import { collections } from "../database";
+import { collections } from "../database.js";
 
 export const newsWebsitesRouter = Router();
 newsWebsitesRouter.use(cors());

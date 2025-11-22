@@ -1,10 +1,10 @@
 // mongoClient
 // const { MongoClient } = require("mongodb");
 import * as mongoDB from "mongodb";
-import { Episode } from "./models/episode";
-import { Article } from "./models/article";
-import { News } from "./models/news";
-import { User } from "./models/user";
+import { Episode } from "./models/episode.js";
+import { Article } from "./models/article.js";
+import { News } from "./models/news.js";
+import { User } from "./models/user.js";
 // URI is the link to the localhosted database
 // Client is a new mongodb client that connects to the URI
 

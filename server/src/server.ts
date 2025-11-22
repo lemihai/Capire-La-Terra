@@ -1,7 +1,10 @@
 import express from "express";
-import cors from "cors";
-import { connectToDatabase } from "./database";
-import { router } from "./routes";
+import cors from "cors"
+// const cors = require("cors");
+// For default imports from packages that export in ES Modules
+// const express = require("express").default;
+import { connectToDatabase } from "./database.js";
+import { router } from "./routes.js";
 
 // Defining the app and port of the express application
 
