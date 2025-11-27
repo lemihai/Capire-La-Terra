@@ -353,7 +353,8 @@
     cursor: pointer;
 
     .episode-image {
-      min-width: 7.2rem;
+      width: 7.2rem;
+      min-width: 7.2rem !important;
       // transition: var(--transition-160);
       // background-color: var(--main-color-dark-32);
 

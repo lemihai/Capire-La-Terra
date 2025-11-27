@@ -20,6 +20,8 @@ services:
     environment:
       - DB_HOST=mongodb://db:27017/capirelaterra
       # Optional: Add any environment variables needed for development, e.g., NODE_ENV=development
+    env_file:
+      - ./.env
     depends_on:
       - db
     volumes:

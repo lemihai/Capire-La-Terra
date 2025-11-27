@@ -2,8 +2,15 @@
   <p>
     {{ buttonText }}
   </p>
-  @if(iconType == 'arrow-right'){
-  <svg class="arrow-right" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  @if(iconType == 'none'){ } @if(iconType == 'arrow-right'){
+  <svg
+    class="arrow-right"
+    width="32"
+    height="32"
+    viewBox="0 0 32 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M16.4385 7.34766L25.4385 16.3477L16.4385 25.3477"
       stroke="black"
@@ -21,7 +28,14 @@
   </svg>
 
   } @if(iconType == 'open-right'){
-  <svg class="open-right" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    class="open-right"
+    width="32"
+    height="32"
+    viewBox="0 0 32 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M24.2728 15.173V26.3412C24.2728 27.0464 23.9926 27.7228 23.4939 28.2215C22.9953 28.7202 22.3189 29.0003 21.6136 29.0003H5.65909C4.95386 29.0003 4.27751 28.7202 3.77883 28.2215C3.28016 27.7228 3 27.0464 3 26.3412V10.3867C3 9.68141 3.28016 9.00504 3.77883 8.50641C4.27751 8.00773 4.95386 7.72754 5.65909 7.72754H16.8272"
       stroke="black"
@@ -44,5 +58,30 @@
       stroke-linejoin="round"
     />
   </svg>
+  } @if(iconType == 'enter-right'){
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M11 11V8.5C11 7.83696 11.2634 7.20107 11.7322 6.73223C12.2011 6.26339 12.837 6 13.5 6H26.5C27.163 6 27.7989 6.26339 28.2678 6.73223C28.7366 7.20107 29 7.83696 29 8.5V23.5C29 24.163 28.7366 24.7989 28.2678 25.2678C27.7989 25.7366 27.163 26 26.5 26H13.5C12.837 26 12.2011 25.7366 11.7322 25.2678C11.2634 24.7989 11 24.163 11 23.5V21"
+      stroke="black"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M17 21L22 16L17 11"
+      stroke="black"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M3 16H21"
+      stroke="black"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+
   }
 </button>

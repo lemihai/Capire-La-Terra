@@ -1,0 +1,29 @@
+<div id="smooth-wrapper">
+  <div id="smooth-content">
+    <div class="article-page-wrapper">
+      <section class="title">
+        <h1>{{ articles[0].title }}</h1>
+        <div class="article-details">
+          @if(articles[0].author == 'Sofia'){
+          <app-profile-card />
+          }
+          <div class="separator-line"></div>
+          <p class="date">{{ articles[0].date }}</p>
+          <div class="separator-line"></div>
+          <app-source source="the guardian" />
+        </div>
+      </section>
+
+      <section class="article-body">
+        <div class="sections">
+          <p class="abstract">{{ articles[0].summary }}</p>
+        </div>
+      </section>
+
+      <section class="next-story">
+        <app-news-card cardType="large"/>
+      </section>
+    </div>
+    <app-footer />
+  </div>
+</div>

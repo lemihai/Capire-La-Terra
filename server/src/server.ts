@@ -5,6 +5,10 @@ import cors from "cors"
 // const express = require("express").default;
 import { connectToDatabase } from "./database.js";
 import { router } from "./routes.js";
+import 'dotenv/config';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 
 // Defining the app and port of the express application
 

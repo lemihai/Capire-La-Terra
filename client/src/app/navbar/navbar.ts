@@ -152,6 +152,11 @@ export class Navbar implements OnInit {
     this.triggerPageTransition('/login-page', this.currentRoute);
   }
 
+  nagivateToAdminPage(){
+    this.updateRoute();
+    this.triggerPageTransition('/admin-page', this.currentRoute);
+  }
+
   updateRoute() {
     this.currentRoute = this.router.url;
     console.log('************-------*************');

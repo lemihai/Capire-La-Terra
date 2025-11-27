@@ -15,10 +15,11 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import CustomEase from 'gsap/CustomEase';
+import { Footer } from "../footer/footer";
 
 @Component({
   selector: 'app-episodes-page',
-  imports: [NgOptimizedImage, AudioTrack, Button, EpisodeCard],
+  imports: [NgOptimizedImage, AudioTrack, Button, EpisodeCard, Footer],
   templateUrl: './episodes-page.html',
   styleUrl: './episodes-page.scss',
 })

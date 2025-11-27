@@ -1,0 +1,84 @@
+:host {
+  height: auto;
+  width: 100%;
+}
+
+#smooth-wrapper {
+  #smooth-content {
+    will-change: transform;
+    gap: 1.6rem;
+    height: auto;
+    min-height: 100vh;
+    overflow: hidden;
+    // position: relative; /* All children are positioned relative to this */
+
+    position: relative;
+    padding: 0.8rem;
+    border-radius: 3.2rem;
+  }
+}
+
+.article-page-wrapper {
+  margin-top: 8rem;
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2.4rem;
+
+  padding: 0.8rem 32%;
+
+  color: var(--main-color-dark);
+
+  section.title {
+
+    width: 100%;
+    height: auto
+    h1 {
+    }
+
+    .article-details {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.8rem;
+
+      font-size: 1.4rem;
+      transition: var(--transition-160);
+      .separator-line {
+        height: 1.2rem;
+        width: 0.18rem;
+        background-color: var(--main-color-dark-64);
+      }
+
+      .title {
+        font-size: 2.4rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Limit to 4 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis;
+      }
+
+      .abstract {
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Limit to 4 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Optional: Add ellipsis (...) at the end */
+      }
+
+      .date {
+        opacity: 0.64;
+      }
+
+      .source {
+        opacity: 0.64;
+      }
+    }
+  }
+}

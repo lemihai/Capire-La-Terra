@@ -1,5 +1,65 @@
 <div id="smooth-wrapper">
   <div id="smooth-content">
-    <p>news-page works!</p>
+    <div class="content-wrapper">
+      <section class="main-articles">
+        <div class="main-wrapper">
+          <app-news-card cardType="hero-card" cardDirection="right" />
+          <app-news-card cardType="hero-card" cardDirection="left" />
+        </div>
+        <div class="separator-line"></div>
+        <div class="latest-news-wrapper">
+          <div class="header">
+            <h1>Biggest News</h1>
+            <div class="horizontal-seaprator-line"></div>
+          </div>
+          <app-news-card cardType="small-no-image" />
+          <div class="horizontal-seaprator-line"></div>
+          <app-news-card cardType="small-no-image" />
+          <div class="horizontal-seaprator-line"></div>
+          <app-news-card cardType="small-no-image" />
+          <div class="horizontal-seaprator-line"></div>
+          <app-news-card cardType="small-no-image" />
+        </div>
+      </section>
+      <section class="separator-articles">
+        <div class="separator-wrapper">
+          <h1>Current Climate events</h1>
+          <ul class="climate-events-list">
+            <li>
+              <div class="dot"></div>
+              <b>this is a climate event</b>
+              <div class="separator-line"></div>
+              <p>location</p>
+            </li>
+            <li>
+              <div class="dot"></div>
+              <b>this is a climate event</b>
+              <div class="separator-line"></div>
+              <p>location</p>
+            </li>
+            <li>
+              <div class="dot"></div>
+              <b>this is a climate event</b>
+              <div class="separator-line"></div>
+              <p>location</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="all-articles">
+        <div class="header">
+          <h1>Latest News</h1>
+          <div class="horizontal-seaprator-line"></div>
+        </div>
+        <div class="episode-list" >
+          <app-news-card cardType="large"/>
+          <app-news-card cardType="large"/>
+          <app-news-card cardType="large"/>
+          <app-news-card cardType="large"/>
+          <app-news-card cardType="large"/>
+        </div>
+      </section>
+    </div>
+    <app-footer />
   </div>
 </div>

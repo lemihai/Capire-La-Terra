@@ -1,5 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-source',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './source.component.scss'
 })
 export class SourceComponent {
-
+  @Input() source: string = ''; // Default value
 }

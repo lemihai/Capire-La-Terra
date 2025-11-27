@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "npx ts-node src/server.ts",
-   "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +23,7 @@
     "@playwright/test": "^1.54.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.0.13",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.3",

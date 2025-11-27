@@ -9,15 +9,21 @@ import {
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { NewsCardComponent } from '../shared/components/news-card.component/news-card.component';
+import { Footer } from "../footer/footer";
+
+
 
 @Component({
   selector: 'app-news-page',
-  imports: [],
+  imports: [NewsCardComponent, Footer],
   templateUrl: './news-page.html',
-  styleUrl: './news-page.scss'
+  styleUrl: './news-page.scss',
 })
-export class NewsPage implements AfterViewInit, OnInit, OnDestroy{
-private smoother: ScrollSmoother | null = null;
+export class NewsPage implements AfterViewInit, OnInit, OnDestroy {
+  private smoother: ScrollSmoother | null = null;
+
+  
 
   constructor(private ngZone: NgZone) {}
 
