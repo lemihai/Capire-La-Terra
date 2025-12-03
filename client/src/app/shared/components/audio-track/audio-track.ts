@@ -48,7 +48,7 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
   // **************************
   ngOnInit() {
     this.numberOfLines = Math.floor(this.audioTrackWidth / 4.4);
-    console.log('*************************************',this.numberOfLines);
+    // console.log('*************************************',this.numberOfLines);
     for (let i = 0; i <= this.numberOfLines; i++) {
       let a = Math.floor(Math.random() * 4) + 1;
       let n = i;

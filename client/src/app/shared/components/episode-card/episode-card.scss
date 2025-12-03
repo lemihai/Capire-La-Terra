@@ -24,6 +24,7 @@
   border: 1px solid #38460500;
 
   transition: var(--transition-160);
+  
   .play {
     display: flex;
     justify-content: flex-start;
@@ -137,6 +138,7 @@
   border: 1px solid #31362d00;
 
   transition: var(--transition-160);
+  // background-color: red;
   // transition: all 1s ease-out;
   // .episode-image-wrapper{
   // }
@@ -146,7 +148,7 @@
     width: 0rem;
 
     transition: inherit;
-    transform: skewX(-32deg) skewY(-8deg);
+    transform: skewX(-16deg) skewY(-4deg);
     overflow: hidden;
     white-space: nowrap;
   }
@@ -245,7 +247,7 @@
         width: 0rem;
 
         transition: inherit;
-        transform: skewX(-32deg) skewY(-8deg);
+        transform: skewX(-16deg) skewY(-4deg);
         overflow: hidden;
         white-space: nowrap;
       }
@@ -272,7 +274,7 @@
 
       .app-profile-card-wrapper-for-transform {
         opacity: 1;
-        transform: translate(2rem, 4rem) skewX(-32deg) skewY(8deg);
+        transform: translate(-2rem, 4rem) skewX(-16deg) skewY(4deg);
       }
 
       // app-profile-card {
@@ -326,7 +328,7 @@
         margin-left: 0.64rem;
 
         transition: inherit;
-        transform: translate(4rem, 8rem) skewX(-32deg) skewY(8deg);
+        transform: translate(2rem, 1rem) skewX(-8deg) skewY(3.2deg);
         opacity: 0;
 
         @media screen and (max-width: 1500px) {
@@ -480,7 +482,7 @@
 
       .app-profile-card-wrapper-for-transform {
         opacity: 1;
-        transform: translate(2rem, 4rem) skewX(-32deg) skewY(8deg);
+        transform: translate(1.6rem, 1.6rem) skewX(-16deg) skewY(4deg);
       }
 
       // app-profile-card {
@@ -494,7 +496,7 @@
 
         transition: inherit;
         white-space: nowrap;
-        transform: translate(1rem, 2rem) skewX(-32deg) skewY(8deg);
+        transform: translate(1.6rem, 1.6rem) skewX(-16deg) skewY(4deg);
       }
 
       .episode-duration {
@@ -556,7 +558,7 @@
         width: 0rem;
 
         transition: inherit;
-        transform: skewX(-32deg) skewY(-8deg);
+        transform: skewX(-12deg) skewY(-8deg);
         overflow: hidden;
         white-space: nowrap;
       }
@@ -566,13 +568,14 @@
       width: 100%;
 
       transition: inherit;
-      transform: translate(4rem, 8rem) skewX(-32deg) skewY(8deg);
+      transform: translate(1.6rem, 2.4rem) skewX(-12deg) skewY(6deg);
       opacity: 0;
 
       display: flex;
       flex: row;
       justify-content: flex-start;
       align-items: center;
+      gap: .8rem;
     }
   }
 }

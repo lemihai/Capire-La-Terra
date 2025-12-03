@@ -100,7 +100,8 @@
 
   justify-content: flex-start;
 
-  background-color: var(--main-color-dark-16);
+  // background-color: var(--main-color-dark-16);
+  background-color: var(--main-color-dark-background);
   z-index: 30 !important;
 
   border-radius: 1.2rem;
@@ -131,10 +132,6 @@
       transition: var(--transition-160);
       height: 3.2rem;
       width: 3.2rem;
-
-      // background-color: var(--main-color-dark-16);
-      // border: 1px solid var(--main-color-dark-16);
-
       opacity: 1;
 
       svg {
@@ -200,7 +197,8 @@
   bottom: 8vh;
   width: auto;
   height: auto;
-  background-color: var(--main-color-dark-16);
+  // background-color: var(--main-color-dark-16);
+  background-color: var(--main-color-dark-background);
   border: 1px solid var(--main-color-dark-16);
   padding: 0.8rem;
   border-radius: 1.2rem;
@@ -223,7 +221,6 @@
   }
 }
 
-
 .container-details-right {
   // z-index: 29 !important;
   opacity: 1;
@@ -231,7 +228,8 @@
   bottom: 8vh;
   width: auto;
   height: auto;
-  background-color: var(--main-color-dark-16);
+  // background-color: var(--main-color-dark-16);
+  background-color: var(--main-color-dark-background);
   border: 1px solid var(--main-color-dark-16);
   padding: 0.8rem;
   border-radius: 1.2rem;
@@ -278,9 +276,6 @@
     height: 3.2rem !important;
     width: 3.2rem !important;
 
-    // background-color: var(--main-color-dark-16);
-    // border: 1px solid var(--main-color-dark-16);
-
     opacity: 1 !important;
 
     svg {
@@ -322,11 +317,11 @@
 
     &:hover {
       scale: 1.1;
-      background-color: var(--main-color-dark-hover) !important;
+      // background-color: var(--main-color-dark-hover) !important;
+      background-color: var(--main-color-dark-background);
     }
   }
 }
-
 
 .info-active-right {
   transition: var(--transition-160);
@@ -344,9 +339,6 @@
     height: 3.2rem !important;
     width: 3.2rem !important;
 
-    // background-color: var(--main-color-dark-16);
-    // border: 1px solid var(--main-color-dark-16);
-
     opacity: 1 !important;
 
     svg {
@@ -388,7 +380,8 @@
 
     &:hover {
       scale: 1.1;
-      background-color: var(--main-color-dark-hover) !important;
+      // background-color: var(--main-color-dark-hover) !important;
+      background-color: var(--main-color-dark-background);
     }
   }
 }
@@ -404,7 +397,8 @@
 
   justify-content: flex-start;
 
-  background-color: var(--main-color-dark-16);
+  // background-color: var(--main-color-dark-16);
+  background-color: var(--main-color-dark-background);
   z-index: 30 !important;
 
   border-radius: 1.2rem;
@@ -432,9 +426,6 @@
       transition: var(--transition-160);
       height: 3.2rem;
       width: 3.2rem;
-
-      // background-color: var(--main-color-dark-16);
-      // border: 1px solid var(--main-color-dark-16);
 
       opacity: 1;
 
@@ -470,6 +461,7 @@
       &:hover {
         transition: var(--transition-16) !important;
         background-color: var(--main-color-hover);
+        // background-color: var(--main-color-dark-background);
         border: 1px solid #33333300;
 
         svg {

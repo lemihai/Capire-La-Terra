@@ -44,7 +44,7 @@
 
       height: 4rem;
       width: 4rem;
-      background-color: var(--main-color-dark-16);
+      background-color: var(--main-color-dark-background);
       z-index: 0 !important;
 
       border-radius: 1.2rem;
@@ -126,7 +126,7 @@
           bottom: 0rem;
           border-radius: 0.4rem 0.4rem 0.8rem 0.8rem;
 
-          background-color: var(--main-color-dark-16);
+          background-color: var(--main-color-dark-background);
           border: 1px solid var(--main-color-dark-16);
           position: absolute;
           transition: var(--transition-16);
@@ -139,6 +139,7 @@
             height: 2.4rem;
             width: 100%;
             transition: var(--transition-16);
+            // background-color: var(--main-color-dark-background);
 
             display: flex;
             justify-content: center;
@@ -263,7 +264,7 @@
       //   height: 5.6rem;
       width: 8rem;
       bottom: 0rem;
-      background-color: var(--main-color-dark-16);
+      background-color: var(--main-color-dark-background);
       transition: var(--transition-8);
 
       .cl {
@@ -299,7 +300,7 @@
   .player-wrapper {
     width: 48rem !important;
     height: 8.8rem !important;
-    background-color: var(--main-color-dark-16) !important;
+    background-color: var(--main-color-dark-background) !important;
     transition: var(--transition-32);
     color: var(--main-color-dark);
 
@@ -340,14 +341,14 @@
 
             .timer-text:nth-child(1) {
               // background-color: aqua;
-              text-align: left ;
+              text-align: left;
               justify-content: flex-start;
             }
-            
+
             .timer-text:nth-child(3) {
               // background-color: red;
-                justify-content: flex-end;
-                text-align: right ;
+              justify-content: flex-end;
+              text-align: right;
             }
 
             .episode-details-container {

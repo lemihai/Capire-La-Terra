@@ -2,13 +2,15 @@ import {
   Component,
   OnInit,
   ChangeDetectorRef,
-  NgZone, // 1. Import NgZone
+  NgZone,
+  AfterViewInit, // 1. Import NgZone
 } from '@angular/core';
 
-import { Router, RouterLink, ActivatedRoute } from '@angular/router'; // 2. Import Router
+import { Router, RouterLink, ActivatedRoute, NavigationEnd } from '@angular/router'; // 2. Import Router
 import { gsap } from 'gsap'; // 3. Import gsap (assuming it's installed)
 import CustomEase from 'gsap/CustomEase';
-import { from } from 'rxjs';
+import { filter, from } from 'rxjs';
+import { NavbarGsapService } from './navbar-gsap-service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +19,7 @@ import { from } from 'rxjs';
   styleUrl: './navbar.scss',
   standalone: true, // Assuming this is a standalone component based on the original snippet
 })
-export class Navbar implements OnInit {
+export class Navbar implements OnInit, AfterViewInit {
   // Initial state for the Navbar component's load-in animation
   translateY: string = '-32px';
   backgroundColor = '';
@@ -26,8 +28,152 @@ export class Navbar implements OnInit {
   width = '0px';
   currentRoute: string = '';
 
+  navbarObj = {
+    home: 'active',
+    episodes: '',
+    news: '',
+    admin: '',
+    backgroundWidth: '87.56px',
+    backgroundLeft: '',
+    currentInFocus: 'home',
+    languageItalian: 'ln-active',
+    languageEnglish: 'ln-inactive',
+
+    setActive(view: string) {
+      if (view == 'home') {
+        this.currentInFocus = 'home';
+
+        this.home = 'active';
+        this.episodes = '';
+        this.news = '';
+        this.admin = '';
+        this.backgroundWidth = '87.56px';
+        this.backgroundLeft = '.4rem';
+      }
+      if (view == 'episodes') {
+        this.currentInFocus = 'episodes';
+
+        this.home = '';
+        this.episodes = 'active';
+        this.news = '';
+        this.admin = '';
+        this.backgroundWidth = '102.31px';
+
+        // this.backgroundLeft = '2rem';
+        this.backgroundLeft = 'calc(.8rem + 65.16px)';
+      }
+      if (view == 'news') {
+        this.currentInFocus = 'news';
+
+        this.home = '';
+        this.episodes = '';
+        this.news = 'active';
+        this.admin = '';
+        this.backgroundWidth = '82.44px';
+        this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px)';
+      }
+      if (view == 'admin') {
+        this.currentInFocus = 'admin';
+
+        this.home = '';
+        this.episodes = '';
+        this.news = '';
+        this.admin = 'active';
+        this.backgroundWidth = '91.55px';
+        this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px)';
+      }
+    },
+
+    hovered(button: string, flag: boolean) {
+      // console.log(this.currentInFocus);
+      switch (this.currentInFocus) {
+        case 'home':
+          // console.log('fioenwdfje');
+          break;
+        case 'episodes':
+          // console.log('4352g5r');
+          if (button == 'home') {
+            if (flag == true) {
+              this.backgroundLeft = 'calc(.8rem + 87.56px)';
+            }
+            if (flag == false) {
+              this.backgroundLeft = 'calc(.8rem + 65.16px)';
+            }
+          }
+
+          break;
+
+        case 'news':
+          // console.log('c4m19xumh53');
+          if (button == 'home') {
+            if (flag == true) {
+              this.backgroundLeft = 'calc(1.2rem + 87.56px + 79.91px)';
+            }
+            if (flag == false) {
+              this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px)';
+            }
+          }
+
+          if (button == 'episodes') {
+            if (flag == true) {
+              // this.backgroundWidth = '87.56px';
+              this.backgroundLeft = 'calc(1.2rem + 65.16px + 102.31px)';
+            }
+            if (flag == false) {
+              // this.backgroundWidth = '87.56px';
+              this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px)';
+            }
+          }
+          break;
+        case 'admin':
+          // console.log('124hxm5789');
+          if (button == 'home') {
+            if (flag == true) {
+              this.backgroundLeft = 'calc(1.5rem + 87.56px + 79.91px + 60.04px)';
+            }
+            if (flag == false) {
+              this.backgroundLeft = 'calc(1.5rem + 65.16px + 79.91px + 60.04px)';
+            }
+          }
+
+          if (button == 'episodes') {
+            if (flag == true) {
+              // this.backgroundWidth = '87.56px';
+              this.backgroundLeft = 'calc(1.5rem + 65.16px + 102.31px + 60.04px)';
+            }
+            if (flag == false) {
+              // this.backgroundWidth = '87.56px';
+              this.backgroundLeft = 'calc(1.5rem + 65.16px + 79.91px + 60.04px)';
+            }
+          }
+          if (button == 'news') {
+            if (flag == true) {
+              this.backgroundLeft = 'calc(1.5rem + 65.16px + 79.91px + 82.44px)';
+            }
+            if (flag == false) {
+              this.backgroundLeft = 'calc(1.5rem + 65.16px + 79.91px + 60.04px)';
+            }
+          }
+          break;
+
+        default:
+      }
+    },
+
+    setLanguage(language: string) {
+      if (language === 'italian') {
+        this.languageItalian = 'ln-active';
+        this.languageEnglish = 'ln-inactive';
+      }
+      if (language === 'english') {
+        this.languageItalian = 'ln-inactive';
+        this.languageEnglish = 'ln-active';
+      }
+    },
+  };
+
   // For animations in gsap
-  time = .64;
+  time = 0.64;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
 
   // Inject ChangeDetectorRef, Router, and NgZone
@@ -35,15 +181,60 @@ export class Navbar implements OnInit {
     private cdr: ChangeDetectorRef,
     private router: Router, // 4. Inject Router
     private ngZone: NgZone, // 5. Inject NgZone
-    private activatedRoute: ActivatedRoute
+    private route: ActivatedRoute,
+    private navbarGsapService: NavbarGsapService
   ) {}
 
   ngOnInit() {
-    // Navbar initial load-in animation (for the navbar itself)
-
+    // ... your existing setTimeout ...
     setTimeout(() => {
       this.animateNavbarIn();
     }, 1600);
+
+    // FIX: Subscribe to Router events to correctly determine the current route
+    // after the initial navigation is complete, especially on refresh.
+    this.router.events
+      .pipe(
+        // Filter for the NavigationEnd event, which signals the completion of a navigation cycle
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+      )
+      .subscribe((event: NavigationEnd) => {
+        // 'event.url' or 'event.urlAfterRedirects' now holds the correct, navigated URL
+        this.currentRoute = event.urlAfterRedirects;
+        this.logRouteInfo(this.currentRoute);
+        this.updateNavbarActiveState(this.currentRoute); // Call a method to update the navbar's active state
+      });
+  }
+
+  ngAfterViewInit(): void {
+    // This is often too early on page load. The subscription in ngOnInit is more reliable.
+    // If you need the URL immediately for any reason, use the snapshot.
+    // However, the router.events subscription handles the refresh scenario best.
+  }
+
+  // Update logRouteInfo to accept the URL
+  logRouteInfo(url: string) {
+    // console.log(`--- Router URL (Corrected): ${url} ---`);
+    // console.log(`Current Route set: ${this.currentRoute}`);
+    // Example: You might want to strip query params or fragments here
+  }
+
+  // New method to process the route and set the navbarObj active state
+  updateNavbarActiveState(url: string): void {
+    // Logic to determine which view is active based on the URL
+    // You'll need to match your routes ('/', '/episodes-page', etc.) to your navbarObj keys.
+    if (url === '/') {
+      this.navbarObj.setActive('home');
+    } else if (url.startsWith('/episodes-page')) {
+      this.navbarObj.setActive('episodes');
+    } else if (url.startsWith('/news-page')) {
+      this.navbarObj.setActive('news');
+    } else if (url.startsWith('/admin-page')) {
+      this.navbarObj.setActive('admin');
+    } else if (url.startsWith('/article-page')) {
+      this.navbarObj.setActive('news');
+    }
+    this.cdr.detectChanges(); // Ensure the view updates with the new state
   }
 
   animateNavbarIn() {
@@ -56,12 +247,6 @@ export class Navbar implements OnInit {
 
     // console.log('Navbar load-in animation finished.');
   }
-
-  /**
-   * Triggers the page exit animation and then navigates.
-   * @param url The target URL for navigation.
-   */
-  // Inside Navbar component
 
   private triggerPageTransition(url: string, fromRoute: string) {
     const customEase = 'cubic-bezier(0,.55,.52,.96)';
@@ -97,28 +282,41 @@ export class Navbar implements OnInit {
         },
         0
       );
-      
+
       // ******************************************
       // TRIGGER FOR HOME PAGE
       // ******************************************
-      if(fromRoute == '/'){
-        this.exitFrontPage(exitTimeline);
+      if (fromRoute == '/') {
+        this.navbarGsapService.exitFrontPage(exitTimeline);
       }
 
       // ******************************************
       // TRIGGER FOR EPISODES PAGE
       // ******************************************
       if (fromRoute == '/episodes-page') {
-        this.exitEpisodesPage();
+        this.navbarGsapService.exitEpisodesPage();
       }
 
       // ******************************************
       // TRIGGER FOR NEWS PAGE
       // ******************************************
       if (fromRoute == '/news-page') {
-        this.exitNewsPage();
+        // this.exitNewsPage();
+        this.navbarGsapService.exitNewsPage();
       }
 
+      if (fromRoute == '/article-page') {
+        // this.exitNewsPage();
+        this.navbarGsapService.exitArticlePage();
+      }
+
+      if (fromRoute == '/admin-page') {
+        this.navbarGsapService.exitAdminPage();
+      }
+
+      if (fromRoute == '/login-page') {
+        this.navbarGsapService.exitLoginPage();
+      }
 
       // 3. Add the first animation to the timeline (starts at 0 seconds)
 
@@ -135,268 +333,37 @@ export class Navbar implements OnInit {
   navigateToHome() {
     this.updateRoute();
     this.triggerPageTransition('/', this.currentRoute);
+    this.navbarObj.setActive('home');
   }
 
   navigateToEpisodesPage() {
     this.updateRoute();
     this.triggerPageTransition('/episodes-page', this.currentRoute);
+    this.navbarObj.setActive('episodes');
   }
 
   navigateToNewsPage() {
     this.updateRoute();
     this.triggerPageTransition('/news-page', this.currentRoute);
+    this.navbarObj.setActive('news');
   }
 
-  nagivateToLoginPage(){
+  nagivateToAdminPage() {
+    this.updateRoute();
+    this.triggerPageTransition('/admin-page', this.currentRoute);
+    this.navbarObj.setActive('admin');
+  }
+
+  nagivateToLoginPage() {
     this.updateRoute();
     this.triggerPageTransition('/login-page', this.currentRoute);
   }
 
-  nagivateToAdminPage(){
-    this.updateRoute();
-    this.triggerPageTransition('/admin-page', this.currentRoute);
-  }
-
   updateRoute() {
     this.currentRoute = this.router.url;
-    console.log('************-------*************');
-    console.log('Current route URL:', this.router.url);
-    console.log('************-------*************');
+    // console.log('************-------*************');
+    // console.log('Current route URL:', this.router.url);
+    // console.log('************-------*************');
   }
 
-  exitFrontPage(exitTimeline: gsap.core.Timeline) {
-    exitTimeline.to(
-      '.background-wrapper',
-      {
-        height: '0px',
-        duration: this.time,
-        ease: this.ease,
-      },
-      0
-    ); // The '0' position parameter makes it start immediately with the timeline
-    exitTimeline.to(
-      '.episodes-text-h1',
-      {
-        height: '0px',
-        width: '0px',
-        y: 0,
-        skewX: 32,
-        skewY: 8,
-        rotate: 0,
-        duration: this.time,
-        ease: this.ease,
-        overwrite: true,
-      },
-      0
-    );
-    exitTimeline.to(
-      '.latest-news-h1',
-      {
-        height: '0px',
-        width: '0px',
-        y: 0,
-        skewX: 32,
-        skewY: 8,
-        rotate: 0,
-        duration: this.time,
-        ease: this.ease,
-        overwrite: true,
-      },
-      0
-    );
-    exitTimeline.to(
-      '.episode-list-wrapper',
-      {
-        height: '0px',
-        duration: this.time,
-        ease: this.ease,
-      },
-      0
-    );
-    exitTimeline.to(
-      '.about-earth-section',
-      {
-        height: '0rem',
-        duration: this.time,
-        ease: this.ease,
-      },
-      0
-    );
-    exitTimeline.to(
-      '.about-earth-wrapper',
-      {
-        height: '0rem',
-        paddingTop: '8rem',
-        duration: this.time,
-        ease: this.ease,
-      },
-      0
-    );
-    exitTimeline.to(
-      '.left-side-wrapper',
-      {
-        height: '0px',
-        duration: this.time,
-        ease: this.ease,
-      },
-      0
-    );
-    exitTimeline.to(
-      '.left-side',
-      {
-        paddingBottom: '8rem',
-        duration: this.time,
-        ease: this.ease,
-      },
-      0
-    );
-    exitTimeline.to(
-      '.right-side-wrapper',
-      {
-        height: '0px',
-        duration: this.time,
-        ease: this.ease,
-      },
-      0
-    );
-    exitTimeline.to(
-      '.right-side',
-      {
-        duration: this.time,
-        ease: this.ease,
-      },
-      0
-    );
-  }
-
-  exitEpisodesPage() {
-    gsap.to('.episodes-list', {
-      height: '0rem',
-      minHeight: '0vh',
-      opacity: 0,
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.hero-h1A', {
-      height: '0rem',
-      width: '0rem',
-      y: 32,
-      skewX: 32,
-      skewY: 8,
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.season-h1', {
-      height: '0rem',
-      width: '0rem',
-      y: 32,
-      skewX: 32,
-      skewY: 8,
-      duration: this.time,
-      // delay: 1,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.medium', {
-      height: '6.4rem',
-      minWidth: '32rem',
-      opacity: 0,
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.header-dropdown', {
-      height: '0rem',
-      width: '0rem',
-      skewX: 32,
-      skewY: 8,
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-
-    gsap.to('h2', {
-      width: '0rem',
-      height: '0rem',
-      skewX: 32,
-      skewY: 8,
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.app-profile-card-wrapper-for-transform', {
-      // clearProps: 'all',
-      width: '0rem',
-      height: '0rem',
-      translateX: '2rem',
-      translateY: '-4rem',
-      skewX: 32,
-      skewY: 8,
-      opacity: 0,
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.date', {
-      width: '0rem',
-      height: '0rem',
-      skewX: 32,
-      skewY: 8,
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.topic', {
-      width: '0rem',
-      height: '0rem',
-      skewX: 32,
-      skewY: 8,
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.bottom-container', {
-      // width: '100%',
-      // height: 'auto',
-      skewX: 0,
-      skewY: 0,
-      rotate: 0,
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.episode-image', {
-      width: '0rem',
-      minWidth: '0rem',
-      // height: 'auto',
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.separator-line', {
-      height: '0rem',
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
-    gsap.to('.audio-track-wrapper', {
-      // width: 'auto',
-      // height: 'auto',
-      translateX: '2rem',
-      translateY: '-6rem',
-      skewX: 32,
-      skewY: -8,
-      rotate: 4,
-      opacity: 0,
-      duration: this.time,
-      ease: this.ease,
-      // overwrite: 'auto',
-    });
-  }
-
-  exitNewsPage(){
-    
-  }
 }

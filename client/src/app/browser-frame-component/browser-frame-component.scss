@@ -1,0 +1,75 @@
+@use '../../variables.scss' as *;
+
+:host {
+  height: 100vh;
+  width: 100vw;
+
+  min-height: 100vh;
+  min-width: 100vw;
+  position: fixed;
+
+  z-index: 99;
+  pointer-events: none;
+  
+}
+
+.cutout-wrapper {
+  height: 100%;
+  width: 100%;
+
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cutout-row {
+  width: 100%;
+  position: sticky;
+  top: 0rem;
+
+  display: flex;
+  flex-direction: row;
+  max-height: 2.4rem;
+  padding: 0rem 0.8rem;
+}
+
+.cutout-row:first-child {
+  border-top: 0.8rem solid var(--main-color-light);
+}
+
+.cutout-row:last-child {
+  border-bottom: 0.8rem solid var(--main-color-light);
+  align-items: flex-end;
+}
+
+.middle_bar {
+  width: 100%;
+  height: 0rem;
+  //   background-color: var(--main-color-light);
+  min-height: 0.8rem;
+}
+
+.top_left_corner {
+  height: 2.4rem;
+  width: 2.4rem;
+  transform: scaleX(-1);
+}
+
+.top_right_corner {
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.bottom_left_corner {
+  height: 2.4rem;
+  width: 2.4rem;
+  transform: scale(-1, -1);
+}
+
+.bottom_right_corner {
+  height: 2.4rem;
+  width: 2.4rem;
+  transform: scale(1, -1);
+}

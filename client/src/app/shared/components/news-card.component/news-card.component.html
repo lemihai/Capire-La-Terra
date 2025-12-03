@@ -2,16 +2,15 @@
   class="card-wrapper {{ cardType }} "
   [attr.data-card-type]="cardType"
   [attr.data-card-type]="cardDirection"
-  (click)="navigateToArticle()"
 >
   @if (cardType === 'smallest') {
   <p>This is a large card.</p>
   } @if (cardType === 'small-no-image') {
-  <div class="news-card-wrapper">
+  <div class="news-card-wrapper" (click)="navigateToArticlePage()">
     <div class="hovered-bar"></div>
     <div class="card-content">
       <div class="title-wrapper">
-        <h2 class="title">{{ articles[0].title }}</h2>
+        <h2 class="title transition-A">{{ articlesGG[0].title }}</h2>
         <div class="title-icon">
           <svg
             width="32"
@@ -45,23 +44,23 @@
         </div>
       </div>
       <div class="article-details">
-        @if(articles[0].author == 'Sofia'){
-        <app-profile-card />
+        @if(articlesGG[0].author == 'Sofia'){
+        <app-profile-card class="transition-A" />
         }
-        <div class="separator-line"></div>
-        <p class="date">{{ articles[0].date }}</p>
-        <div class="separator-line"></div>
-        <app-source source="the guardian" />
+        <div class="separator-line transition-vertical-line-inside-card"></div>
+        <p class="date transition-A">{{ articlesGG[0].date }}</p>
+        <div class="separator-line transition-vertical-line-inside-card"></div>
+        <app-source class="transition-A" source="the guardian" />
       </div>
-      <p class="abstract">{{ articles[0].summary }}</p>
+      <p class="abstract transition-A">{{ articlesGG[0].summary }}</p>
     </div>
   </div>
   }@else if (cardType === 'small') {
-  <div class="news-card-wrapper">
+  <div class="news-card-wrapper" (click)="navigateToArticlePage()">
     <div class="card-image"></div>
     <div class="card-container">
       <div class="card-title-wrapper">
-        <h1 class="card-title">this is an article title</h1>
+        <h1 class="card-title transition-A">this is an article title</h1>
         <div class="title-icon">
           <svg
             width="32"
@@ -100,16 +99,13 @@
         labore et dolore magna aliqua. Ut enim ad minim veniam
       </p>
       <div class="card-details">
-        <div class="card-date">03/11/2025</div>
-        <div class="separator-line"></div>
-        <app-profile-card />
-        <div class="separator-line"></div>
-        <div class="sources">
+        <div class="card-date transition-A">03/11/2025</div>
+        <div class="separator-line transition-vertical-line-inside-card"></div>
+        <app-profile-card class="transition-A" />
+        <div class="separator-line transition-vertical-line-inside-card"></div>
+        <div class="sources class=transition-A">
           <p>Sources:</p>
-          <div class="source">
-            <div class="source-image"></div>
-            <!-- <p class="source-text">the guardian</p> -->
-          </div>
+          <app-source class="transition-A" source="the guardian" />
         </div>
       </div>
     </div>
@@ -117,12 +113,12 @@
   } @else if (cardType === 'medium') {
   <p>This is a medium card.</p>
   } @else if (cardType === 'large') {
-  <div class="news-card-wrapper">
+  <div class="news-card-wrapper" (click)="navigateToArticlePage()">
     <div class="hovered-bar"></div>
-    <div class="image"></div>
+    <div class="image transition-image-A"></div>
     <div class="card-content">
       <div class="title-wrapper">
-        <h2 class="title">{{ articles[0].title }}</h2>
+        <h2 class="title transition-A">{{ articlesGG[0].title }}</h2>
         <div class="title-icon">
           <svg
             width="32"
@@ -156,38 +152,59 @@
         </div>
       </div>
       <div class="article-details">
-        @if(articles[0].author == 'Sofia'){
-        <app-profile-card />
+        @if(articlesGG[0].author == 'Sofia'){
+        <app-profile-card class="transition-A" />
         }
-        <div class="separator-line"></div>
-        <p class="date">{{ articles[0].date }}</p>
-        <div class="separator-line"></div>
-        <app-source source="the guardian" />
+        <div class="separator-line transition-vertical-line-inside-card"></div>
+        <p class="date transition-A">{{ articlesGG[0].date }}</p>
+        <div class="separator-line transition-vertical-line-inside-card"></div>
+        <app-source class="transition-A" source="the guardian" />
       </div>
-      <p class="abstract">{{ articles[0].summary }}</p>
+      <p class="abstract transition-A">{{ articlesGG[0].summary }}</p>
     </div>
   </div>
   } @else if (cardType === 'extra-large') {
   <p>This is a large card.</p>
   }@else if (cardType === 'hero-card') {
-  <div class="news-card-wrapper {{ cardDirection }}">
+  <div class="news-card-wrapper  {{ cardDirection }}" (click)="navigateToArticlePage()">
     <div class="hovered-bar"></div>
-    <div class="image"></div>
+    <!-- <div class="image-wrapper"></div> -->
+    <div class="image transition-image"></div>
     <div class="content">
-      <h1 class="title">{{ articles[0].title }}</h1>
+      <h1 class="title transition-A">{{ articlesGG[0].title }}</h1>
       <div class="article-details">
-        @if(articles[0].author == 'Sofia'){
-        <app-profile-card />
+        @if(articlesGG[0].author == 'Sofia'){
+        <app-profile-card class="transition-A" />
         }
-        <div class="separator-line"></div>
-        <p class="date">{{ articles[0].date }}</p>
-        <div class="separator-line"></div>
-        <app-source source="the guardian" />
+        <div class="separator-line transition-vertical-line-inside-card"></div>
+        <p class="date transition-A">{{ articlesGG[0].date }}</p>
+        <div class="separator-line transition-vertical-line-inside-card"></div>
+        <app-source class="transition-A" source="the guardian" />
       </div>
-      <p class="abstract">{{ articles[0].summary }}</p>
+      <p class="abstract transition-A">{{ articlesGG[0].summary }}</p>
     </div>
   </div>
-  }@else {
+  }@else if(cardType === 'admin-small'){
+  <div class="admin-card-wrapper {{ cardDirection }}">
+    <div class="hovered-bar"></div>
+    <div class="app-source-wrapper">
+      <app-source class="app-source" source="the guardian" />
+    </div>
+    <div class="separator-line"></div>
+    <h2 class="title">{{ article.title }}</h2>
+    <div class="separator-line"></div>
+    <div class="author-card-wrapper">
+      <!-- Pass the author in this component -->
+      <!-- @if(article.author == 'Sofia'){ -->
+       <p class="author">{{article.author}}</p>
+      <!-- <app-profile-card class="app-profile-card" /> -->
+      <!-- } -->
+    </div>
+    <div class="separator-line"></div>
+    <p class="date">{{ article.date }}</p>
+  </div>
+
+  } @else if(cardType === 'admin-medium'){ } @else {
   <p>Unknown card type: {{ cardType }}</p>
   }
 </div>

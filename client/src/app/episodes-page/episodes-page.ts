@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   ChangeDetectionStrategy,
+  HostListener,
 } from '@angular/core';
 import { AudioTrack } from '../shared/components/audio-track/audio-track';
 import { Button } from '../shared/buttons/button/button';
@@ -15,7 +16,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import CustomEase from 'gsap/CustomEase';
-import { Footer } from "../footer/footer";
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-episodes-page',
@@ -161,11 +162,15 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
         smoothTouch: false,
       });
       setTimeout(() => {
+        // --------------------------------
+        // TEXT SECTION
+        // --------------------------------
         gsap.to('.hero-h1', {
           height: '120px',
           width: '48rem',
           skewX: 0,
           skewY: 0,
+          scale: 1,
           rotate: 0,
           duration: this.time,
           ease: this.ease,
@@ -184,6 +189,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           width: '26rem',
           skewX: 0,
           skewY: 0,
+          scale: 1,
           rotate: 0,
           duration: this.time,
           ease: this.ease,
@@ -194,14 +200,8 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           width: '128px',
           skewX: 0,
           skewY: 0,
+          scale: 1,
           rotate: 0,
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
-        gsap.to('.medium', {
-          height: '8rem',
-          minWidth: '40rem',
           duration: this.time,
           ease: this.ease,
           overwrite: true,
@@ -211,7 +211,18 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           width: '22rem',
           skewX: 0,
           skewY: 0,
+          scale: 1,
           rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        // --------------------------------
+        // Episode Card
+        // --------------------------------
+        gsap.to('.medium', {
+          height: '8rem',
+          minWidth: '40rem',
           duration: this.time,
           ease: this.ease,
           overwrite: true,
@@ -222,6 +233,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           height: 'auto',
           skewX: 0,
           skewY: 0,
+          scale: 1,
           rotate: 0,
           duration: this.time,
           ease: this.ease,
@@ -234,6 +246,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           translateY: 0,
           skewX: 0,
           skewY: 0,
+          scale: 1,
           rotate: 0,
           duration: this.time,
           ease: this.ease,
@@ -246,6 +259,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           translateY: 0,
           skewX: 0,
           skewY: 0,
+          scale: 1,
           rotate: 0,
           duration: this.time,
           ease: this.ease,
@@ -258,6 +272,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           translateY: 0,
           skewX: 0,
           skewY: 0,
+          scale: 1,
           rotate: 0,
           duration: this.time,
           ease: this.ease,
@@ -266,6 +281,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
         gsap.to('.bottom-container', {
           skewX: 0,
           skewY: 0,
+          scale: 1,
           rotate: 0,
           duration: this.time,
           ease: this.ease,
@@ -289,6 +305,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           translateY: 0,
           skewX: 0,
           skewY: 0,
+          scale: 1,
           rotate: 0,
           opacity: 1,
           duration: this.time,
@@ -309,7 +326,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           ease: this.ease,
           overwrite: 'auto',
         });
-      }, 800);
+      }, 100);
     });
   }
 }

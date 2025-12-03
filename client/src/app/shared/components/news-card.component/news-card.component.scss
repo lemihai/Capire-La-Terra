@@ -3,6 +3,40 @@
 :host {
 }
 
+.transition-A {
+  overflow: hidden;
+  height: 0rem;
+  transform: translate(1.6rem, 3.2rem) skewX(-12deg) skewY(-6deg);
+  opacity: 0;
+  transition: var(--transition-160);
+}
+
+// height: 128%;
+// width: 100%;
+// max-width: 64rem;
+// min-width: 44rem;
+.transition-image {
+  // height: 10%;
+  // max-height: 5rem;
+  transition: var(--transition-160);
+}
+
+.transition-image-A {
+  max-height: 0rem;
+}
+
+.transition-image-B {
+}
+
+.transition-horizontal-line {
+  width: 0rem;
+}
+
+.transition-vertical-line-inside-card {
+  max-height: 0rem;
+  transform: translateY(6.2rem);
+}
+
 .card-wrapper {
   color: var(--main-color-dark);
   transition: var(--transition-160);
@@ -578,7 +612,7 @@
         transition: var(--transition-24);
       }
 
-      .image{
+      .image {
         width: 56%;
       }
 
@@ -671,7 +705,6 @@
 
       .title {
         font-size: 4rem;
-
         max-width: 48rem;
       }
 
@@ -679,11 +712,23 @@
       }
     }
 
+    // .image-wrapper {
+    //   height: 100%;
+    //   width: 80%;
+    //   max-width: 48rem;
+    //   min-width: 32rem;
+    //   overflow: hidden;
+    //   border-radius: 1.6rem;
+    // }
+
     .image {
       height: 100%;
       width: 80%;
       max-width: 48rem;
       min-width: 32rem;
+
+      // height: 48rem;
+      // width: auto;
     }
 
     &:hover {
@@ -740,7 +785,7 @@
 
     .content {
       display: flex;
-      flex-direction: flex-start;
+      flex-direction: column;
       justify-content: center;
 
       padding: 0rem 1.6rem 2.4rem 1.6rem;
@@ -751,10 +796,18 @@
     }
 
     .image {
-      height: 128%;
+      height: 0%;
       width: 100%;
       max-width: 64rem;
       min-width: 44rem;
+      max-height: 0rem;
+      min-height: 0rem;
+      // max-width: 5rem;
+
+      background-image: url('../../../../../public/assets/article-illustration-1.jpg');
+      background-size: cover; /* Ensures the image covers the entire div */
+      background-position: center; /* Centers the image */
+      background-repeat: no-repeat; /* Prevents the image from repeating */
     }
 
     &:hover {
@@ -813,8 +866,13 @@
     }
 
     .image {
-      height: 110%;
+      height: 0%;
       width: 80%;
+
+      max-width: 64rem;
+      min-width: 44rem;
+      max-height: 0rem;
+      min-height: 0rem;
 
       background-image: url('../../../../../public/assets/article-illustration-1.jpg');
       background-size: cover; /* Ensures the image covers the entire div */
@@ -869,6 +927,142 @@
         opacity: 0.64;
         transition: var(--transition-160);
       }
+    }
+  }
+}
+
+.card-wrapper.admin-small {
+  height: 3.4rem;
+  // width: 100%;
+  // min-width: 100%;
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  transition: var(--transition-160);
+
+  background-color: var(--main-color-dark-invisible);
+  border: 1px solid var(--main-color-dark-invisible);
+  border-radius: 0.8rem;
+
+  // ******************************
+  // This the the bottom container
+  // ******************************
+  .admin-card-wrapper {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 1.2rem;
+    transition: all 0.6s var(--cubic-bezzier-a);
+  }
+
+  .separator-line {
+    height: 1.2rem;
+    width: 0.24rem;
+    min-width: 0.24rem;
+    background-color: var(--main-color-dark-32);
+    border-radius: 1rem;
+  }
+
+  .app-source-wrapper {
+    min-width: 12.8rem;
+    width: 12.8rem;
+  }
+
+  .hovered-bar {
+    height: 1.2rem;
+    width: 0rem;
+    background-color: var(--main-color-dark-hover);
+    border-radius: 1rem;
+    transition: all 0.6s var(--cubic-bezzier-a);
+  }
+
+  .author-card-wrapper {
+    
+    width: 12.8rem;
+    min-width: 12.8rem;
+  }
+
+  .title {
+    height: 2.4rem;
+    overflow: hidden;
+    font-size: var(--font-size-regular);
+    flex-grow: 1;
+    max-width: 100%;
+    font-weight: 600;
+    width: 100%;
+    mask-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 88%,
+      rgba(0, 0, 0, 0) 100%
+    );
+
+    text-wrap: nowrap;
+    white-space: nowrap;
+    text-overflow: clip;
+    transition: all 0.6s var(--cubic-bezzier-a);
+  }
+
+  .date {
+    width: 8.8rem;
+    min-width: 8.8rem;
+    transition: all 0.6s var(--cubic-bezzier-a);
+  }
+
+  .author{
+    height: 2.4rem;
+    // height: 1.6rem;
+    overflow: hidden;
+    font-size: var(--font-size-regular);
+    flex-grow: 1;
+    max-width: 100%;
+    font-weight: 400;
+    width: 100%;
+    mask-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 88%,
+      rgba(0, 0, 0, 0) 100%
+    );
+
+    text-wrap: nowrap;
+    white-space: nowrap;
+    text-overflow: clip;
+    transition: all 0.6s var(--cubic-bezzier-a);
+  }
+
+  &:hover {
+    cursor: pointer;
+    transition: all 0.6s var(--cubic-bezzier-a);
+    padding: 0rem 0.8rem;
+    // height: 3.2rem;
+
+    background-color: var(--main-color-dark-16);
+    border: 1px solid var(--main-color-dark-16);
+
+    .title{
+      font-weight: 700;
+      transition: all 0.6s var(--cubic-bezzier-a);
+    }
+
+    .admin-card-wrapper {
+      gap: 0.8rem;
+      transition: all 0.6s var(--cubic-bezzier-a);
+    }
+
+    .hovered-bar {
+      width: 0.24rem;
+      min-width: 0.24rem;
+      transition: all 0.6s var(--cubic-bezzier-a);
     }
   }
 }

@@ -5,6 +5,24 @@
   width: 100%;
 }
 
+.transition-A {
+  overflow: hidden;
+  height: 0rem;
+  transform: translate(1.6rem, 3.2rem) skewX(-12deg) skewY(-6deg) ;
+  opacity: 0;
+}
+
+.transition-horizontal-line {
+  // min-width: 0rem;
+  max-width: 0rem;
+  // width: 0rem;
+}
+
+.transition-vertical-line {
+  max-height: 0rem;
+}
+
+
 #smooth-wrapper {
   #smooth-content {
     will-change: transform;
@@ -35,7 +53,7 @@
 
 .horizontal-seaprator-line {
   min-height: 0.24rem;
-  min-width: 100%;
+  width: 100%;
   background-color: var(--main-color-dark-32);
   border-radius: 1rem;
 }
@@ -94,7 +112,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       gap: 1.2rem;
 
       // min-height: 100%;

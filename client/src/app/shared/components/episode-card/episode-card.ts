@@ -30,24 +30,36 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   // episode card can be 'small', 'medium', 'large'
 
   viewportWidth = window.innerWidth;
-  audioTrackWidth = this.calculateTrack(this.viewportWidth);
-  audioTrackWidthLarge = 540;
+  audioTrackWidth = this.calculateTrack(this.viewportWidth, 'medium');
+  audioTrackWidthLarge = this.calculateTrack(this.viewportWidth, 'large');
   currentAudioTrackWidth!: number;
   imageUrl = '../../../../../public/assets/article-illustration-1.jpg';
 
-  calculateTrack(wpWidth: number) {
+  calculateTrack(wpWidth: number, cardType: string) {
     let width: number = 0;
     // 1500px
-    // 1200-1500px
-    // 800-1200px
+    // 1300-1500px
+    // 800-1300px
     if (wpWidth > 1500) {
-      width = 200;
-    } else if (wpWidth > 1200 && wpWidth <= 1500) {
-      width = 164;
-    } else if (wpWidth > 800 && wpWidth <= 1200) {
-      width = 132;
+      if (cardType === 'medium') {
+        width = 200;
+      } else if (cardType === 'large') {
+        width = 528;
+      }
+    } else if (wpWidth > 1300 && wpWidth <= 1500) {
+      if (cardType === 'medium') {
+        width = 164;
+      } else if (cardType === 'large') {
+        width = 446;
+      }
+    } else if (wpWidth > 800 && wpWidth <= 1300) {
+      if (cardType === 'medium') {
+        width = 132;
+      } else if (cardType === 'large') {
+        width =408;
+      }
     }
-    console.log('This is the viewport', wpWidth, typeof wpWidth);
+    // console.log('This is the viewport', wpWidth, typeof wpWidth);
     return width;
   }
 
@@ -68,7 +80,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
       country: 'Netherlands',
     },
     greet: function () {
-      console.log(`Hello, I'm ${this.name}!`);
+      // console.log(`Hello, I'm ${this.name}!`);
     },
   };
 
@@ -79,7 +91,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
     //   this.appRef.tick();
     // }
     // this.calculateTrack(this.viewportWidth);
-    console.log('this is the audio track width', this.audioTrackWidth);
+    // console.log('this is the audio track width', this.audioTrackWidth);
     if (this.audioTrackWrapper) {
       // console.log(this.audioTrackWrapper.nativeElement.clientWidth);
       // console.log('test');
@@ -161,7 +173,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
         //     overwrite: true,
         //   }
         // );
-        // console.log('AAAAAAAA', '09999999');
+        console.log('AAAAAAAA', '09999999');
       }, 800);
     }); 
     */
@@ -171,7 +183,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   }
 
   triggerChange() {
-    console.log('This is a change');
+    // console.log('This is a change');
   }
 
   ngOnChanges(changes: SimpleChanges): void {

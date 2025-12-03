@@ -88,7 +88,7 @@ export class UIStatContainer implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.delayedFunction();
-    }, 5600);
+    }, 2800);
   }
 
   delayedFunction() {

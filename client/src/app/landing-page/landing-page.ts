@@ -6,6 +6,7 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  HostListener,
 } from '@angular/core';
 
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
@@ -116,21 +117,16 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
   time = 1.24;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
 
+  @HostListener('window:beforeunload', ['$event'])
+  clearLocalStorage(event: BeforeUnloadEvent) {
+    localStorage.removeItem('landingPageLoaded');
+  }
+
   ngOnInit() {
     // Register GSAP plugins here once
     this.ngZone.runOutsideAngular(() => {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
     });
-
-    // this.router.events.subscribe((event) => {
-    //   if (event instanceof NavigationStart) {
-    //     // Navigation is starting: play the "out" animation
-    //     this.playPageOutTransition();
-    //   } else if (event instanceof NavigationEnd) {
-    //     // Navigation is complete: play the "in" animation
-    //     this.playPageInTransition();
-    //   }
-    // });
 
     setTimeout(() => {
       this.delayedFunction();
@@ -139,51 +135,17 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
   }
 
   playPageOutTransition() {
-    this.ngZone.runOutsideAngular(() => {
-      // gsap.to('#smooth-wrapper', {
-      //   opacity: 0,
-      //   duration: 3.2,
-      //   ease: this.ease,
-      // });
-      // gsap.to('.background', {
-      //   height: '0px',
-      //   duration: 1.6,
-      //   ease: this.ease,
-      //   // onComplete: () => {
-      //   //   // This code runs AFTER the animation finishes
-      //   //   this.router.navigate(['/episodes-page']);
-      //   // },
-      // });
-    });
-
-    // console.log('EXITEEEEEED');
+    this.ngZone.runOutsideAngular(() => {});
   }
 
   playPageInTransition() {
-    this.ngZone.runOutsideAngular(() => {
-      // gsap.fromTo(
-      //   '#smooth-wrapper',
-      //   { opacity: 0, height: '0rem' },
-      //   {
-      //     opacity: 1,
-      //     height: '100rem',
-      //     duration: 2.4,
-      //     ease: this.ease,
-      //     // onComplete: () => {
-      //     //   this.router.navigate(['/episodes-page']);
-      //     // },
-      //   }
-      // );
-    });
-    // console.log('ENTEREEEEEED');
+    this.ngZone.runOutsideAngular(() => {});
   }
 
   // GET RID OF THIS
   delayedFunction() {
     this.height = '0rem';
     this.cdr.detectChanges();
-
-    // console.log('feawrfer');
   }
 
   ngOnDestroy() {
@@ -191,21 +153,15 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
     if (this.smoother) {
       this.smoother.kill();
     }
-
-    this.changeanimation = '.on-destroy-test';
   }
 
-  // ... (your existing imports and component setup)
-
   ngAfterViewInit() {
-    //  GSAP Animations
-
     this.ngZone.runOutsideAngular(() => {
-      gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+      const hasLoaded = localStorage.getItem('landingPageLoaded');
 
-      // --- 1. Define the Initial Load-In Animation Timeline ---
-      // this.createLoadInTimeline();
-      // Create the smoother instance
+      // --------------------------
+      // SMOOTHER LOADUP
+      // --------------------------
       this.smoother = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
@@ -216,125 +172,21 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         smoothTouch: false,
       });
 
-      gsap.to('.spacing-h1', {
-        height: '120px',
-        width: '400px',
-        skewX: 0,
-        skewY: 0,
-        rotate: 0,
-        duration: 0.8,
-        ease: this.ease,
-        overwrite: true,
-      });
-
-      // Initial state set in CSS should be removed.
-      // We use GSAP to set the starting position (off-screen) and then animate to the final position.
-      if (this.loadhappened == false) {
-        setTimeout(() => {
-          gsap.to('.spacing-h1', {
-            height: '0px',
-            width: '0px',
-            y: '-32px',
-            skewX: 32,
-            skewY: 8,
-            // rotate: 0,
-            duration: 0.8,
-            ease: this.ease,
-            // overwrite: true,
-          });
-          // console.log('AAAAAAAA', '09999999');
-        }, 800);
-
-        setTimeout(() => {
-          gsap.to('.spacing', {
-            height: '90vh',
-            zIndex: -99,
-            opacity: 0,
-            // Animate to its natural position
-            duration: 0.8,
-            ease: this.ease,
-            // ease: CustomEase.create('eeeease', '.01,.99,.53,.99'),
-          });
-          // console.log('BBBBBBB', '09999999');
-          // console.log('BBBBBBB', '09999999');
-          // console.log('BBBBBBB', '09999999');
-        }, 1000);
-
-        setTimeout(() => {
-          gsap.fromTo(
-            '#smooth-wrapper',
-            { y: '100vh' }, // Start 100vh lower than its natural position
-            {
-              y: '0vh',
-              // Animate to its natural position
-              duration: 0.8,
-              ease: this.ease,
-              // ease: CustomEase.create('eeeease', '.01,.99,.53,.99'),
-            }
-          );
-          gsap.fromTo(
-            '#smooth-content',
-            { opacity: 0 }, // Start 100vh lower than its natural position
-            {
-              opacity: 1, // Animate to its natural position
-              duration: 0.8,
-              ease: this.ease,
-              // ease: CustomEase.create('eeeease', '.01,.99,.53,.99'),
-            }
-          );
-          gsap.fromTo(
-            '.image',
-            { height: '120vh' }, // Start 100vh lower than its natural position
-            {
-              height: 'calc(100vh - 1.6rem)', // Animate to its natural position
-              duration: 1.6,
-              ease: this.ease,
-              // ease: CustomEase.create('eeeease', '.01,.99,.53,.99'),
-            }
-          );
-
-          // console.log('CCCCCCCC', '09999999');
-        }, 1200);
-        this.loadhappened = true;
-      } else {
-        // console.log('intro not happening');
-      }
-      // setTimeout(() => {for (let i = 0; i <= 11; i++) {
-      //   gsap.to(
-      //     `.background-image-layer-${i}`,
-      //     // { top: `${i*2.4}`, height: '200px', opacity: 0 }, // Start 100vh lower than its natural position
-      //     {
-      //       top: `${i*2.4}`,
-      //       opacity: 1, // Animate to its natural position
-      //       duration: 1.6,
-      //       backgroundColor: 'red',
-      //       ease: this.ease,
-      //       // ease: CustomEase.create('eeeease', '.01,.99,.53,.99'),
-      //     }
-      //   );
-      // }}, 3200);
-
-      // PIN THE TEXT: if doesn't work, remove this, reactivate the pin of the other elements
-      // Then add "position fixed to the text container
       ScrollTrigger.create({
-        trigger: '#smooth-content', // Start at the very top of the scrollable area
+        trigger: '#smooth-content',
         start: 'top top',
-        // endTrigger: '.background-collapse-trigger', // End when the background is about to collapse
         end: 'top top',
-        pin: '.text-container', // <-- Pin the text container itself
-        pinType: 'fixed', // Use 'fixed' to position it relative to the viewport while pinned
-        pinSpacing: false, // Don't add extra space when pinning a fixed element
-        markers: false, // set to true for debugging
+        // pin: '.text-container',
+        // pinType: 'fixed',
+        pinSpacing: false,
+        markers: false,
       });
 
       // ******************************************
       // Trigger to collapse the background
       // ******************************************
       let backgroundTL = gsap.timeline();
-      backgroundTL.to('.background', 
-        { height: '16vh', 
-          duration: 6, 
-          ease: 'power2.out' });
+      backgroundTL.to('.background', { height: '16vh', duration: 6, ease: 'power2.out' });
 
       ScrollTrigger.create({
         animation: backgroundTL,
@@ -350,33 +202,218 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
       });
 
       // ******************************************
-      // Trigger to show the first lines of text
+      // Trigger for collapsing the H1 element
       // ******************************************
-      let heroTextTL = gsap.timeline();
-      heroTextTL.to('.hero-h1', {
-        height: '0px',
-        width: '0px',
-        y: -0,
-        skewX: 32,
-        skewY: 8,
-        rotate: 0,
-        duration: 2,
-        ease: this.ease,
-      });
 
       // Scroll triggers for the sides
       ScrollTrigger.create({
-        animation: heroTextTL,
+        // animation: heroTextTL,
         trigger: '.hero-section-trigger',
         start: 'center center',
-        // end: '+=400',
-        end: '+=180',
-        // pin: '.snap-element-a',
-        // pin: true,
-        scrub: true,
+        end: '+=01',
         anticipatePin: 1,
-        // snap: 2,
+
+        onEnter: () => {},
+        onLeave: () => {
+          gsap.to('.hero-h1', {
+            height: '0rem',
+            width: '0rem',
+            y: -120,
+            skewX: 32,
+            skewY: 8,
+            scale: 1,
+            rotate: 0,
+            duration: 2,
+            ease: this.ease,
+          });
+        },
+        onEnterBack: () => {
+          gsap.to('.hero-h1', {
+            width: '46.4rem',
+            height: '12rem',
+            y: 0,
+            skewX: 0,
+            skewY: 0,
+            scale: 1,
+            rotate: 0,
+            duration: 2,
+            ease: this.ease,
+          });
+        },
+        onLeaveBack: () => {},
       });
+
+      // ****************************************
+      // This is how to handle the conditional loading
+      // ****************************************
+      if (!hasLoaded) {
+        // Set the flag in localStorage
+        localStorage.setItem('landingPageLoaded', 'true');
+
+        gsap.to('.spacing-h1', {
+          height: '120px',
+          width: '400px',
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: this.ease,
+          overwrite: true,
+        });
+
+        // Initial state set in CSS should be removed.
+        // We use GSAP to set the starting position (off-screen) and then animate to the final position.
+        setTimeout(() => {
+          gsap.to('.spacing-h1', {
+            height: '0px',
+            width: '0px',
+            y: '-32px',
+            skewX: 32,
+            scale: 1,
+            skewY: 8,
+            duration: 0.8,
+            ease: this.ease,
+          });
+        }, 800);
+
+        setTimeout(() => {
+          gsap.to('.spacing', {
+            height: '90vh',
+            zIndex: -99,
+            opacity: 0,
+            duration: 0.8,
+            ease: this.ease,
+          });
+        }, 1000);
+
+        // --------------------------
+        // TEXT SECTION
+        // --------------------------
+
+        setTimeout(() => {
+          gsap.to('.hero-h1', {
+            width: '46.4rem',
+            height: '12rem',
+            y: 0,
+            scale: 1,
+            skewX: 0,
+            skewY: 0,
+            rotate: 0,
+            duration: 2,
+            ease: this.ease,
+          });
+        }, 2400);
+
+        // --------------------------
+        // WRAPPER AND CONTENT SECTION
+        // --------------------------
+        setTimeout(() => {
+          gsap.fromTo(
+            '#smooth-wrapper',
+            { y: '100vh' },
+            {
+              y: '0vh',
+              duration: 0.8,
+              ease: this.ease,
+            }
+          );
+          gsap.fromTo(
+            '#smooth-content',
+            { opacity: 0 },
+            {
+              opacity: 1,
+              duration: 0.8,
+              ease: this.ease,
+            }
+          );
+          gsap.fromTo(
+            '.image',
+            { height: '120vh' },
+            {
+              height: 'calc(100vh - 1.6rem)',
+              duration: 1.6,
+              ease: this.ease,
+            }
+          );
+        }, 1200);
+
+        // ****************************************
+        // This is how to handle the conditional loading
+        // ****************************************
+      } else {
+        // --------------------------
+        // SPACING SECTION
+        // --------------------------
+        gsap.to('.spacing', {
+          height: '0vh',
+          zIndex: -99,
+          opacity: 0,
+          duration: 0,
+          ease: this.ease,
+          pointerEvents: 'none,',
+        });
+
+        // --------------------------
+        // TEXT SECTION
+        // --------------------------
+        gsap.to('.hero-h1', {
+          width: '46.4rem',
+          height: '12rem',
+          y: 0,
+          skewX: 0,
+          scale: 1,
+          skewY: 0,
+          rotate: 0,
+          duration: 2,
+          ease: this.ease,
+        });
+        setTimeout(() => {}, 2400);
+
+        // --------------------------
+        // WRAPPER AND CONTENT SECTION
+        // --------------------------
+
+        setTimeout(() => {
+          gsap.fromTo(
+            '#smooth-wrapper',
+            { y: '100vh' },
+            {
+              y: '0vh',
+              duration: 0.64,
+              ease: this.ease,
+            }
+          );
+          gsap.fromTo(
+            '#smooth-content',
+            { opacity: 0 },
+            {
+              opacity: 1,
+              duration: 0.64,
+              ease: this.ease,
+            }
+          );
+
+          // --------------------------
+          // BACKGROUND SECTION
+          // --------------------------
+
+          gsap.fromTo(
+            '.image',
+            { height: '120vh' },
+            {
+              height: 'calc(100vh - 1.6rem)',
+              duration: 1.2,
+              ease: this.ease,
+            }
+          );
+          console.log('LOADED SKIPPED');
+        }, 100);
+      }
+
+      // --------------------------
+      // THIS NEEDS TO HAPPEN NO MATTER HOW THE PAGE LOADS
+      // --------------------------
 
       // ******************************************
       // Trigger for entering Episodes section
@@ -389,7 +426,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         // pin: true,
         scrub: false,
         anticipatePin: 1,
-        markers: true,
+        markers: false,
         onEnter: () => {
           // Play entering animation when entering from the top
           gsap.to('.episodes-text-h1', {
@@ -398,6 +435,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: -120,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 0,
             ease: this.ease,
@@ -409,6 +447,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -418,8 +457,10 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             height: '40px',
             width: '140px',
             y: 0,
+            // scale: '1',
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -430,6 +471,8 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
+            // scale: '1',
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -444,6 +487,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: -60,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -455,6 +499,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -466,6 +511,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -476,6 +522,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -490,6 +537,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -501,6 +549,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -512,6 +561,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -522,6 +572,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -536,6 +587,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -547,6 +599,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -558,6 +611,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -568,6 +622,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -587,7 +642,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         // pin: true,
         scrub: false,
         anticipatePin: 1,
-        markers: true,
+        markers: false,
         onEnter: () => {
           // Play entering animation when entering from the top
           gsap.to('.line-container', {
@@ -603,6 +658,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -617,6 +673,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -628,6 +685,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -638,6 +696,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -658,6 +717,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: -60,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -669,6 +729,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -680,6 +741,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -690,6 +752,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 0,
             skewY: 0,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -710,6 +773,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -721,6 +785,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -732,6 +797,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -742,6 +808,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -762,6 +829,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 2,
             ease: this.ease,
@@ -773,6 +841,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -784,6 +853,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -794,6 +864,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             y: 0,
             skewX: 32,
             skewY: 8,
+            scale: 1,
             rotate: 0,
             duration: 1,
             ease: this.ease,
@@ -809,7 +880,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         // pin: true,
         scrub: false,
         anticipatePin: 1,
-        markers: true,
+        markers: false,
         onEnter: () => {
           // Play entering animation when entering from the top
           gsap.to('.left-side', {
@@ -851,6 +922,4 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
       });
     });
   }
-
-  // ... (rest of your component code)
 }
