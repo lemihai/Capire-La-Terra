@@ -10,19 +10,19 @@ export class Api {
 
   getData() {
     console.log(environment.apiUrl);
-    return this.http.get(`${environment.apiUrl}/articles`);
+    return this.http.get(`${environment.apiUrl}/news`);
   }
 
   getArticle(){
     // console.log(environment.apiUrl);
-   let articles = this.http.get(`${environment.apiUrl}/articles`)
+   let articles = this.http.get(`${environment.apiUrl}/news`)
   //  let article = articles[1];
-    return this.http.get(`${environment.apiUrl}/articles`);
+    return this.http.get(`${environment.apiUrl}/news`);
   }
 
   login(_req:any){
     console.log('API-ts');
-    let login = this.http.post(`${environment.apiUrl}/login-page`, _req.body);
+    let login = this.http.post(`${environment.apiUrl}/login`, _req.body);
     return login;
   }
 }

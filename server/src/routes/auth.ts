@@ -10,6 +10,10 @@ export const logInRouter = Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION = "1h";
 
+// --------------------------------------
+// <|||||||||> lOGIN Routes <|||||||||>
+// --------------------------------------
+
 logInRouter.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;

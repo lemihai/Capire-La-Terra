@@ -1,5 +1,5 @@
 import { chromium, Page } from "playwright";
-import { newsWebsitesRouter } from "../routes/news.routes.js";
+import { newsWebsitesRouter } from "../routes/newsWebsites.routes.js";
 import { collections } from "../database.js";
 import { ObjectId } from "mongodb";
 // function imports

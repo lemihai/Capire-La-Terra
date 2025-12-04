@@ -3,17 +3,26 @@
 import * as mongoDB from "mongodb";
 import { Episode } from "./models/episode.js";
 import { Article } from "./models/article.js";
+import { NewsWebsite } from "./models/newsWebsite.js";
 import { News } from "./models/news.js";
 import { User } from "./models/user.js";
 // URI is the link to the localhosted database
 // Client is a new mongodb client that connects to the URI
 
 export const collections: {
+  news?: mongoDB.Collection<News>;
   articles?: mongoDB.Collection<Article>;
   episodes?: mongoDB.Collection<Episode>;
-  newsWebsites?: mongoDB.Collection<News>;
+  newsWebsites?: mongoDB.Collection<NewsWebsite>;
   users?: mongoDB.Collection<User>;
 } = {};
+
+// news
+// articles
+// episodes
+// newswebsites || ROBOTS
+//
+// users
 
 // console.log("test");
 let dbName = "";
@@ -36,7 +45,8 @@ export async function connectToDatabase() {
     // initializing collections
     collections.episodes = database.collection<Episode>("episodes");
     collections.articles = database.collection<Article>("articles");
-    collections.newsWebsites = database.collection<News>("news");
+    collections.newsWebsites = database.collection<NewsWebsite>("newswebsites");
+    collections.news = database.collection<News>("news");
     collections.users = database.collection<User>("users");
   } catch (error) {
     // error handling the connect

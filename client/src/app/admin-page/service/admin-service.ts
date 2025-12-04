@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import gsap from 'gsap';
 import CustomEase from 'gsap/CustomEase';
+import { RobotsService } from './robots-service/robots-service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class AdminService {
   constructor(
     private http: HttpClient,
     private newsService: NewsService,
+    private robotsService: RobotsService,
     private ngZone: NgZone,
     private router: Router
   ) {}
@@ -104,4 +106,8 @@ export class AdminService {
   // --------------------------
   // Robots Service
   // --------------------------
+
+  getRobots() {
+    return this.robotsService.getRobots();
+  }
 }

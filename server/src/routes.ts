@@ -2,10 +2,11 @@ import { Router } from "express";
 
 // Import the routers
 import { episodeRouter } from "./routes/episode.routes.js";
-import { articleRouter } from "./routes/article.routes.js";
-import { newsWebsitesRouter } from "./routes/news.routes.js";
+import { newsRouter } from "./routes/news.routes.js";
+import { newsWebsitesRouter } from "./routes/newsWebsites.routes.js";
 import { userRouter } from "./routes/user.routes.js";
 import { logInRouter } from "./routes/auth.js";
+import { articlesRouter } from "./routes/articles.js";
 
 // Initializing the global router
 // also making the main router use all of the other routers.
@@ -13,8 +14,9 @@ import { logInRouter } from "./routes/auth.js";
 
 export const router = Router();
 router.use("/", logInRouter)
-router.use("/", articleRouter);
-router.use("/scrape", articleRouter);
+router.use("/", newsRouter);
+router.use("/", articlesRouter);
+router.use("/scrape", newsRouter);
 router.use("/", episodeRouter);
 router.use("/", newsWebsitesRouter);
 router.use("/", userRouter);

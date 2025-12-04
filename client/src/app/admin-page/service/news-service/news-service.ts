@@ -17,6 +17,8 @@ export interface Article {
   // Add other fields as needed
 }
 
+// db.runCommand({ renameCollection: "capirelaterra.scraperwebsites", to: "capirelaterra.articles" })
+
 export interface NewsQuery {
   id?: string;
   author?: string;
@@ -28,7 +30,7 @@ export interface NewsQuery {
   providedIn: 'root',
 })
 export class NewsService {
-  private readonly apiUrl = `${environment.apiUrl}/articles`;
+  private readonly apiUrl = `${environment.apiUrl}/news`;
   time = 0.64;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
 
@@ -38,13 +40,13 @@ export class NewsService {
   // GET Methods
   // --------------------------
   getAllNews() {
-    console.log(environment.apiUrl);
-    return this.http.get(`${environment.apiUrl}/articles`);
+    // console.log(environment.apiUrl);
+    return this.http.get(`${environment.apiUrl}/news`);
   }
 
   getOneNewsArticle(id: string) {
-    console.log(environment.apiUrl);
-    return this.http.get(`${environment.apiUrl}/articles:${id}`);
+    // console.log(environment.apiUrl);
+    return this.http.get(`${environment.apiUrl}/news:${id}`);
   }
 
   getNewsByParameters(query: NewsQuery): Observable<Article[]> {
