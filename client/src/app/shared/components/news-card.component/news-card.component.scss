@@ -932,7 +932,7 @@
 }
 
 .card-wrapper.admin-small {
-  height: 3.4rem;
+  height: 4rem;
   // width: 100%;
   // min-width: 100%;
   max-width: 100%;
@@ -944,9 +944,7 @@
 
   transition: var(--transition-160);
 
-  background-color: var(--main-color-dark-invisible);
-  border: 1px solid var(--main-color-dark-invisible);
-  border-radius: 0.8rem;
+  border-radius: 1.2rem;
 
   // ******************************
   // This the the bottom container
@@ -957,11 +955,109 @@
 
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 
     gap: 1.2rem;
     transition: all 0.6s var(--cubic-bezzier-a);
+  }
+
+  .admin-card-inner {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 1.2rem;
+
+    background-color: var(--main-color-dark-invisible);
+    border: 1px solid var(--main-color-dark-invisible);
+
+    gap: 1.2rem;
+    transition: all 0.6s var(--cubic-bezzier-a);
+  }
+
+  .actions {
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    opacity: 0;
+
+    transition: inherit;
+    border-radius: 1.2rem;
+    padding: 0.4rem;
+
+    background-color: var(--main-color-dark-invisible);
+    border: 1px solid var(--main-color-dark-invisible);
+
+    .button {
+      height: 3.2rem;
+      width: 3.2rem;
+      min-width: 3.2rem;
+      min-height: 3.2rem;
+
+      border-radius: 0.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: inherit;
+
+      .button-icon {
+        height: 3.2rem;
+        width: 3.2rem;
+
+        opacity: 0.32;
+        transition: inherit;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.8rem;
+
+        background-color: var(--main-color-dark-invisible);
+        border: 1px solid var(--main-color-dark-invisible);
+
+        svg {
+          height: 2rem;
+          width: 2rem;
+          transition: var(--transition-24);
+          path {
+            stroke: var(--main-color-dark);
+            stroke-width: 0.24rem;
+            transition: var(--transition-24);
+          }
+        }
+
+        &:hover {
+          scale: 1.1;
+          transition: inherit;
+          background-color: var(--main-color-hover);
+          border: 1px solid var(--main-color-dark-16);
+          opacity: 1;
+          cursor: pointer;
+
+          svg {
+            height: 2rem;
+            width: 2rem;
+            transition: var(--transition-24);
+
+            path {
+              stroke: var(--main-color-light-hover);
+              transition: var(--transition-24);
+            }
+          }
+        }
+      }
+
+      .edit {
+        transition: inherit;
+      }
+    }
   }
 
   .separator-line {
@@ -986,30 +1082,40 @@
   }
 
   .author-card-wrapper {
-    
     width: 12.8rem;
     min-width: 12.8rem;
   }
 
-  .title {
-    height: 2.4rem;
-    overflow: hidden;
-    font-size: var(--font-size-regular);
-    flex-grow: 1;
-    max-width: 100%;
-    font-weight: 600;
+  .title-wrapper {
     width: 100%;
+    max-width: 100%;
+    // height: 3.2rem;
+    overflow: hidden;
+    // flex-grow: 1;
+    transition: all 0.6s var(--cubic-bezzier-a);
     mask-image: linear-gradient(
       90deg,
       rgba(0, 0, 0, 1) 0%,
       rgba(0, 0, 0, 1) 88%,
       rgba(0, 0, 0, 0) 100%
     );
+  }
 
-    text-wrap: nowrap;
-    white-space: nowrap;
-    text-overflow: clip;
+  .title {
+    height: 2.4rem;
+    font-size: var(--font-size-regular);
+    flex-grow: 1;
+    width: 130%;
+    // max-width: 100%;
+
+    line-height: 2.4rem;
+    font-weight: 600;
     transition: all 0.6s var(--cubic-bezzier-a);
+
+    overflow: hidden;
+    text-wrap: nowrap;
+    white-space: wrap;
+    text-overflow: ellipsis;
   }
 
   .date {
@@ -1018,7 +1124,7 @@
     transition: all 0.6s var(--cubic-bezzier-a);
   }
 
-  .author{
+  .author {
     height: 2.4rem;
     // height: 1.6rem;
     overflow: hidden;
@@ -1043,14 +1149,25 @@
   &:hover {
     cursor: pointer;
     transition: all 0.6s var(--cubic-bezzier-a);
-    padding: 0rem 0.8rem;
     // height: 3.2rem;
 
-    background-color: var(--main-color-dark-16);
-    border: 1px solid var(--main-color-dark-16);
+    .admin-card-inner {
+      padding: 0rem 0.8rem;
+      background-color: var(--main-color-dark-16);
+      border: 1px solid var(--main-color-dark-16);
+      transition: all 0.6s var(--cubic-bezzier-a);
+    }
 
-    .title{
-      font-weight: 700;
+    .actions {
+      transition: inherit;
+      background-color: var(--main-color-dark-16);
+      border: 1px solid var(--main-color-dark-16);
+
+      opacity: 1;
+    }
+
+    .title {
+      // font-weight: 700;
       transition: all 0.6s var(--cubic-bezzier-a);
     }
 

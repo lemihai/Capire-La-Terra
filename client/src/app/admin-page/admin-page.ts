@@ -129,9 +129,14 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
     });
 
+    const currentRouter = this.router.url;
     // Set the initial active sidebar based on the current route
-    const currentRoute = this.router.url.split('/').pop() || 'admin-page';
-    console.log('current route: ', currentRoute);
+    let currentRoute = this.router.url.split('/').pop() || 'admin-page';
+    if(currentRouter.includes('news-article-view')){
+      // console.log(543254,54235,542354,4,this.router.url);
+      currentRoute = currentRouter;
+    }
+    // console.log('current route: ', currentRoute);
     this.SetSidebarView(currentRoute);
 
     // Subscribe to future route changes
@@ -229,6 +234,9 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   SetSidebarView(view: string) {
+    console.log('************************');
+    console.log(view);
+    console.log('************************');
     if (view === 'admin-page') {
       this.Sidebar.setActive('admin-page');
       this.buttonHoverTop = 'calc(6.1rem)';
@@ -263,7 +271,15 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       this.buttonHoverTop = 'auto';
       this.bottomHoverBottom = '.8rem !important';
       this.router.navigate(['']);
-    } else {
+    } else if(view.includes('news-article-view')){
+      console.log(543254,54235,542354,4,this.router.url);
+      this.Sidebar.setActive('news-view');
+      this.bottomHoverBottom = 'auto';
+      this.buttonHoverTop = 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important';
+      this.router.navigate([`${view}`]);
+    }
+    
+    else {
       console.log('THIS ROUTE HAS NOT BEEN DETECTED');
     }
     this.cdr.detectChanges();

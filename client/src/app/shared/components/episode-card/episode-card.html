@@ -119,4 +119,21 @@
 <!-- </div> -->
 <!-- </div> -->
 
+} @if(cardType == 'admin-small'){
+
+<div class="episode small">
+  <div class="play">
+    <app-play-button />
+  </div>
+  <p class="episode-number">#{{episode.number}} -</p>
+  <p class="episode-title">{{episode.title}}</p>
+  <div class="profile-card-wrapper">
+    <app-profile-card class="episode-author" />
+  </div>
+  <p class="episode-duration">3:46</p>
+
+  <!-- Adding these kills the whole app scroll -->
+  <!-- <app-audio-track [audioTrackWidth]="audioTrackWidth" /> -->
+  <app-audio-track [audioTrackWidth]="100" />
+</div>
 }

@@ -14,7 +14,9 @@ articlesRouter.use(cors());
 
 articlesRouter.get("/articles", async (_req, res) => {
   try {
-    res.status(200).send(`test`);
+    const articles = await collections?.articles?.find({}).toArray();
+
+    res.status(200).send(articles);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Error";
     console.log(message);
@@ -62,7 +64,20 @@ articlesRouter.put("/articles/:id", async (req, res) => {
 
 articlesRouter.delete("/articles/:id", async (req, res) => {
   try {
-    res.status(200).send(`test`);
+    const { id } = req.params;
+    console.log(`Deleting article with ID: ${id}`);
+
+    // Replace this with your actual database deletion logic
+    // Example for Mongoose:
+    // await Article.findByIdAndDelete(id);
+
+    // Example for Sequelize:
+    // await Article.destroy({ where: { id } });
+
+    res.status(200).json({
+      success: true,
+      message: "Article deleted successfully"
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Error";
     console.log(message);

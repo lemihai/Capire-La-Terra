@@ -27,6 +27,7 @@
   --main-color-dark-background: #d8dec0;
 
   --main-color-light: #e9efd1;
+  --main-color-light-invisible: #e9efd100;
   --main-color-light-08: #e9efd108;
   --main-color-light-16: #e9efd116;
   --main-color-light-24: #e9efd124;
@@ -38,6 +39,25 @@
   --main-color-hover: #9cc40a;
   --main-color-dark-hover: #596e0c;
   --main-color-light-hover: #ffffff;
+
+  // status colors
+  --main-color-error: #c4480a;
+  --main-color-error-08: #c4480a08;
+  --main-color-error-16: #c4480a16;
+  --main-color-error-32: #c4480a32;
+  --main-color-error-64: #c4480a64;
+
+  --main-color-correct: #0ac420;
+  --main-color-correct-08: #0ac42008;
+  --main-color-correct-16: #0ac42016;
+  --main-color-correct-32: #0ac42032;
+  --main-color-correct-64: #0ac42064;
+
+  --main-color-alert: #c4b80a;
+  --main-color-alert-08: #c4b80a08;
+  --main-color-alert-16: #c4b80a16;
+  --main-color-alert-32: #c4b80a32;
+  --main-color-alert-64: #c4b80a64;
 
   // Shadows
   --main-shadow: 0rem 0.02rem 0.8rem var(--main-color-dark-16);
@@ -70,4 +90,6 @@
   --transition-64: all 0.64s ease-out;
   --transition-120: all 1.2s ease-out;
   --transition-160: all 1.6s var(--cubic-bezzier-a);
+
+  --transition-experiment: all .64s var(--cubic-bezzier-a);
 }

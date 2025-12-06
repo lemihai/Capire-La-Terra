@@ -1,0 +1,37 @@
+<div class="news-article-view-wrapper">
+  <header class="header-container">
+    <h2>News-Article</h2>
+  </header>
+  <div class="edit-container-wrapper">
+    <app-edit-bar mode="{{ editBarComponents }}" [componentData]="news" />
+  </div>
+  <section class="article-body">
+    <header class="news-article-header">
+      <h1 class="article-title">{{ news?.title }}</h1>
+      <div class="news-article-details">
+        <!-- <p>{{ news?.url }}</p> -->
+        <div class="app-article-wrapper">
+          @if(news.url){
+          <app-source [source]="news.url" />
+          }
+        </div>
+        <div class="separator-line"></div>
+        <p class="date">{{ news?.date }}</p>
+        <div class="separator-line"></div>
+        <p class="author">{{ news?.author }}</p>
+        <!-- <p>{{news?.summary}}</p> -->
+      </div>
+    </header>
+    <div class="second-header">
+      <h1 class="article-body-header">Article Body</h1>
+      <div class="horizontal-separator-line"></div>
+    </div>
+    <div class="article-text-wrapper">
+      <!-- <p>{{ news?.text }}</p> -->
+      @for (paragraph of paragraphs; track $index) {
+      <p>{{ paragraph }}</p>
+      }
+    </div>
+    <section class="next-article-section"></section>
+  </section>
+</div>

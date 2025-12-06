@@ -12,7 +12,12 @@ import { NewsView } from './admin-page/news-view/news-view';
 import { RobotsView } from './admin-page/robots-view/robots-view';
 import { Settings } from './admin-page/settings/settings';
 import { ArticlesView } from './admin-page/articles-view/articles-view';
-import { NewsArticlePage } from './admin-page/news-view/news-article-page/news-article-page/news-article-page';
+import { NewsArticlePage } from './admin-page/news-view/news-article-page/news-article-page';
+import { ArticleCard } from './admin-page/articles-view/article-card/article-card';
+import { NewArticle } from './admin-page/articles-view/new-article/new-article';
+import { NewEpisode } from './admin-page/episodes-view/new-episode/new-episode/new-episode';
+import { AdminArticlePage } from './admin-page/articles-view/admin-article-page/admin-article-page';
+import { AdminEpisodeView } from './admin-page/episodes-view/admin-episode-view/admin-episode-view';
 
 export const routes: Routes = [
   { path: '', component: LandingPage, title: 'Home' },
@@ -32,29 +37,27 @@ export const routes: Routes = [
       },
       {
         path: 'episodes-view',
-        component: EpisodesView,
         title: 'Episodes-view',
         children: [
           {
-            path: '', 
-            component: EpisodesView, 
+            path: '',
+            component: EpisodesView,
             title: 'episodes-list',
           },
           {
             path: 'episode-page',
-            component: NewsArticlePage,
+            component: AdminEpisodeView,
             title: 'episode-page',
           },
           {
-            path: 'add-episode',
-            component: NewsArticlePage,
-            title: 'add-episode',
+            path: 'new-episode',
+            component: NewEpisode,
+            title: 'new-episode',
           },
         ],
       },
       {
         path: 'news-view',
-        // component: NewsView,
         title: 'News-view',
         children: [
           {
@@ -65,18 +68,32 @@ export const routes: Routes = [
           {
             // The News Article view (e.g., /admin-page/news-view/article/123)
             // Note: I renamed the path for clarity, but you can keep 'news-article-view/:id'
-            path: 'news-article-view',
+            path: 'news-article-view/:id',
             component: NewsArticlePage, // NewsArticlePage replaces NewsView here
             title: 'News-article-view',
           },
-          // You can also add a redirect here if needed
-          // { path: '**', redirectTo: '' }
         ],
       },
       {
         path: 'articles-view',
-        component: ArticlesView,
         title: 'Articles-view',
+        children: [
+          {
+            path: '',
+            component: ArticlesView,
+            title: 'article',
+          },
+          {
+            path: 'admin-article-page',
+            component: AdminArticlePage,
+            title: 'article-page',
+          },
+          {
+            path: '',
+            component: NewArticle,
+            title: 'new-article',
+          },
+        ],
       },
       {
         path: 'robots-view',

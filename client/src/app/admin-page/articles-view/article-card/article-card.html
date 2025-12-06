@@ -1,0 +1,92 @@
+<div class="article-card-wrapper" (click)="navigateToArticlePage()">
+  <div class="hover-bar"></div>
+  <div class="article-image"></div>
+  <p class="article-title">{{ article.title }}</p>
+  <div class="separator-line"></div>
+  <app-profile-card />
+  <div class="separator-line"></div>
+  <p class="article-date">{{ date }}</p>
+  <div class="article-sources-wrapper">
+    <app-source />
+  </div>
+</div>
+<div class="actions">
+  <div class="button" >
+    <div class="button-icon">
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5.74456 20.3636L21.1664 4.94194C21.8253 4.28298 23.9035 3.24389 26.4993 5.84022C29.0954 8.4369 28.0566 10.5143 27.3977 11.1731C26.2625 12.3083 16.6604 21.9437 11.9759 26.5949L4.16992 28.1696L5.74456 20.3636Z"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path d="M20 6L26 12" stroke="black" stroke-width="1.6" />
+        <path d="M7 20L13 26" stroke="black" stroke-width="1.6" />
+      </svg>
+      <p class="edit"></p>
+    </div>
+  </div>
+  <div class="button" (click)="deleteArticle()">
+    <div class="button-icon">
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7 7L8.25 27C8.30937 28.1556 9.15 29 10.25 29H21.75C22.8544 29 23.6794 28.1556 23.75 27L25 7"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M5 7H27"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+        />
+        <path
+          d="M12 7.00001V4.50001C11.9994 4.30286 12.0378 4.10755 12.113 3.9253C12.1882 3.74305 12.2987 3.57746 12.4381 3.43806C12.5775 3.29866 12.743 3.18819 12.9253 3.11301C13.1075 3.03783 13.3029 2.99943 13.5 3.00001H18.5C18.6972 2.99943 18.8925 3.03783 19.0747 3.11301C19.257 3.18819 19.4226 3.29866 19.562 3.43806C19.7014 3.57746 19.8118 3.74305 19.887 3.9253C19.9622 4.10755 20.0006 4.30286 20 4.50001V7.00001"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M16 11V25"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M11.5 11L12 25"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M20.5 11L20 25"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <p class="edit"></p>
+    </div>
+  </div>
+</div>

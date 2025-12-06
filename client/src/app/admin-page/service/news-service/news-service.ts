@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import CustomEase from 'gsap/CustomEase';
 import { AdminService } from '../admin-service';
 
-export interface Article {
-  _id?: string; // MongoDB ID (optional for new articles)
+export interface News {
+  _id?: string; 
   title: string;
   author?: string;
   date?: string;
@@ -45,11 +45,10 @@ export class NewsService {
   }
 
   getOneNewsArticle(id: string) {
-    // console.log(environment.apiUrl);
-    return this.http.get(`${environment.apiUrl}/news:${id}`);
+    return this.http.get(`${environment.apiUrl}/news/${id}`);
   }
 
-  getNewsByParameters(query: NewsQuery): Observable<Article[]> {
+  getNewsByParameters(query: NewsQuery): Observable<News[]> {
     let params = new HttpParams();
 
     if (query.author) params = params.append('author', query.author);
@@ -59,34 +58,20 @@ export class NewsService {
       params = params.append('date', dateString);
     }
 
-    return this.http.get<Article[]>(this.apiUrl, { params });
+    return this.http.get<News[]>(this.apiUrl, { params });
   }
 
   /**
    * Trigger a web scrape and return the updated articles.
    */
-  scrapeAndUpdateArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(`${environment.apiUrl}/scrape`);
-  }
-
-  // --------------------------
-  // POST: Add Articles
-  // --------------------------
-  addArticle(article: Article): Observable<{ insertedId: string }> {
-    return this.http.post<{ insertedId: string }>(this.apiUrl, article);
-  }
-
-  // --------------------------
-  // PUT: Update Articles
-  // --------------------------
-  updateArticle(id: string, article: Article): Observable<string> {
-    return this.http.put(`${this.apiUrl}/${id}`, article, { responseType: 'text' });
+  scrapeAndUpdateArticles(): Observable<News[]> {
+    return this.http.get<News[]>(`${environment.apiUrl}/scrape`);
   }
 
   // --------------------------
   // DELETE: Remove Articles
   // --------------------------
-  deleteArticle(id: string): Observable<string> {
+  deleteNewsArticle(id: string): Observable<string> {
     return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
   }
   // --------------------------

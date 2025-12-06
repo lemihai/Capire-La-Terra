@@ -1,25 +1,25 @@
 <div class="source" [attr.data-card-type]="source">
   <!-- THE Guardian -->
-  @if (source === 'the guardian') {
+  <!-- @if (source === 'the guardian') { -->
   <img
-    ngSrc="assets/episode_placeholder.png"
+    [ngSrc]="newsSourceImage"
     height="32"
     width="32"
     alt="episode_image"
     class="episode-image"
   />
   <!-- <div class="source-image"></div> -->
-  <p class="source-text">the guardian</p>
+  <p class="source-text">{{outletName}}</p>
   <!-- Nature Climate Change -->
-  } @else if (source === 'nature climate change') {
+  <!-- } @else if (source === 'nature climate change') {
   <img
     ngSrc="assets/article-illustration-1.jpg"
     height="32"
     width="32"
     alt="episode_image"
     class="episode-image"
-  />
+  /> -->
   <!-- <div class="source-image"></div> -->
-  <p class="source-text">the guardian</p>
-  }
+  <!-- <p class="source-text">nature.com</p> -->
+  <!-- } -->
 </div>

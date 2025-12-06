@@ -6,7 +6,7 @@ import { NavbarGsapService } from '../../../navbar/navbar-gsap-service';
 
 import gsap from 'gsap';
 import CustomEase from 'gsap/CustomEase';
-import { Article } from '../../../admin-page/service/news-service/news-service';
+import { News } from '../../../admin-page/service/news-service/news-service';
 
 // export interface Article {
 //   _id?: string; // MongoDB ID (optional for new articles)
@@ -25,8 +25,8 @@ import { Article } from '../../../admin-page/service/news-service/news-service';
   templateUrl: './news-card.component.html',
   styleUrl: './news-card.component.scss',
 })
-export class NewsCardComponent implements OnInit{
-  @Input() article: Article = {
+export class NewsCardComponent implements OnInit {
+  @Input() article: News = {
     _id: '',
     url: '',
     title: '',
@@ -38,9 +38,10 @@ export class NewsCardComponent implements OnInit{
   @Input() cardType: string = ''; // Default value
   @Input() cardDirection: string = ''; // Default value
 
+  source = '';
   currentRoute: string = '';
 
-  articlesGG: Article[] = [
+  articlesGG: News[] = [
     {
       _id: '3243223', // Changed from `id` to `_id` and made it a string
       url: 'https://example.com/article1', // Added `url`
@@ -60,13 +61,16 @@ export class NewsCardComponent implements OnInit{
     private ngZone: NgZone,
     private route: ActivatedRoute,
     private navbarGsapService: NavbarGsapService
-  ) {gsap.registerPlugin(CustomEase);}
+  ) {
+    gsap.registerPlugin(CustomEase);
+  }
 
   time = 0.64;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
 
   ngOnInit(): void {
-    // gsap.registerPlugin(CustomEase);
+    // this.defineSource(this.article.url);
+    this.source = this.article.url;
   }
 
   updateRoute() {
@@ -180,4 +184,38 @@ export class NewsCardComponent implements OnInit{
     this.updateRoute();
     this.triggerPageTransition('/article-page', this.currentRoute);
   }
+
+  // defineSource(url: string) {
+  //   // console.log(url);
+  //   if (url.includes('aljazeera')) {
+  //     this.source = 'aljazeera';
+  //   }
+  //   if (url.includes('cleantechnica')) {
+  //     this.source = 'cleantechnica';
+  //   }
+  //   if (url.includes('climatechange')) {
+  //     this.source = 'climatechange';
+  //   }
+  //   if (url.includes('euronews')) {
+  //     this.source = 'euronews';
+  //   }
+  //   if (url.includes('greenpeace')) {
+  //     this.source = 'greenpeace';
+  //   }
+  //   if (url.includes('iea')) {
+  //     this.source = 'iea';
+  //   }
+  //   if (url.includes('mongabay')) {
+  //     this.source = 'mongabay';
+  //   }
+  //   if (url.includes('nature.')) {
+  //     this.source = 'nature';
+  //   }
+  //   if (url.includes('theguardian')) {
+  //     this.source = 'theguardian';
+  //   }
+  //   if (url.includes('woodcentral')) {
+  //     this.source = 'woodcentral';
+  //   }
+  // }
 }

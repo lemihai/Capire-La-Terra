@@ -9,7 +9,7 @@
   img {
     height: 1.6rem;
     width: 1.6rem;
-    background-image: url('../../../../../public/assets/article-illustration-1.jpg');
+    // background-image: url('../../../../../public/assets/article-illustration-1.jpg');
     background-size: cover; /* Ensures the image covers the entire div */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -18,7 +18,8 @@
   }
 
   .source-text {
-    font-size: 1.4rem;
-    opacity: 0.64;
+    font-size: 1.6rem;
+    opacity: 1;
+    min-width: max-content;
   }
 }

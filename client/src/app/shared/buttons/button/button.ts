@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 export class Button {
   @Input({required: true}) buttonText!: string;
   @Input({required: true}) iconType!: string;
+  @Input() size?: string;
 }

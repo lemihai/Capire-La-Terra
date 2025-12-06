@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import gsap from 'gsap';
 import CustomEase from 'gsap/CustomEase';
 import { RobotsService } from './robots-service/robots-service';
+import { EpisodesService } from './episodes-service/episodes-service';
+import { ArticlesService } from './articles-service/articles-service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +23,8 @@ export class AdminService {
     private http: HttpClient,
     private newsService: NewsService,
     private robotsService: RobotsService,
+    private episodesService: EpisodesService,
+    private articlesService: ArticlesService,
     private ngZone: NgZone,
     private router: Router
   ) {}
@@ -29,12 +33,13 @@ export class AdminService {
   // PAGE TRANSITION
   // --------------------------
 
-  public triggerViewChange(url: string, fromRoute: string) {
+  public triggerViewChange(url: string, fromRoute: string, Id?: string, data?: any) {
     const customEase = 'cubic-bezier(0,.55,.52,.96)';
-    // console.log('THIS IS the route we are coming from', fromRoute);
-    console.log('this is url: ', url);
-    const adminURL = '/admin-page' + '/news-view' + '/' + url;
-    console.log('this is final rul: ' + adminURL);
+
+    if (Id) {
+    }
+    const adminURL = '/admin-page' + '/' + fromRoute + '/' + url + '/' + Id;
+
     this.ngZone.runOutsideAngular(() => {
       // 1. Create a new GSAP Timeline
       const exitTimeline = gsap.timeline({
@@ -42,7 +47,8 @@ export class AdminService {
         onComplete: () => {
           // --- Single Navigation Point ---
           this.ngZone.run(() => {
-            this.router.navigate([adminURL]);
+            const navigationExtras = data ? { state: { data } } : {};
+            this.router.navigate([adminURL], navigationExtras);
           });
         },
       });
@@ -82,26 +88,36 @@ export class AdminService {
   // --------------------------
 
   getAllNews() {
-    return this.newsService.getAllNews(); // Calls NewsService's method
+    return this.newsService.getAllNews();
   }
 
-  // Example: Use NewsService to delete an article
-  deleteArticleForAdmin(articleId: string) {
-    return this.newsService.deleteArticle(articleId); // Delegates to NewsService
+  getOneNewsArticle(id:string){
+    return this.newsService.getOneNewsArticle(id);
   }
 
-  // Example: Admin-specific POST method
-  addAdminUser(user: { name: string; role: string }) {
-    return this.http.post(`${this.apiUrl}/users`, user);
+  deleteOneNewsArticle(id:string){
+    return this.newsService.deleteNewsArticle(id);
   }
 
   // --------------------------
   // Articles Service
   // --------------------------
 
+  getAllArticles() {
+    return this.articlesService.getAllArticles(); // Calls NewsService's method
+  }
+
+  deleteArticle(articleId: string) {
+    return this.articlesService.deleteArticle(articleId);
+  }
+
   // --------------------------
   // Episodes Service
   // --------------------------
+
+  getAllEpisodes() {
+    return this.episodesService.getAllEpisodes(); // Calls NewsService's method
+  }
 
   // --------------------------
   // Robots Service

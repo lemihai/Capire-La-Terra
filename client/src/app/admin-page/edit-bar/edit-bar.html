@@ -1,0 +1,21 @@
+@if (mode==='news-article') {
+<div class="edit-bar-wrapper">
+  <div class="left-wrapper">
+    <div class="button-wrapper">
+      <!-- <a href="{{ componentData.url }}"> -->
+        <app-button
+          iconType="open-right"
+          buttonText="To Source"
+          size="small-text"
+          (click)="navigateToPage()"
+        />
+      <!-- </a> -->
+    </div>
+  </div>
+  <div class="right-wrapper">
+    <div class="button-wrapper">
+      <app-button iconType="delete" buttonText="" size="small" (click)="deleteCurrentArticle()"/>
+    </div>
+  </div>
+</div>
+}

@@ -27,6 +27,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   @ViewChild('playerWidth') playerWidth!: ElementRef<HTMLDivElement>;
   @ViewChild('audioTrackWrapper') audioTrackWrapper!: ElementRef<HTMLDivElement>;
   @Input() cardType = '';
+  @Input() episode: any = {};
   // episode card can be 'small', 'medium', 'large'
 
   viewportWidth = window.innerWidth;
@@ -56,7 +57,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
       if (cardType === 'medium') {
         width = 132;
       } else if (cardType === 'large') {
-        width =408;
+        width = 408;
       }
     }
     // console.log('This is the viewport', wpWidth, typeof wpWidth);
@@ -69,20 +70,6 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
     private cdr: ChangeDetectorRef,
     private appRef: ApplicationRef
   ) {}
-
-  episode = {
-    name: 'Alice',
-    age: 30,
-    isStudent: false,
-    hobbies: ['reading', 'hiking'],
-    address: {
-      city: 'Amsterdam',
-      country: 'Netherlands',
-    },
-    greet: function () {
-      // console.log(`Hello, I'm ${this.name}!`);
-    },
-  };
 
   ngOnInit() {
     // for (let i = 0; i <= 10; i++) {

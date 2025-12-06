@@ -579,3 +579,122 @@
     }
   }
 }
+
+
+.episode.admin-small {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.8rem;
+
+  position: relative;
+
+  //   background-color: var(--main-color-16);
+  // background-color: red;
+  //   border: 1px solid var(--main-color-dark-08);
+
+  height: 4rem;
+  width: 100%;
+
+  padding: 0.8rem;
+  border-radius: 1.2rem;
+  border: 1px solid #38460500;
+
+  transition: var(--transition-160);
+  
+  .play {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    transition: var(--transition-160);
+    border-radius: 0.8rem;
+
+    opacity: 0;
+    min-width: 0rem;
+    width: 0rem;
+    overflow: hidden;
+  }
+
+  .episode-number {
+    width: 4rem;
+    font-size: var(--font-size-regular);
+    font-weight: bold;
+    flex-basis: 3.4rem;
+    min-width: 3.4rem;
+  }
+
+  .episode-title {
+    font-size: var(--font-size-regular);
+    width: 100%;
+
+    mask-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 88%,
+      rgba(0, 0, 0, 0) 100%
+    );
+
+    text-wrap: nowrap;
+    font-size: var(--font-size-regular);
+    line-height: 1.6rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+  }
+
+  .profile-card-wrapper {
+    min-width: 8.8rem;
+    //   width: 100%;
+  }
+
+  .episode-author {
+    width: 12rem !important;
+  }
+
+  .episode-duration {
+    font-size: var(--font-size-regular);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // background-color: var(--main-color-light);
+    // background-color: #82ff43;
+    background-color: #eaefd6;
+    opacity: 0; /* Initially hidden */
+    // transition: var(--transition-160);
+    z-index: -1; /* Place behind the element */
+    border-radius: inherit; /* Match parent's border radius */
+    transition: var(--transition-160);
+  }
+
+  &:hover {
+    transition: var(--transition-160);
+
+    // background-color: var(--main-color-32);
+    // box-shadow: inset 0 0 0 200px var(--main-color-16);
+    border: 1px solid var(--main-color-dark-16);
+    cursor: pointer;
+    padding: 0.8rem 0.4rem 0.8rem 0.4rem;
+
+    .play {
+      opacity: 1;
+      transition: var(--transition-160);
+      width: 3.2rem;
+      min-width: 3.2rem;
+      // overflow: hidden;
+    }
+  }
+
+  &:hover::before {
+    transition: var(--transition-160);
+    opacity: 1;
+  }
+}

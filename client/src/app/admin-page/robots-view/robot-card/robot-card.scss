@@ -1,0 +1,438 @@
+@use '../../../../variables.scss' as *;
+
+:host {
+  width: 100%;
+  height: auto;
+  transition: all 0.64s var(--cubic-bezzier-a);
+  //   Instant tranisiton is also very nice. Experiment
+  //   transition: var(--transition-160);
+  &:hover {
+    // transition: all .64s var(--cubic-bezzier-a);
+    transition: var(--transition-160);
+    cursor: pointer;
+  }
+}
+
+.active {
+  background-color: #00000000;
+  border: 1px solid #00000000;
+  padding: 0.2rem;
+  min-width: 12rem;
+  width: 12rem;
+
+  transition: inherit;
+  .status-container {
+    background-color: var(--main-color-correct);
+    border: 1px solid var(--main-color-correct);
+    transition: inherit;
+    .dot {
+      transition: inherit;
+      animation: pulse 3.2s var(--cubic-bezzier-a) infinite;
+    }
+  }
+}
+
+.scraping {
+  background-color: var(--main-color-alert-16);
+  border: 1px solid var(--main-color-alert-16);
+
+  padding: 0.8rem;
+  min-width: 12rem;
+  width: 12rem;
+  transition: inherit;
+
+  .status-container {
+    .icon-loading {
+      background-color: var(--main-color-alert);
+      border: 1px solid var(--main-color-alert);
+      height: 2.4rem;
+      width: 2.4rem;
+      min-width: 2.4rem;
+      min-height: 2.4rem;
+      border-radius: 0.8rem;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: inherit;
+
+      svg {
+        height: 1.6rem;
+        width: 1.6rem;
+        transition: inherit;
+
+        animation: rotateForever 3.2s cubic-bezier(0.73, -0.01, 0.21, 1) infinite;
+
+        path {
+          transition: inherit;
+          fill: var(--main-color-light);
+        }
+      }
+
+      @keyframes rotateForever {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+}
+
+.inactive {
+  transition: inherit;
+  background-color: var(--main-color-error-16);
+  border: 1px solid var(--main-color-error-16);
+  padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+  min-width: 12rem;
+  width: 12rem;
+
+  .status-container {
+    background-color: var(--main-color-error-08);
+    border: 1px solid #00000000;
+    transition: inherit;
+
+    .icon {
+      height: 2.4rem;
+      width: 2.4rem;
+      transition: inherit;
+      svg {
+        height: 2.4rem;
+        width: 2.4rem;
+        transition: inherit;
+        path {
+          stroke: var(--main-color-error);
+          stroke-width: 0.22rem;
+          transition: inherit;
+        }
+      }
+    }
+  }
+}
+
+.card-wrapper {
+  width: 100%;
+  height: 4rem;
+  min-height: 4rem;
+  border-radius: 1.2rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.2rem;
+
+  transition: inherit;
+
+  .status-wrapper {
+    transition: inherit;
+
+    // width: 12.8rem;
+    height: 4rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.2rem;
+
+    border-radius: 1.2rem;
+    transition: inherit;
+
+    .status-container {
+      height: 2.4rem;
+      width: 2.4rem;
+      min-width: 2.4rem;
+      min-height: 2.4rem;
+
+      border-radius: 0.8rem;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: inherit;
+
+      .dot {
+        border-radius: 2rem;
+        height: 0.64rem;
+        width: 0.64rem;
+        background-color: var(--main-color-light);
+        box-shadow: 0rem 0rem 0rem 0.16rem var(--main-color-light-16);
+        transition: inherit;
+        /* Add animation */
+      }
+    }
+
+    /* Define the pulse animation */
+    @keyframes pulse {
+      0% {
+        height: 0.64rem;
+        width: 0.64rem;
+        box-shadow: 0rem 0rem 0rem 0.16rem var(--main-color-light-32);
+      }
+      52% {
+        height: 0.8rem;
+        width: 0.8rem;
+      }
+      64% {
+        box-shadow: 0rem 0rem 0rem 0.8rem var(--main-color-light-08);
+      }
+      78% {
+        height: 0.64rem;
+        width: 0.64rem;
+      }
+      100% {
+        box-shadow: 0rem 0rem 0rem 0.16rem var(--main-color-light-invisible);
+      }
+    }
+
+    .status-text {
+      transition: inherit;
+    }
+  }
+
+  .details-wrapper {
+    width: 100%;
+    height: 4rem;
+    transition: inherit;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+
+    gap: 0.8rem;
+    background-color: var(--main-color-dark-invisible);
+    border: 1px solid var(--main-color-dark-invisible);
+    border-radius: 1.2rem;
+
+    .play-button {
+      width: 0rem;
+      overflow: hidden;
+      border-radius: 0.8rem;
+      transition: inherit;
+    }
+
+    .title {
+      min-width: 15.2rem;
+      transition: inherit;
+    }
+
+    .separator-line {
+      height: 1.2rem;
+      width: 0.24rem;
+      min-width: 0.24rem;
+      background-color: var(--main-color-dark-32);
+      transition: inherit;
+      transition: inherit;
+    }
+
+    .url-wrapper {
+      height: 3.2rem;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.8rem;
+      transition: inherit;
+
+      .url-button {
+        height: 3.2rem;
+        width: 0rem;
+        scale: 0.64;
+        transform: translateX(1.6rem);
+
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: inherit;
+
+        svg {
+          height: 2rem;
+          width: 2rem;
+          path {
+            stroke-width: 0.24rem;
+            stroke: var(--main-color-dark);
+          }
+        }
+      }
+
+      &:hover {
+        transition: inherit;
+
+        .url {
+          text-decoration: underline;
+        }
+
+        .url-button {
+          scale: 1;
+          transform: translateX(0rem);
+          height: 3.2rem;
+          width: 3.2rem;
+          transition: inherit;
+
+          path {
+            transition: var(--transition-24);
+            stroke-width: 0.24rem;
+          }
+
+          path:nth-child(2) {
+            transform: translate(2px, -2px);
+            stroke: var(--main-color-dark-hover);
+          }
+          path:nth-child(3) {
+            transform: translate(2px, -2px);
+            stroke: var(--main-color-dark-hover);
+          }
+        }
+      }
+    }
+  }
+
+  .actions {
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    opacity: 0;
+
+    transition: inherit;
+    border-radius: 1.2rem;
+    padding: 0.4rem;
+
+    background-color: var(--main-color-dark-invisible);
+    border: 1px solid var(--main-color-dark-invisible);
+
+    .button {
+      height: 3.2rem;
+      width: 3.2rem;
+      min-width: 3.2rem;
+      min-height: 3.2rem;
+
+      border-radius: 0.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: inherit;
+
+      .button-icon {
+        height: 3.2rem;
+        width: 3.2rem;
+
+        opacity: 0.32;
+        transition: inherit;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.8rem;
+
+        background-color: var(--main-color-dark-invisible);
+        border: 1px solid var(--main-color-dark-invisible);
+
+        svg {
+          height: 2rem;
+          width: 2rem;
+          transition: var(--transition-24);
+          path {
+            stroke: var(--main-color-dark);
+            stroke-width: 0.24rem;
+            transition: var(--transition-24);
+          }
+        }
+
+        &:hover {
+          scale: 1.1;
+          transition: inherit;
+          background-color: var(--main-color-hover);
+          border: 1px solid var(--main-color-dark-16);
+          opacity: 1;
+          cursor: pointer;
+
+          svg {
+            height: 2rem;
+            width: 2rem;
+            transition: var(--transition-24);
+
+            path {
+              stroke: var(--main-color-light-hover);
+              transition: var(--transition-24);
+            }
+          }
+        }
+      }
+
+      .edit {
+        transition: inherit;
+      }
+    }
+  }
+
+  &:hover {
+    transition: inherit;
+
+    .active {
+      background-color: var(--main-color-correct-32);
+      border: 1px solid var(--main-color-correct-16);
+      padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+      transition: inherit;
+      min-width: 12.8rem;
+      width: 12.8rem;
+    }
+
+    .inactive {
+      background-color: var(--main-color-error-32);
+      border: 1px solid var(--main-color-error-16);
+      padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+      transition: inherit;
+      min-width: 12.8rem;
+      width: 12.8rem;
+    }
+
+    .scraping {
+      background-color: var(--main-color-alert-32);
+      border: 1px solid var(--main-color-alert-16);
+      padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+      transition: inherit;
+      min-width: 12.8rem;
+      width: 12.8rem;
+    }
+
+    .status-wrapper {
+      gap: 1.6rem;
+      transition: inherit;
+      .status-container {
+        transition: inherit;
+        scale: 1.16;
+      }
+    }
+
+    .details-wrapper {
+      transition: inherit;
+      padding: 0.4rem 0.8rem 0.4rem 0.4rem;
+      background-color: var(--main-color-dark-16);
+      border: 1px solid var(--main-color-dark-16);
+
+      .play-button {
+        width: 4rem;
+        transition: inherit;
+      }
+    }
+
+    .actions {
+      transition: inherit;
+      background-color: var(--main-color-dark-16);
+      border: 1px solid var(--main-color-dark-16);
+
+      opacity: 1;
+    }
+  }
+}

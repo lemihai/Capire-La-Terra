@@ -18,9 +18,25 @@ newsRouter.get("/news", async (_req, res) => {
   try {
     // storing the result of the call in the articles cosntant
     const articles = await collections?.news?.find({}).toArray();
-
+    // console.log(articles);
     // Handling results and sending it to the front-end
     res.status(200).send(articles);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// express/backend route
+
+newsRouter.get("/news/:id", async (_req, res) => {
+  const id = _req?.params?.id;
+  try {
+    const query = { _id: new ObjectId(id) }; // This looks correct for MongoDB
+
+    const article = await collections?.news?.findOne(query);
+    console.log(article);
+
+    res.status(200).send(article);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -92,7 +108,7 @@ newsRouter.put("/news/:id", async (req, res) => {
 // Deleting an article
 
 // DELETE 1
-newsRouter.delete("/article:id", async (req, res) => {
+newsRouter.delete("/news/:id", async (req, res) => {
   try {
     const id = req?.params?.id;
     // Defining the query form the article ID
@@ -106,6 +122,7 @@ newsRouter.delete("/article:id", async (req, res) => {
     } else if (!result.deletedCount) {
       res.status(404).send(`Failed to find an article: ID ${id}`);
     }
+    // res.status(202).send(`nom nom  ${id} `);
   } catch (error) {
     res.status(400).send(error);
   }
