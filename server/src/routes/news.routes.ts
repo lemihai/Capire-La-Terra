@@ -104,6 +104,9 @@ newsRouter.put("/news/:id", async (req, res) => {
   }
 });
 
+// PATCH
+
+
 // DELETE
 // Deleting an article
 

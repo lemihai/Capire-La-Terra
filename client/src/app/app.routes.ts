@@ -84,12 +84,12 @@ export const routes: Routes = [
             title: 'article',
           },
           {
-            path: 'admin-article-page',
+            path: 'admin-article-page/:id',
             component: AdminArticlePage,
             title: 'article-page',
           },
           {
-            path: '',
+            path: 'new-article',
             component: NewArticle,
             title: 'new-article',
           },
@@ -105,6 +105,7 @@ export const routes: Routes = [
         component: Settings,
         title: 'Settings-view',
       },
+      { path: '**', component: AdminPage }
     ],
   },
 ];

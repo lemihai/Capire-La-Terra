@@ -5,21 +5,19 @@
 }
 
 // For the small icon
-.small{
+.small {
   max-width: 3.2rem;
   max-height: 3.2rem;
   height: 3.2rem;
   width: 3.2rem;
 
   padding: 0.8rem;
-  border-radius: .8rem;
-  
+  border-radius: 0.8rem;
 }
-.small-text{
+.small-text {
   max-height: 3.2rem;
   height: 3.2rem;
-  border-radius: .8rem;
-
+  border-radius: 0.8rem;
 }
 
 button {
@@ -38,7 +36,6 @@ button {
 
   border-radius: 1.2rem;
   transition: var(--transition-160);
-
 
   p {
     color: var(--main-color-light);
@@ -84,7 +81,29 @@ button {
     }
   }
 
-  .delete{
+  .save-icon {
+    height: 2rem;
+    width: 2rem;
+    path {
+      height: 2rem;
+      width: 2rem;
+      stroke: var(--main-color-light);
+      stroke-width: 0.2rem;
+    }
+  }
+
+  .edit-icon {
+    height: 2rem;
+    width: 2rem;
+    path {
+      height: 2rem;
+      width: 2rem;
+      stroke: var(--main-color-light);
+      stroke-width: 0.2rem;
+    }
+  }
+
+  .delete {
     height: 1.6rem;
     width: 1.6rem;
   }
@@ -127,6 +146,41 @@ button {
       path:nth-child(3) {
         transform: translate(2px, -2px);
         stroke: var(--main-color);
+      }
+    }
+  }
+}
+
+.focused {
+  background-color: var(--main-color-hover);
+  border: 1px solid var(--main-color);
+
+  p {
+    color: var(--main-color-dark);
+  }
+
+  .button-icon {
+    svg {
+      path {
+        stroke: var(--main-color-dark);
+      }
+    }
+  }
+
+  &:hover {
+    background-color: var(--main-color);
+    border: 1px solid var(--main-color-hover);
+    
+
+    p {
+      color: var(--main-color-dark);
+    }
+
+    .button-icon {
+      svg {
+        path {
+          stroke: var(--main-color-dark);
+        }
       }
     }
   }

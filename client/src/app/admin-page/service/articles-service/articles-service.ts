@@ -11,9 +11,12 @@ export interface Article {
   title: string;
   date: string;
   author: string;
-  text: string;
+  url: string;
+  imageUrl: string;
+  text: string[];
   sources: string[];
   summary: string;
+  posted: boolean;
 }
 
 @Injectable({
@@ -34,20 +37,46 @@ export class ArticlesService {
     return this.http.get(`${this.apiUrl}`);
   }
 
+  getOneArticle(id: string): Observable<Article> {
+    // 💡 Key change: Add <Article> to the Observable type and http.get call
+    return this.http.get<Article>(`${this.apiUrl}/${id}`);
+}
+
   // --------------------------
   // POST: Add Articles
   // --------------------------
 
+  postArticle(body: Article) {
+    return this.http.post(`${this.apiUrl}`, body);
+  }
+
   // --------------------------
-  // PUT: Update Articles
+  // PUT: Replace Articles
   // --------------------------
+
+  // --------------------------
+  // PATCH: Update Articles
+  // --------------------------
+
+  updateArticle(articleId: string, status: boolean) {
+    const body = { posted: status };
+
+    return this.http.patch(`${this.apiUrl}/${articleId}`, body);
+  }
+
+//   updateArticle(id: string, posted: boolean): Observable<any> {
+//     const url = `${this.apiUrl}/${id}`;
+    
+//     // The body MUST be { posted: true } or { posted: false }
+//     return this.http.patch(url, { posted: posted }); 
+// }
 
   // --------------------------
   // DELETE: Remove Articles
   // --------------------------
 
-  deleteArticle(articleId:string){
-    return this.http.delete(`${this.apiUrl}/:${articleId}`)
+  deleteArticle(articleId: string) {
+    return this.http.delete(`${this.apiUrl}/${articleId}`);
   }
 
   // --------------------------

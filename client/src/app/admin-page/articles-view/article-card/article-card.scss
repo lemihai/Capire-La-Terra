@@ -2,6 +2,7 @@
 
 :host {
   width: 100%;
+  min-height: 4rem;
   height: auto;
   transition: all 0.6s var(--cubic-bezzier-a);
 
@@ -19,15 +20,16 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    // gap: .24rem;
 
     opacity: 0;
 
     transition: inherit;
     border-radius: 1.2rem;
-    padding: .4rem;
+    padding: 0.4rem;
 
     background-color: var(--main-color-dark-invisible);
-      border: 1px solid var(--main-color-dark-invisible);
+    border: 1px solid var(--main-color-dark-invisible);
 
     .button {
       height: 3.2rem;
@@ -40,6 +42,11 @@
       justify-content: center;
       align-items: center;
       transition: inherit;
+
+      &:hover {
+        scale: 1.1;
+        transform: var(--transition-160);
+      }
 
       .button-icon {
         height: 3.2rem;
@@ -72,6 +79,7 @@
           background-color: var(--main-color-hover);
           border: 1px solid var(--main-color-dark-16);
           opacity: 1;
+
           cursor: pointer;
 
           svg {
@@ -92,6 +100,24 @@
   }
 
   &:hover {
+    .article-card-wrapper {
+      transition: inherit;
+      background-color: var(--main-color-dark-16);
+      border: 1px solid var(--main-color-dark-16);
+      cursor: pointer;
+      padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+      gap: 0.8rem;
+
+      .article-title {
+        font-weight: 600;
+      }
+
+      .hover-bar {
+        transition: inherit;
+        min-width: 0.24rem;
+      }
+    }
+
     .actions {
       background-color: var(--main-color-dark-16);
       border: 1px solid var(--main-color-dark-16);
@@ -143,7 +169,7 @@
     flex-grow: 1;
     max-width: 100%;
     font-weight: 600;
-    width: 100% ;
+    width: 100%;
     mask-image: linear-gradient(
       90deg,
       rgba(0, 0, 0, 1) 0%,
@@ -163,6 +189,7 @@
     min-width: 0.24rem;
     background-color: var(--main-color-dark-32);
     transition: inherit;
+    border-radius: 1rem;
   }
 
   .article-author {
@@ -171,7 +198,7 @@
   }
 
   .article-date {
-    min-width: 8rem;
+    min-width: 8.8rem;
     transition: inherit;
   }
 
@@ -179,16 +206,100 @@
     transition: inherit;
   }
 
+  .article-status {
+    width: 9.6rem;
+    min-width: 9.6rem;
+    transition: inherit;
+    .false-flag {
+      // width: auto;
+      height: 3.2rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      background-color: var(--main-color-dark-08);
+      border: 1px solid var(--main-color-dark-16);
+      border-radius: 0.8rem;
+
+      padding: 0.2rem 0.8rem 0.2rem 0.2rem;
+      transition: inherit;
+      .icon-wrapper {
+        height: 3.2rem;
+        width: 3.2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: inherit;
+        svg {
+          height: 2.2rem;
+          width: 2.2rem;
+          transition: inherit;
+          path {
+            stroke: var(--main-color-dark);
+            stroke-width: 0.2rem;
+            transition: inherit;
+          }
+        }
+        p {
+          font-size: 1.6rem;
+          color: var(--main-color-dark);
+          transition: inherit;
+        }
+      }
+    }
+
+    .posted-flag {
+      // width: auto;
+      height: 3.2rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      background-color: var(--main-color-correct-16);
+      border: 1px solid var(--main-color-correct-16);
+      border-radius: 0.8rem;
+
+      padding: 0.2rem 0.8rem 0.2rem 0.2rem;
+      transition: inherit;
+      .icon-wrapper {
+        height: 3.2rem;
+        width: 3.2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: inherit;
+
+        .dot {
+          height: 0.64rem;
+          width: 0.64rem;
+          background-color: var(--main-color-correct);
+          border-radius: 0.8rem;
+          box-shadow: 0rem 0rem 0rem 0.32rem var(--main-color-correct-16);
+        }
+
+        p {
+          font-size: 1.6rem;
+          color: var(--main-color-dark);
+          transition: inherit;
+        }
+      }
+    }
+  }
+
   &:hover {
     transition: inherit;
     background-color: var(--main-color-dark-16);
     border: 1px solid var(--main-color-dark-16);
     cursor: pointer;
-    padding: 0.4rem 0.4rem 0.4rem .8rem;
+    padding: 0.4rem 0.4rem 0.4rem 0.8rem;
     gap: 0.8rem;
 
-    .article-title{
-        font-weight: 700;
+    .article-title {
+      font-weight: 600;
     }
 
     .hover-bar {

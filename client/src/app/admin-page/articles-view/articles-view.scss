@@ -8,6 +8,7 @@
   align-items: stretch;
   max-height: 100%;
   max-width: 100%;
+  transition: var(--transition-160);
 }
 
 .main-view-wrapper {
@@ -35,7 +36,6 @@
     align-items: center;
 
     gap: 1.1rem;
-    padding-right: 9.7rem;
     transition: var(--transition-160);
 
     .desc {
@@ -145,27 +145,28 @@
       border-radius: 1rem;
     }
 
-    .filter-section-news-outlet {
-      width: 12.8rem;
-      min-width: 12.8rem;
-      margin-left: 1.4rem;
+    .filter-section-posted {
+      width: 9.7rem;
+      min-width: 9.7rem;
+      // margin-left: 1.4rem;
       border-radius: 0.8rem;
     }
 
     .filter-section-title {
       width: 100%;
       border-radius: 0.8rem;
+      margin-left: 1.2rem;
     }
 
     .filter-section-author {
-      min-width: 12.8rem;
-      width: 12.8rem;
+      min-width: 14rem;
+      width: 14rem;
       margin-right: 0.2rem;
       border-radius: 0.8rem;
     }
 
     .filter-section-date {
-      min-width: 9rem;
+      min-width: 8rem;
       //   width: 8.8rem;
       border-radius: 0.8rem;
     }
@@ -185,45 +186,55 @@
     width: 100%;
     background-color: var(--main-color-dark-32);
     border-radius: 1rem;
+    transition: var(--transition-160);
   }
 
   .content-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  gap: 0.24rem;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  /* Scrollbar styling */
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: var(--main-color-dark-hover) var(--main-color-dark-invisible); /* For Firefox */
-  position: relative;
-}
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0.24rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    /* Scrollbar styling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: var(--main-color-dark-hover) var(--main-color-dark-invisible); /* For Firefox */
+    position: relative;
 
-/* WebKit scrollbar */
-.content-container::-webkit-scrollbar {
-  width: 0.5rem; /* Set a width for the scrollbar */
-  position: absolute;
-}
+    padding: 0rem;
 
-/* Track */
-.content-container::-webkit-scrollbar-track {
-  background-color: var(--main-color-dark-08);
-  border-radius: 1rem; /* This may not always be visible */
-}
+    transition: var(--transition-160);
+  }
 
-/* Thumb */
-.content-container::-webkit-scrollbar-thumb {
-  background-color: var(--main-color-hover);
-  border-radius: 1rem; /* This will work */
-  opacity: 0.5;
-}
+  /* WebKit scrollbar */
+  .content-container::-webkit-scrollbar {
+    width: 0.5rem; /* Set a width for the scrollbar */
+    position: absolute;
+    transition: var(--transition-160);
+  }
 
-/* Hover effect for the thumb */
-.content-container::-webkit-scrollbar-thumb:hover {
-  background-color: var(--main-color-dark-hover);
-  opacity: 1;
-}
+  /* Track */
+  .content-container::-webkit-scrollbar-track {
+    background-color: var(--main-color-dark-08);
+    border-radius: 1rem; /* This may not always be visible */
+    transition: var(--transition-160);
+  }
+
+  /* Thumb */
+  .content-container::-webkit-scrollbar-thumb {
+    background-color: var(--main-color-hover);
+    border-radius: 1rem; /* This will work */
+    opacity: 0.5;
+    transition: var(--transition-160);
+  }
+
+  /* Hover effect for the thumb */
+  .content-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--main-color-dark-hover);
+    opacity: 1;
+    transition: var(--transition-160);
+  }
 }

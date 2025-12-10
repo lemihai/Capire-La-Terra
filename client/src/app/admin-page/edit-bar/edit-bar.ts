@@ -1,4 +1,12 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Button } from '../../shared/buttons/button/button';
 import { News } from '../service/news-service/news-service';
 import { AdminService } from '../service/admin-service';
@@ -13,7 +21,17 @@ import { Router } from '@angular/router';
 export class EditBar implements OnInit, OnChanges {
   @Input() mode?: string;
   @Input() componentId?: string;
-  @Input() componentData?: News;
+  @Input() componentData?: any;
+  @Input() componentActions?: any;
+
+  @Output() submitArticle = new EventEmitter<any>();
+  @Output() saveArticle = new EventEmitter<any>();
+  @Output() switchFlagEvent = new EventEmitter<any>();
+  @Output() deleteArticle = new EventEmitter<any>();
+  @Output() editModeEmitter = new EventEmitter<any>();
+
+  editMode = 'hidden';
+  editModeArticleStatus = 'statusNoEdit'
 
   constructor(private adminService: AdminService, private router: Router) {}
 
@@ -47,6 +65,34 @@ export class EditBar implements OnInit, OnChanges {
         );
       }
       console.log('nom nom', this.mode);
+    }
+  }
+
+  onDeleteArticle() {
+    this.deleteArticle.emit();
+  }
+
+  submitCurrentArticle() {
+    console.log('works');
+    this.submitArticle.emit();
+  }
+
+  saveCurrentArticle() {
+    this.saveArticle.emit();
+  }
+
+  switchFlag() {
+    this.switchFlagEvent.emit();
+  }
+
+  triggerEditMode() {
+    this.editModeEmitter.emit();
+    if (this.editMode == 'hidden') {
+      this.editMode = 'editMode';
+      this.editModeArticleStatus = '';
+    } else if (this.editMode == 'editMode') {
+      this.editMode = 'hidden';
+      this.editModeArticleStatus = 'statusNoEdit';
     }
   }
 }

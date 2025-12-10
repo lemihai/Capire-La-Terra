@@ -1,24 +1,191 @@
 @use '../../../variables.scss' as *;
 
-:host{
-width: 100%;
-height: 4rem;
+:host {
+  width: 100%;
+  height: 4rem;
+  transition: var(--transition-160);
 }
 
-.edit-bar-wrapper{
-width: 100%;
-height: 4rem;
+.edit-bar-wrapper {
+  transition: var(--transition-160);
+  width: 100%;
+  height: 4rem;
 
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
-background-color: var(--main-color-dark-16);
-border: 1px solid var(--main-color-dark-16);
+  background-color: var(--main-color-dark-16);
+  border: 1px solid var(--main-color-dark-16);
 
-padding: .4rem;
+  padding: 0.4rem;
 
-border-radius: 1.2rem;
+  border-radius: 1.2rem;
 
+  .left-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 0.8rem;
+    transition: var(--transition-160);
+
+    .button-wrapper{
+      width: auto;
+      max-width: auto;
+      transition: var(--transition-160);
+    }
+  }
+
+  .article-status {
+    width: auto;
+    transition: inherit;
+    .false-flag {
+      width: auto;
+      height: 3.2rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      background-color: var(--main-color-dark-16);
+      border: 1px solid var(--main-color-dark-16);
+      border-radius: 0.8rem;
+
+      padding: 0.2rem 0.8rem 0.2rem 0.2rem;
+      transition: inherit;
+      .icon-wrapper {
+        height: 3.2rem;
+        width: 3.2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: inherit;
+        svg {
+          height: 2.2rem;
+          width: 2.2rem;
+          transition: inherit;
+          path {
+            stroke: var(--main-color-dark);
+            stroke-width: 0.2rem;
+            transition: inherit;
+          }
+        }
+        p {
+          font-size: 1.6rem;
+          color: var(--main-color-dark);
+          transition: inherit;
+        }
+      }
+    }
+
+    .posted-flag {
+      width: auto;
+      height: 3.2rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      background-color: var(--main-color-correct-16);
+      border: 1px solid var(--main-color-correct-16);
+      border-radius: 0.8rem;
+
+      padding: 0.2rem 0.8rem 0.2rem 0.2rem;
+      transition: inherit;
+      .icon-wrapper {
+        height: 3.2rem;
+        width: 3.2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: inherit;
+        
+        .dot {
+          height: 0.64rem;
+          width: 0.64rem;
+          background-color: var(--main-color-correct);
+          border-radius: 0.8rem;
+          box-shadow: 0rem 0rem 0rem 0.32rem var(--main-color-correct-16);
+        }
+
+        p {
+          font-size: 1.6rem;
+          color: var(--main-color-dark);
+          transition: inherit;
+        }
+      }
+    }
+
+    &:hover {
+      transition: inherit;
+      .false-flag {
+        transition: inherit;
+
+        cursor: pointer;
+        background-color: var(--main-color-dark-24);
+        border: 1px solid var(--main-color-dark-32);
+        gap: 0.4rem;
+        padding: 0.2rem 1.2rem 0.2rem 0.32rem;
+        .icon-wrapper {
+          transition: inherit;
+        }
+
+        p {
+          transition: inherit;
+        }
+      }
+
+      .posted-flag{
+        transition: inherit;
+
+        cursor: pointer;
+        background-color: var(--main-color-correct-32);
+        border: 1px solid var(--main-color-correct-32);
+        gap: 0.4rem;
+        padding: 0.2rem 1.2rem 0.2rem 0.32rem;
+        .icon-wrapper {
+          transition: inherit;
+
+          .dot{
+            scale: 1.1;
+            background-color: var(--main-color-dark);
+             box-shadow: 0rem 0rem 0rem 0.64rem var(--main-color-dark-16);
+          }
+        }
+
+        p {
+          transition: inherit;
+        }
+      }
+    }
+  }
+}
+
+.editMode{
+  // display: flex;
+  width: auto;
+  max-width: auto;
+  opacity: 1;
+  transition: var(--transition-160);
+  overflow: hidden;
+}
+
+.hidden{
+  // display: none;
+  width: 0rem;
+  max-width: 0rem;
+  overflow: hidden;
+  // visibility: hidden;
+  opacity: 1;
+  transition: var(--transition-160);
+}
+
+.statusNoEdit{
+  transform: translateX(-1.6rem);
+  transition: var(--transition-160);
 }

@@ -128,15 +128,41 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     this.ngZone.runOutsideAngular(() => {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
     });
-
     const currentRouter = this.router.url;
+
     // Set the initial active sidebar based on the current route
     let currentRoute = this.router.url.split('/').pop() || 'admin-page';
-    if(currentRouter.includes('news-article-view')){
-      // console.log(543254,54235,542354,4,this.router.url);
+    if (currentRouter.includes('news-article-view')) {
       currentRoute = currentRouter;
     }
-    // console.log('current route: ', currentRoute);
+    if (currentRouter.includes('new-article')) {
+      currentRoute = currentRouter;
+    }
+    if (currentRouter.includes('admin-article-page')) {
+      let routeSplit = currentRouter.split('/articles-view').pop();
+
+      if (typeof routeSplit === 'string') {
+        currentRoute = routeSplit;
+      }
+    }
+    if (currentRouter.includes('robots-view')) {
+      // currentRoute = currentRouter;
+    }
+    if (currentRouter.includes('episodes-view')) {
+      // currentRoute = currentRouter;
+    }
+    // if (currentRouter.includes('admin-article-page')) {
+    //
+    //   currentRoute = currentRouter;
+    //
+    // }
+
+    // console.log('');
+    // console.log('');
+    // console.log(32, currentRoute);
+    // console.log('');
+    // console.log('');
+
     this.SetSidebarView(currentRoute);
 
     // Subscribe to future route changes
@@ -144,10 +170,22 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.Sidebar.currentRoute = event.urlAfterRedirects;
-        this.SetSidebarView(this.Sidebar.currentRoute);
+
+        //HERE IS THE PLACE WHERE THE NEW ARTICLE ERROR APPEARS BECAUSE IT REDIRECTS TO NEWS-ARTICLE FOR SOME REASON. THE FIRST ONE IS NICE
+        // if (this.Sidebar.currentRoute.includes('new-article')) {
+        //   this.Sidebar.currentRoute = 'new-article';
+        // }
+
+        //
+        //
+        //
+        //
+        //
+
+        // this.SetSidebarView(this.Sidebar.currentRoute);
       });
 
-    this.cdr.detectChanges();
+    // this.cdr.detectChanges();
   }
 
   ngOnDestroy() {
@@ -234,9 +272,11 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   SetSidebarView(view: string) {
-    console.log('************************');
-    console.log(view);
-    console.log('************************');
+    // console.log('');
+    // console.log('');
+    // console.log(32, view);
+    // console.log('');
+    // console.log('');
     if (view === 'admin-page') {
       this.Sidebar.setActive('admin-page');
       this.buttonHoverTop = 'calc(6.1rem)';
@@ -271,16 +311,27 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       this.buttonHoverTop = 'auto';
       this.bottomHoverBottom = '.8rem !important';
       this.router.navigate(['']);
-    } else if(view.includes('news-article-view')){
-      console.log(543254,54235,542354,4,this.router.url);
+    } else if (view.includes('news-article-view')) {
+      //
       this.Sidebar.setActive('news-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important';
       this.router.navigate([`${view}`]);
-    }
-    
-    else {
-      console.log('THIS ROUTE HAS NOT BEEN DETECTED');
+    } else if (view.includes('admin-article-page')) {
+      this.Sidebar.setActive('articles-view');
+      this.bottomHoverBottom = 'auto';
+      this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
+      this.router.navigate([`/admin-page/articles-view/${view}`]);
+    } else if (view === '/admin-page/articles-view/new-article') {
+      this.Sidebar.setActive('articles-view');
+      this.bottomHoverBottom = 'auto';
+      this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
+      // this.router.navigate([`admin-page/new-article`]);
+      this.router.navigate([`${view}`]);
+    } else {
+      // this.Sidebar.setActive('admin-page');
+      // this.buttonHoverTop = 'calc(6.1rem)';
+      // this.router.navigate(['admin-page']);
     }
     this.cdr.detectChanges();
   }

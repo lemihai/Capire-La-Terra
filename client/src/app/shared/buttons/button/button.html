@@ -1,4 +1,4 @@
-<button class="{{ size }}">
+<button class="{{ size }} {{ focusedState }}" (click)="toggleActive()">
   @if (buttonText != ''){
   <p>
     {{ buttonText }}
@@ -153,6 +153,68 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       />
+    </svg>
+
+    } @if (iconType === 'upload'){
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M6 21L6 22.5C6 23.163 6.26339 23.7989 6.73223 24.2678C7.20107 24.7366 7.83696 25 8.5 25L23.5 25C24.163 25 24.7989 24.7366 25.2678 24.2678C25.7366 23.7989 26 23.163 26 22.5L26 21"
+        stroke="black"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M21 12L16 7L11 12"
+        stroke="black"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M16 21L16 8"
+        stroke="black"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    }@if (iconType === 'save'){
+    <svg
+      class="save-icon"
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M22 3H10C9.20435 3 8.44129 3.31607 7.87868 3.87868C7.31607 4.44129 7 5.20435 7 6V29L16 21L25 29V6C25 5.20435 24.6839 4.44129 24.1213 3.87868C23.5587 3.31607 22.7956 3 22 3Z"
+        stroke="black"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    }@if (iconType === 'edit'){
+    <svg
+      class="edit-icon"
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5.74456 20.3636L21.1664 4.94194C21.8253 4.28298 23.9035 3.24389 26.4993 5.84022C29.0954 8.4369 28.0566 10.5143 27.3977 11.1731C26.2625 12.3083 16.6604 21.9437 11.9759 26.5949L4.16992 28.1696L5.74456 20.3636Z"
+        stroke="black"
+        stroke-width="1.6"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path d="M20 6L26 12" stroke="black" stroke-width="1.6" />
+      <path d="M7 20L13 26" stroke="black" stroke-width="1.6" />
     </svg>
 
     }

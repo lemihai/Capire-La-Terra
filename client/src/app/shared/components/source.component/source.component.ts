@@ -53,7 +53,7 @@ export class SourceComponent implements OnInit {
     if (url.includes('mongabay')) {
       this.outletName = 'mongabay';
     }
-    if (url.includes('nature.')) {
+    if (url.includes('nature')) {
       this.outletName = 'nature';
     }
     if (url.includes('guardian')) {

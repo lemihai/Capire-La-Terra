@@ -1,17 +1,136 @@
-<div class="article-card-wrapper" (click)="navigateToArticlePage()">
+<div class="article-card-wrapper" (click)="navigateToArticlePage($event)">
   <div class="hover-bar"></div>
-  <div class="article-image"></div>
+  <div class="article-image">
+    @if (article?.imageUrl) {
+    <img [src]="article.imageUrl" alt="Article Image" class="article-image" />
+    }
+  </div>
   <p class="article-title">{{ article.title }}</p>
   <div class="separator-line"></div>
-  <app-profile-card />
-  <div class="separator-line"></div>
-  <p class="article-date">{{ date }}</p>
-  <div class="article-sources-wrapper">
-    <app-source />
+  <div class="article-status">
+    @if (article.posted === false){
+    <div class="false-flag">
+      <div class="icon-wrapper">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M23 3H9C7.34315 3 6 4.34315 6 6V26C6 27.6569 7.34315 29 9 29H23C24.6569 29 26 27.6569 26 26V6C26 4.34315 24.6569 3 23 3Z"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M11 8H21"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M11 13H21"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M11 18H16"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+      <p class="tag-icon">draft</p>
+    </div>
+    } @if (article.posted === true){
+    <div class="posted-flag">
+      <div class="icon-wrapper">
+        <div class="dot"></div>
+      </div>
+      <p class="tag-icon">posted</p>
+    </div>
+    }
   </div>
+  <div class="separator-line"></div>
+  <app-profile-card [profile]="article.author" />
+  <div class="separator-line"></div>
+  <p class="article-date">{{ article.date }}</p>
+  <!-- <div class="article-sources-wrapper">
+    <app-source />
+  </div> -->
 </div>
 <div class="actions">
-  <div class="button" >
+  @if (article.posted == false){
+  <div class="button" (click)="postClickedArticle($event)">
+    <div class="button-icon">
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6 21L6 22.5C6 23.163 6.26339 23.7989 6.73223 24.2678C7.20107 24.7366 7.83696 25 8.5 25L23.5 25C24.163 25 24.7989 24.7366 25.2678 24.2678C25.7366 23.7989 26 23.163 26 22.5L26 21"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M21 12L16 7L11 12"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M16 21L16 8"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+  </div>
+  } @else{
+  <div class="button" (click)="postClickedArticle($event)">
+    <div class="button-icon">
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M28 16C28 9.375 22.625 4 16 4C9.375 4 4 9.375 4 16C4 22.625 9.375 28 16 28C22.625 28 28 22.625 28 16Z"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-miterlimit="10"
+        />
+        <path
+          d="M21 16H11"
+          stroke="black"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+
+      <p class="edit"></p>
+    </div>
+  </div>
+  }
+  <div class="button" (click)="editClickedArticle($event)">
     <div class="button-icon">
       <svg
         width="32"
@@ -31,10 +150,10 @@
         <path d="M20 6L26 12" stroke="black" stroke-width="1.6" />
         <path d="M7 20L13 26" stroke="black" stroke-width="1.6" />
       </svg>
-      <p class="edit"></p>
     </div>
   </div>
-  <div class="button" (click)="deleteArticle()">
+
+  <div class="button" (click)="deleteClickedArticle($event)">
     <div class="button-icon">
       <svg
         width="32"
@@ -86,7 +205,6 @@
           stroke-linejoin="round"
         />
       </svg>
-      <p class="edit"></p>
     </div>
   </div>
 </div>

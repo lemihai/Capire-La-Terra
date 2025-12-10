@@ -1,4 +1,12 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Article, ArticlesService } from '../../service/articles-service/articles-service';
 import { SourceComponent } from '../../../shared/components/source.component/source.component';
 import { ProfileCard } from '../../../shared/components/profile-card/profile-card';
@@ -13,6 +21,11 @@ import { Router } from '@angular/router';
 })
 export class ArticleCard implements OnInit, AfterViewInit {
   @Input() article!: Article;
+
+  @Output() navigateToArticle = new EventEmitter<{ id: string; article: Article }>();
+  @Output() submitArticle = new EventEmitter<any>();
+  @Output() editArticle = new EventEmitter<any>();
+  @Output() deleteArticle = new EventEmitter<any>();
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -37,20 +50,20 @@ export class ArticleCard implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {}
 
-  navigateToArticlePage() {
-    this.adminService.triggerViewChange('admin-article-page', 'articles-view');
+  navigateToArticlePage(event: MouseEvent) {
+    event.stopPropagation();
+    this.navigateToArticle.emit({ id: this.article._id, article: this.article });
   }
 
-  deleteArticle() {
-    console.log('WORKS');
-    console.log(this.article._id);
-    this.adminService.deleteArticle(this.article._id).subscribe(
-      (response) => {
-        console.log('Article deleted successfully', response);
-      },
-      (error) => {
-        console.error('Error deleting article', error);
-      }
-    );
+  postClickedArticle(event: MouseEvent) {
+    this.submitArticle.emit();
+  }
+
+  editClickedArticle(event: MouseEvent) {
+    this.editArticle.emit();
+  }
+
+  deleteClickedArticle(event: MouseEvent) {
+    this.deleteArticle.emit();
   }
 }

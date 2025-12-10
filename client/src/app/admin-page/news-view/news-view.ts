@@ -105,6 +105,7 @@ export class NewsView implements OnInit, AfterViewInit {
 
   navigateToNewsArticlePage(articleId: string, articleData: any) {
     this.adminService.triggerViewChange('news-article-view', 'news-view', articleId, articleData);
+    // console.log();
   }
 
   // Inside export class NewsView implements OnInit, AfterViewInit { ... }

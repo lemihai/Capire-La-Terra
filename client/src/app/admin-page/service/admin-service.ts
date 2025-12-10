@@ -8,7 +8,7 @@ import gsap from 'gsap';
 import CustomEase from 'gsap/CustomEase';
 import { RobotsService } from './robots-service/robots-service';
 import { EpisodesService } from './episodes-service/episodes-service';
-import { ArticlesService } from './articles-service/articles-service';
+import { Article, ArticlesService } from './articles-service/articles-service';
 
 @Injectable({
   providedIn: 'root',
@@ -33,13 +33,18 @@ export class AdminService {
   // PAGE TRANSITION
   // --------------------------
 
-  public triggerViewChange(url: string, fromRoute: string, Id?: string, data?: any) {
+  public triggerViewChange(
+    url: string,
+    fromRoute: string,
+    Id?: string | undefined,
+    data?: any | undefined
+  ) {
     const customEase = 'cubic-bezier(0,.55,.52,.96)';
 
-    if (Id) {
-    }
-    const adminURL = '/admin-page' + '/' + fromRoute + '/' + url + '/' + Id;
+    let adminURL = '/admin-page' + '/' + fromRoute + '/' + url + '/' + Id;
+    adminURL = adminURL.replace('/undefined', '');
 
+    //
     this.ngZone.runOutsideAngular(() => {
       // 1. Create a new GSAP Timeline
       const exitTimeline = gsap.timeline({
@@ -49,6 +54,7 @@ export class AdminService {
           this.ngZone.run(() => {
             const navigationExtras = data ? { state: { data } } : {};
             this.router.navigate([adminURL], navigationExtras);
+            //
           });
         },
       });
@@ -91,11 +97,11 @@ export class AdminService {
     return this.newsService.getAllNews();
   }
 
-  getOneNewsArticle(id:string){
+  getOneNewsArticle(id: string) {
     return this.newsService.getOneNewsArticle(id);
   }
 
-  deleteOneNewsArticle(id:string){
+  deleteOneNewsArticle(id: string) {
     return this.newsService.deleteNewsArticle(id);
   }
 
@@ -107,7 +113,20 @@ export class AdminService {
     return this.articlesService.getAllArticles(); // Calls NewsService's method
   }
 
+  getOneArticle(articleId: string) {
+    return this.articlesService.getOneArticle(articleId);
+  }
+
+  postArticle(body: Article){
+    return this.articlesService.postArticle(body)
+  }
+
+  patchArticlePostedStatus(articleId: string, body: boolean){
+    return this.articlesService.updateArticle(articleId, body)
+  }
+
   deleteArticle(articleId: string) {
+    
     return this.articlesService.deleteArticle(articleId);
   }
 
