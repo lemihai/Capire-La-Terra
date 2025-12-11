@@ -1,1 +1,191 @@
-<p>admin-episode-view works!</p>
+<div class="episode-episode-view-wrapper">
+  <header class="header-container">
+    <h2>Episode S{{episode.season}} E{{episode.number}}</h2>
+  </header>
+  <div class="edit-container-wrapper">
+    <app-edit-bar
+      mode="{{ editBarComponents }}"
+      [componentData]="episode"
+      [externalEditActivation]="editMode"
+      (deleteepisode)="deleteEpisode()"
+      (submitepisode)="submitCurrentEpisode()"
+      (saveepisode)="saveCurrentEpisode()"
+      (switchFlagEvent)="switchFlag()"
+      (editModeEmitter)="toggleEditMode()"
+    />
+  </div>
+  <section class="episode-body">
+    <header class="episode-episode-header">
+      @if(!editMode){
+      <h1 class="episode-title" (click)="toggleEditMode()">{{ episode?.title }}</h1>
+      } @else if(editMode){
+      <div
+        id="episode-title-field "
+        class="input-field title-input"
+        contenteditable="true"
+        (blur)="updateTitle($event)"
+      >
+        {{ episode.title }}
+      </div>
+      } @if(!editMode){ @if(episode.imageUrl != ''){
+      <div class="image-wrapper">
+        <img
+          [src]="episode.imageUrl"
+          height="500"
+          width="500"
+          alt="episode Image"
+          class="episode-image"
+        />
+      </div>
+      } } @else if(editMode){
+      <div class="image-upload-field">
+        <input
+          #fileInput
+          class="image-input"
+          type="file"
+          id="image-upload"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        />
+        <div class="image-container">
+          @if (episode.imageUrl) {
+          <div class="image-preview-container">
+            <img
+              [src]="episode.imageUrl"
+              alt="episode Image Preview"
+              class="uploaded-image-preview"
+            />
+          </div>
+          } @else {
+          <label class="drop-image-container-label">Drop your image here</label>
+          }
+        </div>
+        <div class="input-field-overlay" #inputOverlay>
+          <label>Add your episodes</label>
+          <label class="details-text">.PNG .JPG</label>
+          @if (episode.imageUrl !== ''){
+          <div class="image-file">
+            <div class="image-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M26 5H6C4.34315 5 3 6.34315 3 8V24C3 25.6569 4.34315 27 6 27H26C27.6569 27 29 25.6569 29 24V8C29 6.34315 27.6569 5 26 5Z"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M21 13C22.1046 13 23 12.1046 23 11C23 9.89543 22.1046 9 21 9C19.8954 9 19 9.89543 19 11C19 12.1046 19.8954 13 21 13Z"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-miterlimit="10"
+                />
+                <path
+                  d="M19 20.9873L13.3337 15.3317C12.9732 14.9712 12.4886 14.7621 11.9789 14.747C11.4693 14.7319 10.9731 14.912 10.5919 15.2505L3 22.0005"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M14 27.0001L21.7087 19.2913C22.0613 18.9381 22.5332 18.7294 23.0317 18.7063C23.5302 18.6831 24.0194 18.8472 24.4031 19.1663L29 23.0001"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="document-text">Your Image</p>
+            <div class="close-icon" (click)="removeImage()">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M22.3643 9.63574L9.63634 22.3637"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M22.3637 22.3637L9.63574 9.63574"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+          }
+          <button class="upload-button">
+            <app-button
+              size="small-text"
+              buttonText="Upload image"
+              iconType="open-right"
+              (click)="triggerFileInput()"
+            />
+          </button>
+        </div>
+        <!-- 
+        <button type="button" class="custom-upload-button">Upload episode Image</button>
+        <label class="label-field">Add your Image episode</label>
+
+        <input
+          class="image-input"
+          type="file"
+          id="image-upload"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        />
+
+        <div class="image-preview">
+          <img *ngIf="episode.imageUrl" [src]="episode.imageUrl" alt="Preview" />
+        </div> -->
+      </div>
+      }
+      <div class="episode-episode-details">
+        <!-- <p>{{ episode?.url }}</p> -->
+        <app-profile-card [profile]="episode.author" />
+        <div class="separator-line"></div>
+        <p class="date">{{ episode?.date }}</p>
+        <div class="separator-line"></div>
+        <div class="app-episode-wrapper">
+          @for (source of episode.sources; track $index) {
+          <app-source [source]="source" />
+          }
+        </div>
+      </div>
+    </header>
+    <div class="second-header">
+      <h1 class="episode-body-header">episode Body</h1>
+      <div class="horizontal-separator-line"></div>
+    </div>
+    <div class="episode-text-wrapper">
+      @if(!editMode){ @for (paragraph of episode.about; track $index) {
+      <p (click)="toggleEditMode()">{{ paragraph }}</p>
+      } } @else if(editMode){ @for (paragraph of episode.about; track $index) {
+      <div
+        #textInputField
+        id="episode-text-field"
+        class="input-field text-input"
+        contenteditable="true"
+        (blur)="updateParagraph($event, $index)"
+      >
+        {{ paragraph }}
+      </div>
+      } }
+    </div>
+    <section class="next-episode-section"></section>
+  </section>
+</div>

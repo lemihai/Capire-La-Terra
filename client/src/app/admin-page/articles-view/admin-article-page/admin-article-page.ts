@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  HostListener,
   OnChanges,
   OnInit,
   QueryList,
@@ -19,7 +20,7 @@ import { Article } from '../../service/articles-service/articles-service';
 import { ProfileCard } from '../../../shared/components/profile-card/profile-card';
 import { NgOptimizedImage } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Button } from "../../../shared/buttons/button/button";
+import { Button } from '../../../shared/buttons/button/button';
 
 @Component({
   selector: 'app-admin-article-page',
@@ -31,11 +32,97 @@ export class AdminArticlePage {
   articleId: string | null = '';
   editBarComponents: string = 'article-page-view';
   editMode = false;
+  editModeFromState: boolean = false;
   @ViewChild('fileInput') fileInput!: ElementRef;
   @ViewChildren('textInputField')
   textInputFields!: QueryList<ElementRef>;
   @ViewChild('inputOverlay') inputOverlay!: ElementRef;
   // articleAuthor = '';
+
+  @HostListener('keydown', ['$event'])
+  handleTabKey(event: KeyboardEvent) {
+    this.addSources();
+    const focusedElement = document.activeElement;
+    const lastInputField = this.textInputFields.last?.nativeElement;
+    // console.log(lastInputField);
+    // console.log(focusedElement);
+    let innerHTML = focusedElement?.textContent;
+    // console.log('Focused element:', focusedElement);
+    if (event.key === 'Tab') {
+      if (focusedElement == lastInputField) {
+        // console.log('flag');
+        if (focusedElement?.id === 'article-text-field') {
+          // console.log('flag 2');
+          event.preventDefault();
+          this.article.text.push('');
+
+          setTimeout(() => {
+            const newLastInputField = this.textInputFields.last?.nativeElement;
+            newLastInputField?.focus();
+          }, 1);
+        }
+      }
+    }
+    if (event.key === 'Backspace') {
+      if (focusedElement?.id === 'article-text-field') {
+        if (innerHTML === '') {
+          // console.log('backspace key pressed');
+          this.article.text.pop();
+        }
+      }
+    }
+  }
+
+  addSources() {
+    let fullText = this.article.text.join(' ');
+    console.log(fullText);
+
+    if (fullText.toLowerCase().includes('aljazera') && !this.article.sources.includes('aljazera')) {
+      this.article.sources.push('aljazera');
+    }
+    if (
+      fullText.toLowerCase().includes('cleantechnica') &&
+      !this.article.sources.includes('cleantechnica')
+    ) {
+      this.article.sources.push('cleantechnica');
+    }
+    if (
+      fullText.toLowerCase().includes('climatechange') &&
+      !this.article.sources.includes('climatechange')
+    ) {
+      this.article.sources.push('climatechange');
+    }
+    if (fullText.toLowerCase().includes('euronews') && !this.article.sources.includes('euronews')) {
+      this.article.sources.push('euronews');
+    }
+    if (
+      fullText.toLowerCase().includes('greenpeace') &&
+      !this.article.sources.includes('greenpeace')
+    ) {
+      this.article.sources.push('greenpeace');
+    }
+    if (fullText.toLowerCase().includes('iea') && !this.article.sources.includes('iea')) {
+      this.article.sources.push('iea');
+    }
+    if (fullText.toLowerCase().includes('mongabay') && !this.article.sources.includes('mongabay')) {
+      this.article.sources.push('mongabay');
+    }
+    if (fullText.toLowerCase().includes('nature') && !this.article.sources.includes('nature')) {
+      this.article.sources.push('nature');
+    }
+    if (
+      fullText.toLowerCase().includes('the guardian') &&
+      !this.article.sources.includes('the guardian')
+    ) {
+      this.article.sources.push('the guardian');
+    }
+    if (
+      fullText.toLowerCase().includes('woodcentral') &&
+      !this.article.sources.includes('woodcentral')
+    ) {
+      this.article.sources.push('woodcentral');
+    }
+  }
 
   myForm: FormGroup;
 
@@ -84,6 +171,17 @@ export class AdminArticlePage {
       return;
     }
     try {
+      this.route.queryParams.subscribe((params) => {
+        // Query parameters are always strings, so you must convert 'true'/'false' to boolean
+        const editModeParam = params['editMode'];
+
+        // Check if the parameter exists and is explicitly 'true'
+        this.editModeFromState = editModeParam === 'true';
+
+        console.log('THIS IS THE EDIT MODE FROM QUERY PARAMS', this.editModeFromState);
+
+        // Now you can safely use the 'this.editMode' property elsewhere.
+      });
       const navigation = this.router.getCurrentNavigation();
       let articleData = navigation?.extras.state?.['data'];
       if (articleData != undefined) {
@@ -95,6 +193,12 @@ export class AdminArticlePage {
       this.cdr.detectChanges();
     } catch (error) {
       console.error('Error accessing article data or ID:', error);
+    }
+
+    if(this.editModeFromState == true){
+      this.editModeFromState = true;
+      this.editMode= true;
+      this.cdr.detectChanges()
     }
   }
 
@@ -157,7 +261,7 @@ export class AdminArticlePage {
 
   postArticle() {
     this.formatArticle();
-    this.adminService.postArticle(this.article).subscribe(
+    this.adminService.updateArticle(this.article._id, this.article).subscribe(
       (response) => {
         console.log('Success:', response);
         this.router.navigate(['/admin-page/articles-view']);
@@ -209,7 +313,6 @@ export class AdminArticlePage {
     this.fileInput.nativeElement.click();
     console.log('fweiuabfueiws');
   }
-
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;

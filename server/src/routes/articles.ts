@@ -26,7 +26,7 @@ articlesRouter.get("/articles", async (_req, res) => {
     res.status(200).send(articles);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Error";
-    console.log(message);
+    // console.log(message);
     res.status(400).send(message);
   }
 });
@@ -39,7 +39,7 @@ articlesRouter.get("/articles/:id", async (req, res) => {
     const query = { _id: new ObjectId(id) }; // This looks correct for MongoDB
 
     const article = await collections?.articles?.findOne(query);
-    // console.log(article);
+    console.log(article);
 
     res.status(200).send(article);
   } catch (error) {
@@ -54,7 +54,7 @@ articlesRouter.post("/articles", async (req, res) => {
   try {
     const article = req.body;
     delete article._id;
-    console.log(article);
+    // console.log(article);
     const result = await collections?.articles?.insertOne(article);
 
     if (result?.acknowledged) {
@@ -80,6 +80,53 @@ articlesRouter.post("/articles", async (req, res) => {
 });
 
 // PUT
+
+articlesRouter.put("/articles/:id", (async (req: Request, res: Response) => {
+// ^^^ Cast the entire async function to RequestHandler ^^^
+  try {
+    const id = req?.params?.id;
+    // Check if ID is a valid ObjectId format
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: `Invalid Article ID format: ${id}`,
+        success: false,
+      });
+    }
+
+    // The entire updated article object is in req.body
+    const updatedArticle = req.body;
+    // Remove the _id from the body to prevent issues when setting the document
+    delete updatedArticle._id; 
+
+    const query = { _id: new ObjectId(id) };
+
+    const result = await collections?.articles?.replaceOne(query, updatedArticle);
+
+    if (result && result.matchedCount) {
+      res.status(200).json({
+        message: `Successfully updated article: ID ${id}`,
+        success: true,
+      });
+    } else if (!result?.matchedCount) {
+      res.status(404).json({
+        message: `Failed to find an article to update: ID ${id}`,
+        success: false,
+      });
+    } else {
+      res.status(304).json({
+        message: `Article was found, but not modified: ID ${id}`,
+        success: true,
+      });
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown Error";
+    console.error(message);
+    res.status(500).json({
+      success: false,
+      message: message,
+    });
+  }
+}) as RequestHandler);
 
 // PATCH
 // Partially updating the Article data
@@ -155,7 +202,7 @@ articlesRouter.delete("/articles/:id", async (req, res) => {
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Error";
-    console.log(message);
+    // console.log(message);
     res.status(400).send(message);
   }
 });

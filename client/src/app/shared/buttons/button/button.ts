@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-button',
@@ -6,15 +7,46 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './button.html',
   styleUrl: './button.scss',
 })
-export class Button implements OnInit {
+export class Button implements OnInit, OnChanges {
   @Input({ required: true }) buttonText!: string;
   @Input({ required: true }) iconType!: string;
+  @Input() externalFocus?: boolean;
   @Input() size?: string;
 
   focusedState = '';
 
+  constructor(private route: ActivatedRoute) {}
+
   ngOnInit(): void {
-    console.log(this.buttonText);
+    this.route.queryParams.subscribe((params) => {
+      // Query parameters are always strings, so you must convert 'true'/'false' to boolean
+      const editModeParam = params['editMode'];
+
+      // Check if the parameter exists and is explicitly 'true'
+      let editModeFromState = editModeParam === 'true';
+      if (editModeFromState == true) {
+        this.toggleActive();
+      }
+
+      // Now you can safely use the 'this.editMode' property elsewhere.
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['externalFocus']) {
+      const isFocused = changes['externalFocus'].currentValue;
+      console.log(1, this.externalFocus);
+
+      // // Update the internal state based on the external input
+      // if (isFocused === true) {
+      //   this.focusedState = 'focused';
+      // } else if (isFocused === false) {
+      //   this.focusedState = '';
+      // }
+
+      // // Console log for debugging
+      // console.log(`Button [${this.buttonText}] externalFocus changed to: ${isFocused}. Setting focusedState to: ${this.focusedState}`);
+    }
   }
 
   toggleActive() {
@@ -23,7 +55,6 @@ export class Button implements OnInit {
     } else if (this.buttonText == 'Edit' && this.focusedState === 'focused') {
       this.focusedState = '';
     }
-    console.log(this.focusedState);
-    console.log(1);
+    console.log(2, this.focusedState);
   }
 }

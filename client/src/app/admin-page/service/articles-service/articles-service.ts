@@ -54,11 +54,15 @@ export class ArticlesService {
   // PUT: Replace Articles
   // --------------------------
 
+  updateArticle(articleId: string, body: Article){
+    return this.http.put(`${this.apiUrl}/${articleId}`, body);
+  }
+
   // --------------------------
   // PATCH: Update Articles
   // --------------------------
 
-  updateArticle(articleId: string, status: boolean) {
+  updatePostedArticle(articleId: string, status: boolean) {
     const body = { posted: status };
 
     return this.http.patch(`${this.apiUrl}/${articleId}`, body);

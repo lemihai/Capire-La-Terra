@@ -3,10 +3,9 @@
     <h2>Episodes</h2>
   </header>
   <div class="filter-row">
-    <div class="filter-section-news-outlet">
-      <p>news outlet</p>
-      <div class="news-outlet-list"></div>
-      <div class="chevron-icon">
+    <div class="filter-section-number {{ sorting.seasonSortingVisualFlag }} " (click)="sort('season')">
+      <p>S</p>
+      <div class="chevron-icon {{ sorting.sortDirection }}">
         <svg
           width="32"
           height="32"
@@ -25,9 +24,30 @@
       </div>
     </div>
     <div class="filter-separator-line"></div>
-    <div class="filter-section-title">
+    <div class="filter-section-number {{ sorting.episodeSortingVisualFlag }} " (click)="sort('number')">
+      <p>E</p>
+      <div class="chevron-icon {{ sorting.sortDirection }}">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 12L16 20L24 12"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    </div>
+    <div class="filter-separator-line"></div>
+    <div class="filter-section-title {{ sorting.titleSortingVisualFlag }} " (click)="sort('title')">
       <p>title</p>
-      <div class="chevron-icon">
+      <div class="chevron-icon {{ sorting.sortDirection }}">
         <svg
           width="32"
           height="32"
@@ -46,9 +66,37 @@
       </div>
     </div>
     <div class="filter-separator-line"></div>
-    <div class="filter-section-author">
+    <div
+      class="filter-section-posted {{ sorting.postedSortingVisualFlag }} "
+      (click)="sort('posted')"
+    >
+      <p>posted</p>
+      <div class="chevron-icon {{ sorting.sortDirection }}">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 12L16 20L24 12"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <div class="filter-separator-line"></div>
+    <div
+      class="filter-section-author {{ sorting.authorSortingVisualFlag }} "
+      (click)="sort('author')"
+    >
       <p>author</p>
-      <div class="chevron-icon">
+      <div class="chevron-icon {{ sorting.sortDirection }}">
         <svg
           width="32"
           height="32"
@@ -67,9 +115,9 @@
       </div>
     </div>
     <div class="filter-separator-line"></div>
-    <div class="filter-section-date">
+    <div class="filter-section-date {{ sorting.dateSortingVisualFlag }}  " (click)="sort('date')">
       <p>date</p>
-      <div class="chevron-icon">
+      <div class="chevron-icon {{ sorting.sortDirection }}">
         <svg
           width="32"
           height="32"
@@ -86,14 +134,27 @@
           />
         </svg>
       </div>
+    </div>
+    <div class="button-wrapper">
+      <app-button
+        buttonText="New Episode"
+        iconType="add"
+        size="small-text"
+        (click)="navigateToNewEpisodeView()"
+      />
     </div>
   </div>
   <div class="separator-line"></div>
   <router-outlet />
   <div class="content-container">
     @for (episode of episodes; track episode._id) {
-    <app-episode-card cardType="admin-small" [episode]="episode"/>
-    <!-- <app-news-card [article]="newsArticle" cardType="admin-small" (click)="navigateToNewsArticlePage()"/> -->
+    <app-admin-episode-card 
+    [episode]="episode"
+      (navigateToEpisode)="navigateToEpisodePage(episode._id, episode)"
+      (submitEpisode)="postEpisode(episode)"
+      (editEpisode)="editEpisode(episode._id, episode, true)"
+      (deleteEpisode)="deleteEpisode(episode._id)"
+    />
     }
   </div>
 </div>

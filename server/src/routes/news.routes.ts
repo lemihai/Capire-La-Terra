@@ -34,7 +34,7 @@ newsRouter.get("/news/:id", async (_req, res) => {
     const query = { _id: new ObjectId(id) }; // This looks correct for MongoDB
 
     const article = await collections?.news?.findOne(query);
-    console.log(article);
+    // console.log(article);
 
     res.status(200).send(article);
   } catch (error) {

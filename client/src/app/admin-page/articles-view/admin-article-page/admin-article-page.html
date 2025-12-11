@@ -6,6 +6,7 @@
     <app-edit-bar
       mode="{{ editBarComponents }}"
       [componentData]="article"
+      [externalEditActivation]="editMode"
       (deleteArticle)="deleteArticle()"
       (submitArticle)="submitCurrentArticle()"
       (saveArticle)="saveCurrentArticle()"

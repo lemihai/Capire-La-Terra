@@ -100,16 +100,15 @@ export class ArticlesView {
     this.adminService.triggerViewChange('new-article', 'articles-view');
   }
 
-  
-
   ngAfterViewInit(): void {}
 
-  navigateToArticlePage(articleId: string, articleData: any) {
+  navigateToArticlePage(articleId: string, articleData: any, editMode?: boolean) {
     this.adminService.triggerViewChange(
       'admin-article-page',
       'articles-view',
       articleId,
-      articleData
+      articleData,
+      editMode
     );
   }
 
@@ -209,11 +208,8 @@ export class ArticlesView {
     console.log('from view', article);
   }
 
-  editArticle(article: Article) {
-    // 1. Log the change
-    console.log(
-      `Attempting to update article ID ${article._id} posted status to: ${article.posted}`
-    );
+  editArticle(id:string, art:Article, editMode: boolean) {
+    this.navigateToArticlePage(id, art, editMode)
   }
 
   deleteArticle(_id: string) {

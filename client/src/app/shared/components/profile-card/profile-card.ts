@@ -26,8 +26,8 @@ export class ProfileCard implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.cdr.detectChanges();
-      console.log(1, this.imgsrc);
-      console.log(2, this.profile);
+      // console.log(1, this.imgsrc);
+      // console.log(2, this.profile);
       this.imgsrc = 'assets/' + this.profile.toLowerCase().replace(' ', '-') + '.png';
     }, 30);
   }

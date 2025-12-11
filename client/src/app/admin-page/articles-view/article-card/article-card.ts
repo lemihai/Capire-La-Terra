@@ -41,11 +41,11 @@ export class ArticleCard implements OnInit, AfterViewInit {
     let month = date.getMonth();
     let year = date.getFullYear();
     this.date = day + '-' + month + '-' + year;
-    console.log('OFIRNEBJUVI', this.date);
+    // console.log('OFIRNEBJUVI', this.date);
 
     this.cdr.detectChanges();
 
-    console.log(this.article);
+    // console.log(this.article);
   }
 
   ngAfterViewInit(): void {}

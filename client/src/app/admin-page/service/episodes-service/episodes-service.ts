@@ -10,16 +10,17 @@ import { AdminService } from '../admin-service';
 export interface Episode {
   _id: string;
   title: string;
-  about: string;
+  about: string[];
+  author: string;
   date: string;
   number: number;
   season: number;
+  imageUrl: string,
+  audioUrl: string,
   sources: string[];
   transcript: string;
-  episode: '';
+  posted: boolean;
 }
-
-
 
 @Injectable({
   providedIn: 'root',
@@ -32,10 +33,60 @@ export class EpisodesService {
   constructor(private http: HttpClient) {}
 
   // --------------------------
-  // GET Methods
-  // --------------------------
-  getAllEpisodes() {
+    // GET Methods
+    // --------------------------
+   getAllEpisodes() {
     // console.log(environment.apiUrl);
     return this.http.get(`${this.apiUrl}`);
   }
+  
+    getOneEpisode(id: string): Observable<Episode> {
+      // 💡 Key change: Add <Article> to the Observable type and http.get call
+      return this.http.get<Episode>(`${this.apiUrl}/${id}`);
+  }
+  
+    // --------------------------
+    // POST: Add Articles
+    // --------------------------
+  
+    postEpisode(body: Episode) {
+      return this.http.post(`${this.apiUrl}`, body);
+    }
+  
+    // --------------------------
+    // PUT: Replace Articles
+    // --------------------------
+  
+    updateEpisode(episodeId: string, body: Episode){
+      return this.http.put(`${this.apiUrl}/${episodeId}`, body);
+    }
+  
+    // --------------------------
+    // PATCH: Update Articles
+    // --------------------------
+  
+    updatePostedEpisode(episodeId: string, status: boolean) {
+      const body = { posted: status };
+  
+      return this.http.patch(`${this.apiUrl}/${episodeId}`, body);
+    }
+  
+  //   updateEpisode(id: string, posted: boolean): Observable<any> {
+  //     const url = `${this.apiUrl}/${id}`;
+      
+  //     // The body MUST be { posted: true } or { posted: false }
+  //     return this.http.patch(url, { posted: posted }); 
+  // }
+  
+    // --------------------------
+    // DELETE: Remove Articles
+    // --------------------------
+  
+    deleteEpisode(episodeId: string) {
+      return this.http.delete(`${this.apiUrl}/${episodeId}`);
+    }
+  
+    // --------------------------
+    // GSAP NEWS VIEW
+    // --------------------------
 }
