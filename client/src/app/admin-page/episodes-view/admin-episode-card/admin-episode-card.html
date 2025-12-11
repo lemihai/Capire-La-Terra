@@ -10,14 +10,14 @@
     </svg>
   </div>
 </div>
-<div class="episode-card-wrapper" (click)="navigateToEpisodePage($event)">
+<div class="episode-card-wrapper {{seasonStarter}}" (click)="navigateToEpisodePage($event)">
   <div class="hover-bar"></div>
   <p class="episode-season">{{ episode.season }}</p>
   <div class="separator-line"></div>
   <p class="episode-no">{{ episode.number }}</p>
   <div class="separator-line"></div>
   <div class="episode-image">
-    @if (episode?.imageUrl) {
+    @if (episode.imageUrl) {
     <img [src]="episode.imageUrl" alt="episode Image" class="episode-image" />
     }
   </div>

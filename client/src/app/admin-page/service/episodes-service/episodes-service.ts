@@ -8,7 +8,7 @@ import { AdminService } from '../admin-service';
 
 // Add image
 export interface Episode {
-  _id: string;
+  _id?: string;
   title: string;
   about: string[];
   author: string;

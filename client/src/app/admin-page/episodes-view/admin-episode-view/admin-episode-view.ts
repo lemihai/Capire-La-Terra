@@ -249,6 +249,11 @@ export class AdminEpisodeView {
 
   async deleteEpisode() {
     try {
+      if (!this.episode._id) {
+        console.error('Cannot delete episode: Episode ID is missing.');
+        return; // Exit the function if no ID is available
+      }
+
       await lastValueFrom(this.adminService.deleteEpisode(this.episode._id));
       // After successful deletion, navigate back to the episodes list
       this.router.navigate(['/admin-page/episodes-view']);
@@ -283,6 +288,10 @@ export class AdminEpisodeView {
 
   postEpisode() {
     this.formatEpisode();
+    if (!this.episode._id) {
+      console.error('Cannot delete episode: Episode ID is missing.');
+      return; // Exit the function if no ID is available
+    }
     this.adminService.updateEpisode(this.episode._id, this.episode).subscribe(
       (response) => {
         console.log('Success:', response);
@@ -364,34 +373,34 @@ export class AdminEpisodeView {
   }
 
   onAudioFileSelected(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  if (input.files && input.files.length > 0) {
-    const file = input.files[0];
-    
-    // Check if the file is indeed an audio file
-    if (file.type.startsWith('audio/')) {
-      // Read the file as a Data URL for immediate use/preview
-      const reader = new FileReader();
-      // console.log(reader);
-      reader.onload = () => {
-        // Assign to the audioUrl property
-        this.episode.audioUrl = reader.result as string; 
-      };
-      reader.readAsDataURL(file);
-      this.cdr.detectChanges();
-    } else {
-      console.error('Selected file is not an audio file.');
-    }
-  }
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
 
-  // Optional: Update the visual state of the overlay after selection (if you keep the overlay logic)
-  setTimeout(() => {
-    if (this.audioInputOverlay) {
-        this.audioInputOverlay.nativeElement.style.bottom = '1.2rem';
+      // Check if the file is indeed an audio file
+      if (file.type.startsWith('audio/')) {
+        // Read the file as a Data URL for immediate use/preview
+        const reader = new FileReader();
+        // console.log(reader);
+        reader.onload = () => {
+          // Assign to the audioUrl property
+          this.episode.audioUrl = reader.result as string;
+        };
+        reader.readAsDataURL(file);
+        this.cdr.detectChanges();
+      } else {
+        console.error('Selected file is not an audio file.');
+      }
     }
-    this.cdr.detectChanges();
-  }, 1600);
-}
+
+    // Optional: Update the visual state of the overlay after selection (if you keep the overlay logic)
+    setTimeout(() => {
+      if (this.audioInputOverlay) {
+        this.audioInputOverlay.nativeElement.style.bottom = '1.2rem';
+      }
+      this.cdr.detectChanges();
+    }, 1600);
+  }
 
   removeImage() {
     // 1. Reset the imageUrl property
@@ -414,7 +423,7 @@ export class AdminEpisodeView {
     console.log('Image removed.');
   }
 
-   removeAudio() {
+  removeAudio() {
     // 1. Reset the imageUrl property
     this.episode.audioUrl = '';
 
@@ -435,7 +444,7 @@ export class AdminEpisodeView {
     console.log('Image removed.');
   }
 
-  playEpisode(){
+  playEpisode() {
     this.globalPlayer.playEpisode(this.episode);
   }
 }

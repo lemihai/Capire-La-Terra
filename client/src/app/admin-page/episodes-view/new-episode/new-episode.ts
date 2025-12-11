@@ -62,15 +62,15 @@ export class NewEpisode {
     this.addSources();
     const focusedElement = document.activeElement;
     const lastInputField = this.textInputFields.last?.nativeElement;
-    // console.log(lastInputField);
-    // console.log(focusedElement);
+    // 
+    // 
     let innerHTML = focusedElement?.textContent;
-    // console.log('Focused element:', focusedElement);
+    // 
     if (event.key === 'Tab') {
       if (focusedElement == lastInputField) {
-        // console.log('flag');
+        // 
         if (focusedElement?.id === 'episode-text-field') {
-          // console.log('flag 2');
+          // 
           event.preventDefault();
           this.episode.about.push('');
 
@@ -84,7 +84,7 @@ export class NewEpisode {
     if (event.key === 'Backspace') {
       if (focusedElement?.id === 'episode-text-field') {
         if (innerHTML === '') {
-          // console.log('backspace key pressed');
+          // 
           this.episode.about.pop();
         }
       }
@@ -94,7 +94,7 @@ export class NewEpisode {
   addSources() {
     let fullText = this.episode.about.join(' ');
     // let fullText = this.episode.about;
-    console.log(fullText);
+    
 
     if (fullText.toLowerCase().includes('aljazera') && !this.episode.sources.includes('aljazera')) {
       this.episode.sources.push('aljazera');
@@ -167,7 +167,7 @@ export class NewEpisode {
   paragraphs: string[] = [];
 
   episode: Episode = {
-    _id: '',
+    // _id: '',
     title: 'This is a title',
     about: ['Write you description here', 'add sources'],
     author: '',
@@ -187,7 +187,7 @@ export class NewEpisode {
     this.myForm.patchValue(this.episode);
     this.episode.date = this.getTodayDate();
   }
-  
+
   getTodayDate() {
     const today = new Date();
 
@@ -201,7 +201,7 @@ export class NewEpisode {
     const pad = (num: number): string => (num < 10 ? '0' + num : String(num));
 
     let finalDate = `${pad(day)} ${month} ${year}`;
-    console.log(finalDate);
+    
     // 4. Combine the parts with the specified separator
     return finalDate;
   }
@@ -209,10 +209,10 @@ export class NewEpisode {
   async callForEpisode(id: string): Promise<void> {
     try {
       const response = await lastValueFrom(this.adminService.getOneEpisode(id));
-      console.log(response);
+      
       this.episode = response;
       // this.separateParagraphs(this.episode.text);
-      console.log('episode source URL:', this.episode);
+      
       this.cdr.detectChanges();
     } catch (error) {
       console.error('Error fetching episode:', error);
@@ -231,7 +231,9 @@ export class NewEpisode {
 
   async deleteEpisode() {
     try {
-      await lastValueFrom(this.adminService.deleteEpisode(this.episode._id));
+      if (this.episode._id) {
+        await lastValueFrom(this.adminService.deleteEpisode(this.episode._id));
+      }
       // After successful deletion, navigate back to the episodes list
       this.router.navigate(['/admin-page/episodes-view']);
     } catch (error) {
@@ -251,7 +253,16 @@ export class NewEpisode {
     } else if ((this.editMode = true)) {
       this.editMode = false;
     }
-    console.log(this.editMode);
+    
+  }
+
+  updateEpisodeDetails(details: { season: number; number: number }) {
+    this.episode.season = Number(details.season);
+    this.episode.number = Number(details.number);
+    
+    // You might want to force change detection if the display is not updating,
+    // although for simple property updates it's usually automatic.
+    this.cdr.detectChanges();
   }
 
   saveCurrentEpisode() {
@@ -265,9 +276,9 @@ export class NewEpisode {
 
   postEpisode() {
     this.formatEpisode();
-    this.adminService.updateEpisode(this.episode._id, this.episode).subscribe(
+    this.adminService.postEpisode(this.episode).subscribe(
       (response) => {
-        console.log('Success:', response);
+        
         this.router.navigate(['/admin-page/episodes-view']);
       },
       (error) => {
@@ -285,7 +296,7 @@ export class NewEpisode {
 
   formatEpisode() {
     let array = this.episode.about;
-    console.log(array);
+    
 
     // Filter out empty strings
     array = array.filter((element: string) => element !== '');
@@ -315,18 +326,18 @@ export class NewEpisode {
 
   triggerFileInput(): void {
     this.fileInput.nativeElement.click();
-    console.log('fweiuabfueiws');
+    
   }
   triggerAudioFileInput(): void {
     this.audioFileInput.nativeElement.click();
-    console.log('fweiuabfueiws');
+    
   }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      console.log(file);
+      
 
       // Read the file as a Data URL for an immediate preview
       const reader = new FileReader();
@@ -354,7 +365,7 @@ export class NewEpisode {
       if (file.type.startsWith('audio/')) {
         // Read the file as a Data URL for immediate use/preview
         const reader = new FileReader();
-        // console.log(reader);
+        // 
         reader.onload = () => {
           // Assign to the audioUrl property
           this.episode.audioUrl = reader.result as string;
@@ -393,7 +404,7 @@ export class NewEpisode {
 
     // 4. Force change detection to update the view immediately
     this.cdr.detectChanges();
-    console.log('Image removed.');
+    
   }
 
   removeAudio() {
@@ -414,7 +425,7 @@ export class NewEpisode {
 
     // 4. Force change detection to update the view immediately
     this.cdr.detectChanges();
-    console.log('Image removed.');
+    
   }
 
   playEpisode() {

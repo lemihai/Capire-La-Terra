@@ -267,16 +267,41 @@
     <!-- <div class="button-wrapper">
       <app-button iconType="edit" buttonText="Edit" size="small-text" (click)="triggerEditMode()" />
     </div> -->
-    <div class="episode-numbers-input">
-      <div class="episode-number-wrapper">
-        <p>{{componentData.season}}</p>
+    <!-- <div
+        #textInputField
+        id="episode-text-field"
+        class="input-field text-input"
+        contenteditable="true"
+        (blur)="updateParagraph($event, $index)"
+      >
+        {{ paragraph }}
+      </div> -->
+    <!-- <div class="episode-numbers-input"> -->
+      <div
+        class="episode-numbers-input"
+        contenteditable="true"
+        #episodeSeasonInputField
+        (click)="toggleEditMode('season')"
+        (blur)="emitEpisodeDetails()"
+      >
+        <!-- <p> -->
+          {{ componentData.season }}
+        <!-- </p> -->
       </div>
-    </div>
-    <div class="episode-numbers-input">
-      <div class="episode-number-wrapper">
-        <p>{{componentData.number}}</p>
+    <!-- </div> -->
+    <!-- <div class="episode-numbers-input"> -->
+      <div
+        class="episode-numbers-input"
+        contenteditable="true"
+        #episodeNumbersInputField
+        (click)="toggleEditMode('number')"
+        (blur)="emitEpisodeDetails()"
+      >
+        <!-- <p> -->
+          {{ componentData.number }}
+        <!-- </p> -->
       </div>
-    </div>
+    <!-- </div> -->
     <div class="button-wrapper {{ editMode }}">
       <app-button
         iconType="save"
@@ -352,4 +377,3 @@
   </div>
 </div>
 }
-

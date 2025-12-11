@@ -194,7 +194,7 @@
   width: auto;
   min-width: 3.2rem;
   height: 3.2rem;
-  background-color: var(--main-color-dark-16);
+  background-color: var(--main-color-dark-08);
   border: 1px solid var(--main-color-dark-16);
 
   display: flex;
@@ -204,7 +204,18 @@
 
   border-radius: 0.8rem;
 
-  &:hover{
-    
+  &:hover {
+    cursor: text;
+    background-color: var(--main-color-dark-24);
+    border: 1px solid var(--main-color-dark-24);
+    transition: var(--transition-160);
+  }
+
+  &:focus {
+    outline: none; /* Remove default outline for a custom look */
+    background-color: var(--main-color-16);
+    border: 1.5px solid var(--main-color-hover);
+    box-shadow: 0 0 0 0.4rem inset var(--main-color-16); /* Soft glow effect */
+    transition: var(--transition-160);
   }
 }

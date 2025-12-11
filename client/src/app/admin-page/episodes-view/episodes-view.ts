@@ -165,6 +165,11 @@ export class EpisodesView {
         // so if 'asc' (oldest first) is 1, we use (dateA - dateB) * 1
         // if 'desc' (newest first) is -1, we use (dateA - dateB) * -1 = (dateB - dateA)
         return (dateA - dateB) * direction;
+      } else if (key === 'number' || key === 'season') {
+        // Numeric comparison for episode/season numbers
+        const numA = Number(valA);
+        const numB = Number(valB);
+        return (numA - numB) * direction;
       } else {
         // String comparison (case-insensitive for alphabetical sort)
         valA = String(valA).toLowerCase();
@@ -212,6 +217,11 @@ export class EpisodesView {
     if (episode.posted === true) {
       episode.posted = false;
       console.log(episode);
+      // if (this.episode._id) {
+      if (!episode._id) {
+        console.error('Cannot update episode status: Episode ID is missing.');
+        return; // Exit the function if no ID is available
+      }
       this.adminService.patchEpisodePostedStatus(episode._id, episode.posted).subscribe({
         next: (response) => {
           // console.log('Posted status updated successfully:', response);
@@ -220,8 +230,14 @@ export class EpisodesView {
           // console.error('Error :', error);
         },
       });
+      // }
     } else {
       episode.posted = true;
+      // if (this.episode._id) {
+      if (!episode._id) {
+        console.error('Cannot update episode status: Episode ID is missing.');
+        return; // Exit the function if no ID is available
+      }
       this.adminService.patchEpisodePostedStatus(episode._id, episode.posted).subscribe({
         next: (response) => {
           // console.log('Posted status updated successfully:', response);
@@ -230,12 +246,13 @@ export class EpisodesView {
           // console.error('Error updating posted status:', error);
         },
       });
+      // }
     }
     console.log('from view', episode);
   }
 
   editEpisode(id: string, ep: Episode, editMode: boolean) {
-    this.navigateToEpisodePage(id, ep, editMode)
+    this.navigateToEpisodePage(id, ep, editMode);
   }
 
   deleteEpisode(_id: string) {

@@ -299,7 +299,7 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*3) + (0.4rem*3)) !important';
       this.router.navigate(['admin-page/robots-view']);
-    } else if (view === 'episodes-view') {
+    } else if (view === '/admin-page/episodes-view' || view === 'episodes-view') {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
@@ -315,7 +315,6 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       this.bottomHoverBottom = '.8rem !important';
       this.router.navigate(['']);
     } else if (view.includes('news-article-view')) {
-      //
       this.Sidebar.setActive('news-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important';

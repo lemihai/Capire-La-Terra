@@ -1,11 +1,14 @@
 import {
+  ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnInit,
   Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { Button } from '../../shared/buttons/button/button';
 import { News } from '../service/news-service/news-service';
@@ -36,27 +39,39 @@ export class EditBar implements OnInit, OnChanges {
   @Output() switchFlagEvent = new EventEmitter<any>();
   @Output() editModeEmitter = new EventEmitter<any>();
 
-  editMode = 'hidden';
-  editModeArticleStatus = 'statusNoEdit'
+  @Output() episodeDetailsUpdated = new EventEmitter<{ season: number; number: number }>();
 
-  constructor(private adminService: AdminService, private router: Router, private route: ActivatedRoute) {}
+  @ViewChild('episodeSeasonInputField') seasonInputRef!: ElementRef;
+  @ViewChild('episodeNumbersInputField') numberInputRef!: ElementRef;
+
+  editMode = 'hidden';
+  editModeArticleStatus = 'statusNoEdit';
+  seasonEditMode = false;
+  numberEditMode = false;
+
+  constructor(
+    private adminService: AdminService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     console.log(this.externalEditActivation);
 
     // USE THIS TO PASS INTO THE BUTTON
     this.route.queryParams.subscribe((params) => {
-        // Query parameters are always strings, so you must convert 'true'/'false' to boolean
-        const editModeParam = params['editMode'];
+      // Query parameters are always strings, so you must convert 'true'/'false' to boolean
+      const editModeParam = params['editMode'];
 
-        // Check if the parameter exists and is explicitly 'true'
-        let editModeFromState = editModeParam === 'true';
-        this.externalEditActivation = editModeFromState
+      // Check if the parameter exists and is explicitly 'true'
+      let editModeFromState = editModeParam === 'true';
+      this.externalEditActivation = editModeFromState;
 
-        console.log('IN EDIT BAR QUERY ', this.externalEditActivation);
+      console.log('IN EDIT BAR QUERY ', this.externalEditActivation);
 
-        // Now you can safely use the 'this.editMode' property elsewhere.
-      });
+      // Now you can safely use the 'this.editMode' property elsewhere.
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -87,8 +102,8 @@ export class EditBar implements OnInit, OnChanges {
   }
 
   // --------------------------
-    // ARTICLES
-    // --------------------------
+  // ARTICLES
+  // --------------------------
 
   deleteCurrentArticle() {
     this.router.navigate(['/admin-page/news-view']);
@@ -137,11 +152,50 @@ export class EditBar implements OnInit, OnChanges {
     }
   }
 
-  // --------------------------
-    // Episodes
-    // --------------------------
+  emitEpisodeDetails() {
+    // 1. Get the values from the native HTML elements
+    const seasonValue = this.seasonInputRef?.nativeElement?.textContent;
+    const numberValue = this.numberInputRef?.nativeElement?.textContent;
 
-    onDeleteEpisode() {
+    // 2. Convert them to numbers (or handle empty strings/nulls)
+    // const season = seasonValue ? parseInt(seasonValue, 10) : this.componentData.season;
+    // const number = numberValue ? parseInt(numberValue, 10) : this.componentData.number;
+
+    // 3. Emit the event with the new values
+    this.episodeDetailsUpdated.emit({
+      season: seasonValue,
+      number: numberValue,
+    });
+  }
+
+  toggleEditMode(field: 'season' | 'number') {
+    const HTMLSeasonEl = this.seasonInputRef?.nativeElement;
+    const HTMLNumberEl = this.numberInputRef?.nativeElement;
+    // HTMLSeasonEl.preventDefault();
+    // HTMLNumberEl.preventDefault();
+    console.log('438954983');
+    console.log(HTMLNumberEl.textContent);
+    console.log('438954983');
+    if (field === 'season') {
+      // Toggle the season field
+      this.seasonEditMode = !this.seasonEditMode;
+
+      HTMLSeasonEl?.focus();
+      this.numberEditMode = false;
+    } else if (field === 'number') {
+      // Toggle the number field
+      this.numberEditMode = !this.numberEditMode;
+      HTMLNumberEl?.focus();
+    }
+
+    console.log('Season Mode:', this.seasonEditMode, 'Number Mode:', this.numberEditMode);
+  }
+
+  // --------------------------
+  // Episodes
+  // --------------------------
+
+  onDeleteEpisode() {
     this.deleteEpisode.emit();
   }
 

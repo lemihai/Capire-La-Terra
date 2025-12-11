@@ -2,23 +2,24 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angu
 import { Episode } from '../../service/episodes-service/episodes-service';
 import { AdminService } from '../../service/admin-service';
 import { Router } from '@angular/router';
-import { ProfileCard } from "../../../shared/components/profile-card/profile-card";
-import { PlayButton } from "../../../shared/buttons/play-button/play-button";
+import { ProfileCard } from '../../../shared/components/profile-card/profile-card';
 import { GlobalAudioPlayerService } from '../../../global-audio-player.component/global-audio-player-service';
 
 @Component({
   selector: 'app-admin-episode-card',
-  imports: [ProfileCard, PlayButton],
+  imports: [ProfileCard],
   templateUrl: './admin-episode-card.html',
-  styleUrl: './admin-episode-card.scss'
+  styleUrl: './admin-episode-card.scss',
 })
 export class AdminEpisodeCard {
-@Input() episode!: Episode;
+  @Input() episode!: Episode;
 
   @Output() navigateToEpisode = new EventEmitter<{ id: string; episode: Episode }>();
   @Output() submitEpisode = new EventEmitter<any>();
   @Output() editEpisode = new EventEmitter<any>();
   @Output() deleteEpisode = new EventEmitter<any>();
+
+  seasonStarter = '';
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -37,7 +38,9 @@ export class AdminEpisodeCard {
     let year = date.getFullYear();
     this.date = day + '-' + month + '-' + year;
     // console.log('OFIRNEBJUVI', this.date);
-
+    if(this.episode.number == 1){
+      this.seasonStarter = 'seasonStarter'
+    }
     this.cdr.detectChanges();
 
     // console.log(this.article);
@@ -45,13 +48,15 @@ export class AdminEpisodeCard {
 
   ngAfterViewInit(): void {}
 
-  playEpisode(){
+  playEpisode() {
     this.globalPlayer.playEpisode(this.episode);
   }
 
   navigateToEpisodePage(event: MouseEvent) {
     event.stopPropagation();
-    this.navigateToEpisode.emit({ id: this.episode._id, episode: this.episode });
+    if (this.episode._id) {
+      this.navigateToEpisode.emit({ id: this.episode._id, episode: this.episode });
+    }
   }
 
   postClickedEpisode(event: MouseEvent) {

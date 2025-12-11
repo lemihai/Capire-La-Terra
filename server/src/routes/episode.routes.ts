@@ -58,27 +58,23 @@ episodeRouter.post("/episodes", async (req, res) => {
     const episode = req.body;
     const result = await collections?.episodes?.insertOne(episode);
 
-    // how to add an episode
-    /*
-    collection.insertOne({
-        title: 'My Audio Clip',
-        description: 'A short audio clip',
-        audio: BinData(0, base64AudioData)
-    }, (err, result) => {
-        if (err) throw err;
-        console.log('Audio file inserted successfully');
-        client.close();
-    });
-
-  */
-
     if (result?.acknowledged) {
-      res.status(201).send(`Added a new episode: ID ${result.insertedId}`);
+      res.status(201).json({
+        message: `Added a new episode: ID ${result.insertedId}`,
+        success: true,
+      });
     } else {
-      res.status(500).send(`Failed to add an episode`);
+      res.status(500).json({
+        message: `Failed to add an episode`,
+        success: true,
+      });
     }
   } catch (error) {
     console.log(error);
+    // res.status(400).json({
+    //     message: error instanceof Error ? error.message : "Unknown Error",
+    //     success: true,
+    //   });
     res
       .status(400)
       .send(error instanceof Error ? error.message : "Unknown Error");
