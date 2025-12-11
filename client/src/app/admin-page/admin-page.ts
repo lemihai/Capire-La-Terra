@@ -149,7 +149,10 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       // currentRoute = currentRouter;
     }
     if (currentRouter.includes('episodes-view')) {
-      // currentRoute = currentRouter;
+      currentRoute = currentRouter;
+    }
+    if (currentRouter.includes('new-episode')) {
+      currentRoute = currentRouter;
     }
     // if (currentRouter.includes('admin-article-page')) {
     //
@@ -272,11 +275,11 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   SetSidebarView(view: string) {
-    // console.log('');
-    // console.log('');
-    // console.log(32, view);
-    // console.log('');
-    // console.log('');
+    console.log('');
+    console.log('');
+    console.log(32, view);
+    console.log('');
+    console.log('');
     if (view === 'admin-page') {
       this.Sidebar.setActive('admin-page');
       this.buttonHoverTop = 'calc(6.1rem)';
@@ -328,7 +331,17 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
       // this.router.navigate([`admin-page/new-article`]);
       this.router.navigate([`${view}`]);
-    } else {
+    } else if (view.includes('new-episode')) {
+      this.Sidebar.setActive('episodes-view');
+      this.bottomHoverBottom = 'auto';
+      this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
+      this.router.navigate([`${view}`]);
+    }else if (view.includes('episode-page')) {
+      this.Sidebar.setActive('episodes-view');
+      this.bottomHoverBottom = 'auto';
+      this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
+      this.router.navigate([`${view}`]);
+    }else {
       // this.Sidebar.setActive('admin-page');
       // this.buttonHoverTop = 'calc(6.1rem)';
       // this.router.navigate(['admin-page']);

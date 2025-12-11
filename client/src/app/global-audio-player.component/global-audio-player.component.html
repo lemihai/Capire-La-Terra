@@ -60,7 +60,7 @@
                 {{ duration.seconds }}
               </p>
             </div>
-            <audio #audioPlayer controls src="audio/freepik-sermon-in-folds.mp3"></audio>
+            <audio #audioPlayer controls [src]="episode.audioUrl"></audio>
           </div>
           <div class="inside-cl">
             <div class="episode-details-container">
@@ -75,11 +75,12 @@
               <div class="episode-title">
                 <p>Perche si chiamamo la crisi climatica</p>
                 <div class="episode-season-details-container">
-                  <p>S1</p>
+                  <p>S{{episode.season}}</p>
                   <!-- <div class="eps-separator-line"></div> -->
-                  <p>E12</p>
+                  <p>E{{episode.number}}</p>
+                  <!-- <p>E12</p> -->
                   <!-- <div class="eps-separator-line"></div> -->
-                  <app-profile-card />
+                  <!-- <app-profile-card /> -->
                   <!-- <p>Sofia Lutteri</p> -->
                 </div>
               </div>

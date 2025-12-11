@@ -21,21 +21,39 @@ import { ProfileCard } from '../../../shared/components/profile-card/profile-car
 import { NgOptimizedImage } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Button } from '../../../shared/buttons/button/button';
+import { AudioPlayer } from '../../../shared/components/audio-player/audio-player';
+import { EpisodeCard } from '../../../shared/components/episode-card/episode-card';
+import { AudioTrack } from '../../../shared/components/audio-track/audio-track';
+import { PlayButton } from '../../../shared/buttons/play-button/play-button';
+import { GlobalAudioPlayerService } from '../../../global-audio-player.component/global-audio-player-service';
+import { GlobalAudioPlayerComponent } from '../../../global-audio-player.component/global-audio-player.component';
 
 @Component({
   selector: 'app-admin-episode-view',
-  imports: [EditBar, SourceComponent, ProfileCard, NgOptimizedImage, Button],
+  imports: [
+    EditBar,
+    SourceComponent,
+    ProfileCard,
+    NgOptimizedImage,
+    Button,
+    AudioPlayer,
+    EpisodeCard,
+    AudioTrack,
+    PlayButton,
+  ],
   templateUrl: './admin-episode-view.html',
-  styleUrl: './admin-episode-view.scss'
+  styleUrl: './admin-episode-view.scss',
 })
 export class AdminEpisodeView {
-episodeId: string | null = '';
+  episodeId: string | null = '';
   editBarComponents: string = 'episode-page-view';
   editMode = false;
   editModeFromState: boolean = false;
   @ViewChild('fileInput') fileInput!: ElementRef;
   @ViewChildren('textInputField')
   textInputFields!: QueryList<ElementRef>;
+  @ViewChild('audioFileInput') audioFileInput!: ElementRef;
+  @ViewChild('audioInputOverlay') audioInputOverlay!: ElementRef;
   @ViewChild('inputOverlay') inputOverlay!: ElementRef;
   // episodeAuthor = '';
 
@@ -132,7 +150,8 @@ episodeId: string | null = '';
     private router: Router,
     private route: ActivatedRoute,
     private adminService: AdminService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private globalPlayer: GlobalAudioPlayerService
   ) {
     this.myForm = this.fb.group({
       title: [''],
@@ -198,10 +217,10 @@ episodeId: string | null = '';
       console.error('Error accessing episode data or ID:', error);
     }
 
-    if(this.editModeFromState == true){
+    if (this.editModeFromState == true) {
       this.editModeFromState = true;
-      this.editMode= true;
-      this.cdr.detectChanges()
+      this.editMode = true;
+      this.cdr.detectChanges();
     }
   }
 
@@ -263,7 +282,7 @@ episodeId: string | null = '';
   }
 
   postEpisode() {
-    this.formatepisode();
+    this.formatEpisode();
     this.adminService.updateEpisode(this.episode._id, this.episode).subscribe(
       (response) => {
         console.log('Success:', response);
@@ -282,7 +301,7 @@ episodeId: string | null = '';
     );
   }
 
-  formatepisode() {
+  formatEpisode() {
     let array = this.episode.about;
     console.log(array);
 
@@ -316,6 +335,10 @@ episodeId: string | null = '';
     this.fileInput.nativeElement.click();
     console.log('fweiuabfueiws');
   }
+  triggerAudioFileInput(): void {
+    this.audioFileInput.nativeElement.click();
+    console.log('fweiuabfueiws');
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -340,6 +363,36 @@ episodeId: string | null = '';
     }, 1600);
   }
 
+  onAudioFileSelected(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    const file = input.files[0];
+    
+    // Check if the file is indeed an audio file
+    if (file.type.startsWith('audio/')) {
+      // Read the file as a Data URL for immediate use/preview
+      const reader = new FileReader();
+      // console.log(reader);
+      reader.onload = () => {
+        // Assign to the audioUrl property
+        this.episode.audioUrl = reader.result as string; 
+      };
+      reader.readAsDataURL(file);
+      this.cdr.detectChanges();
+    } else {
+      console.error('Selected file is not an audio file.');
+    }
+  }
+
+  // Optional: Update the visual state of the overlay after selection (if you keep the overlay logic)
+  setTimeout(() => {
+    if (this.audioInputOverlay) {
+        this.audioInputOverlay.nativeElement.style.bottom = '1.2rem';
+    }
+    this.cdr.detectChanges();
+  }, 1600);
+}
+
   removeImage() {
     // 1. Reset the imageUrl property
     this.episode.imageUrl = '';
@@ -359,5 +412,30 @@ episodeId: string | null = '';
     // 4. Force change detection to update the view immediately
     this.cdr.detectChanges();
     console.log('Image removed.');
+  }
+
+   removeAudio() {
+    // 1. Reset the imageUrl property
+    this.episode.audioUrl = '';
+
+    // 2. Reset the file input element so the same file can be selected again
+    // The ViewChild reference is 'fileInput'
+    if (this.audioFileInput && this.audioFileInput.nativeElement) {
+      this.audioFileInput.nativeElement.value = null;
+    }
+
+    // 3. (Optional) Reset the position of the input overlay
+    // The ViewChild reference is 'inputOverlay'
+    if (this.audioInputOverlay && this.audioInputOverlay.nativeElement) {
+      this.audioInputOverlay.nativeElement.style.bottom = '3.2rem'; // Or whatever value hides it
+    }
+
+    // 4. Force change detection to update the view immediately
+    this.cdr.detectChanges();
+    console.log('Image removed.');
+  }
+
+  playEpisode(){
+    this.globalPlayer.playEpisode(this.episode);
   }
 }

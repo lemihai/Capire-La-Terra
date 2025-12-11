@@ -1,20 +1,92 @@
 <div class="episode-episode-view-wrapper">
   <header class="header-container">
-    <h2>Episode S{{episode.season}} E{{episode.number}}</h2>
+    <h2>Episode S{{ episode.season }} E{{ episode.number }}</h2>
   </header>
   <div class="edit-container-wrapper">
     <app-edit-bar
       mode="{{ editBarComponents }}"
       [componentData]="episode"
       [externalEditActivation]="editMode"
-      (deleteepisode)="deleteEpisode()"
-      (submitepisode)="submitCurrentEpisode()"
-      (saveepisode)="saveCurrentEpisode()"
+      (deleteEpisode)="deleteEpisode()"
+      (submitEpisode)="submitCurrentEpisode()"
+      (saveEpisode)="saveCurrentEpisode()"
       (switchFlagEvent)="switchFlag()"
       (editModeEmitter)="toggleEditMode()"
     />
   </div>
   <section class="episode-body">
+    @if(!editMode){
+
+    <header class="episode-non-edit-mode-header">
+      <div class="top-wrapper" (click)="toggleEditMode()">
+        <div class="image-no-edit-wrapper">
+          <img
+            [src]="episode.imageUrl"
+            height="500"
+            width="500"
+            alt="episode Image"
+            class="episode-image-no-edit"
+          />
+        </div>
+        <h1 class="episode-title">{{ episode?.title }}</h1>
+      </div>
+      @if(episode.audioUrl != ''){
+
+      <div class="audio-player-wrapper">
+        <!-- <div class="audio-card-player"> -->
+        <app-play-button (click)="playEpisode()" />
+        <p class="audio-player-duration">4:32</p>
+        <app-audio-track [audioTrackWidth]="464" />
+        <!-- </div> -->
+      </div>
+      }@else{
+      <div class="audio-file-missing-error">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M28 16C28 9.375 22.625 4 16 4C9.375 4 4 9.375 4 16C4 22.625 9.375 28 16 28C22.625 28 28 22.625 28 16Z"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-miterlimit="10"
+          />
+          <path
+            d="M15.641 10.3779L15.9997 17.9998L16.3579 10.3779C16.3601 10.3292 16.3523 10.2806 16.3351 10.2349C16.3179 10.1893 16.2915 10.1477 16.2576 10.1126C16.2238 10.0775 16.1831 10.0496 16.1381 10.0308C16.0931 10.0119 16.0448 10.0025 15.996 10.0029C15.9478 10.0034 15.9002 10.0136 15.856 10.0328C15.8118 10.0521 15.772 10.08 15.7388 10.115C15.7057 10.15 15.68 10.1914 15.6632 10.2365C15.6463 10.2817 15.6388 10.3298 15.641 10.3779Z"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M16 22.9941C15.7528 22.9941 15.5111 22.9208 15.3055 22.7835C15.1 22.6461 14.9398 22.4509 14.8452 22.2225C14.7505 21.9941 14.7258 21.7428 14.774 21.5003C14.8223 21.2578 14.9413 21.0351 15.1161 20.8603C15.2909 20.6854 15.5137 20.5664 15.7561 20.5182C15.9986 20.4699 16.2499 20.4947 16.4784 20.5893C16.7068 20.6839 16.902 20.8441 17.0393 21.0497C17.1767 21.2552 17.25 21.4969 17.25 21.7441C17.25 22.0757 17.1183 22.3936 16.8839 22.628C16.6495 22.8624 16.3315 22.9941 16 22.9941Z"
+            fill="black"
+          />
+        </svg>
+        <p class="error-text">
+
+          Episode audio file missing
+        </p>
+      </div>
+      }
+      <div class="episode-episode-details">
+        <!-- <p>{{ episode?.url }}</p> -->
+        <app-profile-card [profile]="episode.author" />
+        <div class="separator-line"></div>
+        <p class="date">{{ episode?.date }}</p>
+        <div class="separator-line"></div>
+        <div class="app-episode-wrapper">
+          @for (source of episode.sources; track $index) {
+          <app-source [source]="source" />
+          }
+        </div>
+      </div>
+    </header>
+    }@else if(editMode){
+
     <header class="episode-episode-header">
       @if(!editMode){
       <h1 class="episode-title" (click)="toggleEditMode()">{{ episode?.title }}</h1>
@@ -153,6 +225,102 @@
           <img *ngIf="episode.imageUrl" [src]="episode.imageUrl" alt="Preview" />
         </div> -->
       </div>
+      <div class="audio-upload-field">
+        <input
+          #audioFileInput
+          class="audio-input"
+          type="file"
+          id="audio-upload"
+          accept="audio/*"
+          (change)="onAudioFileSelected($event)"
+        />
+        <div class="audio-container">
+          @if (episode.audioUrl) {
+          <div class="audio-player-wrapper">
+            <div class="mic-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 28H20"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M24 13V15C24 19.4 20.4 23 16 23C11.6 23 8 19.4 8 15V13"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M16 23V28"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M16.0001 4.00005C15.474 3.9974 14.9527 4.09905 14.4662 4.29913C13.9797 4.49921 13.5377 4.79375 13.1657 5.16572C12.7938 5.53768 12.4992 5.97969 12.2991 6.46619C12.0991 6.95269 11.9974 7.47402 12.0001 8.00005V14.9376C12.0001 17.1376 13.8126 19.0001 16.0001 19.0001C18.1876 19.0001 20.0001 17.1876 20.0001 14.9376V8.00005C20.0001 5.75005 18.2501 4.00005 16.0001 4.00005Z"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="document-text">Your Image</p>
+            <app-play-button (click)="playEpisode()" />
+            <p class="audio-player-duration">4:32</p>
+            <app-audio-track [audioTrackWidth]="180" />
+            <div class="close-icon" (click)="removeAudio()">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M22.3643 9.63574L9.63634 22.3637"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M22.3637 22.3637L9.63574 9.63574"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+          } @else {
+          <label class="drop-audio-container-label">Drop your audio here</label>
+          }
+        </div>
+        <div class="input-field-overlay" #audioInputOverlay>
+          <label>Add audio file</label>
+          <label class="details-text">.MP3 .OGG</label>
+          <button class="upload-button">
+            <app-button
+              size="small-text"
+              buttonText="Upload audio"
+              iconType="open-right"
+              (click)="triggerAudioFileInput()"
+            />
+          </button>
+        </div>
+      </div>
       }
       <div class="episode-episode-details">
         <!-- <p>{{ episode?.url }}</p> -->
@@ -167,8 +335,9 @@
         </div>
       </div>
     </header>
+    }
     <div class="second-header">
-      <h1 class="episode-body-header">episode Body</h1>
+      <h1 class="episode-body-header">About text</h1>
       <div class="horizontal-separator-line"></div>
     </div>
     <div class="episode-text-wrapper">

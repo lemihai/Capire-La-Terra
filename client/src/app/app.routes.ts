@@ -15,9 +15,9 @@ import { ArticlesView } from './admin-page/articles-view/articles-view';
 import { NewsArticlePage } from './admin-page/news-view/news-article-page/news-article-page';
 import { ArticleCard } from './admin-page/articles-view/article-card/article-card';
 import { NewArticle } from './admin-page/articles-view/new-article/new-article';
-import { NewEpisode } from './admin-page/episodes-view/new-episode/new-episode';
 import { AdminArticlePage } from './admin-page/articles-view/admin-article-page/admin-article-page';
 import { AdminEpisodeView } from './admin-page/episodes-view/admin-episode-view/admin-episode-view';
+import { NewEpisode } from './admin-page/episodes-view/new-episode/new-episode';
 
 export const routes: Routes = [
   { path: '', component: LandingPage, title: 'Home' },

@@ -1,4 +1,12 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, OnInit } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  ChangeDetectorRef,
+  OnInit,
+  Input,
+} from '@angular/core';
 // import { AudioPlayer } from "../shared/components/audio-player/audio-player";
 import { PlayButton } from '../shared/buttons/play-button/play-button';
 import { AudioTrack } from '../shared/components/audio-track/audio-track';
@@ -11,6 +19,9 @@ import { OneForwardButton } from '../shared/buttons/one-forward-button/one-forwa
 import { VolumeButton } from '../shared/buttons/volume-button/volume-button';
 import { TensecBackward } from '../shared/buttons/tensec-backward/tensec-backward';
 import { TensecForward } from '../shared/buttons/tensec-forward/tensec-forward';
+import { Episode } from '../admin-page/service/episodes-service/episodes-service';
+import { GlobalAudioPlayerService } from './global-audio-player-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-global-audio-player',
@@ -32,9 +43,29 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
   @ViewChild('audioTrack') audioTrack!: ElementRef<HTMLAudioElement>;
   @ViewChild('audioTimeContainer') audioTimeContainer!: ElementRef<HTMLAudioElement>;
+  @Input() episode: Episode = {
+    _id: '',
+    title: '',
+    about: [],
+    author: '',
+    date: '',
+    number: 0,
+    season: 0,
+    imageUrl: '',
+    audioUrl: 'audio/freepik-sermon-in-folds.mp3',
+    sources: [],
+    transcript: '',
+    posted: false,
+  };
+  externalFlag = false;
+
+  private episodeSubscription!: Subscription;
 
   trackTriggeredPlay = false;
-  constructor(private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private cdRef: ChangeDetectorRef,
+    private globalPlayerService: GlobalAudioPlayerService
+  ) {}
 
   // Variables of the audio player
   playstate = 0;
@@ -72,9 +103,34 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
   opacity = '0';
 
   ngOnInit() {
+    this.episodeSubscription = this.globalPlayerService.episode$.subscribe(
+      (newEpisode: Episode) => {
+        // 2. Update the component's episode data
+        this.episode = newEpisode;
+
+        this.externalFlag == true;
+        // 3. Set the audio player's source and load the new episode
+        this.audioPlayer.nativeElement.src = this.episode.audioUrl;
+        this.audioPlayer.nativeElement.load(); // Reload the audio element
+        setTimeout(() => {
+          // 4. Start playback automatically (optional, but typical for a 'playEpisode' action)
+          this.play();
+          this.playstate = 1;
+          this.trackTriggeredPlay = true;
+
+          this.extend();
+
+          // Force change detection to update the template bindings
+          this.cdRef.detectChanges();
+        }, 10);
+      }
+    );
+
+    console.log(this.episode);
+
     setTimeout(() => {
       this.delayedFunction();
-    }, 3000);
+    }, 2000);
   }
 
   delayedFunction() {
@@ -152,6 +208,8 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
   }
 
   play() {
+    // this.globalPlayerService.playEpisode();
+    console.log(this.episode);
     if (this.playstate === 0) {
       this.audioPlayer.nativeElement.play();
       this.playstate = 1;

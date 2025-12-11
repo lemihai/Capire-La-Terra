@@ -4,6 +4,7 @@ import { AdminService } from '../../service/admin-service';
 import { Router } from '@angular/router';
 import { ProfileCard } from "../../../shared/components/profile-card/profile-card";
 import { PlayButton } from "../../../shared/buttons/play-button/play-button";
+import { GlobalAudioPlayerService } from '../../../global-audio-player.component/global-audio-player-service';
 
 @Component({
   selector: 'app-admin-episode-card',
@@ -22,7 +23,8 @@ export class AdminEpisodeCard {
   constructor(
     private cdr: ChangeDetectorRef,
     private adminService: AdminService,
-    private router: Router
+    private router: Router,
+    private globalPlayer: GlobalAudioPlayerService
   ) {}
 
   date = '';
@@ -42,6 +44,10 @@ export class AdminEpisodeCard {
   }
 
   ngAfterViewInit(): void {}
+
+  playEpisode(){
+    this.globalPlayer.playEpisode(this.episode);
+  }
 
   navigateToEpisodePage(event: MouseEvent) {
     event.stopPropagation();

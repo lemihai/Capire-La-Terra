@@ -9,6 +9,7 @@ import CustomEase from 'gsap/CustomEase';
 import { EpisodeCard } from '../../shared/components/episode-card/episode-card';
 import { Button } from '../../shared/buttons/button/button';
 import { AdminEpisodeCard } from './admin-episode-card/admin-episode-card';
+import { GlobalAudioPlayerService } from '../../global-audio-player.component/global-audio-player-service';
 
 @Component({
   selector: 'app-episodes-view',
@@ -22,7 +23,8 @@ export class EpisodesView {
     private adminService: AdminService,
     private newsService: EpisodesService,
     private ngZone: NgZone,
-    private router: Router
+    private router: Router,
+    private globalPlayer: GlobalAudioPlayerService
   ) {}
 
   time = 1.24;
@@ -209,48 +211,48 @@ export class EpisodesView {
     console.log(episode._id);
     if (episode.posted === true) {
       episode.posted = false;
-      // console.log(article);
-      // this.adminService.patchEpisodePostedStatus(episode._id, episode.posted).subscribe({
-      //   next: (response) => {
-      //     // console.log('Posted status updated successfully:', response);
-      //   },
-      //   error: (error) => {
-      //     // console.error('Error :', error);
-      //   },
-      // });
+      console.log(episode);
+      this.adminService.patchEpisodePostedStatus(episode._id, episode.posted).subscribe({
+        next: (response) => {
+          // console.log('Posted status updated successfully:', response);
+        },
+        error: (error) => {
+          // console.error('Error :', error);
+        },
+      });
     } else {
       episode.posted = true;
-      // this.adminService.patchEpisodePostedStatus(episode._id, episode.posted).subscribe({
-      //   next: (response) => {
-      //     // console.log('Posted status updated successfully:', response);
-      //   },
-      //   error: (error) => {
-      //     // console.error('Error updating posted status:', error);
-      //   },
-      // });
+      this.adminService.patchEpisodePostedStatus(episode._id, episode.posted).subscribe({
+        next: (response) => {
+          // console.log('Posted status updated successfully:', response);
+        },
+        error: (error) => {
+          // console.error('Error updating posted status:', error);
+        },
+      });
     }
     console.log('from view', episode);
   }
 
   editEpisode(id: string, ep: Episode, editMode: boolean) {
-    // this.navigateToEpisodePage(id, ep, editMode)
+    this.navigateToEpisodePage(id, ep, editMode)
   }
 
   deleteEpisode(_id: string) {
-    // this.adminService.deleteEpisode(_id).subscribe(
-    //   (response) => {
-    //     console.log('Article deleted successfully', response);
-    //     // Re-fetch the articles after deletion
-    //     this.adminService.getAllEpisodes().subscribe((data) => {
-    //       this.episode = data;
-    //       this.sorting.sortedListView = [...this.episode];
-    //       this.cdr.detectChanges(); // Update the view
-    //     });
-    //   },
-    //   (error) => {
-    //     console.error('Error deleting article', error);
-    //   }
-    // );
+    this.adminService.deleteEpisode(_id).subscribe(
+      (response) => {
+        console.log('Article deleted successfully', response);
+        // Re-fetch the articles after deletion
+        this.adminService.getAllEpisodes().subscribe((data) => {
+          this.episodes = data;
+          this.sorting.sortedListView = [...this.episodes];
+          this.cdr.detectChanges(); // Update the view
+        });
+      },
+      (error) => {
+        console.error('Error deleting article', error);
+      }
+    );
   }
 }
 

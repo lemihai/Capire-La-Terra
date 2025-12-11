@@ -27,8 +27,13 @@ export class EditBar implements OnInit, OnChanges {
 
   @Output() submitArticle = new EventEmitter<any>();
   @Output() saveArticle = new EventEmitter<any>();
-  @Output() switchFlagEvent = new EventEmitter<any>();
   @Output() deleteArticle = new EventEmitter<any>();
+
+  @Output() submitEpisode = new EventEmitter<any>();
+  @Output() saveEpisode = new EventEmitter<any>();
+  @Output() deleteEpisode = new EventEmitter<any>();
+
+  @Output() switchFlagEvent = new EventEmitter<any>();
   @Output() editModeEmitter = new EventEmitter<any>();
 
   editMode = 'hidden';
@@ -81,6 +86,10 @@ export class EditBar implements OnInit, OnChanges {
     window.open(this.componentData?.url, '_blank');
   }
 
+  // --------------------------
+    // ARTICLES
+    // --------------------------
+
   deleteCurrentArticle() {
     this.router.navigate(['/admin-page/news-view']);
     if (this.mode === 'news-article') {
@@ -126,5 +135,22 @@ export class EditBar implements OnInit, OnChanges {
       this.editMode = 'hidden';
       this.editModeArticleStatus = 'statusNoEdit';
     }
+  }
+
+  // --------------------------
+    // Episodes
+    // --------------------------
+
+    onDeleteEpisode() {
+    this.deleteEpisode.emit();
+  }
+
+  submitCurrentEpisode() {
+    console.log('works');
+    this.submitEpisode.emit();
+  }
+
+  saveCurrentEpisode() {
+    this.saveEpisode.emit();
   }
 }

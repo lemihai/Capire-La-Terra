@@ -32,7 +32,7 @@
     gap: 0.8rem;
     transition: var(--transition-160);
 
-    .button-wrapper{
+    .button-wrapper {
       width: auto;
       max-width: auto;
       transition: var(--transition-160);
@@ -104,7 +104,7 @@
         justify-content: center;
         align-items: center;
         transition: inherit;
-        
+
         .dot {
           height: 0.64rem;
           width: 0.64rem;
@@ -140,7 +140,7 @@
         }
       }
 
-      .posted-flag{
+      .posted-flag {
         transition: inherit;
 
         cursor: pointer;
@@ -151,10 +151,10 @@
         .icon-wrapper {
           transition: inherit;
 
-          .dot{
+          .dot {
             scale: 1.1;
             background-color: var(--main-color-dark);
-             box-shadow: 0rem 0rem 0rem 0.64rem var(--main-color-dark-16);
+            box-shadow: 0rem 0rem 0rem 0.64rem var(--main-color-dark-16);
           }
         }
 
@@ -166,7 +166,7 @@
   }
 }
 
-.editMode{
+.editMode {
   // display: flex;
   width: auto;
   max-width: auto;
@@ -175,7 +175,7 @@
   overflow: hidden;
 }
 
-.hidden{
+.hidden {
   // display: none;
   width: 0rem;
   max-width: 0rem;
@@ -185,7 +185,26 @@
   transition: var(--transition-160);
 }
 
-.statusNoEdit{
+.statusNoEdit {
   transform: translateX(-1.6rem);
   transition: var(--transition-160);
+}
+
+.episode-numbers-input {
+  width: auto;
+  min-width: 3.2rem;
+  height: 3.2rem;
+  background-color: var(--main-color-dark-16);
+  border: 1px solid var(--main-color-dark-16);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 0.8rem;
+
+  &:hover{
+    
+  }
 }

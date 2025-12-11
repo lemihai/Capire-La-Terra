@@ -192,7 +192,7 @@
         iconType="save"
         buttonText="Save"
         size="small-text"
-        (click)="saveCurrentArticle()"
+        (click)="saveCurrentEpisode()"
       />
     </div>
     <div class="button-wrapper {{ editMode }}">
@@ -200,7 +200,7 @@
         iconType="upload"
         buttonText="Publish"
         size="small-text"
-        (click)="submitCurrentArticle()"
+        (click)="submitCurrentEpisode()"
       />
     </div>
     <div class="article-status {{ editModeArticleStatus }}" (click)="switchFlag()">
@@ -257,8 +257,99 @@
   </div>
   <div class="right-wrapper">
     <div class="button-wrapper">
-      <app-button iconType="delete" buttonText="" size="small" (click)="onDeleteArticle()" />
+      <app-button iconType="delete" buttonText="" size="small" (click)="onDeleteEpisode()" />
+    </div>
+  </div>
+</div>
+} @if (mode==='new-episode') {
+<div class="edit-bar-wrapper">
+  <div class="left-wrapper">
+    <!-- <div class="button-wrapper">
+      <app-button iconType="edit" buttonText="Edit" size="small-text" (click)="triggerEditMode()" />
+    </div> -->
+    <div class="episode-numbers-input">
+      <div class="episode-number-wrapper">
+        <p>{{componentData.season}}</p>
+      </div>
+    </div>
+    <div class="episode-numbers-input">
+      <div class="episode-number-wrapper">
+        <p>{{componentData.number}}</p>
+      </div>
+    </div>
+    <div class="button-wrapper {{ editMode }}">
+      <app-button
+        iconType="save"
+        buttonText="Save"
+        size="small-text"
+        (click)="saveCurrentEpisode()"
+      />
+    </div>
+    <div class="button-wrapper {{ editMode }}">
+      <app-button
+        iconType="upload"
+        buttonText="Publish"
+        size="small-text"
+        (click)="submitCurrentEpisode()"
+      />
+    </div>
+    <div class="article-status {{ editModeArticleStatus }}" (click)="switchFlag()">
+      @if (componentData.posted === false){
+      <div class="false-flag">
+        <div class="icon-wrapper">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M23 3H9C7.34315 3 6 4.34315 6 6V26C6 27.6569 7.34315 29 9 29H23C24.6569 29 26 27.6569 26 26V6C26 4.34315 24.6569 3 23 3Z"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M11 8H21"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M11 13H21"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M11 18H16"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <p class="tag-icon">draft</p>
+      </div>
+      } @if (componentData.posted === true){
+      <div class="posted-flag">
+        <div class="icon-wrapper">
+          <div class="dot"></div>
+        </div>
+        <p class="tag-icon">to post</p>
+      </div>
+      }
+    </div>
+  </div>
+  <div class="right-wrapper">
+    <div class="button-wrapper">
+      <app-button iconType="delete" buttonText="" size="small" (click)="onDeleteEpisode()" />
     </div>
   </div>
 </div>
 }
+

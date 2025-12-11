@@ -1,4 +1,10 @@
-import { Router } from "express";
+import {
+  Router,
+  Request,
+  Response,
+  NextFunction,
+  RequestHandler,
+} from "express";
 import { ObjectId } from "mongodb";
 import cors from "cors";
 import { collections } from "../database.js";
@@ -81,28 +87,98 @@ episodeRouter.post("/episodes", async (req, res) => {
 
 // PUT
 
-episodeRouter.put("/episodes/:id", async (req, res) => {
+episodeRouter.put("/episodes/:id", (async (req: Request, res: Response) => {
+// ^^^ Cast the entire async function to RequestHandler ^^^
   try {
     const id = req?.params?.id;
-    const episode = req.body;
+    // Check if ID is a valid ObjectId format
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: `Invalid Article ID format: ${id}`,
+        success: false,
+      });
+    }
+
+    // The entire updated article object is in req.body
+    const updatedEpisode = req.body;
+    // Remove the _id from the body to prevent issues when setting the document
+    delete updatedEpisode._id; 
+
     const query = { _id: new ObjectId(id) };
-    const result = await collections?.episodes?.updateOne(query, {
-      $set: episode,
-    });
+
+    const result = await collections?.episodes?.replaceOne(query, updatedEpisode);
 
     if (result && result.matchedCount) {
-      res.status(200).send(`Updated an episode: ID ${id}`);
+      res.status(200).json({
+        message: `Successfully updated episode: ID ${id}`,
+        success: true,
+      });
     } else if (!result?.matchedCount) {
-      res.status(404).send(`Failed to find an episode: ID ${id}`);
+      res.status(404).json({
+        message: `Failed to find an episode to update: ID ${id}`,
+        success: false,
+      });
     } else {
-      res.status(304).send(`Failed to updgate and employee: ID ${id}`);
+      res.status(304).json({
+        message: `episode was found, but not modified: ID ${id}`,
+        success: true,
+      });
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Error";
-    console.log(message);
-    res.status(400).send(message);
+    console.error(message);
+    res.status(500).json({
+      success: false,
+      message: message,
+    });
   }
-});
+}) as RequestHandler);
+
+// PATH
+episodeRouter.patch("/episodes/:id", (async (req: Request, res: Response) => {
+  try {
+    const id = req?.params?.id;
+    const { posted } = req.body;
+    if (typeof posted !== "boolean") {
+      return res.status(400).json({
+        message: 'Invalid request body: "posted" must be a boolean',
+        success: false,
+      });
+    }
+
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: `Invalid episode ID format: ${id}`,
+        success: false,
+      });
+    }
+
+    const query = { _id: new ObjectId(id) };
+    const result = await collections?.episodes?.updateOne(query, {
+      $set: { posted },
+    });
+
+    if (result && result.matchedCount) {
+      res.status(200).json({
+        message: `Updated the posted flag for episode: ID ${id}`,
+        success: true,
+      });
+    } else if (!result?.matchedCount) {
+      res.status(404).json({
+        message: `Failed to find an episode: ID ${id}`,
+        success: true,
+      });
+    } else {
+      res.status(304).json({
+        message: `Failed to update the episode: ID ${id}`,
+        success: true,
+      });
+    }
+  } catch (error) {
+    res.status(400).send(error);
+  }
+}) as RequestHandler);
+
 
 // DELETE
 
@@ -113,7 +189,10 @@ episodeRouter.delete("/episodes/:id", async (req, res) => {
     const result = await collections?.episodes?.deleteOne(query);
 
     if (result && result.deletedCount) {
-      res.status(202).send(`Removed an episode: ID ${id}`);
+      res.status(200).json({
+        message: `Episode ${id} has been deleted`,
+        success: true,
+      });
     } else if (!result) {
       res.status(400).send(`Failed to remove an episode: ID ${id}`);
     } else if (!result.deletedCount) {
