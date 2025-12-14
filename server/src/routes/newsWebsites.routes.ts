@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ObjectId } from "mongodb";
 import cors from "cors";
 import { collections } from "../database.js";
+import { main_scraper } from "../scraper/main.js";
 
 export const newsWebsitesRouter = Router();
 newsWebsitesRouter.use(cors());
@@ -25,13 +26,16 @@ newsWebsitesRouter.get("/newsWebsites", async (_req, res) => {
 
 // GET : 1
 
-newsWebsitesRouter.get("/newsWebsites:id", async (req, res) => {
+newsWebsitesRouter.get("/newsWebsites/scrape/:name", async (req, res) => {
   try {
-    const id = req?.params?.id;
-    const query = { _id: new ObjectId(id) };
-    const newsWebsite = await collections?.newsWebsites?.find({ query });
+    const name = req?.params?.name;
 
-    res.status(200).send(newsWebsite);
+    main_scraper();
+
+    res.status(200).json({
+        message: `Scraping process started on: ${name}`,
+        success: true,
+      });
   } catch (error) {
     res.status(500).send(error);
   }

@@ -1,9 +1,9 @@
-<div class="card-wrapper">
-  <div class="status-wrapper {{ status }}">
+<div class="card-wrapper" (click)="startScraper(robot?.name); $event.stopPropagation()">
+  <div class="status-wrapper {{ robot?.status }}">
     <div class="status-container">
-      @if (status === 'active'){
+      @if (robot?.status === 'active'){
       <div class="dot"></div>
-      } @else if(status === 'inactive'){
+      } @else if(robot?.status === 'inactive'){
       <div class="icon">
         <svg
           width="32"
@@ -31,8 +31,8 @@
           />
         </svg>
       </div>
-      } @else if(status==='scraping'){
-      <div class="icon-loading">
+      } @else if(robot?.status==='scraping'){
+      <!-- <div class="icon-loading">
         <svg
           width="24"
           height="24"
@@ -45,19 +45,19 @@
             fill="black"
           />
         </svg>
-      </div>
+      </div> -->
       }
     </div>
-    <p class="status-text">{{ status }}</p>
+    <p class="status-text">{{ robot?.status }}</p>
   </div>
   <div class="details-wrapper">
     <div class="play-button">
-        <app-play-button />
+        <app-play-button (click)="startScraper(robot?.name); $event.stopPropagation()"/>
     </div>
-    <p class="title">{{ robot.name }}</p>
+    <p class="title">{{ robot?.name }}</p>
     <div class="separator-line"></div>
     <!-- <div class="url-wrapper"> -->
-    <a class="url-wrapper" href="{{ robot.url }}">
+    <a class="url-wrapper" href="{{ robot?.url }}">
       <div class="url-button">
         <svg
           width="32"
@@ -90,13 +90,13 @@
         </svg>
       </div>
       <p class="url">
-        {{ robot.url }}
+        {{ robot?.url }}
       </p>
     </a>
     <!-- </div> -->
   </div>
   <div class="actions">
-    <div class="button">
+    <!-- <div class="button">
       <div class="button-icon">
         <svg
           width="32"
@@ -118,7 +118,7 @@
         </svg>
         <p class="edit"></p>
       </div>
-    </div>
+    </div> -->
     <div class="button">
       <div class="button-icon">
         <svg

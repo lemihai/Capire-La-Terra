@@ -3,10 +3,9 @@
     <h2>Robots</h2>
   </header>
   <div class="filter-row">
-    <div class="filter-section-news-outlet">
-      <p>news outlet</p>
-      <div class="news-outlet-list"></div>
-      <div class="chevron-icon">
+    <div class="filter-section-active {{ sorting.activeSortingVisualFlag }} " (click)="sort('active')">
+      <p>status</p>
+      <div class="chevron-icon {{ sorting.sortDirection }}">
         <svg
           width="32"
           height="32"
@@ -25,9 +24,9 @@
       </div>
     </div>
     <div class="filter-separator-line"></div>
-    <div class="filter-section-title">
-      <p>title</p>
-      <div class="chevron-icon">
+    <div class="filter-section-name {{ sorting.nameSortingVisualFlag }} " (click)="sort('name')">
+      <p>name</p>
+      <div class="chevron-icon {{ sorting.sortDirection }}">
         <svg
           width="32"
           height="32"
@@ -46,9 +45,9 @@
       </div>
     </div>
     <div class="filter-separator-line"></div>
-    <div class="filter-section-author">
-      <p>author</p>
-      <div class="chevron-icon">
+    <div class="filter-section-url {{ sorting.urlSortingVisualFlag }} " (click)="sort('url')">
+      <p>url</p>
+      <div class="chevron-icon {{ sorting.sortDirection }}">
         <svg
           width="32"
           height="32"
@@ -66,33 +65,13 @@
         </svg>
       </div>
     </div>
-    <div class="filter-separator-line"></div>
-    <div class="filter-section-date">
-      <p>date</p>
-      <div class="chevron-icon">
-        <svg
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M8 12L16 20L24 12"
-            stroke="black"
-            stroke-width="1.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </div>
-    </div>
+    
   </div>
   <div class="separator-line"></div>
   <router-outlet />
   <div class="content-container">
     @for (robot of robots; track robot._id) {
-    <app-robot-card [status]="status" [robot]="robot"/>
+    <app-robot-card  [robot]="robot"/>
     }
   </div>
 </div>

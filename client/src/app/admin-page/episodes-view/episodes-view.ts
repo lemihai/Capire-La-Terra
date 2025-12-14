@@ -134,11 +134,7 @@ export class EpisodesView {
 
     // If the *same* key is clicked, flip the direction. Otherwise, default to 'asc'.
     // NOTE: Your date logic is inverted (see notes below), so for date, we default to 'desc' (newest first)
-    if (this.sorting.dateSort && this.sorting.sortDirection === 'desc') {
-      this.sorting.sortDirection = 'asc'; // Oldest first
-    } else if (this.sorting.dateSort) {
-      this.sorting.sortDirection = 'desc'; // Newest first (default)
-    } else if (this.sorting.sortDirection === 'asc') {
+    if (this.sorting.sortDirection === 'asc') {
       this.sorting.sortDirection = 'desc';
     } else {
       this.sorting.sortDirection = 'asc';

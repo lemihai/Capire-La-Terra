@@ -4,4 +4,5 @@ export interface NewsWebsite {
   id: mongodb.ObjectId;
   name: string;
   url: string;
+  status: string;
 }

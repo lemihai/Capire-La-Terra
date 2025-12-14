@@ -4,6 +4,7 @@ import { Article } from "../../models/article.js";
 import * as mongoDB from "mongodb";
 import { networkInterfaces } from "os";
 import { parse } from "path";
+import { News } from "../../models/news.js";
 
 // This async function is cleaning the texts from polluted output like
 async function cleanText(input: string) {
@@ -124,7 +125,7 @@ export async function cleanTechnicaScraper(
         // Creatinga  new article object that follows the Article moldel described in the bakend.
         // keep the summary to none.
         // In the future, the summary should be replaced by an ai script that summarisez the content
-        const newArticle: Article = {
+        const newArticle: News = {
           _id: new mongoDB.ObjectId(),
           url: articleUrl,
           title: articleTitle,
@@ -135,7 +136,7 @@ export async function cleanTechnicaScraper(
         };
 
         // insert the newArticle in the articles collection
-        const result = await collections?.articles?.insertOne(newArticle);
+        const result = await collections?.news?.insertOne(newArticle);
 
         // check if the result was succesfull and console log the isnerted ID. Else say that it was not successfull
         if (result?.acknowledged)

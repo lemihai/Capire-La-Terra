@@ -1,5 +1,15 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { PlayButton } from "../../../shared/buttons/play-button/play-button";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { PlayButton } from '../../../shared/buttons/play-button/play-button';
+import { AdminService } from '../../service/admin-service';
+import { NewsWebsite } from '../../service/robots-service/robots-service';
 
 @Component({
   selector: 'app-robot-card',
@@ -7,18 +17,17 @@ import { PlayButton } from "../../../shared/buttons/play-button/play-button";
   templateUrl: './robot-card.html',
   styleUrl: './robot-card.scss',
 })
-export class RobotCard implements OnInit{
-  @Input() status: string = '';
-  @Input() robot: any = '';
+export class RobotCard implements OnInit {
+  @Input() robot?: NewsWebsite;
+  constructor(private cdr: ChangeDetectorRef, private adminService: AdminService) {}
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-  ) {}
-
-  ngOnInit(): void {
-    console.log(this.status);
-    console.log(this.robot);
-    // this.cdr.detectChanges();
+  ngOnInit() {
+    // Avoid using ngOnInit for @Input() properties
   }
-
+  startScraper(robot: string | undefined) {
+      this.adminService.startScraper(robot).subscribe((data) => {
+        console.log(data);
+        this.cdr.detectChanges();
+      });
+  }
 }

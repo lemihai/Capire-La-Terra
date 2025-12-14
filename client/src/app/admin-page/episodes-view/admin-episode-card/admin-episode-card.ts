@@ -13,6 +13,7 @@ import { GlobalAudioPlayerService } from '../../../global-audio-player.component
 })
 export class AdminEpisodeCard {
   @Input() episode!: Episode;
+  @Input() viewMode!: string;
 
   @Output() navigateToEpisode = new EventEmitter<{ id: string; episode: Episode }>();
   @Output() submitEpisode = new EventEmitter<any>();
@@ -42,6 +43,8 @@ export class AdminEpisodeCard {
       this.seasonStarter = 'seasonStarter'
     }
     this.cdr.detectChanges();
+
+    console.log(this.episode);
 
     // console.log(this.article);
   }

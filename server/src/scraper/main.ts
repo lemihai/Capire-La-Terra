@@ -75,8 +75,32 @@ export const main_scraper = async () => {
       // await aljazeeraScraper(URLtest, page, browser);
       switch (scraperName) {
         case "aljazeera": {
-          await aljazeeraScraper(URL, page, browser);
+          try {
+            await aljazeeraScraper(URL, page, browser);
+            console.log(`Successfully scraped: aljazeera`);
 
+            // 1. Define the query using the string name
+            const query = { name: "aljazeera" };
+
+            // 2. Define the update to set the status to 'active' on success
+            const result = await collections.newsWebsites?.updateOne(query, {
+              $set: { status: "active" },
+            });
+            console.log(
+              `Updated aljazeera status to active. Modified count: ${result}`
+            );
+          } catch (error) {
+            console.error(`Error scraping aljazeera:`, error);
+
+            // On failure, set the status to 'inactive'
+            const query = { name: "aljazeera" };
+            const result = await collections.newsWebsites?.updateOne(query, {
+              $set: { status: "inactive" },
+            });
+            console.log(
+              `Updated aljazeera status to inactive due to error. Modified count: ${result}`
+            );
+          }
           break;
         }
         case "climatelinks": {

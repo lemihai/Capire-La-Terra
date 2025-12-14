@@ -3,6 +3,7 @@ import { collections } from "../../database.js";
 import { Article } from "../../models/article.js";
 import * as mongoDB from "mongodb";
 import { networkInterfaces } from "os";
+import { News } from "../../models/news.js";
 
 // This async function is cleaning the texts from polluted output like
 async function cleanText(input: string) {
@@ -100,7 +101,7 @@ export async function aljazeeraScraper(URL: string, page: any, browser: any) {
         // Creating a new article object that follows the Article model described in the backend.
         // keep the summary to none.
         // In the future, the summary should be replaced by an ai script that summarisez the content
-        const newArticle: Article = {
+        const newArticle: News = {
           _id: new mongoDB.ObjectId(),
           url: articleUrl,
           title: articleTitle,
@@ -112,7 +113,7 @@ export async function aljazeeraScraper(URL: string, page: any, browser: any) {
 
         // insert the newArticle in the articles collection
         if (newArticle.text != "missing") {
-          const result = await collections?.articles?.insertOne(newArticle);
+          const result = await collections?.news?.insertOne(newArticle);
           // check if the result was succesfull and console log the isnerted ID. Else say that it was not successfull
           if (result?.acknowledged)
             console.log("Article added succesfully", result.insertedId);

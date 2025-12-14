@@ -10,6 +10,7 @@ export interface NewsWebsite {
   _id?: string;
   name: string;
   url: string;
+  status: string;
 }
 
 export interface ScrapeQuery {
@@ -36,7 +37,10 @@ export class RobotsService {
   // GET Methods
   // --------------------------
   getRobots() {
-    console.log('trying');
-    return this.http.get(`${this.apiUrl}`);
+    return this.http.get<NewsWebsite[]>(`${this.apiUrl}`);
+  }
+
+  startScraper(name: string|undefined){
+    return this.http.get(`${this.apiUrl}/scrape/${name}`)
   }
 }

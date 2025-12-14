@@ -175,4 +175,8 @@ export class AdminService {
   getRobots() {
     return this.robotsService.getRobots();
   }
+
+  startScraper(name: string|undefined){
+    return this.robotsService.startScraper(name);
+  }
 }
