@@ -21,6 +21,8 @@ import { Router } from '@angular/router';
 })
 export class ArticleCard implements OnInit, AfterViewInit {
   @Input() article!: Article;
+  @Input() cardMode?: String;
+
 
   @Output() navigateToArticle = new EventEmitter<{ id: string; article: Article }>();
   @Output() submitArticle = new EventEmitter<any>();

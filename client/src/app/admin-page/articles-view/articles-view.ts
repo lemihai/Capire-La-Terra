@@ -91,7 +91,7 @@ export class ArticlesView {
     this.adminService.getAllArticles().subscribe((data) => {
       this.articles = data;
       this.sorting.sortedListView = [...this.articles];
-
+      this.sort('date');
       this.cdr.detectChanges(); // Manually trigger change detection if needed
     });
   }
@@ -208,18 +208,22 @@ export class ArticlesView {
     console.log('from view', article);
   }
 
-  editArticle(id:string, art:Article, editMode: boolean) {
-    this.navigateToArticlePage(id, art, editMode)
+  editArticle(id: string, art: Article, editMode: boolean) {
+    this.navigateToArticlePage(id, art, editMode);
   }
 
   deleteArticle(_id: string) {
     this.adminService.deleteArticle(_id).subscribe(
       (response) => {
+        const activeSortKey = this.getCurrentSortKey();
         console.log('Article deleted successfully', response);
         // Re-fetch the articles after deletion
         this.adminService.getAllArticles().subscribe((data) => {
           this.articles = data;
           this.sorting.sortedListView = [...this.articles];
+          this.sorting.sortDirection = this.sorting.sortDirection === 'asc' ? 'desc' : 'asc';
+          
+          this.sort(activeSortKey);
           this.cdr.detectChanges(); // Update the view
         });
       },
@@ -228,4 +232,12 @@ export class ArticlesView {
       }
     );
   }
+
+  getCurrentSortKey(): string {
+  if (this.sorting.postedSort) return 'posted';
+  if (this.sorting.titleSort) return 'title';
+  if (this.sorting.authorSort) return 'author';
+  // Default to 'date' if none other is active (based on your initial state)
+  return 'date';
+}
 }

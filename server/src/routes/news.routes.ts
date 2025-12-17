@@ -17,6 +17,8 @@ newsRouter.use(cors());
 newsRouter.get("/news", async (_req, res) => {
   try {
     // storing the result of the call in the articles cosntant
+    // let authorisationToke = _req.headers.authorization;
+    console.log(_req.headers.authorization?.split(':')[1]);
     const articles = await collections?.news?.find({}).toArray();
     // console.log(articles);
     // Handling results and sending it to the front-end

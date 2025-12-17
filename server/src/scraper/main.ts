@@ -63,7 +63,6 @@ export const main_scraper = async () => {
       const browser = await chromium.launch({ headless: true });
       const context = await browser.newContext();
       const page = await context.newPage();
-      console.log("test");
 
       scraperName = website?.name;
       // Set url one by one

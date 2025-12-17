@@ -152,6 +152,7 @@
           gap: 0.32rem;
 
           transition: inherit;
+
           .container-title {
             height: 1.6rem;
             transition: inherit;
@@ -220,10 +221,24 @@
 
     .right-column {
       width: 33%;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      // justify-content: space-between;
       align-items: stretch;
+      gap: 0.8rem;
+
+      .scrapers-row,
+      .news-row,
+      .articles-row {
+        flex-basis: 0; // Baseline size for flex item
+        flex-grow: 1; // Allow all rows to grow and share space equally
+        min-height: 0; // Crucial for allowing the flex item to shrink below its content size
+
+        display: flex; // Turn rows into flex containers for their contents
+        flex-direction: column;
+      }
+
       .scrapers-row {
       }
 
@@ -231,6 +246,22 @@
       }
 
       .articles-row {
+      }
+
+      .list-container-small {
+        padding-top: 0.8rem;
+        height: 100%; // Change this
+
+        // New styles for list container:
+        flex-grow: 1; // Make it take up all remaining vertical space in its parent row
+        min-height: 0; // Crucial for correct flex sizing
+        overflow-y: auto; // Make the content inside scrollable vertically
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 0.24rem;
       }
     }
   }

@@ -30,3 +30,27 @@
     text-overflow: ellipsis;
   }
 }
+.profile-wrapper-no-text {
+  width: 3.2rem;
+  min-width: 3.2rem;
+
+  display: flex;
+  flex: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  overflow: hidden;
+
+  mask-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 95%,
+      rgba(0, 0, 0, 0) 100%
+    );
+
+  .profile-image {
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 1rem;
+  }
+}

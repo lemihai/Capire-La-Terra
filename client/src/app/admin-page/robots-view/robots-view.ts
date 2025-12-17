@@ -33,27 +33,27 @@ export class RobotsView implements OnInit, AfterViewInit {
   sorting = {
     sortDirection: 'desc',
 
-    activeSort: false,
-    nameSort: true,
+    statusSort: true,
+    nameSort: false,
     urlSort: false,
 
-    activeSortingVisualFlag: 'sort-inactive',
+    statusSortingVisualFlag: 'sort-inactive',
     nameSortingVisualFlag: 'sort-inactive',
     urlSortingVisualFlag: 'sort-inactive',
 
     sortUIupdate(key: string) {
-      if (key == 'active') {
-        this.activeSortingVisualFlag = 'sort-active';
+      if (key == 'status') {
+        this.statusSortingVisualFlag = 'sort-active';
         this.nameSortingVisualFlag = 'sort-inactive';
         this.urlSortingVisualFlag = 'sort-inactive';
       }
       if (key == 'name') {
-        this.activeSortingVisualFlag = 'sort-inactive';
+        this.statusSortingVisualFlag = 'sort-inactive';
         this.nameSortingVisualFlag = 'sort-active';
         this.urlSortingVisualFlag = 'sort-inactive';
       }
       if (key == 'url') {
-        this.activeSortingVisualFlag = 'sort-inactive';
+        this.statusSortingVisualFlag = 'sort-inactive';
         this.nameSortingVisualFlag = 'sort-inactive';
         this.urlSortingVisualFlag = 'sort-active';
       }
@@ -64,10 +64,11 @@ export class RobotsView implements OnInit, AfterViewInit {
 
   sort(key: string) {
     // 1. Determine the current direction and update the specific key flag
+    console.log(this.robots);
 
     this.sorting.sortUIupdate(key);
     // Reset all key sort flags except the current one
-    this.sorting.activeSort = key === 'active';
+    this.sorting.statusSort = key === 'status';
     this.sorting.nameSort = key === 'name';
     this.sorting.urlSort = key === 'url';
 
@@ -112,9 +113,17 @@ export class RobotsView implements OnInit, AfterViewInit {
     this.adminService.getRobots().subscribe((data) => {
       this.robots = data;
       this.sorting.sortedListView = [...this.robots];
+      this.sort('status')
       this.cdr.detectChanges();
     });
   }
 
   ngAfterViewInit(): void {}
+
+  getCurrentSortKey(): string {
+    if (this.sorting.urlSort) return 'url';
+    if (this.sorting.nameSort) return 'name';
+    // Default to 'date' if none other is active (based on your initial state)
+    return 'active';
+  }
 }

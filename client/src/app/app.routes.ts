@@ -18,6 +18,7 @@ import { NewArticle } from './admin-page/articles-view/new-article/new-article';
 import { AdminArticlePage } from './admin-page/articles-view/admin-article-page/admin-article-page';
 import { AdminEpisodeView } from './admin-page/episodes-view/admin-episode-view/admin-episode-view';
 import { NewEpisode } from './admin-page/episodes-view/new-episode/new-episode';
+import { authGuard } from '../services/guards/auth-guard';
 
 export const routes: Routes = [
   { path: '', component: LandingPage, title: 'Home' },
@@ -28,6 +29,7 @@ export const routes: Routes = [
   {
     path: 'admin-page',
     component: AdminPage,
+    canActivate: [authGuard],
     title: 'Admin',
     children: [
       {

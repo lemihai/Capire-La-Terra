@@ -1,0 +1,50 @@
+@use '../../../variables.scss' as *;
+
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.main-view-wrapper {
+  width: 100%;
+  // height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  gap: 0.8rem;
+
+  .header-container {
+    margin-bottom: 1.6rem;
+  }
+}
+
+.separator-line {
+  height: 0.16rem;
+  min-height: 0.16rem;
+  width: 100%;
+  background-color: var(--main-color-dark-32);
+  border-radius: 1rem;
+}
+
+.content-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0.24rem;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  /* Scrollbar styling */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: var(--main-color-dark-hover) var(--main-color-dark-invisible); /* For Firefox */
+  position: relative;
+}

@@ -8,7 +8,8 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from '../services/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
 
     // HTTPS Client
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
 
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),

@@ -3,12 +3,12 @@
 :host {
   width: 100%;
   height: auto;
-  transition: all 0.64s var(--cubic-bezzier-a);
+  transition: all 0.6s var(--cubic-bezzier-a);
   //   Instant tranisiton is also very nice. Experiment
   //   transition: var(--transition-160);
   &:hover {
     // transition: all .64s var(--cubic-bezzier-a);
-    transition: var(--transition-160);
+    transition: all 0.6s var(--cubic-bezzier-a);
     cursor: pointer;
   }
 }
@@ -112,6 +112,194 @@
   }
 }
 
+.card-wrapper-main {
+  width: 100%;
+  height: 4rem;
+  min-height: 4rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  transition: inherit;
+
+  gap: 1.2rem;
+
+  .status-wrapper {
+    width: 4rem;
+    max-width: 4rem;
+    min-width: 4rem;
+    padding: 0.8rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .status-container {
+    }
+  }
+
+  .active {
+    width: 4rem;
+    max-width: 4rem;
+    min-width: 4rem;
+  }
+
+  .scraping {
+    width: 4rem;
+    max-width: 4rem;
+    min-width: 4rem;
+  }
+
+  .inactive {
+    width: 4rem;
+    max-width: 4rem;
+    min-width: 4rem;
+  }
+
+  .play-button {
+    width: 0rem;
+    min-width: 0rem;
+    height: 4rem;
+    overflow: hidden;
+    border-radius: 1.2rem;
+    background-color: var(--main-color-dark-invisible);
+    border: 1px solid var(--main-color-dark-invisible);
+    transition: inherit;
+    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    app-play-button {
+    transition: inherit;
+      scale: 0.5;
+    }
+  }
+
+  .content {
+    width: 100%;
+    height: 4rem;
+    background-color: var(--main-color-dark-invisible);
+    border: 1px solid var(--main-color-dark-invisible);
+    border-radius: 1.2rem;
+    padding: 0.4rem;
+  }
+
+  &:hover {
+    transition: inherit;
+    .content {
+      background-color: var(--main-color-dark-08);
+      border: 1px solid var(--main-color-dark-16);
+      transition: inherit;
+    }
+    .play-button {
+      width: 4rem;
+      min-width: 4rem;
+      transition: inherit;
+      background-color: var(--main-color-dark-08);
+      border: 1px solid var(--main-color-dark-16);
+      app-play-button {
+      transition: inherit;
+        scale: 1;
+      }
+    }
+
+    .active {
+      background-color: var(--main-color-correct-32);
+      border: 1px solid var(--main-color-correct-16);
+      padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+      transition: inherit;
+      min-width: 4rem;
+      width: 4rem;
+    }
+
+    .inactive {
+      background-color: var(--main-color-error-32);
+      border: 1px solid var(--main-color-error-16);
+      padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+      transition: inherit;
+      min-width: 4rem;
+      width: 4rem;
+    }
+
+    .scraping {
+      background-color: var(--main-color-alert-32);
+      border: 1px solid var(--main-color-alert-16);
+      padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+      transition: inherit;
+      min-width: 4rem;
+      width: 4rem;
+    }
+  }
+}
+
+.status-wrapper {
+  transition: inherit;
+
+  // width: 12.8rem;
+  height: 4rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.2rem;
+
+  border-radius: 1.2rem;
+  transition: inherit;
+
+  .status-container {
+    height: 2.4rem;
+    width: 2.4rem;
+    min-width: 2.4rem;
+    min-height: 2.4rem;
+
+    border-radius: 0.8rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: inherit;
+
+    .dot {
+      border-radius: 2rem;
+      height: 0.64rem;
+      width: 0.64rem;
+      background-color: var(--main-color-light);
+      box-shadow: 0rem 0rem 0rem 0.16rem var(--main-color-light-16);
+      transition: inherit;
+      /* Add animation */
+    }
+  }
+
+  /* Define the pulse animation */
+  @keyframes pulse {
+    0% {
+      height: 0.64rem;
+      width: 0.64rem;
+      box-shadow: 0rem 0rem 0rem 0.16rem var(--main-color-light-32);
+    }
+    52% {
+      height: 0.8rem;
+      width: 0.8rem;
+    }
+    64% {
+      box-shadow: 0rem 0rem 0rem 0.8rem var(--main-color-light-08);
+    }
+    78% {
+      height: 0.64rem;
+      width: 0.64rem;
+    }
+    100% {
+      box-shadow: 0rem 0rem 0rem 0.16rem var(--main-color-light-invisible);
+    }
+  }
+
+  .status-text {
+    transition: inherit;
+  }
+}
+
 .card-wrapper {
   width: 100%;
   height: 4rem;
@@ -125,73 +313,6 @@
   gap: 1.2rem;
 
   transition: inherit;
-
-  .status-wrapper {
-    transition: inherit;
-
-    // width: 12.8rem;
-    height: 4rem;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1.2rem;
-
-    border-radius: 1.2rem;
-    transition: inherit;
-
-    .status-container {
-      height: 2.4rem;
-      width: 2.4rem;
-      min-width: 2.4rem;
-      min-height: 2.4rem;
-
-      border-radius: 0.8rem;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: inherit;
-
-      .dot {
-        border-radius: 2rem;
-        height: 0.64rem;
-        width: 0.64rem;
-        background-color: var(--main-color-light);
-        box-shadow: 0rem 0rem 0rem 0.16rem var(--main-color-light-16);
-        transition: inherit;
-        /* Add animation */
-      }
-    }
-
-    /* Define the pulse animation */
-    @keyframes pulse {
-      0% {
-        height: 0.64rem;
-        width: 0.64rem;
-        box-shadow: 0rem 0rem 0rem 0.16rem var(--main-color-light-32);
-      }
-      52% {
-        height: 0.8rem;
-        width: 0.8rem;
-      }
-      64% {
-        box-shadow: 0rem 0rem 0rem 0.8rem var(--main-color-light-08);
-      }
-      78% {
-        height: 0.64rem;
-        width: 0.64rem;
-      }
-      100% {
-        box-shadow: 0rem 0rem 0rem 0.16rem var(--main-color-light-invisible);
-      }
-    }
-
-    .status-text {
-      transition: inherit;
-    }
-  }
 
   .details-wrapper {
     width: 100%;
@@ -214,6 +335,10 @@
       overflow: hidden;
       border-radius: 0.8rem;
       transition: inherit;
+      // app-play-button {
+      // transition: inherit;
+      //   scale: 0.5;
+      // }
     }
 
     .title {
@@ -424,6 +549,11 @@
       .play-button {
         width: 4rem;
         transition: inherit;
+        
+        // app-play-button {
+        // transition: inherit;
+        //   scale: 1;
+        // }
       }
     }
 

@@ -29,6 +29,7 @@ export class LoginPage implements OnInit, OnChanges {
   // Use Angular's inject function for services in standalone components
   private api = inject(Api);
   private http = inject(HttpClient); // <--- Inject HttpClient here
+  private authService = inject(AuthService);
 
   emailFocused = '';
   passwordFocused = '';
@@ -47,8 +48,6 @@ export class LoginPage implements OnInit, OnChanges {
   // You can remove the constructor if you use the inject function:
   // constructor(private api: Api) {}
 
-  private authService = inject(AuthService);
-
   checkPassTyped() {
     const isFilled = this.password.trim().length > 0;
     if (isFilled) {
@@ -64,7 +63,7 @@ export class LoginPage implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log('initialised');
+    // console.log('initialised');
   }
 
   // Login: admin, password

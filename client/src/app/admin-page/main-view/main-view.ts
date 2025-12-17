@@ -10,10 +10,15 @@ import { Article } from '../service/articles-service/articles-service';
 import { NewsWebsite } from '../service/robots-service/robots-service';
 import { Episode } from '../service/episodes-service/episodes-service';
 import { News } from '../service/news-service/news-service';
+import { RobotCard } from '../robots-view/robot-card/robot-card';
+
+import { SlicePipe } from '@angular/common';
+import { NewsCardComponent } from '../../shared/components/news-card.component/news-card.component';
+import { ArticleCard } from '../articles-view/article-card/article-card';
 
 @Component({
   selector: 'app-main-view',
-  imports: [Button, EpisodeCard, AdminEpisodeCard],
+  imports: [Button, EpisodeCard, AdminEpisodeCard, RobotCard, NewsCardComponent, ArticleCard],
   templateUrl: './main-view.html',
   styleUrl: './main-view.scss',
 })
@@ -40,7 +45,7 @@ export class MainView implements OnInit, AfterViewInit {
     posted: false,
   };
 
-    article: Article = {
+  article: Article = {
     _id: '',
     title: '',
     date: '',
@@ -53,7 +58,7 @@ export class MainView implements OnInit, AfterViewInit {
     posted: false,
   };
 
-   news: News = {
+  news: News = {
     author: '',
     date: '2010-01-17',
     summary: '',
@@ -63,13 +68,12 @@ export class MainView implements OnInit, AfterViewInit {
     _id: '',
   };
 
-    robot: NewsWebsite = {
+  robot: NewsWebsite = {
     _id: '',
     name: '',
     url: '',
     status: '',
   };
-
 
   newsListMain: any = [];
   articlesListMain: any = [];
@@ -98,7 +102,7 @@ export class MainView implements OnInit, AfterViewInit {
         // results will be an object:
         // { articles: articlesData, robots: robotsData, episodes: episodesData, news: newsData }
 
-        console.log(results);
+        // console.log(results);
         let a = results;
         let b = a.articles;
         let articlesArray = results.articles;
@@ -106,16 +110,16 @@ export class MainView implements OnInit, AfterViewInit {
         let newsArray = results.news;
         let robotsArray = results.robots;
 
-        console.log('articlesarray', articlesArray, articlesArray);
-        console.log(episodesArray);
-        console.log(newsArray);
-        console.log(robotsArray);
-        
+        // console.log('articlesarray', articlesArray, articlesArray);
+        // console.log(episodesArray);
+        // console.log('newsArray', newsArray);
+        // console.log(robotsArray);
+
         this.articlesListMain = articlesArray;
         this.episodesListMain = episodesArray;
         this.newsListMain = newsArray;
         this.robotsListMain = robotsArray;
-        
+
         this.articlesLength = this.articlesListMain.length;
         this.episodesLength = this.episodesListMain.length;
         this.newsLength = this.newsListMain.length;
@@ -126,7 +130,7 @@ export class MainView implements OnInit, AfterViewInit {
         // this.episodesList = results.episodes;
         // this.newsList = results.news;
 
-        console.log('All data fetched:', results);
+        // console.log('All data fetched:', results);
 
         // 3. Manually trigger change detection if the component's strategy requires it
         // This is often needed when subscribing within ngOnInit or when using OnPush
@@ -137,6 +141,13 @@ export class MainView implements OnInit, AfterViewInit {
         // Handle error appropriately (e.g., show a user notification)
       },
     });
+  }
+
+  navigateToPage(page: string){
+    this.adminService.triggerViewChange(
+      page,
+      ''
+    );
   }
 
   ngAfterViewInit(): void {}
@@ -159,10 +170,10 @@ export class MainView implements OnInit, AfterViewInit {
   }
 
   postEpisode(episode: Episode) {
-    console.log(episode._id);
+    // console.log(episode._id);
     if (episode.posted === true) {
       episode.posted = false;
-      console.log(episode);
+      // console.log(episode);
       // if (this.episode._id) {
       if (!episode._id) {
         console.error('Cannot update episode status: Episode ID is missing.');
@@ -194,7 +205,7 @@ export class MainView implements OnInit, AfterViewInit {
       });
       // }
     }
-    console.log('from view', episode);
+    // console.log('from view', episode);
   }
 
   editEpisode(id: string, ep: Episode, editMode: boolean) {
@@ -204,7 +215,7 @@ export class MainView implements OnInit, AfterViewInit {
   deleteEpisode(_id: string) {
     this.adminService.deleteEpisode(_id).subscribe(
       (response) => {
-        console.log('Article deleted successfully', response);
+        // console.log('Article deleted successfully', response);
         // Re-fetch the articles after deletion
         this.adminService.getAllEpisodes().subscribe((data) => {
           let episodes = data;
@@ -218,16 +229,101 @@ export class MainView implements OnInit, AfterViewInit {
     );
   }
 
-
   // --------------------------
   // NEWS
   // --------------------------
+
+  navigateToNewsArticlePage(articleId: string, articleData: any) {
+    this.adminService.triggerViewChange('news-article-view', 'news-view', articleId, articleData);
+    // console.log();
+  }
+
+  deleteThisArticle(articleId: string) {
+    this.adminService.deleteOneNewsArticle(articleId).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        // Error: Handle the error (e.g., show an error message)
+        console.error('Error deleting article:', error);
+        alert(`Failed to delete article: ${error.message || error}`);
+      }
+    );
+  }
 
   // --------------------------
   // ROBOTS
   // --------------------------
 
+  startScrapers(robot: string | undefined) {
+    this.adminService.startScraper(robot).subscribe((data) => {
+      // console.log(data);
+      this.cdr.detectChanges();
+    });
+  }
+
   // --------------------------
   // ARTICLES
   // --------------------------
+
+  navigateToNewArticleView() {
+    this.adminService.triggerViewChange('new-article', 'articles-view');
+  }
+
+  navigateToArticlePage(articleId: string, articleData: any, editMode?: boolean) {
+    this.adminService.triggerViewChange(
+      'admin-article-page',
+      'articles-view',
+      articleId,
+      articleData,
+      editMode
+    );
+  }
+
+  postArticle(article: Article) {
+    // console.log(article._id);
+    if (article.posted === true) {
+      article.posted = false;
+      // console.log(article);
+      this.adminService.patchArticlePostedStatus(article._id, article.posted).subscribe({
+        next: (response) => {
+          // console.log('Posted status updated successfully:', response);
+        },
+        error: (error) => {
+          // console.error('Error :', error);
+        },
+      });
+    } else {
+      article.posted = true;
+      this.adminService.patchArticlePostedStatus(article._id, article.posted).subscribe({
+        next: (response) => {
+          // console.log('Posted status updated successfully:', response);
+        },
+        error: (error) => {
+          // console.error('Error updating posted status:', error);
+        },
+      });
+    }
+    // console.log('from view', article);
+  }
+
+  editArticle(id: string, art: Article, editMode: boolean) {
+    this.navigateToArticlePage(id, art, editMode);
+  }
+
+  deleteArticle(_id: string) {
+    this.adminService.deleteArticle(_id).subscribe(
+      (response) => {
+        // console.log('Article deleted successfully', response);
+        // Re-fetch the articles after deletion
+        this.adminService.getAllArticles().subscribe((data) => {
+          this.articlesListMain = data;
+          this.cdr.detectChanges(); // Update the view
+        });
+      },
+      (error) => {
+        console.error('Error deleting article', error);
+      }
+    );
+  }
 }

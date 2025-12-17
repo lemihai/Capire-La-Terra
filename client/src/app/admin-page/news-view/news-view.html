@@ -3,7 +3,7 @@
     <h2>News</h2>
   </header>
   <div class="filter-row">
-    <div class="filter-section-news-outlet {{sorting.outletSortingVisualFlag}} " (click)="sort('outlet')">
+    <div class="filter-section-news-outlet {{sorting.urlSortingVisualFlag}} " (click)="sort('url')">
       <p>news outlet</p>
       <div class="news-outlet-list"></div>
       <div class="chevron-icon {{sorting.sortDirection}}">
@@ -95,7 +95,8 @@
     <app-news-card
       [article]="newsArticle"
       cardType="admin-small"
-      (click)="navigateToNewsArticlePage(newsArticle._id, newsArticle)"
+      (navigateToArticle)="navigateToNewsArticlePage(newsArticle._id, newsArticle)"
+      (deleteArticle)="deleteThisArticle(newsArticle._id)"
     />
     }
   </div>

@@ -5,6 +5,9 @@ import {
   OnInit,
   NgZone,
   ChangeDetectorRef,
+  OnChanges,
+  SimpleChanges,
+  inject,
 } from '@angular/core';
 import {
   Router,
@@ -20,7 +23,12 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import CustomEase from 'gsap/CustomEase';
+
+// rxjs
 import { filter } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { AdminService } from './service/admin-service';
 
 @Component({
   selector: 'app-admin-page',
@@ -112,6 +120,11 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     },
   };
 
+  private adminService = inject(AdminService); // If using inject, otherwise inject in constructor
+  private destroy$ = new Subject<void>();
+
+  fromMain = '';
+
   constructor(
     private ngZone: NgZone,
     private router: Router,
@@ -154,10 +167,27 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     if (currentRouter.includes('new-episode')) {
       currentRoute = currentRouter;
     }
+
+    // console.log(398439, currentRoute, currentRouter);
+    this.fromMain = currentRoute;
     // if (currentRouter.includes('admin-article-page')) {
     //
     //   currentRoute = currentRouter;
     //
+    // }
+
+    // if (currentRoute == 'admin-page') {
+    this.adminService.viewChange$.pipe(takeUntil(this.destroy$)).subscribe((view: string) => {
+      // 2. Update the sidebar state using the received view key
+      if (view === '/admin-page/news-view') {
+        view.replace('/admin-page/', '');
+      }
+      // let splitview = view.split('/admin-page/').pop();
+      // console.log(3945348, splitview);
+      this.SetSidebarView(view);
+
+      // Note: SetSidebarView already calls this.cdr.detectChanges();
+    });
     // }
 
     // console.log('');
@@ -166,28 +196,14 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     // console.log('');
     // console.log('');
 
-    this.SetSidebarView(currentRoute);
-
     // Subscribe to future route changes
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.Sidebar.currentRoute = event.urlAfterRedirects;
-
-        //HERE IS THE PLACE WHERE THE NEW ARTICLE ERROR APPEARS BECAUSE IT REDIRECTS TO NEWS-ARTICLE FOR SOME REASON. THE FIRST ONE IS NICE
-        // if (this.Sidebar.currentRoute.includes('new-article')) {
-        //   this.Sidebar.currentRoute = 'new-article';
-        // }
-
-        //
-        //
-        //
-        //
-        //
-
-        // this.SetSidebarView(this.Sidebar.currentRoute);
       });
 
+    this.SetSidebarView(currentRoute);
     // this.cdr.detectChanges();
   }
 
@@ -196,6 +212,8 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     if (this.smoother) {
       this.smoother.kill();
     }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngAfterViewInit() {
@@ -275,72 +293,88 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   SetSidebarView(view: string) {
-    console.log('');
-    console.log('');
-    console.log(32, view);
-    console.log('');
-    console.log('');
+    // console.log('');
+    // console.log('');
+    // console.log(32, view);
+    // console.log('');
+    // console.log('');
     if (view === 'admin-page') {
       this.Sidebar.setActive('admin-page');
       this.buttonHoverTop = 'calc(6.1rem)';
       this.router.navigate(['admin-page']);
-    } else if (view === 'news-view') {
+    } else if (view === 'news-view' || view === '/admin-page/news-view') {
+      // console.log('');
+      // console.log('');
+      // console.log(100, view);
+      // console.log('');
+      // console.log('');
       this.Sidebar.setActive('news-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important';
       this.router.navigate(['admin-page/news-view']);
-    } else if (view === 'articles-view') {
+      // return
+    } else if (view === 'articles-view' || view ==='/admin-page/articles-view') {
       this.Sidebar.setActive('articles-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
       this.router.navigate(['admin-page/articles-view']);
-    } else if (view === 'robots-view') {
+      // return
+    } else if (view === 'robots-view' || view ==='/admin-page/robots-view') {
       this.Sidebar.setActive('robots-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*3) + (0.4rem*3)) !important';
       this.router.navigate(['admin-page/robots-view']);
+      // return
     } else if (view === '/admin-page/episodes-view' || view === 'episodes-view') {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
       this.router.navigate(['admin-page/episodes-view']);
+      // return
     } else if (view === 'settings') {
       this.Sidebar.setActive('settings');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*5) + (0.4rem*5)) !important';
       this.router.navigate(['admin-page/settings']);
+      // return
     } else if (view === 'logout') {
       this.Sidebar.setActive('logout');
       this.buttonHoverTop = 'auto';
       this.bottomHoverBottom = '.8rem !important';
       this.router.navigate(['']);
+      // return
     } else if (view.includes('news-article-view')) {
       this.Sidebar.setActive('news-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important';
       this.router.navigate([`${view}`]);
+      // return
     } else if (view.includes('admin-article-page')) {
       this.Sidebar.setActive('articles-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
       this.router.navigate([`/admin-page/articles-view/${view}`]);
+      // return
     } else if (view === '/admin-page/articles-view/new-article') {
       this.Sidebar.setActive('articles-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
       // this.router.navigate([`admin-page/new-article`]);
       this.router.navigate([`${view}`]);
+      // return
     } else if (view.includes('new-episode')) {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
       this.router.navigate([`${view}`]);
-    }else if (view.includes('episode-page')) {
+      // return
+    } else if (view.includes('episode-page')) {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
       this.router.navigate([`${view}`]);
-    }else {
+      // return
+    } else {
       // this.Sidebar.setActive('admin-page');
       // this.buttonHoverTop = 'calc(6.1rem)';
       // this.router.navigate(['admin-page']);

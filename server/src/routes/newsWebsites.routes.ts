@@ -30,7 +30,8 @@ newsWebsitesRouter.get("/newsWebsites/scrape/:name", async (req, res) => {
   try {
     const name = req?.params?.name;
 
-    main_scraper();
+    console.log(name);
+    // main_scraper();
 
     res.status(200).json({
         message: `Scraping process started on: ${name}`,

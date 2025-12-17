@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output } from '@angular/core';
 import { ProfileCard } from '../profile-card/profile-card';
 import { SourceComponent } from '../source.component/source.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { NavbarGsapService } from '../../../navbar/navbar-gsap-service';
 import gsap from 'gsap';
 import CustomEase from 'gsap/CustomEase';
 import { News } from '../../../admin-page/service/news-service/news-service';
+import { AdminService } from '../../../admin-page/service/admin-service';
 
 // export interface Article {
 //   _id?: string; // MongoDB ID (optional for new articles)
@@ -37,6 +38,9 @@ export class NewsCardComponent implements OnInit {
   };
   @Input() cardType: string = ''; // Default value
   @Input() cardDirection: string = ''; // Default value
+
+  @Output() deleteArticle = new EventEmitter<{ id: string}>();
+  @Output() navigateToArticle = new EventEmitter<{ id: string}>();
 
   source = '';
   currentRoute: string = '';
@@ -183,6 +187,14 @@ export class NewsCardComponent implements OnInit {
   navigateToArticlePage() {
     this.updateRoute();
     this.triggerPageTransition('/article-page', this.currentRoute);
+  }
+
+  onDeleteArticle() {
+    this.deleteArticle.emit();
+  }
+
+  onNavigateToArticle(){
+    this.navigateToArticle.emit();
   }
 
   // defineSource(url: string) {

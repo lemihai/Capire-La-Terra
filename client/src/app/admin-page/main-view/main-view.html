@@ -3,7 +3,7 @@
     <h2>Dashboard</h2>
   </header>
   <div class="details-row">
-    <div class="details-container">
+    <div class="details-container" (click)="navigateToPage('news-view')">
       <div class="icon">
         <svg
           width="32"
@@ -96,10 +96,10 @@
       </div>
       <div class="container-column">
         <p class="container-title">News</p>
-        <h2 class="container-details">{{newsLength}}</h2>
+        <h2 class="container-details">{{ newsLength }}</h2>
       </div>
     </div>
-    <div class="details-container">
+    <div class="details-container" (click)="navigateToPage('articles-view')">
       <div class="icon">
         <svg
           width="32"
@@ -168,10 +168,10 @@
       </div>
       <div class="container-column">
         <p class="container-title">Articles</p>
-        <h2 class="container-details">{{articlesLength}}</h2>
+        <h2 class="container-details">{{ articlesLength }}</h2>
       </div>
     </div>
-    <div class="details-container">
+    <div class="details-container" (click)="navigateToPage('robots-view')">
       <div class="icon">
         <svg
           width="32"
@@ -241,10 +241,10 @@
       </div>
       <div class="container-column">
         <p class="container-title">Robots</p>
-        <h2 class="container-details">{{robotsLength}}</h2>
+        <h2 class="container-details">{{ robotsLength }}</h2>
       </div>
     </div>
-    <div class="details-container">
+    <div class="details-container" (click)="navigateToPage('episodes-view')">
       <div class="icon">
         <svg
           width="32"
@@ -313,7 +313,7 @@
       </div>
       <div class="container-column">
         <p class="container-title">Episodes</p>
-        <h2 class="container-details">{{episodesLength}}</h2>
+        <h2 class="container-details">{{ episodesLength }}</h2>
       </div>
     </div>
   </div>
@@ -322,7 +322,12 @@
       <div class="section-header">
         <h2 class="content-container-h2">Episodes</h2>
         <div class="button-wrapper">
-          <app-button buttonText="Add Episode" iconType="add" size="small-text" />
+          <app-button
+            buttonText="Add Episode"
+            iconType="add"
+            size="small-text"
+            (click)="navigateToNewEpisodeView()"
+          />
         </div>
       </div>
       <div class="separator-line"></div>
@@ -342,28 +347,62 @@
     <div class="right-column">
       <div class="scrapers-row">
         <div class="section-header">
-          <h2 class="content-container-h2">Scrapers</h2>
+          <h2 class="content-container-h2">Robots</h2>
           <div class="button-wrapper">
-            <app-button buttonText="Scrape All" iconType="add" size="small-text" />
+            <app-button
+              buttonText="Scrape All"
+              iconType="add"
+              size="small-text"
+              (click)="startScrapers('all')"
+            />
           </div>
         </div>
         <div class="separator-line"></div>
-        <p>scraper</p>
+        <div class="list-container-small">
+          @for (robot of robotsListMain; track robot._id){
+          <app-robot-card cardMode="mainView" [robot]="robot" />
+          }
+        </div>
       </div>
       <div class="news-row">
         <h2 class="content-container-h2">News</h2>
         <div class="separator-line"></div>
-        <p>scraper</p>
+        <div class="list-container-small">
+          @for (news of newsListMain; track news._id){
+          <app-news-card
+            [article]="news"
+            cardType="admin-small-main-view"
+            (click)="navigateToNewsArticlePage(news._id, news)"
+            (deleteArticle)="deleteThisArticle(news._id)"
+          />
+          }
+        </div>
       </div>
       <div class="articles-row">
         <div class="section-header">
           <h2 class="content-container-h2">Articles</h2>
           <div class="button-wrapper">
-            <app-button buttonText="Add Article" iconType="add" size="small-text" />
+            <app-button
+              buttonText="Add Article"
+              iconType="add"
+              size="small-text"
+              (click)="navigateToNewArticleView()"
+            />
           </div>
         </div>
         <div class="separator-line"></div>
-        <p>scraper</p>
+        <div class="list-container-small">
+          @for (article of articlesListMain; track article._id){
+          <app-article-card
+            cardMode="main-view"
+            [article]="article"
+            (navigateToArticle)="navigateToArticlePage(article._id, article)"
+            (submitArticle)="postArticle(article)"
+            (editArticle)="editArticle(article._id, article, true)"
+            (deleteArticle)="deleteArticle(article._id)"
+          />
+          }
+        </div>
       </div>
     </div>
   </div>

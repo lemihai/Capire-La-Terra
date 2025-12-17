@@ -1,15 +1,17 @@
+@if(size === 'no-image'){
+<div class="image-wrapper">
+  <img [ngSrc]="newsSourceImage" height="32" width="32" alt="episode_image" class="episode-image" />
+</div>
+} @else {
+
 <div class="source" [attr.data-card-type]="source">
   <!-- THE Guardian -->
   <!-- @if (source === 'the guardian') { -->
-  <img
-    [ngSrc]="newsSourceImage"
-    height="32"
-    width="32"
-    alt="episode_image"
-    class="episode-image"
-  />
+  <img [ngSrc]="newsSourceImage" height="32" width="32" alt="episode_image" class="episode-image" />
   <!-- <div class="source-image"></div> -->
-  <p class="source-text">{{outletName}}</p>
+
+  <p class="source-text">{{ outletName }}</p>
+
   <!-- Nature Climate Change -->
   <!-- } @else if (source === 'nature climate change') {
   <img
@@ -23,3 +25,4 @@
   <!-- <p class="source-text">nature.com</p> -->
   <!-- } -->
 </div>
+}

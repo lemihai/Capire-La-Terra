@@ -26,38 +26,39 @@ export class NewsView implements OnInit, AfterViewInit {
 
   sorting = {
     sortDirection: 'desc',
+    currentSortKey: 'date',
 
-    outletSort: false,
+    urlSort: false,
     titleSort: false,
     dateSort: true,
     authorSort: false,
 
-    outletSortingVisualFlag: 'sort-inactive',
+    urlSortingVisualFlag: 'sort-inactive',
     titleSortingVisualFlag: 'sort-inactive',
     dateSortingVisualFlag: 'sort-active',
     authorSortingVisualFlag: 'sort-inactive',
 
     sortUIupdate(key: string) {
-      if (key == 'outlet') {
-        this.outletSortingVisualFlag = 'sort-active';
+      if (key == 'url') {
+        this.urlSortingVisualFlag = 'sort-active';
         this.titleSortingVisualFlag = 'sort-inactive';
         this.dateSortingVisualFlag = 'sort-inactive';
         this.authorSortingVisualFlag = 'sort-inactive';
       }
       if (key == 'title') {
-        this.outletSortingVisualFlag = 'sort-inactive';
+        this.urlSortingVisualFlag = 'sort-inactive';
         this.titleSortingVisualFlag = 'sort-active';
         this.dateSortingVisualFlag = 'sort-inactive';
         this.authorSortingVisualFlag = 'sort-inactive';
       }
       if (key == 'author') {
-        this.outletSortingVisualFlag = 'sort-inactive';
+        this.urlSortingVisualFlag = 'sort-inactive';
         this.titleSortingVisualFlag = 'sort-inactive';
         this.dateSortingVisualFlag = 'sort-inactive';
         this.authorSortingVisualFlag = 'sort-active';
       }
       if (key == 'date') {
-        this.outletSortingVisualFlag = 'sort-inactive';
+        this.urlSortingVisualFlag = 'sort-inactive';
         this.titleSortingVisualFlag = 'sort-inactive';
         this.dateSortingVisualFlag = 'sort-active';
         this.authorSortingVisualFlag = 'sort-inactive';
@@ -89,15 +90,10 @@ export class NewsView implements OnInit, AfterViewInit {
     this.adminService.getAllNews().subscribe((data) => {
       this.newsList = data;
       this.sorting.sortedListView = [...this.newsList];
-
-    
-
+this.sort('date');
       this.cdr.detectChanges(); // Manually trigger change detection if needed
     });
-    
   }
-
-  
 
   showarticles() {}
 
@@ -111,64 +107,84 @@ export class NewsView implements OnInit, AfterViewInit {
   // Inside export class NewsView implements OnInit, AfterViewInit { ... }
 
   sort(key: string) {
-    // 1. Determine the current direction and update the specific key flag
-
     this.sorting.sortUIupdate(key);
-    // Reset all key sort flags except the current one
-    this.sorting.outletSort = key === 'outlet';
+
+    // 1. Determine if this is a new sort column
+    const isNewKey = this.sorting.currentSortKey !== key;
+
+    // 2. Determine the new sort direction
+    if (isNewKey) {
+        // If a new key is clicked, default to the desired starting direction.
+        // Date usually defaults to 'desc' (newest first). Others default to 'asc'.
+        this.sorting.sortDirection = key === 'date' ? 'desc' : 'asc';
+    } else {
+        // If the same key is clicked, flip the current direction.
+        this.sorting.sortDirection = this.sorting.sortDirection === 'asc' ? 'desc' : 'asc';
+    }
+
+    // 3. Update the current sort key
+    this.sorting.currentSortKey = key;
+
+    // Optional: Keep your boolean flags for UI visual states (but they are not used for logic anymore)
+    this.sorting.urlSort = key === 'url';
     this.sorting.titleSort = key === 'title';
     this.sorting.dateSort = key === 'date';
     this.sorting.authorSort = key === 'author';
 
-    // If the *same* key is clicked, flip the direction. Otherwise, default to 'asc'.
-    // NOTE: Your date logic is inverted (see notes below), so for date, we default to 'desc' (newest first)
-    if (this.sorting.dateSort && this.sorting.sortDirection === 'desc') {
-      this.sorting.sortDirection = 'asc'; // Oldest first
-    } else if (this.sorting.dateSort) {
-      this.sorting.sortDirection = 'desc'; // Newest first (default)
-    } else if (this.sorting.sortDirection === 'asc') {
-      this.sorting.sortDirection = 'desc';
-    } else {
-      this.sorting.sortDirection = 'asc';
-    }
 
+    // 4. Perform the sort (Keep this as is - it's correct)
     const direction = this.sorting.sortDirection === 'asc' ? 1 : -1;
 
-    // 2. Perform the sort
     this.sorting.sortedListView.sort((a: any, b: any) => {
-      // Use 'any' for the list items here
-      let valA = a[key];
-      let valB = b[key];
+        let valA = a[key];
+        let valB = b[key];
 
-      if (key === 'date') {
-        // Date comparison:
-        // For 'desc' (newest first), the result of (dateA - dateB) should be negative
-        // if A is newer than B (and thus A should come first).
-        // (dateA - dateB) is negative if A is earlier (older) than B.
-        // So, for 'desc' (newest first), we use (dateB - dateA)
-        const dateA = new Date(valA).getTime();
-        const dateB = new Date(valB).getTime();
+        if (key === 'date') {
+            const dateA = new Date(valA).getTime();
+            const dateB = new Date(valB).getTime();
+            return (dateA - dateB) * direction;
+        } else {
+            valA = String(valA).toLowerCase();
+            valB = String(valB).toLowerCase();
 
-        // NOTE: The direction is handled by the sorting function itself,
-        // so if 'asc' (oldest first) is 1, we use (dateA - dateB) * 1
-        // if 'desc' (newest first) is -1, we use (dateA - dateB) * -1 = (dateB - dateA)
-        return (dateA - dateB) * direction;
-      } else {
-        // String comparison (case-insensitive for alphabetical sort)
-        valA = String(valA).toLowerCase();
-        valB = String(valB).toLowerCase();
-
-        if (valA < valB) return -1 * direction;
-        if (valA > valB) return 1 * direction;
-        return 0; // values must be equal
-      }
+            if (valA < valB) return -1 * direction;
+            if (valA > valB) return 1 * direction;
+            return 0;
+        }
     });
-
-    console.log(this.sorting.sortedListView[32]);
 
     this.newsList = this.sorting.sortedListView;
 
     console.log(`Sorted by ${key} in ${this.sorting.sortDirection} order.`);
     this.cdr.detectChanges(); // Update the view after sorting
+}
+
+  deleteThisArticle(articleId: string) {
+    this.adminService.deleteOneNewsArticle(articleId).subscribe(
+      (response) => {
+        const activeSortKey = this.getCurrentSortKey();
+        this.adminService.getAllNews().subscribe((data) => {
+          this.newsList = data;
+          this.sorting.sortedListView = [...this.newsList];
+          this.sorting.sortDirection = this.sorting.sortDirection === 'asc' ? 'desc' : 'asc';
+          
+          this.sort(activeSortKey);
+          this.cdr.detectChanges(); // Update the view
+        });
+      },
+      (error) => {
+        // Error: Handle the error (e.g., show an error message)
+        console.error('Error deleting article:', error);
+        alert(`Failed to delete article: ${error.message || error}`);
+      }
+    );
   }
+
+  getCurrentSortKey(): string {
+  if (this.sorting.urlSort) return 'url';
+  if (this.sorting.titleSort) return 'title';
+  if (this.sorting.authorSort) return 'author';
+  // Default to 'date' if none other is active (based on your initial state)
+  return 'date';
+}
 }

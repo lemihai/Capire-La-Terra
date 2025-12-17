@@ -44,7 +44,7 @@ export class AdminEpisodeCard {
     }
     this.cdr.detectChanges();
 
-    console.log(this.episode);
+    // console.log(this.episode);
 
     // console.log(this.article);
   }

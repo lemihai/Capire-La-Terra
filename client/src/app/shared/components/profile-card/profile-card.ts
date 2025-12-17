@@ -9,6 +9,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@ang
 })
 export class ProfileCard implements OnInit, AfterViewInit {
   @Input({ required: true }) profile: string = '';
+  @Input() cardMode?: string = '';
   imgsrc: string = '';
 
   constructor(private cdr: ChangeDetectorRef) {}

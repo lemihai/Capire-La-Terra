@@ -10,11 +10,15 @@ import { RobotsService } from './robots-service/robots-service';
 import { Episode, EpisodesService } from './episodes-service/episodes-service';
 import { Article, ArticlesService } from './articles-service/articles-service';
 
+import { Subject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AdminService {
   private readonly apiUrl = `${environment.apiUrl}`;
+  private viewChangeSubject = new Subject<string>();
+  public viewChange$ = this.viewChangeSubject.asObservable();
 
   time = 0.64;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
@@ -41,9 +45,50 @@ export class AdminService {
     editMode?: boolean
   ) {
     const customEase = 'cubic-bezier(0,.55,.52,.96)';
+    let sidebarKey = fromRoute;
+
+    
 
     let adminURL = '/admin-page' + '/' + fromRoute + '/' + url + '/' + Id;
     adminURL = adminURL.replace('/undefined', '');
+    adminURL = adminURL.replace('//', '/');
+    
+    sidebarKey = adminURL;
+    console.log(2);
+    console.log(2);
+    console.log(sidebarKey);
+    console.log(2);
+    console.log(2);
+    // if (url.includes('news-view')) {
+    //   sidebarKey = 'news-view';
+    // } else if(url.includes('news-article-view')){
+    //   sidebarKey = adminURL;
+    //   console.log(2);
+    // console.log(2);
+    // console.log(adminURL);
+    // console.log(2);
+    // console.log(2);
+    // }else if(url.includes('articles-view')){
+    //   sidebarKey = 'articles-view';
+    // }else if(url.includes('new-article')){
+    //   sidebarKey = adminURL;
+      
+    // }else if(url.includes("admin-article-page")){
+    //   sidebarKey = 'articles-view';
+    // }
+    
+    // else if(url.includes('episodes-view') || url.includes('new-episode') ||url.includes("episode-page")){
+    //   sidebarKey = 'episodes-view';
+    // }else if(url.includes('robots-view')){
+    //   sidebarKey = 'robots-view';
+    // }else if(url.includes('settings')){
+    //   sidebarKey = 'settings';
+    // }
+
+    // if (adminURL.includes('/admin-page/admin-page')) {
+    //   adminURL = adminURL.replace('/admin-page/admin-page', '/admin-page');
+    //   console.log(4);
+    // }
 
     //
     this.ngZone.runOutsideAngular(() => {
@@ -62,6 +107,7 @@ export class AdminService {
             };
             this.router.navigate([adminURL], navigationExtras);
             //
+            this.viewChangeSubject.next(sidebarKey);
           });
         },
       });
@@ -176,7 +222,7 @@ export class AdminService {
     return this.robotsService.getRobots();
   }
 
-  startScraper(name: string|undefined){
+  startScraper(name: string | undefined) {
     return this.robotsService.startScraper(name);
   }
 }

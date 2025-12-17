@@ -147,7 +147,6 @@ export class EpisodesView {
       // Use 'any' for the list items here
       let valA = a[key];
       let valB = b[key];
-      console.log('****** ', valA, valB);
       if (key === 'date') {
         // Date comparison:
         // For 'desc' (newest first), the result of (dateA - dateB) should be negative
@@ -189,6 +188,7 @@ export class EpisodesView {
     this.adminService.getAllEpisodes().subscribe((data) => {
       this.episodes = data;
       this.sorting.sortedListView = [...this.episodes];
+      this.sort('date')
       console.log('Episodes result ', this.episodes);
       this.cdr.detectChanges(); // Manually trigger change detection if needed
     });
@@ -256,9 +256,14 @@ export class EpisodesView {
       (response) => {
         console.log('Article deleted successfully', response);
         // Re-fetch the articles after deletion
+        const activeSortKey = this.getCurrentSortKey();
         this.adminService.getAllEpisodes().subscribe((data) => {
           this.episodes = data;
           this.sorting.sortedListView = [...this.episodes];
+          this.sorting.sortDirection = this.sorting.sortDirection === 'asc' ? 'desc' : 'asc';
+
+          this.sort(activeSortKey);
+
           this.cdr.detectChanges(); // Update the view
         });
       },
@@ -267,6 +272,14 @@ export class EpisodesView {
       }
     );
   }
-}
 
-// db.episodes.insertOne({ title: "The Future of AI in 2025", about: "Exploring the latest advancements in artificial intelligence and their impact on society in 2025.", author: "Sofia Lutteri", date: "09 Dec 2025", number: 1, season: 3, imageUrl: '', audioUrl: '', sources: ["the guardian", "iea", "euronews"], transcript: "Welcome to today's episode, where we dive into the future of AI in 2025. The landscape of artificial intelligence has evolved dramatically over the past few years...", posted: true });
+  getCurrentSortKey(): string {
+    if (this.sorting.seasonSort) return 'season';
+    if (this.sorting.episodeSort) return 'number';
+    if (this.sorting.postedSort) return 'posted';
+    if (this.sorting.titleSort) return 'title';
+    if (this.sorting.authorSort) return 'author';
+    // Default to 'date' if none other is active (based on your initial state)
+    return 'date';
+  }
+}
