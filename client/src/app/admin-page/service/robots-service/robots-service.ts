@@ -23,9 +23,9 @@ export interface ScrapeQuery {
   };
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable(
+  // {providedIn: 'root',}
+)
 export class RobotsService {
   private readonly apiUrl = `${environment.apiUrl}/newsWebsites`;
   time = 0.64;

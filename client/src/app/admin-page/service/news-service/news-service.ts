@@ -26,9 +26,9 @@ export interface NewsQuery {
   date?: Date;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable(
+  // {providedIn: 'root',}
+)
 export class NewsService {
   private readonly apiUrl = `${environment.apiUrl}/news`;
   time = 0.64;

@@ -29,10 +29,15 @@ import { filter } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AdminService } from './service/admin-service';
+import { RobotsService } from './service/robots-service/robots-service';
+import { EpisodesService } from './service/episodes-service/episodes-service';
+import { ArticlesService } from './service/articles-service/articles-service';
+import { NewsService } from './service/news-service/news-service';
 
 @Component({
   selector: 'app-admin-page',
   imports: [RouterOutlet],
+  providers: [AdminService, RobotsService, EpisodesService, ArticlesService, NewsService],
   templateUrl: './admin-page.html',
   styleUrl: './admin-page.scss',
 })

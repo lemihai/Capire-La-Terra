@@ -22,9 +22,9 @@ export interface Episode {
   posted: boolean;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable(
+  // {providedIn: 'root',}
+)
 export class EpisodesService {
   private readonly apiUrl = `${environment.apiUrl}/episodes`;
   time = 0.64;

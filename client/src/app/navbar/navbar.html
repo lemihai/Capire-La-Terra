@@ -201,6 +201,7 @@
           <p class="nav-text">News</p>
         </button>
       </li>
+      @if (isLoggedIn$ | async) {
       <li
         class="nav-button-wrapper"
         (click)="nagivateToAdminPage()"
@@ -262,9 +263,11 @@
           <p class="nav-text">Admin</p>
         </button>
       </li>
+      }
       <div
         class="button-hover-background"
         [style.width]="navbarObj.backgroundWidth"
+        [style.height]="navbarObj.backgroundHeight"
         [style.left]="navbarObj.backgroundLeft"
       ></div>
     </ul>
@@ -272,8 +275,18 @@
 
   <header class="nav-login-navigation">
     <ul>
-      <li class="nav-button-wrapper" (click)="nagivateToLoginPage()">
-        <button class="nav-button">
+      @if (isLoggedIn$ | async) {
+      <li class="profile-wrapper">
+        <app-profile-card profile="Sofia Lutteri" cardMode="navbar" />
+      </li>
+      } @else {
+      <li
+        class="nav-button-wrapper"
+        (click)="nagivateToLoginPage()"
+        (mouseenter)="navbarObj.hovered('login', true)"
+        (mouseleave)="navbarObj.hovered('login', false)"
+      >
+        <button class="nav-button {{ navbarObj.login }}">
           <div class="nav-icon">
             <svg
               width="32"
@@ -308,10 +321,14 @@
           <p class="nav-text">login</p>
         </button>
       </li>
+      }
       <div class="separator-line-right-container"></div>
       <li class="language-button">
         <div class="language-button-wrapper">
-          <div class="language-icon italian {{ navbarObj.languageItalian }}" (click)="navbarObj.setLanguage('italian')">
+          <div
+            class="language-icon italian {{ navbarObj.languageItalian }}"
+            (click)="navbarObj.setLanguage('italian')"
+          >
             <svg
               width="24"
               height="24"
@@ -337,7 +354,10 @@
               </defs>
             </svg>
           </div>
-          <div class="language-icon english {{ navbarObj.languageEnglish }}" (click)="navbarObj.setLanguage('english')">
+          <div
+            class="language-icon english {{ navbarObj.languageEnglish }}"
+            (click)="navbarObj.setLanguage('english')"
+          >
             <svg
               width="24"
               height="24"
@@ -455,6 +475,12 @@
           <p class="temp-text-C">C</p>
         </div>
       </li>
+      <div
+        class="login-button-hover-background"
+        [style.width]="navbarObj.loginBackgroundWidth"
+        [style.height]="navbarObj.loginBackgroundHeight"
+        [style.left]="navbarObj.loginBackgroundLeft"
+      ></div>
     </ul>
   </header>
 </nav>

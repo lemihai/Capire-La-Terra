@@ -12,9 +12,9 @@ import { Article, ArticlesService } from './articles-service/articles-service';
 
 import { Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable(
+  // {providedIn: 'root',}
+)
 export class AdminService {
   private readonly apiUrl = `${environment.apiUrl}`;
   private viewChangeSubject = new Subject<string>();

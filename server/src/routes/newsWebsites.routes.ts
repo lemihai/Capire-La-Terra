@@ -3,6 +3,7 @@ import { ObjectId } from "mongodb";
 import cors from "cors";
 import { collections } from "../database.js";
 import { main_scraper } from "../scraper/main.js";
+import { verifyToken } from "./auth.middleware.js";
 
 export const newsWebsitesRouter = Router();
 newsWebsitesRouter.use(cors());
@@ -14,7 +15,7 @@ newsWebsitesRouter.use(cors());
 // GET
 // returning data from the DB
 
-newsWebsitesRouter.get("/newsWebsites", async (_req, res) => {
+newsWebsitesRouter.get("/newsWebsites", verifyToken, async (_req, res) => {
   try {
     const newsWebsites = await collections?.newsWebsites?.find({}).toArray();
 
@@ -26,11 +27,11 @@ newsWebsitesRouter.get("/newsWebsites", async (_req, res) => {
 
 // GET : 1
 
-newsWebsitesRouter.get("/newsWebsites/scrape/:name", async (req, res) => {
+newsWebsitesRouter.get("/newsWebsites/scrape/:name",verifyToken, async (req, res) => {
   try {
     const name = req?.params?.name;
 
-    console.log(name);
+    // console.log(name);
     // main_scraper();
 
     res.status(200).json({
@@ -45,7 +46,7 @@ newsWebsitesRouter.get("/newsWebsites/scrape/:name", async (req, res) => {
 // POST
 // Adding data to the DB
 
-newsWebsitesRouter.post("/newsWebsites:id", async (req, res) => {
+newsWebsitesRouter.post("/newsWebsites:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
     const newsWebsite = req.body;
@@ -64,7 +65,7 @@ newsWebsitesRouter.post("/newsWebsites:id", async (req, res) => {
 
 // PUT
 
-newsWebsitesRouter.put("/newsWebsites:id", async (req, res) => {
+newsWebsitesRouter.put("/newsWebsites:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
     const newsWebsite = req.body;
@@ -86,7 +87,7 @@ newsWebsitesRouter.put("/newsWebsites:id", async (req, res) => {
 
 // DELETE
 
-newsWebsitesRouter.delete("/newsWebsites:id", async (req, res) => {
+newsWebsitesRouter.delete("/newsWebsites:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
     const query = { _id: new ObjectId(id) };

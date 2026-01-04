@@ -2,6 +2,7 @@
   class="stat-container container-left {{ isInforActive }}"
   [style.transform]="`translate(${translateXLeft}, ${translateYLeft})`"
   [style.opacity]="opacityLeft"
+  [style.zIndex]="containerZIndex"
 >
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -154,6 +155,7 @@
   class="stat-container container-right {{ isInforActiveRight }}"
   [style.transform]="`translate(${translateXRight}, ${translateYRight})`"
   [style.opacity]="opacityRight"
+  [style.zIndex]="containerZIndex"
 >
   <div class="svg-hover" (click)="expandRight()">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

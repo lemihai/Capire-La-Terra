@@ -79,7 +79,9 @@ nav {
   .nav-main-navigation {
     margin: 0rem 0rem 0rem 5.2rem;
     position: relative;
+    overflow: hidden;
     ul {
+      overflow: hidden;
       justify-content: center;
       gap: 0.4rem;
 
@@ -126,10 +128,17 @@ nav {
   // Right container
   // ***************************
   .nav-login-navigation {
+    overflow: hidden;
     ul {
       padding: 0.4rem 0.4rem 0.4rem 0.4rem !important;
       justify-content: flex-start;
+      position: relative;
+      overflow: hidden;
       gap: 0.8rem;
+
+      li{
+        z-index: 10;
+      }
 
       li.language-button {
         display: flex;
@@ -448,6 +457,18 @@ nav {
         height: 1.2rem;
         background-color: var(--main-color-dark-32);
         border-radius: 1rem;
+      }
+
+      .login-button-hover-background {
+        position: absolute;
+        left: 0.4rem;
+        // height: 3.2rem;
+        width: 12rem;
+        background-color: var(--main-color-dark);
+        pointer-events: none;
+        border-radius: 0.8rem;
+        transition: var(--transition-160);
+        z-index: 0;
       }
     }
   }

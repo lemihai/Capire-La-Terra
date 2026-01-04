@@ -3,6 +3,7 @@ import { ObjectId } from "mongodb";
 import cors from "cors";
 import { main_scraper } from "../scraper/main.js";
 import { collections } from "../database.js";
+import { verifyToken } from "./auth.middleware.js";
 
 export const newsRouter = Router();
 newsRouter.use(cors());
@@ -14,11 +15,12 @@ newsRouter.use(cors());
 // GET
 // returning data from the DB
 
-newsRouter.get("/news", async (_req, res) => {
+newsRouter.get("/news", verifyToken, async (_req, res) => {
   try {
     // storing the result of the call in the articles cosntant
     // let authorisationToke = _req.headers.authorization;
-    console.log(_req.headers.authorization?.split(':')[1]);
+    // console.log(_req.headers.authorization?.split(':')[1]);
+    // console.log(_req.headers);
     const articles = await collections?.news?.find({}).toArray();
     // console.log(articles);
     // Handling results and sending it to the front-end
@@ -30,7 +32,7 @@ newsRouter.get("/news", async (_req, res) => {
 
 // express/backend route
 
-newsRouter.get("/news/:id", async (_req, res) => {
+newsRouter.get("/news/:id", verifyToken, async (_req, res) => {
   const id = _req?.params?.id;
   try {
     const query = { _id: new ObjectId(id) }; // This looks correct for MongoDB
@@ -44,7 +46,7 @@ newsRouter.get("/news/:id", async (_req, res) => {
   }
 });
 
-newsRouter.get("/scrape", async (_req, res) => {
+newsRouter.get("/scrape", verifyToken, async (_req, res) => {
   try {
     // storing the result of the call in the articles constant
     const articles = await collections?.news?.find({}).toArray();
@@ -62,7 +64,7 @@ newsRouter.get("/scrape", async (_req, res) => {
 // POST
 // Adding data to the DB
 
-newsRouter.post("/news", async (req, res) => {
+newsRouter.post("/news", verifyToken, async (req, res) => {
   try {
     // storing the body of the request in the article
     // moreover, storing the result of the insert on the result constant
@@ -84,7 +86,7 @@ newsRouter.post("/news", async (req, res) => {
 // Updating the Article data
 
 // UPDATE 1
-newsRouter.put("/news/:id", async (req, res) => {
+newsRouter.put("/news/:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
     // Change the req body with the actual update of the article
@@ -113,7 +115,7 @@ newsRouter.put("/news/:id", async (req, res) => {
 // Deleting an article
 
 // DELETE 1
-newsRouter.delete("/news/:id", async (req, res) => {
+newsRouter.delete("/news/:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
     // Defining the query form the article ID
@@ -135,7 +137,7 @@ newsRouter.delete("/news/:id", async (req, res) => {
 
 // DELETE ALL
 
-newsRouter.delete("/news", async (_req, res) => {
+newsRouter.delete("/news", verifyToken, async (_req, res) => {
   try {
     // this deletes all articles from the database
     const articles = await collections?.news?.deleteMany({});

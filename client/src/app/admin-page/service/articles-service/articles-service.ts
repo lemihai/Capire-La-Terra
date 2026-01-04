@@ -19,9 +19,9 @@ export interface Article {
   posted: boolean;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable(
+  // {providedIn: 'root',}
+)
 export class ArticlesService {
   private readonly apiUrl = `${environment.apiUrl}/articles`;
   time = 0.64;

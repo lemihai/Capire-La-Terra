@@ -17,7 +17,7 @@ const JWT_EXPIRATION = "1h";
 logInRouter.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
-    console.log({ username, password });
+    // console.log({ username, password });
 
     const checkUser = await collections?.users?.findOne({
       username: `${username}`,
@@ -32,7 +32,7 @@ logInRouter.post("/login", async (req, res) => {
     }
 
     if (checkUserName === username && checkUserPassword === password) {
-      console.log("FUCKING WORKS", JWT_SECRET);
+      // console.log("FUCKING WORKS", JWT_SECRET);
 
       const payload = {
         userId: checkUser?._id.toHexString(), // Use .toHexString() to ensure it's a string
@@ -43,7 +43,9 @@ logInRouter.post("/login", async (req, res) => {
         expiresIn: JWT_EXPIRATION,
       });
 
-      console.log(token);
+      console.log(23432324, token);
+
+      // console.log(token);
 
       res.status(200).json({
         success: true,

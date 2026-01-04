@@ -8,6 +8,7 @@ import {
 import { ObjectId } from "mongodb";
 import cors from "cors";
 import { collections } from "../database.js";
+import { verifyToken } from "./auth.middleware.js";
 
 export const episodeRouter = Router();
 episodeRouter.use(cors());
@@ -23,7 +24,7 @@ episodeRouter.get("/episodes", async (_req, res) => {
     // the episode variable awaits for all the objects in the collection episodes and then makes them an array.
     // Then the response is being sent to the client
     const episodes = await collections?.episodes?.find({}).toArray();
-    console.log(episodes);
+    // console.log(episodes);
 
     res.status(200).send(episodes);
   } catch (error) {
@@ -35,7 +36,7 @@ episodeRouter.get("/episodes", async (_req, res) => {
 
 // GET : BY ID
 
-episodeRouter.get("/episodes/:id", async (req, res) => {
+episodeRouter.get("/episodes/:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
     const query = { _id: new ObjectId(id) };
@@ -53,7 +54,7 @@ episodeRouter.get("/episodes/:id", async (req, res) => {
 
 // POST
 // Add one episode
-episodeRouter.post("/episodes", async (req, res) => {
+episodeRouter.post("/episodes", verifyToken, async (req, res) => {
   try {
     const episode = req.body;
     const result = await collections?.episodes?.insertOne(episode);
@@ -70,7 +71,7 @@ episodeRouter.post("/episodes", async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     // res.status(400).json({
     //     message: error instanceof Error ? error.message : "Unknown Error",
     //     success: true,
@@ -83,7 +84,7 @@ episodeRouter.post("/episodes", async (req, res) => {
 
 // PUT
 
-episodeRouter.put("/episodes/:id", (async (req: Request, res: Response) => {
+episodeRouter.put("/episodes/:id", verifyToken, (async (req: Request, res: Response) => {
 // ^^^ Cast the entire async function to RequestHandler ^^^
   try {
     const id = req?.params?.id;
@@ -131,7 +132,7 @@ episodeRouter.put("/episodes/:id", (async (req: Request, res: Response) => {
 }) as RequestHandler);
 
 // PATH
-episodeRouter.patch("/episodes/:id", (async (req: Request, res: Response) => {
+episodeRouter.patch("/episodes/:id", verifyToken, (async (req: Request, res: Response) => {
   try {
     const id = req?.params?.id;
     const { posted } = req.body;
@@ -178,7 +179,7 @@ episodeRouter.patch("/episodes/:id", (async (req: Request, res: Response) => {
 
 // DELETE
 
-episodeRouter.delete("/episodes/:id", async (req, res) => {
+episodeRouter.delete("/episodes/:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
     const query = { _id: new ObjectId(id) };
@@ -196,7 +197,7 @@ episodeRouter.delete("/episodes/:id", async (req, res) => {
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Error";
-    console.log(message);
+    // console.log(message);
     res.status(400).send(message);
   }
 });

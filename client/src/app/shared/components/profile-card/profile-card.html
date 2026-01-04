@@ -2,6 +2,11 @@
 <div class="profile-wrapper-no-text">
   <img [ngSrc]="imgsrc" height="40" width="40" alt="profile pic image" class="profile-image" />
 </div>
+} @else if(cardMode === 'navbar'){
+<div class="profile-wrapper-navbar">
+  <img [ngSrc]="imgsrc" height="40" width="40" alt="profile pic image" class="profile-image" />
+  <p class="name">{{ profile }}</p>
+</div>
 }@else {
 
 <div class="profile-wrapper">
@@ -10,3 +15,4 @@
 </div>
 
 }
+

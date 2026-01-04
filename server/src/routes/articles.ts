@@ -9,6 +9,7 @@ import { ObjectId } from "mongodb";
 import cors from "cors";
 import { collections } from "../database.js";
 import { Article } from "../models/article.js";
+import { verifyToken } from "./auth.middleware.js";
 
 export const articlesRouter = Router();
 articlesRouter.use(cors());
@@ -39,7 +40,7 @@ articlesRouter.get("/articles/:id", async (req, res) => {
     const query = { _id: new ObjectId(id) }; // This looks correct for MongoDB
 
     const article = await collections?.articles?.findOne(query);
-    console.log(article);
+    // console.log(article);
 
     res.status(200).send(article);
   } catch (error) {
@@ -50,7 +51,7 @@ articlesRouter.get("/articles/:id", async (req, res) => {
 // POST
 // Add one episode
 
-articlesRouter.post("/articles", async (req, res) => {
+articlesRouter.post("/articles", verifyToken, async (req, res) => {
   try {
     const article = req.body;
     delete article._id;
@@ -81,7 +82,7 @@ articlesRouter.post("/articles", async (req, res) => {
 
 // PUT
 
-articlesRouter.put("/articles/:id", (async (req: Request, res: Response) => {
+articlesRouter.put("/articles/:id", verifyToken, (async (req: Request, res: Response) => {
 // ^^^ Cast the entire async function to RequestHandler ^^^
   try {
     const id = req?.params?.id;
@@ -131,7 +132,7 @@ articlesRouter.put("/articles/:id", (async (req: Request, res: Response) => {
 // PATCH
 // Partially updating the Article data
 
-articlesRouter.patch("/articles/:id", (async (req: Request, res: Response) => {
+articlesRouter.patch("/articles/:id", verifyToken, (async (req: Request, res: Response) => {
   try {
     const id = req?.params?.id;
     const { posted } = req.body;
@@ -177,7 +178,7 @@ articlesRouter.patch("/articles/:id", (async (req: Request, res: Response) => {
 
 // DELETE
 
-articlesRouter.delete("/articles/:id", async (req, res) => {
+articlesRouter.delete("/articles/:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
 

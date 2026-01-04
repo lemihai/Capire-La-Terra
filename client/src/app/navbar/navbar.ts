@@ -5,22 +5,26 @@ import {
   NgZone,
   AfterViewInit, // 1. Import NgZone
 } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 
 import { Router, RouterLink, ActivatedRoute, NavigationEnd } from '@angular/router'; // 2. Import Router
 import { gsap } from 'gsap'; // 3. Import gsap (assuming it's installed)
 import CustomEase from 'gsap/CustomEase';
-import { filter, from } from 'rxjs';
+import { filter, from, Observable } from 'rxjs';
 import { NavbarGsapService } from './navbar-gsap-service';
+import { AuthService } from '../../services/login-service/auth-service';
+import { ProfileCard } from "../shared/components/profile-card/profile-card";
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink],
+  imports: [RouterLink, AsyncPipe, ProfileCard],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
   standalone: true, // Assuming this is a standalone component based on the original snippet
 })
 export class Navbar implements OnInit, AfterViewInit {
   // Initial state for the Navbar component's load-in animation
+  isLoggedIn$!: Observable<boolean>;
   translateY: string = '-32px';
   backgroundColor = '';
   scale = '.8';
@@ -33,11 +37,20 @@ export class Navbar implements OnInit, AfterViewInit {
     episodes: '',
     news: '',
     admin: '',
+    login: '',
     backgroundWidth: '87.56px',
+    backgroundHeight: '3.2rem',
     backgroundLeft: '',
+
+    loginBackgroundWidth: '0rem',
+    loginBackgroundHeight: '.8rem',
+    loginBackgroundLeft: '-8rem',
+
     currentInFocus: 'home',
     languageItalian: 'ln-active',
     languageEnglish: 'ln-inactive',
+
+    previousActive: 'home',
 
     setActive(view: string) {
       if (view == 'home') {
@@ -47,8 +60,16 @@ export class Navbar implements OnInit, AfterViewInit {
         this.episodes = '';
         this.news = '';
         this.admin = '';
+        this.login = '';
         this.backgroundWidth = '87.56px';
+        this.backgroundHeight = '3.2rem';
         this.backgroundLeft = '.4rem';
+
+        this.loginBackgroundWidth = '0rem';
+        this.loginBackgroundHeight = '3.2rem';
+        this.loginBackgroundLeft = '-6rem';
+
+        this.previousActive = view;
       }
       if (view == 'episodes') {
         this.currentInFocus = 'episodes';
@@ -57,10 +78,16 @@ export class Navbar implements OnInit, AfterViewInit {
         this.episodes = 'active';
         this.news = '';
         this.admin = '';
+        this.login = '';
         this.backgroundWidth = '102.31px';
-
-        // this.backgroundLeft = '2rem';
+        this.backgroundHeight = '3.2rem';
         this.backgroundLeft = 'calc(.8rem + 65.16px)';
+
+        this.loginBackgroundWidth = '0rem';
+        this.loginBackgroundHeight = '3.2rem';
+        this.loginBackgroundLeft = '-6rem';
+
+        this.previousActive = view;
       }
       if (view == 'news') {
         this.currentInFocus = 'news';
@@ -69,8 +96,16 @@ export class Navbar implements OnInit, AfterViewInit {
         this.episodes = '';
         this.news = 'active';
         this.admin = '';
+        this.login = '';
         this.backgroundWidth = '82.44px';
+        this.backgroundHeight = '3.2rem';
         this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px)';
+
+        this.loginBackgroundWidth = '0rem';
+        this.loginBackgroundHeight = '3.2rem';
+        this.loginBackgroundLeft = '-6rem';
+
+        this.previousActive = view;
       }
       if (view == 'admin') {
         this.currentInFocus = 'admin';
@@ -79,8 +114,54 @@ export class Navbar implements OnInit, AfterViewInit {
         this.episodes = '';
         this.news = '';
         this.admin = 'active';
+        this.login = '';
+        
         this.backgroundWidth = '91.55px';
+        this.backgroundHeight = '3.2rem';
         this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px)';
+
+        this.loginBackgroundWidth = '0rem';
+        this.loginBackgroundHeight = '3.2rem';
+        this.loginBackgroundLeft = '-6rem';
+
+        this.previousActive = view;
+      }
+      if (view == 'login') {
+        this.currentInFocus = 'admin';
+
+        this.home = '';
+        this.episodes = '';
+        this.news = '';
+        this.admin = '';
+        this.login = 'active';
+        if (this.previousActive === 'admin') {
+          this.backgroundWidth = '0px';
+          this.backgroundHeight = '3.2rem';
+          this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px + 10rem)';
+        } else if (this.previousActive === 'news') {
+          this.backgroundWidth = '0px';
+          this.backgroundHeight = '3.2rem';
+          this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px + 16rem)';
+        } else if (this.previousActive === 'episodes') {
+          this.backgroundWidth = '0px';
+          this.backgroundHeight = '3.2rem';
+          this.backgroundLeft = 'calc(.8rem + 65.16px + 28rem)';
+        }else if (this.previousActive === 'home') {
+          this.backgroundWidth = '0px';
+          this.backgroundHeight = '3.2rem';
+          this.backgroundLeft = 'calc(.4rem + 38rem)';
+        }else {
+          this.backgroundWidth = '0px';
+          this.backgroundHeight = '.8rem';
+          
+        }
+        // this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px)';
+
+        this.loginBackgroundWidth = '7.87rem';
+        this.loginBackgroundHeight = '3.2rem';
+        this.loginBackgroundLeft = '.4rem';
+
+        this.previousActive = view;
       }
     },
 
@@ -182,7 +263,8 @@ export class Navbar implements OnInit, AfterViewInit {
     private router: Router, // 4. Inject Router
     private ngZone: NgZone, // 5. Inject NgZone
     private route: ActivatedRoute,
-    private navbarGsapService: NavbarGsapService
+    private navbarGsapService: NavbarGsapService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -190,6 +272,9 @@ export class Navbar implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.animateNavbarIn();
     }, 1600);
+
+    this.isLoggedIn$ = this.authService.isAuthenticated$;
+    console.log(this.isLoggedIn$);
 
     // FIX: Subscribe to Router events to correctly determine the current route
     // after the initial navigation is complete, especially on refresh.
@@ -233,6 +318,8 @@ export class Navbar implements OnInit, AfterViewInit {
       this.navbarObj.setActive('admin');
     } else if (url.startsWith('/article-page')) {
       this.navbarObj.setActive('news');
+    } else if (url.startsWith('/login')) {
+      this.navbarObj.setActive('login');
     }
     this.cdr.detectChanges(); // Ensure the view updates with the new state
   }
@@ -365,5 +452,4 @@ export class Navbar implements OnInit, AfterViewInit {
     // console.log('Current route URL:', this.router.url);
     // console.log('************-------*************');
   }
-
 }
