@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  computed,
   ElementRef,
   HostListener,
+  inject,
   OnChanges,
   OnInit,
   QueryList,
@@ -11,7 +13,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { AdminService } from '../../service/admin-service';
 import { EditBar } from '../../edit-bar/edit-bar';
 import { SourceComponent } from '../../../shared/components/source.component/source.component';
@@ -27,6 +29,7 @@ import { AudioTrack } from '../../../shared/components/audio-track/audio-track';
 import { PlayButton } from '../../../shared/buttons/play-button/play-button';
 import { GlobalAudioPlayerService } from '../../../global-audio-player.component/global-audio-player-service';
 import { GlobalAudioPlayerComponent } from '../../../global-audio-player.component/global-audio-player.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-admin-episode-view',
@@ -56,6 +59,9 @@ export class AdminEpisodeView {
   @ViewChild('audioInputOverlay') audioInputOverlay!: ElementRef;
   @ViewChild('inputOverlay') inputOverlay!: ElementRef;
   // episodeAuthor = '';
+
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   @HostListener('keydown', ['$event'])
   handleTabKey(event: KeyboardEvent) {
@@ -94,7 +100,7 @@ export class AdminEpisodeView {
   addSources() {
     let fullText = this.episode.about.join(' ');
     // let fullText = this.episode.about;
-    console.log(fullText);
+    // console.log(fullText);
 
     if (fullText.toLowerCase().includes('aljazera') && !this.episode.sources.includes('aljazera')) {
       this.episode.sources.push('aljazera');
@@ -147,8 +153,8 @@ export class AdminEpisodeView {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute,
+    // private router: Router,
+    // private route: ActivatedRoute,
     private adminService: AdminService,
     private cdr: ChangeDetectorRef,
     private globalPlayer: GlobalAudioPlayerService
@@ -183,29 +189,59 @@ export class AdminEpisodeView {
 
   episodeText: string[] = [];
 
+  readonly navigationState = computed(() => {
+    const nav = this.router.currentNavigation();
+    return nav?.extras.state as { editMode: any; data: any } | undefined;
+  });
+
+  private queryParams = toSignal(this.route.queryParamMap);
+
   ngOnInit() {
     this.episodeId = this.route.snapshot.paramMap.get('id');
+    // const state = this.navigationState();
+    // const navigation = this.router.getCurrentNavigation();
+    // console.log(99, this.route);
+    const state = window.history.state;
+    const episodeData = state?.data;
 
+    console.log('Data from history.state:', state);
     // let innersource = '';
     if (!this.episodeId) {
       // Redirect or handle missing ID
       this.router.navigate(['/admin-page/episodes-view']);
       return;
     }
+
+    this.route.queryParams.subscribe((params) => {
+      const editModeParam = params['editMode'];
+      // Convert string 'true' to boolean true
+      this.editMode = editModeParam === 'true';
+      this.editModeFromState = this.editMode;
+
+      console.log('Edit Mode sync from URL:', params);
+      this.cdr.detectChanges();
+    });
+
     try {
-      this.route.queryParams.subscribe((params) => {
-        // Query parameters are always strings, so you must convert 'true'/'false' to boolean
-        const editModeParam = params['editMode'];
+      // this.route.queryParams.subscribe((params) => {
+      //   // Query parameters are always strings, so you must convert 'true'/'false' to boolean
+      //   const editModeParam = params['editMode'];
 
-        // Check if the parameter exists and is explicitly 'true'
-        this.editModeFromState = editModeParam === 'true';
+      //   // Check if the parameter exists and is explicitly 'true'
+      //   this.editModeFromState = editModeParam === 'true';
 
-        console.log('THIS IS THE EDIT MODE FROM QUERY PARAMS', this.editModeFromState);
+      //   console.log('THIS IS THE EDIT MODE FROM QUERY PARAMS', this.editModeFromState);
 
-        // Now you can safely use the 'this.editMode' property elsewhere.
-      });
+      //   // Now you can safely use the 'this.editMode' property elsewhere.
+      // });
       const navigation = this.router.getCurrentNavigation();
       let episodeData = navigation?.extras.state?.['data'];
+
+      console.log(8);
+      console.log(8);
+      console.log(episodeData);
+      console.log(8);
+      console.log(8);
       if (episodeData != undefined) {
         this.episode = episodeData;
         // innersource = episodeData.url;
@@ -227,10 +263,10 @@ export class AdminEpisodeView {
   async callForEpisode(id: string): Promise<void> {
     try {
       const response = await lastValueFrom(this.adminService.getOneEpisode(id));
-      console.log(response);
+      // console.log(response);
       this.episode = response;
       // this.separateParagraphs(this.episode.text);
-      console.log('episode source URL:', this.episode);
+      // console.log('episode source URL:', this.episode);
       this.cdr.detectChanges();
     } catch (error) {
       console.error('Error fetching episode:', error);
@@ -274,7 +310,7 @@ export class AdminEpisodeView {
     } else if ((this.editMode = true)) {
       this.editMode = false;
     }
-    console.log(this.editMode);
+    // console.log(this.editMode);
   }
 
   saveCurrentEpisode() {
@@ -294,7 +330,7 @@ export class AdminEpisodeView {
     }
     this.adminService.updateEpisode(this.episode._id, this.episode).subscribe(
       (response) => {
-        console.log('Success:', response);
+        // console.log('Success:', response);
         this.router.navigate(['/admin-page/episodes-view']);
       },
       (error) => {
@@ -312,7 +348,7 @@ export class AdminEpisodeView {
 
   formatEpisode() {
     let array = this.episode.about;
-    console.log(array);
+    // console.log(array);
 
     // Filter out empty strings
     array = array.filter((element: string) => element !== '');
@@ -342,18 +378,18 @@ export class AdminEpisodeView {
 
   triggerFileInput(): void {
     this.fileInput.nativeElement.click();
-    console.log('fweiuabfueiws');
+    // console.log('fweiuabfueiws');
   }
   triggerAudioFileInput(): void {
     this.audioFileInput.nativeElement.click();
-    console.log('fweiuabfueiws');
+    // console.log('fweiuabfueiws');
   }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      console.log(file);
+      // console.log(file);
 
       // Read the file as a Data URL for an immediate preview
       const reader = new FileReader();
@@ -420,7 +456,7 @@ export class AdminEpisodeView {
 
     // 4. Force change detection to update the view immediately
     this.cdr.detectChanges();
-    console.log('Image removed.');
+    // console.log('Image removed.');
   }
 
   removeAudio() {
@@ -441,7 +477,7 @@ export class AdminEpisodeView {
 
     // 4. Force change detection to update the view immediately
     this.cdr.detectChanges();
-    console.log('Image removed.');
+    // console.log('Image removed.');
   }
 
   playEpisode() {

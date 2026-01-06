@@ -198,7 +198,7 @@ export class EpisodesView {
     this.adminService.triggerViewChange('new-episode', 'episodes-view');
   }
 
-  navigateToEpisodePage(episodeId: string, episodeData: any, editMode?: boolean) {
+  navigateToEpisodePage(episodeId: string, episodeData: any, editMode?: string) {
     this.adminService.triggerViewChange(
       'episode-page',
       'episodes-view',
@@ -247,7 +247,7 @@ export class EpisodesView {
     console.log('from view', episode);
   }
 
-  editEpisode(id: string, ep: Episode, editMode: boolean) {
+  editEpisode(id: string, ep: Episode, editMode: string) {
     this.navigateToEpisodePage(id, ep, editMode);
   }
 

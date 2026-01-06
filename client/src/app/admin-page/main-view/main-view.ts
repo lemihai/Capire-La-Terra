@@ -159,7 +159,8 @@ export class MainView implements OnInit, AfterViewInit {
     this.adminService.triggerViewChange('new-episode', 'episodes-view');
   }
 
-  navigateToEpisodePage(episodeId: string, episodeData: any, editMode?: boolean) {
+  navigateToEpisodePage(episodeId: string, episodeData: any, editMode?: string) {
+    
     this.adminService.triggerViewChange(
       'episode-page',
       'episodes-view',
@@ -208,7 +209,7 @@ export class MainView implements OnInit, AfterViewInit {
     // console.log('from view', episode);
   }
 
-  editEpisode(id: string, ep: Episode, editMode: boolean) {
+  editEpisode(id: string, ep: Episode, editMode: string) {
     this.navigateToEpisodePage(id, ep, editMode);
   }
 
@@ -270,7 +271,7 @@ export class MainView implements OnInit, AfterViewInit {
     this.adminService.triggerViewChange('new-article', 'articles-view');
   }
 
-  navigateToArticlePage(articleId: string, articleData: any, editMode?: boolean) {
+  navigateToArticlePage(articleId: string, articleData: any, editMode?: string) {
     this.adminService.triggerViewChange(
       'admin-article-page',
       'articles-view',
@@ -307,7 +308,7 @@ export class MainView implements OnInit, AfterViewInit {
     // console.log('from view', article);
   }
 
-  editArticle(id: string, art: Article, editMode: boolean) {
+  editArticle(id: string, art: Article, editMode: string) {
     this.navigateToArticlePage(id, art, editMode);
   }
 

@@ -102,7 +102,7 @@ export class ArticlesView {
 
   ngAfterViewInit(): void {}
 
-  navigateToArticlePage(articleId: string, articleData: any, editMode?: boolean) {
+  navigateToArticlePage(articleId: string, articleData: any, editMode?: string) {
     this.adminService.triggerViewChange(
       'admin-article-page',
       'articles-view',
@@ -208,7 +208,7 @@ export class ArticlesView {
     console.log('from view', article);
   }
 
-  editArticle(id: string, art: Article, editMode: boolean) {
+  editArticle(id: string, art: Article, editMode: string) {
     this.navigateToArticlePage(id, art, editMode);
   }
 

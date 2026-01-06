@@ -157,7 +157,7 @@ export class UIStatContainer implements OnInit, OnChanges {
 
   private handleRouteChange(url: string) {
     const hasLoaded = localStorage.getItem('landingPageLoaded');
-    console.log('hasloaded', hasLoaded);
+    // console.log('hasloaded', hasLoaded);
     this.isAdminPage = url.includes('admin-page');
     if (url.includes('admin-page')) {
       // setTimeout(() => {
@@ -179,12 +179,12 @@ export class UIStatContainer implements OnInit, OnChanges {
         this.appearAnimation();
       // }, 100);
     }
-    console.log(1);
-    console.log(1);
-    console.log('New Route Detected:', url);
-    console.log(this.isAdminPage);
-    console.log(1);
-    console.log(1);
+    // console.log(1);
+    // console.log(1);
+    // console.log('New Route Detected:', url);
+    // console.log(this.isAdminPage);
+    // console.log(1);
+    // console.log(1);
 
     // Perform any logic needed when the page changes
     // (e.g., resetting animations, closing expanded containers)

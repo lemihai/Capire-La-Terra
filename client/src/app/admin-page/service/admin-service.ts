@@ -12,9 +12,8 @@ import { Article, ArticlesService } from './articles-service/articles-service';
 
 import { Subject } from 'rxjs';
 
-@Injectable(
-  // {providedIn: 'root',}
-)
+@Injectable()
+// {providedIn: 'root',}
 export class AdminService {
   private readonly apiUrl = `${environment.apiUrl}`;
   private viewChangeSubject = new Subject<string>();
@@ -42,23 +41,25 @@ export class AdminService {
     fromRoute: string,
     Id?: string | undefined,
     data?: any | undefined,
-    editMode?: boolean
+    editMode?: string
   ) {
     const customEase = 'cubic-bezier(0,.55,.52,.96)';
     let sidebarKey = fromRoute;
+    let adminURL = 'admin-page' + '/' + fromRoute + '/' + url + '/' + Id;
+    console.log(2);
+    console.log(2);
+    console.log(adminURL);
+    console.log(2);
+    console.log(2);
 
-    
-
-    let adminURL = '/admin-page' + '/' + fromRoute + '/' + url + '/' + Id;
     adminURL = adminURL.replace('/undefined', '');
     adminURL = adminURL.replace('//', '/');
-    
+    // if(editMode == true){
+    //   adminURL += '?edit=true';
+    // }
+
     sidebarKey = adminURL;
-    console.log(2);
-    console.log(2);
-    console.log(sidebarKey);
-    console.log(2);
-    console.log(2);
+
     // if (url.includes('news-view')) {
     //   sidebarKey = 'news-view';
     // } else if(url.includes('news-article-view')){
@@ -72,11 +73,11 @@ export class AdminService {
     //   sidebarKey = 'articles-view';
     // }else if(url.includes('new-article')){
     //   sidebarKey = adminURL;
-      
+
     // }else if(url.includes("admin-article-page")){
     //   sidebarKey = 'articles-view';
     // }
-    
+
     // else if(url.includes('episodes-view') || url.includes('new-episode') ||url.includes("episode-page")){
     //   sidebarKey = 'episodes-view';
     // }else if(url.includes('robots-view')){
@@ -98,14 +99,30 @@ export class AdminService {
         onComplete: () => {
           // --- Single Navigation Point ---
           this.ngZone.run(() => {
+            const pathSegments = adminURL.split('/').filter((p) => p !== '');
+
+            // const queryParams: any = {};
+            // if (editMode !== undefined && editMode !== null) {
+            //   queryParams.editMode = editMode;
+            // }
+
             const navigationExtras: NavigationExtras = {
               queryParams: {
-                editMode: editMode, // Will be '?editMode=true' or '?editMode=false'
+                editMode: editMode || null,
               },
-              // You can still keep the 'data' in the state if you only need it for the initial load
-              state: data ? { data } : undefined,
+              state: {
+                data: data,
+              },
+              // This tells Angular to remove the parameter from the URL if it's null
+              // queryParamsHandling: 'merge',
             };
-            this.router.navigate([adminURL], navigationExtras);
+
+            console.log(adminURL);
+            console.log(1, navigationExtras);
+            console.log(2, pathSegments);
+            console.log(3, editMode);
+            this.router.navigate(['/', ...pathSegments], navigationExtras);
+            // this.router.navigate([adminURL], navigationExtras);
             //
             this.viewChangeSubject.next(sidebarKey);
           });
