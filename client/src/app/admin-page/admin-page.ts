@@ -16,6 +16,7 @@ import {
   RouterLink,
   NavigationEnd,
   ActivatedRoute,
+  NavigationExtras,
 } from '@angular/router';
 
 // GSAP
@@ -33,6 +34,7 @@ import { RobotsService } from './service/robots-service/robots-service';
 import { EpisodesService } from './service/episodes-service/episodes-service';
 import { ArticlesService } from './service/articles-service/articles-service';
 import { NewsService } from './service/news-service/news-service';
+import { AuthService } from '../../services/login-service/auth-service';
 
 @Component({
   selector: 'app-admin-page',
@@ -126,6 +128,7 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
   };
 
   private adminService = inject(AdminService); // If using inject, otherwise inject in constructor
+  private authService = inject(AuthService);
   private destroy$ = new Subject<void>();
 
   fromMain = '';
@@ -182,14 +185,14 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     // }
 
     // if (currentRoute == 'admin-page') {
-    this.adminService.viewChange$.pipe(takeUntil(this.destroy$)).subscribe((view: string) => {
+    this.adminService.viewChange$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       // 2. Update the sidebar state using the received view key
-      if (view === '/admin-page/news-view') {
-        view.replace('/admin-page/', '');
+      if (data.view === '/admin-page/news-view') {
+        data.view.replace('/admin-page/', '');
       }
       // let splitview = view.split('/admin-page/').pop();
       // console.log(3945348, splitview);
-      this.SetSidebarView(view);
+      this.SetSidebarView(data.view, data.extras);
 
       // Note: SetSidebarView already calls this.cdr.detectChanges();
     });
@@ -297,17 +300,25 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  SetSidebarView(view: string) {
-    // console.log('');
-    // console.log('');
-    // console.log(32, view);
-    // console.log('');
-    // console.log('');
+  SetSidebarView(view: string, extras?: NavigationExtras) {
+    if (view.includes('?editMode')) {
+      extras = {
+        queryParams: {
+          editMode: true,
+        },
+      };
+
+      let a = view.split('?')[0];
+      let editM = view.split('?')[1];
+      view = a;
+      
+    }
+
     if (view === 'admin-page') {
       this.Sidebar.setActive('admin-page');
       this.buttonHoverTop = 'calc(6.1rem)';
       this.router.navigate(['admin-page']);
-    } else if (view === 'news-view' || view === '/admin-page/news-view') {
+    } else if (view === 'news-view' || view === 'admin-page/news-view') {
       // console.log('');
       // console.log('');
       // console.log(100, view);
@@ -318,19 +329,19 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       this.buttonHoverTop = 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important';
       this.router.navigate(['admin-page/news-view']);
       // return
-    } else if (view === 'articles-view' || view ==='/admin-page/articles-view') {
+    } else if (view === 'articles-view' || view === 'admin-page/articles-view') {
       this.Sidebar.setActive('articles-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
       this.router.navigate(['admin-page/articles-view']);
       // return
-    } else if (view === 'robots-view' || view ==='/admin-page/robots-view') {
+    } else if (view === 'robots-view' || view === 'admin-page/robots-view') {
       this.Sidebar.setActive('robots-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*3) + (0.4rem*3)) !important';
       this.router.navigate(['admin-page/robots-view']);
       // return
-    } else if (view === '/admin-page/episodes-view' || view === 'episodes-view') {
+    } else if (view === 'episodes-view' || view === 'admin-page/episodes-view') {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
@@ -358,26 +369,27 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       this.Sidebar.setActive('articles-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
-      this.router.navigate([`/admin-page/articles-view/${view}`]);
+      this.router.navigate([`${view}`], extras);
+
       // return
     } else if (view === '/admin-page/articles-view/new-article') {
       this.Sidebar.setActive('articles-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
       // this.router.navigate([`admin-page/new-article`]);
-      this.router.navigate([`${view}`]);
+      this.router.navigate([`${view}`], extras);
       // return
     } else if (view.includes('new-episode')) {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
-      this.router.navigate([`${view}`]);
+      this.router.navigate([`${view}`], extras);
       // return
     } else if (view.includes('episode-page')) {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
       this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
-      this.router.navigate([`${view}`]);
+      this.router.navigate([`${view}`], extras);
       // return
     } else {
       // this.Sidebar.setActive('admin-page');
@@ -385,6 +397,12 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       // this.router.navigate(['admin-page']);
     }
     this.cdr.detectChanges();
+  }
+
+  Logout(){
+    console.log('test');
+    this.authService.logout();
+    // this.router.navigate(['']);
   }
 }
 

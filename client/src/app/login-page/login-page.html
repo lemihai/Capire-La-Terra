@@ -39,7 +39,8 @@
       <h1>Capire la Terra</h1>
     </div>
     <form>
-      <label (click)="focusInput(1)" class="{{ emailFocused }}">
+      <label (click)="focusInput(1)" class="{{ emailFocused }} {{ error }}">
+        @if(!error){
         <svg
           width="32"
           height="32"
@@ -62,6 +63,34 @@
             stroke-linejoin="round"
           />
         </svg>
+        } @else {
+        <svg
+          class="alert-icon"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M28 16C28 9.375 22.625 4 16 4C9.375 4 4 9.375 4 16C4 22.625 9.375 28 16 28C22.625 28 28 22.625 28 16Z"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-miterlimit="10"
+          />
+          <path
+            d="M15.641 10.3779L15.9997 17.9998L16.3579 10.3779C16.3601 10.3292 16.3523 10.2806 16.3351 10.2349C16.3179 10.1893 16.2915 10.1477 16.2576 10.1126C16.2238 10.0775 16.1831 10.0496 16.1381 10.0308C16.0931 10.0119 16.0448 10.0025 15.996 10.0029C15.9478 10.0034 15.9002 10.0136 15.856 10.0328C15.8118 10.0521 15.772 10.08 15.7388 10.115C15.7057 10.15 15.68 10.1914 15.6632 10.2365C15.6463 10.2817 15.6388 10.3298 15.641 10.3779Z"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M16 22.9941C15.7528 22.9941 15.5111 22.9208 15.3055 22.7835C15.1 22.6461 14.9398 22.4509 14.8452 22.2225C14.7505 21.9941 14.7258 21.7428 14.774 21.5003C14.8223 21.2578 14.9413 21.0351 15.1161 20.8603C15.2909 20.6854 15.5137 20.5664 15.7561 20.5182C15.9986 20.4699 16.2499 20.4947 16.4784 20.5893C16.7068 20.6839 16.902 20.8441 17.0393 21.0497C17.1767 21.2552 17.25 21.4969 17.25 21.7441C17.25 22.0757 17.1183 22.3936 16.8839 22.628C16.6495 22.8624 16.3315 22.9941 16 22.9941Z"
+            fill="black"
+          />
+        </svg>
+        }
         <div class="separator-line"></div>
         <input
           type="input-field"
@@ -72,7 +101,8 @@
           (blur)="emailFocused = ''"
         />
       </label>
-      <label (click)="focusInput(2)" class="{{ passwordFocused }}">
+      <label (click)="focusInput(2)" class="{{ passwordFocused }} {{ error }}">
+        @if(!error){
         <svg
           width="32"
           height="32"
@@ -95,9 +125,37 @@
             stroke-linejoin="round"
           />
         </svg>
+        } @else {
+        <svg
+          class="alert-icon"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M28 16C28 9.375 22.625 4 16 4C9.375 4 4 9.375 4 16C4 22.625 9.375 28 16 28C22.625 28 28 22.625 28 16Z"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-miterlimit="10"
+          />
+          <path
+            d="M15.641 10.3779L15.9997 17.9998L16.3579 10.3779C16.3601 10.3292 16.3523 10.2806 16.3351 10.2349C16.3179 10.1893 16.2915 10.1477 16.2576 10.1126C16.2238 10.0775 16.1831 10.0496 16.1381 10.0308C16.0931 10.0119 16.0448 10.0025 15.996 10.0029C15.9478 10.0034 15.9002 10.0136 15.856 10.0328C15.8118 10.0521 15.772 10.08 15.7388 10.115C15.7057 10.15 15.68 10.1914 15.6632 10.2365C15.6463 10.2817 15.6388 10.3298 15.641 10.3779Z"
+            stroke="black"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M16 22.9941C15.7528 22.9941 15.5111 22.9208 15.3055 22.7835C15.1 22.6461 14.9398 22.4509 14.8452 22.2225C14.7505 21.9941 14.7258 21.7428 14.774 21.5003C14.8223 21.2578 14.9413 21.0351 15.1161 20.8603C15.2909 20.6854 15.5137 20.5664 15.7561 20.5182C15.9986 20.4699 16.2499 20.4947 16.4784 20.5893C16.7068 20.6839 16.902 20.8441 17.0393 21.0497C17.1767 21.2552 17.25 21.4969 17.25 21.7441C17.25 22.0757 17.1183 22.3936 16.8839 22.628C16.6495 22.8624 16.3315 22.9941 16 22.9941Z"
+            fill="black"
+          />
+        </svg>
+        }
         <div class="separator-line"></div>
         <input
-          type="password"
+          type="{{passwordShow}}"
           [(ngModel)]="password"
           name="password"
           placeholder="password"
@@ -106,7 +164,7 @@
           (input)="checkPassTyped()"
         />
         <div class="eye-button {{ buttonVisible }}">
-          <div class="eye-closed-icon" [style.display]="eyeClosedVisible">
+          <div class="eye-closed-icon" [style.display]="eyeClosedVisible" (click)="showPassword()">
             <svg
               width="32"
               height="32"
@@ -136,7 +194,7 @@
               />
             </svg>
           </div>
-          <div class="eye-open-icon" [style.display]="eyeOpenVisible">
+          <div class="eye-open-icon" [style.display]="eyeOpenVisible" (click)="showPassword()">
             <svg
               width="32"
               height="32"
@@ -161,6 +219,38 @@
           </div>
         </div>
       </label>
+
+      <div class="alert-box {{alertBoxActive}}">
+        <div class="alert-icon">
+          <svg
+            class="alert-icon"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M28 16C28 9.375 22.625 4 16 4C9.375 4 4 9.375 4 16C4 22.625 9.375 28 16 28C22.625 28 28 22.625 28 16Z"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-miterlimit="10"
+            />
+            <path
+              d="M15.641 10.3779L15.9997 17.9998L16.3579 10.3779C16.3601 10.3292 16.3523 10.2806 16.3351 10.2349C16.3179 10.1893 16.2915 10.1477 16.2576 10.1126C16.2238 10.0775 16.1831 10.0496 16.1381 10.0308C16.0931 10.0119 16.0448 10.0025 15.996 10.0029C15.9478 10.0034 15.9002 10.0136 15.856 10.0328C15.8118 10.0521 15.772 10.08 15.7388 10.115C15.7057 10.15 15.68 10.1914 15.6632 10.2365C15.6463 10.2817 15.6388 10.3298 15.641 10.3779Z"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M16 22.9941C15.7528 22.9941 15.5111 22.9208 15.3055 22.7835C15.1 22.6461 14.9398 22.4509 14.8452 22.2225C14.7505 21.9941 14.7258 21.7428 14.774 21.5003C14.8223 21.2578 14.9413 21.0351 15.1161 20.8603C15.2909 20.6854 15.5137 20.5664 15.7561 20.5182C15.9986 20.4699 16.2499 20.4947 16.4784 20.5893C16.7068 20.6839 16.902 20.8441 17.0393 21.0497C17.1767 21.2552 17.25 21.4969 17.25 21.7441C17.25 22.0757 17.1183 22.3936 16.8839 22.628C16.6495 22.8624 16.3315 22.9941 16 22.9941Z"
+              fill="black"
+            />
+          </svg>
+        </div>
+        <p class="alert-text">Incorrect Credentials</p>
+      </div>
 
       <div class="form-options">
         <div class="checkbox-wrapper">

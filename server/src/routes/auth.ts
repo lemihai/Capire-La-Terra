@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 export const logInRouter = Router();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const JWT_EXPIRATION = "1h";
+let JWT_EXPIRATION = "1h";
 
 // --------------------------------------
 // <|||||||||> lOGIN Routes <|||||||||>
@@ -16,19 +16,23 @@ const JWT_EXPIRATION = "1h";
 
 logInRouter.post("/login", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, rememberMe } = req.body;
     // console.log({ username, password });
 
     const checkUser = await collections?.users?.findOne({
       username: `${username}`,
     });
 
+    const expiresIn = rememberMe ? "30d" : "1h";
+
     const checkUserName = checkUser?.username;
     const checkUserPassword = checkUser?.password;
 
-        if (!JWT_SECRET) {
-        // This will stop the server from starting if the secret is missing
-        throw new Error("FATAL: JWT_SECRET environment variable is not configured.");
+    if (!JWT_SECRET) {
+      // This will stop the server from starting if the secret is missing
+      throw new Error(
+        "FATAL: JWT_SECRET environment variable is not configured."
+      );
     }
 
     if (checkUserName === username && checkUserPassword === password) {
@@ -40,7 +44,7 @@ logInRouter.post("/login", async (req, res) => {
       };
 
       const token = jwt.sign(payload, JWT_SECRET!, {
-        expiresIn: JWT_EXPIRATION,
+        expiresIn,
       });
 
       console.log(23432324, token);

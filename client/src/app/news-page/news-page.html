@@ -3,7 +3,13 @@
     <div class="content-wrapper">
       <section class="main-articles">
         <div class="main-wrapper">
-          <app-news-card cardType="hero-card" cardDirection="right" />
+          <app-news-card
+            cardType="hero-card"
+            cardDirection="right"
+            [article]="articles[0]"
+            (navigateToArticle)="navigateToArticlePage(articles._id, articles[0])"
+          />
+          <!-- <app-news-card cardType="hero-card" cardDirection="right" /> -->
           <app-news-card cardType="hero-card" cardDirection="left" />
         </div>
         <div class="separator-line transition-vertical-line"></div>
@@ -63,3 +69,15 @@
     <app-footer />
   </div>
 </div>
+
+<!-- 
+  @for (article of articles; track article._id) {
+    <app-article-card
+      [article]="article"
+      (navigateToArticle)="navigateToArticlePage(article._id, article)"
+      (submitArticle)="postArticle(article)"
+      (editArticle)="editArticle(article._id, article, 'true')"
+      (deleteArticle)="deleteArticle(article._id)"
+    />
+  }
+ -->

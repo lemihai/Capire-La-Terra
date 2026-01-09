@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   ChangeDetectionStrategy,
+  inject,
 } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,6 +13,7 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import CustomEase from 'gsap/CustomEase';
 import { NewsCardComponent } from '../shared/components/news-card.component/news-card.component';
 import { Footer } from '../footer/footer';
+import { ArticlesService } from '../../services/articles-service/articles-service';
 
 @Component({
   selector: 'app-news-page',
@@ -21,14 +23,24 @@ import { Footer } from '../footer/footer';
 })
 export class NewsPage implements AfterViewInit, OnInit, OnDestroy {
   private smoother: ScrollSmoother | null = null;
+  private articlesService = inject(ArticlesService);
 
   time = 1.24;
-  timeFast = .64;
+  timeFast = 0.64;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
 
   constructor(private ngZone: NgZone) {}
 
+  articles: any = [];
+
   ngOnInit() {
+     this.articlesService.getAllArticles().subscribe((data) => {
+      console.log(data);
+      // this.articles = data;
+      // this.sorting.sortedListView = [...this.articles];
+      // this.sort('date');
+      // this.cdr.detectChanges(); // Manually trigger change detection if needed
+    });
     // Register GSAP plugins here once
     this.ngZone.runOutsideAngular(() => {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -40,6 +52,10 @@ export class NewsPage implements AfterViewInit, OnInit, OnDestroy {
     if (this.smoother) {
       this.smoother.kill();
     }
+  }
+
+  navigateToArticlePage(articleId: string, articleData: any) {
+    console.log(articleId, articleData);
   }
 
   ngAfterViewInit() {

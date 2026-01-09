@@ -201,10 +201,7 @@ export class AdminEpisodeView {
     // const state = this.navigationState();
     // const navigation = this.router.getCurrentNavigation();
     // console.log(99, this.route);
-    const state = window.history.state;
-    const episodeData = state?.data;
 
-    console.log('Data from history.state:', state);
     // let innersource = '';
     if (!this.episodeId) {
       // Redirect or handle missing ID
@@ -218,7 +215,7 @@ export class AdminEpisodeView {
       this.editMode = editModeParam === 'true';
       this.editModeFromState = this.editMode;
 
-      console.log('Edit Mode sync from URL:', params);
+      // console.log('Edit Mode sync from URL:', params);
       this.cdr.detectChanges();
     });
 
@@ -237,11 +234,7 @@ export class AdminEpisodeView {
       const navigation = this.router.getCurrentNavigation();
       let episodeData = navigation?.extras.state?.['data'];
 
-      console.log(8);
-      console.log(8);
-      console.log(episodeData);
-      console.log(8);
-      console.log(8);
+      
       if (episodeData != undefined) {
         this.episode = episodeData;
         // innersource = episodeData.url;

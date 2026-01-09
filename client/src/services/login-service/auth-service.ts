@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, tap } from 'rxjs';
 
 interface LoginResponse {
   success: boolean;
@@ -25,6 +25,19 @@ export class AuthService {
     this.checkToken();
   }
 
+  login(username: string, password: string, rememberMe: boolean): Observable<LoginResponse> {
+  const credentials = { username, password, rememberMe };
+  return this.http.post<LoginResponse>(`${environment.apiUrl}/login`, credentials).pipe(
+    tap((response: LoginResponse) => {
+      if (response.success && response.token) {
+        this.storeToken(response.token);
+        this.isAuthenticated.next(true);
+      }
+    })
+  );
+}
+
+  /*
   login(username: string, password: string) {
     const credentials = { username, password };
     this.http.post<LoginResponse>(`${environment.apiUrl}/login`, credentials).subscribe({
@@ -41,12 +54,10 @@ export class AuthService {
       // this.router.navigate(['/dashboard']),
       error: (err) => {
         console.error('Full error:', err);
-        console.error('Error status:', err.status);
-        console.error('Error message:', err.message);
-        console.error('Error body:', err.error);
       },
     });
   }
+  */
 
   storeToken(token: string): void {
     localStorage.setItem(this.JWT_TOKEN, token);
@@ -55,7 +66,7 @@ export class AuthService {
     const iat = new Date(decodedToken.iat! * 1000);
     console.log('DecodedToken: ', decodedToken);
     // expiresAt += 1000;
-    console.log('expires at:' ,expiresAt, 'IAT:', iat);
+    console.log('expires at:', expiresAt, 'IAT:', iat);
     console.log(expiresAt.toISOString());
     localStorage.setItem(this.SESSION_EXPIRATION_TOKEN, expiresAt.toISOString());
   }
@@ -77,7 +88,7 @@ export class AuthService {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.SESSION_EXPIRATION_TOKEN);
     this.isAuthenticated.next(false);
-    this.router.navigate(['/login-page']);
+    this.router.navigate(['']);
   }
 
   get isAuthenticated$(): Observable<boolean> {

@@ -35,7 +35,7 @@ export class Button implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['externalFocus']) {
       const isFocused = changes['externalFocus'].currentValue;
-      console.log(1, this.externalFocus);
+      // console.log(1, this.externalFocus);
 
       // // Update the internal state based on the external input
       // if (isFocused === true) {
@@ -55,6 +55,6 @@ export class Button implements OnInit, OnChanges {
     } else if (this.buttonText == 'Edit' && this.focusedState === 'focused') {
       this.focusedState = '';
     }
-    console.log(2, this.focusedState);
+    // console.log(2, this.focusedState);
   }
 }

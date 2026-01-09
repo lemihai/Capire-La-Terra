@@ -176,11 +176,11 @@ export class EpisodesView {
       }
     });
 
-    console.log(this.sorting.sortedListView[32]);
+    // console.log(this.sorting.sortedListView[32]);
 
     this.episodes = this.sorting.sortedListView;
 
-    console.log(`Sorted by ${key} in ${this.sorting.sortDirection} order.`);
+    // console.log(`Sorted by ${key} in ${this.sorting.sortDirection} order.`);
     this.cdr.detectChanges(); // Update the view after sorting
   }
 
@@ -189,7 +189,7 @@ export class EpisodesView {
       this.episodes = data;
       this.sorting.sortedListView = [...this.episodes];
       this.sort('date')
-      console.log('Episodes result ', this.episodes);
+      // console.log('Episodes result ', this.episodes);
       this.cdr.detectChanges(); // Manually trigger change detection if needed
     });
   }
@@ -209,10 +209,10 @@ export class EpisodesView {
   }
 
   postEpisode(episode: Episode) {
-    console.log(episode._id);
+    // console.log(episode._id);
     if (episode.posted === true) {
       episode.posted = false;
-      console.log(episode);
+      // console.log(episode);
       // if (this.episode._id) {
       if (!episode._id) {
         console.error('Cannot update episode status: Episode ID is missing.');
@@ -244,7 +244,7 @@ export class EpisodesView {
       });
       // }
     }
-    console.log('from view', episode);
+    // console.log('from view', episode);
   }
 
   editEpisode(id: string, ep: Episode, editMode: string) {
@@ -254,7 +254,7 @@ export class EpisodesView {
   deleteEpisode(_id: string) {
     this.adminService.deleteEpisode(_id).subscribe(
       (response) => {
-        console.log('Article deleted successfully', response);
+        // console.log('Article deleted successfully', response);
         // Re-fetch the articles after deletion
         const activeSortKey = this.getCurrentSortKey();
         this.adminService.getAllEpisodes().subscribe((data) => {

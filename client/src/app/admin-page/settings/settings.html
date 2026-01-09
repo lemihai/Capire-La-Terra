@@ -2,9 +2,154 @@
   <header class="header-container">
     <h2>Settings</h2>
   </header>
-  
-  <div class="separator-line"></div>
+
+  <!-- <div class="separator-line"></div> -->
   <div class="content-container">
-   <div class="">fiawejienu</div>
+    <header class="top-wrapper-containers">
+      <div class="profile-picture" [style.background-image]="'url(profilePicture)'">
+        <div class="upload-new-picture"></div>
+      </div>
+      <!-- edit button -->
+      <!-- Here I will ut profile pic and name -->
+      <!-- Account created date -->
+    </header>
+    <section class="top-details-container">
+      <!-- Name -->
+      <!-- Date of birth -->
+      <!-- Role -->
+      <div class="row">
+        <p class="label-text">Username</p>
+        <label (click)="focusInput(1)" class="{{ emailFocused }}">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M26.5 6H5.5C4.11929 6 3 7.11929 3 8.5V23.5C3 24.8807 4.11929 26 5.5 26H26.5C27.8807 26 29 24.8807 29 23.5V8.5C29 7.11929 27.8807 6 26.5 6Z"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7 10L16 17L25 10"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <div class="separator-line"></div>
+          <input
+            type="input-field"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="email"
+            #emailInput
+            (blur)="emailFocused = ''"
+          />
+        </label>
+      </div>
+      <div class="row">
+        <p class="label-text">Email</p>
+        <label (click)="focusInput(2)" class="{{ emailFocused }}">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M26.5 6H5.5C4.11929 6 3 7.11929 3 8.5V23.5C3 24.8807 4.11929 26 5.5 26H26.5C27.8807 26 29 24.8807 29 23.5V8.5C29 7.11929 27.8807 6 26.5 6Z"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7 10L16 17L25 10"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <div class="separator-line"></div>
+          <input
+            type="input-field"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="email"
+            #emailInput
+            (blur)="emailFocused = ''"
+          />
+        </label>
+      </div>
+    </section>
+    <section class="middle-details-container">
+      <div class="row">
+        <p class="label-text">password</p>
+        <div class="input-field-wrapper">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M26.5 6H5.5C4.11929 6 3 7.11929 3 8.5V23.5C3 24.8807 4.11929 26 5.5 26H26.5C27.8807 26 29 24.8807 29 23.5V8.5C29 7.11929 27.8807 6 26.5 6Z"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7 10L16 17L25 10"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <input type="text" name="password" placeholder="password" />
+        </div>
+      </div>
+      <div class="row">
+        <p class="label-text">confirm password</p>
+        <div class="input-field-wrapper">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M26.5 6H5.5C4.11929 6 3 7.11929 3 8.5V23.5C3 24.8807 4.11929 26 5.5 26H26.5C27.8807 26 29 24.8807 29 23.5V8.5C29 7.11929 27.8807 6 26.5 6Z"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7 10L16 17L25 10"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <input type="text" name="password" placeholder="password" />
+        </div>
+      </div>
+    </section>
+    <section class="bottom-details-container">
+      <div class="2FA">2FA</div>
+    </section>
   </div>
 </div>

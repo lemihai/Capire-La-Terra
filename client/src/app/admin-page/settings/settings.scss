@@ -39,12 +39,265 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: stretch;
-  gap: 0.24rem;
+  align-items: center;
+  gap: 1rem;
+
   overflow-y: scroll;
   scroll-behavior: smooth;
   /* Scrollbar styling */
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: var(--main-color-dark-hover) var(--main-color-dark-invisible); /* For Firefox */
   position: relative;
+
+  header {
+    height: 16rem;
+    min-height: 16rem;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    padding-left: 18.8rem;
+    // margin-bottom: 4rem;
+
+    background-image: url(/assets/article-illustration-1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-radius: 1.6rem;
+
+    .profile-picture {
+      height: 12.8rem;
+      width: 12.8rem;
+
+      position: relative;
+
+      border-radius: 8rem;
+      border: 0.4rem solid var(--main-color-light);
+      background-color: var(--main-color-dark);
+
+      background-image: url(/assets/article-illustration-1.jpg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: translateY(6.4rem);
+    }
+  }
+  section {
+    width: 64%;
+    background-color: var(--main-color-dark-08);
+    border-radius: 1.6rem;
+    border: 1px solid var(--main-color-dark-08);
+    min-height: auto;
+    padding: 3.2rem 3.2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0.8rem;
+
+    .row {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      min-width: 2rem;
+      // min-height: 2rem;
+      transition: var(--transition-160);
+    }
+
+    label {
+      height: 100%;
+      width: 100%;
+      // MIN
+      min-height: 4rem;
+      max-height: 4rem;
+      min-width: 30rem;
+      max-width: 40rem;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.8rem;
+
+      background-color: var(--main-color-dark-08);
+      border: 1px solid var(--main-color-dark-16);
+      border-radius: 1.6rem;
+      padding: 0.8rem 0.8rem 0.8rem 1.2rem;
+
+      transition: var(--transition-160);
+
+      .separator-line {
+        height: 1.2rem;
+        width: 0.24rem;
+
+        background-color: var(--main-color-dark-64);
+        border-radius: 1rem;
+        transition: var(--transition-160);
+      }
+
+      svg {
+        opacity: 0.32;
+        transition: var(--transition-160);
+
+        path {
+          color: var(--main-color-dark);
+          stroke-width: 0.28rem;
+        }
+      }
+
+      input {
+        width: 100%;
+        height: 80%;
+        background-color: #00000000;
+        color: var(--main-color-dark);
+
+        transition: var(--transition-160);
+        caret-color: var(--main-color-dark);
+
+        &:focus {
+          background-color: none;
+        }
+
+        &::placeholder {
+          color: var(--main-color-dark-64);
+
+          transition: var(--transition-160);
+        }
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+          -webkit-box-shadow: none;
+          -webkit-text-fill-color: var(--main-color-dark) !important;
+          transition: background-color 5000s ease-in-out 0s;
+        }
+      }
+
+      input[type='password'] {
+        -webkit-text-security: disc;
+      }
+
+      .eye-button {
+        width: 0rem;
+        min-width: 0rem;
+        height: 0rem;
+        overflow: hidden;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 0.8rem;
+        border: 1px solid #00000000;
+
+        transition: var(--transition-160);
+
+        .eye-closed-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          // display: none;
+          transition: var(--transition-160);
+        }
+
+        .eye-open-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: var(--transition-160);
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: var(--main-color-dark-08);
+          border: 1px solid var(--main-color-dark-16);
+          transition: var(--transition-160);
+
+          .eye-closed-icon {
+            svg {
+              opacity: 1 !important;
+              transition: var(--transition-160);
+            }
+          }
+
+          .eye-open-icon {
+            svg {
+              opacity: 1 !important;
+              transition: var(--transition-160);
+            }
+          }
+        }
+      }
+
+      .buttonVisible {
+        width: 3.2rem;
+        min-width: 3.2rem;
+        height: 3.2rem;
+        transition: var(--transition-160);
+      }
+
+      &:hover {
+        cursor: text;
+        gap: 1rem;
+        padding: 0.8rem 0.8rem 0.8rem 1.6rem;
+
+        background-color: var(--main-color-dark-16);
+        border: 1px solid var(--main-color-dark-hover);
+
+        .eye-button {
+          .eye-closed-icon {
+            svg {
+              opacity: 0.32;
+            }
+          }
+
+          .eye-open-icon {
+            svg {
+              opacity: 0.32;
+            }
+          }
+        }
+
+        input {
+          &::placeholder {
+            color: var(--main-color-dark-80);
+            transition: var(--transition-160);
+          }
+        }
+
+        .separator-line {
+          height: 1.2rem;
+          width: 0.24rem;
+
+          background-color: var(--main-color-dark-hover);
+          border-radius: 1rem;
+        }
+
+        svg {
+          opacity: 1;
+
+          path {
+            color: var(--main-color-dark);
+            stroke-width: 0.28rem;
+          }
+        }
+      }
+
+      &:focus {
+        background-color: var(--main-color-dark);
+      }
+    }
+  }
 }

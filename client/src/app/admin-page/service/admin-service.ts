@@ -16,7 +16,7 @@ import { Subject } from 'rxjs';
 // {providedIn: 'root',}
 export class AdminService {
   private readonly apiUrl = `${environment.apiUrl}`;
-  private viewChangeSubject = new Subject<string>();
+  private viewChangeSubject = new Subject<{ view: string; extras?: NavigationExtras }>();
   public viewChange$ = this.viewChangeSubject.asObservable();
 
   time = 0.64;
@@ -46,12 +46,6 @@ export class AdminService {
     const customEase = 'cubic-bezier(0,.55,.52,.96)';
     let sidebarKey = fromRoute;
     let adminURL = 'admin-page' + '/' + fromRoute + '/' + url + '/' + Id;
-    console.log(2);
-    console.log(2);
-    console.log(adminURL);
-    console.log(2);
-    console.log(2);
-
     adminURL = adminURL.replace('/undefined', '');
     adminURL = adminURL.replace('//', '/');
     // if(editMode == true){
@@ -101,11 +95,6 @@ export class AdminService {
           this.ngZone.run(() => {
             const pathSegments = adminURL.split('/').filter((p) => p !== '');
 
-            // const queryParams: any = {};
-            // if (editMode !== undefined && editMode !== null) {
-            //   queryParams.editMode = editMode;
-            // }
-
             const navigationExtras: NavigationExtras = {
               queryParams: {
                 editMode: editMode || null,
@@ -124,7 +113,10 @@ export class AdminService {
             this.router.navigate(['/', ...pathSegments], navigationExtras);
             // this.router.navigate([adminURL], navigationExtras);
             //
-            this.viewChangeSubject.next(sidebarKey);
+            this.viewChangeSubject.next({
+              view: sidebarKey,
+              extras: navigationExtras,
+            });
           });
         },
       });

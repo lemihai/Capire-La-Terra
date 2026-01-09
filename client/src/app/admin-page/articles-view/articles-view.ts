@@ -173,16 +173,16 @@ export class ArticlesView {
       }
     });
 
-    console.log(this.sorting.sortedListView[32]);
+    // console.log(this.sorting.sortedListView[32]);
 
     this.articles = this.sorting.sortedListView;
 
-    console.log(`Sorted by ${key} in ${this.sorting.sortDirection} order.`);
+    // console.log(`Sorted by ${key} in ${this.sorting.sortDirection} order.`);
     this.cdr.detectChanges(); // Update the view after sorting
   }
 
   postArticle(article: Article) {
-    console.log(article._id);
+    // console.log(article._id);
     if (article.posted === true) {
       article.posted = false;
       // console.log(article);
@@ -205,7 +205,7 @@ export class ArticlesView {
         },
       });
     }
-    console.log('from view', article);
+    // console.log('from view', article);
   }
 
   editArticle(id: string, art: Article, editMode: string) {
@@ -216,7 +216,7 @@ export class ArticlesView {
     this.adminService.deleteArticle(_id).subscribe(
       (response) => {
         const activeSortKey = this.getCurrentSortKey();
-        console.log('Article deleted successfully', response);
+        // console.log('Article deleted successfully', response);
         // Re-fetch the articles after deletion
         this.adminService.getAllArticles().subscribe((data) => {
           this.articles = data;

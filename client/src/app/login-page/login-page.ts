@@ -15,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 import { Button } from '../shared/buttons/button/button'; // <-- New Import
 
 import { AuthService } from '../../services/login-service/auth-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -30,6 +31,7 @@ export class LoginPage implements OnInit, OnChanges {
   private api = inject(Api);
   private http = inject(HttpClient); // <--- Inject HttpClient here
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   emailFocused = '';
   passwordFocused = '';
@@ -44,6 +46,9 @@ export class LoginPage implements OnInit, OnChanges {
   email: string = '';
   password: string = '';
   rememberMe: boolean = false;
+  error: string = '';
+  alertBoxActive: string = '';
+  passwordShow: string = 'password';
 
   // You can remove the constructor if you use the inject function:
   // constructor(private api: Api) {}
@@ -68,9 +73,43 @@ export class LoginPage implements OnInit, OnChanges {
 
   // Login: admin, password
   login(username: string, password: string) {
-    this.authService.login(username, password);
-    // No need to handle the subscription here; AuthService does it.
+    console.log(1);
+        console.log(1);
+        console.log(this.rememberMe);
+        console.log(1);
+        console.log(1);
+    this.authService.login(username, password, this.rememberMe).subscribe({
+      next: (response) => {
+        if (response.success && response.token) {
+          this.router.navigate(['/admin-page']);
+        } else {
+          this.error = 'error';
+          this.alertBoxActive = 'alert-active';
+          this.router.navigate(['/login-page']);
+          this.email = '';
+          this.password = '';
+          console.error('Login failed:', response.message);
+        }
+      },
+      error: (err) => {
+        this.error = 'error';
+        this.alertBoxActive = 'alert-active';
+        this.router.navigate(['/login-page']);
+        this.email = '';
+        this.password = '';
+        
+      },
+    });
   }
+  /*
+  login(username: string, password: string) {
+    try {
+      this.authService.login(username, password);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  */
 
   // login(username: string, password: string) {
   //   // console.log('POPEFKPOFWKE', this.password);
@@ -94,14 +133,30 @@ export class LoginPage implements OnInit, OnChanges {
   }
 
   focusInput(type: number) {
-    console.log('works');
+    // console.log('works');
     if (type === 1) {
       this.emailFocused = 'email-focused';
       this.emailInput.nativeElement.focus();
+      if ((this.error = 'error')) {
+        this.error = '';
+        this.alertBoxActive = '';
+      }
     }
     if (type === 2) {
       this.passwordFocused = 'password-focused';
       this.passwordInput.nativeElement.focus();
+      if ((this.error = 'error')) {
+        this.error = '';
+        this.alertBoxActive = '';
+      }
+    }
+  }
+
+  showPassword(){
+    if(this.passwordShow == 'password'){
+      this.passwordShow = 'text';
+    } else {
+      this.passwordShow = 'password';
     }
   }
 

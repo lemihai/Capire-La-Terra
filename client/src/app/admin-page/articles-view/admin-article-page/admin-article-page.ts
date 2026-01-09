@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  computed,
   ElementRef,
   HostListener,
+  inject,
   OnChanges,
   OnInit,
   QueryList,
@@ -21,6 +23,7 @@ import { ProfileCard } from '../../../shared/components/profile-card/profile-car
 import { NgOptimizedImage } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Button } from '../../../shared/buttons/button/button';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-admin-article-page',
@@ -38,6 +41,9 @@ export class AdminArticlePage {
   textInputFields!: QueryList<ElementRef>;
   @ViewChild('inputOverlay') inputOverlay!: ElementRef;
   // articleAuthor = '';
+
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   @HostListener('keydown', ['$event'])
   handleTabKey(event: KeyboardEvent) {
@@ -128,8 +134,8 @@ export class AdminArticlePage {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute,
+    // private router: Router,
+    // private route: ActivatedRoute,
     private adminService: AdminService,
     private cdr: ChangeDetectorRef
   ) {
@@ -161,6 +167,13 @@ export class AdminArticlePage {
 
   articleArticleText: string[] = [];
 
+  readonly navigationState = computed(() => {
+    const nav = this.router.currentNavigation();
+    return nav?.extras.state as { editMode: any; data: any } | undefined;
+  });
+
+  private queryParams = toSignal(this.route.queryParamMap);
+
   ngOnInit() {
     this.articleId = this.route.snapshot.paramMap.get('id');
 
@@ -170,20 +183,33 @@ export class AdminArticlePage {
       this.router.navigate(['/admin-page/articles-view']);
       return;
     }
+
+    const initialEditMode = this.route.snapshot.queryParamMap;
+
+    this.route.queryParams.subscribe((params) => {
+      const editModeParam = params['editMode'];
+      this.editMode = editModeParam === 'true';
+      this.editModeFromState = this.editMode;
+
+      // console.log('Article Edit Mode from URL:', params);
+      this.cdr.detectChanges();
+    });
+
     try {
-      this.route.queryParams.subscribe((params) => {
-        // Query parameters are always strings, so you must convert 'true'/'false' to boolean
-        const editModeParam = params['editMode'];
+      // this.route.queryParams.subscribe((params) => {
+      //   // Query parameters are always strings, so you must convert 'true'/'false' to boolean
+      //   const editModeParam = params['editMode'];
 
-        // Check if the parameter exists and is explicitly 'true'
-        this.editModeFromState = editModeParam === 'true';
+      //   // Check if the parameter exists and is explicitly 'true'
+      //   this.editModeFromState = editModeParam === 'true';
 
-        console.log('THIS IS THE EDIT MODE FROM QUERY PARAMS', this.editModeFromState);
+      //   console.log('THIS IS THE EDIT MODE FROM QUERY PARAMS', this.editModeFromState);
 
-        // Now you can safely use the 'this.editMode' property elsewhere.
-      });
+      //   // Now you can safely use the 'this.editMode' property elsewhere.
+      // });
       const navigation = this.router.getCurrentNavigation();
       let articleData = navigation?.extras.state?.['data'];
+
       if (articleData != undefined) {
         this.article = articleData;
         // innersource = articleData.url;
@@ -195,10 +221,10 @@ export class AdminArticlePage {
       console.error('Error accessing article data or ID:', error);
     }
 
-    if(this.editModeFromState == true){
+    if (this.editModeFromState == true) {
       this.editModeFromState = true;
-      this.editMode= true;
-      this.cdr.detectChanges()
+      this.editMode = true;
+      this.cdr.detectChanges();
     }
   }
 
