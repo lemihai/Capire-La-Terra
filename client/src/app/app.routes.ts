@@ -23,7 +23,23 @@ import { authGuard } from '../services/guards/auth-guard';
 export const routes: Routes = [
   { path: '', component: LandingPage, title: 'Home' },
   { path: 'episodes-page', component: EpisodesPage, title: 'Episodes' },
-  { path: 'news-page', component: NewsPage, title: 'News' },
+  {
+    path: 'news-page',
+    component: NewsPage,
+    title: 'News',
+    // children: [
+    //   {
+    //     path: '', // The main News list view (e.g., /admin-page/news-view)
+    //     component: NewsPage, // Now NewsView is treated as a child
+    //     title: 'news-page',
+    //   },
+    //   {
+    //     path: 'article-page/:id',
+    //     component: ArticlePage, // NewsArticlePage replaces NewsView here
+    //     title: 'Article',
+    //   },
+    // ],
+  },
   { path: 'article-page', component: ArticlePage, title: 'Article' },
   { path: 'login-page', component: LoginPage, title: 'Login' },
   {
@@ -107,7 +123,7 @@ export const routes: Routes = [
         component: Settings,
         title: 'Settings-view',
       },
-      { path: '**', component: AdminPage }
+      { path: '**', component: AdminPage },
     ],
   },
 ];

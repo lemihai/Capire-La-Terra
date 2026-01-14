@@ -35,7 +35,10 @@ export class NewsPage implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit() {
      this.articlesService.getAllArticles().subscribe((data) => {
-      console.log(data);
+       // let dataList = data;
+      //  console.log(data);
+       this.articles = data
+      //  console.log(this.articles);
       // this.articles = data;
       // this.sorting.sortedListView = [...this.articles];
       // this.sort('date');

@@ -75,6 +75,7 @@ export class NewsCardComponent implements OnInit {
   ngOnInit(): void {
     // this.defineSource(this.article.url);
     this.source = this.article.url;
+    console.log(this.article);
   }
 
   updateRoute() {
@@ -187,6 +188,7 @@ export class NewsCardComponent implements OnInit {
   navigateToArticlePage() {
     this.updateRoute();
     this.triggerPageTransition('/article-page', this.currentRoute);
+    // Update this so that it navigates to the article page but with the specific ID
   }
 
   onDeleteArticle() {
