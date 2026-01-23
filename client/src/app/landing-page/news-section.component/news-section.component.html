@@ -8,14 +8,17 @@
   </div>
   <div class="right-side">
     <div class="right-side-wrapper">
-      <div class="articles-list-header">
-        <h2>latest climate news</h2>
-        <!-- <div class="articles-list-header-line"></div> -->
+      <div class="header">
+        <h1 class="transition-A">Biggest News</h1>
+        <div class="horizontal-seaprator-line transition-horizontal-line"></div>
       </div>
-      <!-- <app-news-card cardType="medium"/> -->
-      <app-news-card cardType="small" />
-      <app-news-card cardType="small" />
-      <app-news-card cardType="small" />
+      <app-news-card cardType="small-no-image" [article]="articles[0]" />
+      <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+      <app-news-card cardType="small-no-image" [article]="articles[1]" />
+      <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+      <app-news-card cardType="small-no-image" [article]="articles[2]" />
+      <!-- <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+      <app-news-card cardType="small-no-image" [article]="articles[3]" /> -->
     </div>
   </div>
 </div>

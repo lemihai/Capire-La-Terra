@@ -16,6 +16,7 @@ import { ProfileCard } from '../profile-card/profile-card';
 import { PlayButton } from '../../buttons/play-button/play-button';
 import { NgOptimizedImage } from '@angular/common';
 import { SourceComponent } from '../source.component/source.component';
+import { Episode } from '../../../../services/episodes-service/episodes-service';
 
 @Component({
   selector: 'app-episode-card',
@@ -24,10 +25,10 @@ import { SourceComponent } from '../source.component/source.component';
   styleUrl: './episode-card.scss',
 })
 export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
+  @Input() episode!: Episode;
+  @Input() cardType = '';
   @ViewChild('playerWidth') playerWidth!: ElementRef<HTMLDivElement>;
   @ViewChild('audioTrackWrapper') audioTrackWrapper!: ElementRef<HTMLDivElement>;
-  @Input() cardType = '';
-  @Input() episode: any = {};
   // episode card can be 'small', 'medium', 'large'
 
   viewportWidth = window.innerWidth;
@@ -68,10 +69,12 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   constructor(
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
-    private appRef: ApplicationRef
+    private appRef: ApplicationRef,
   ) {}
 
   ngOnInit() {
+    console.log(this.episode);
+    // console.log(this.episode);
     // for (let i = 0; i <= 10; i++) {
     //   this.triggerChange();
     //   this.cdr.detectChanges();
@@ -85,7 +88,20 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(1, changes);
+    if (changes['episode']) {
+      this.episode = changes['episode'].currentValue;
+      // this.article = { ...this.article };
+      // this.episode = changes['episode'].currentValue;
+      // console.log(changes['episode'].currentValue);
+    }
+    // console.log(1, this.episode);
+    this.cdr.detectChanges();
+  }
+
   ngAfterViewInit() {
+    // console.log(2, this.episode);
     // setTimeout(()=>{
 
     // this.currentAudioTrackWidth = this.audioTrackWrapper.nativeElement.clientWidth;
@@ -173,7 +189,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
     // console.log('This is a change');
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // this.cdr.detectChanges();
+  playEpisode(){
+    console.log('play-episode');
   }
 }

@@ -4,35 +4,52 @@
       <section class="title">
         <div class="title-wrapper">
           <div class="line-container">
-            <h1 class="transition-A">{{ articles[0].title }}</h1>
+            <h1 class="transition-A">{{ article.title }}</h1>
           </div>
         </div>
-        <div class="image transition-image"></div>
+        <div class="image transition-image">
+          <img
+            [src]="article.imageUrl"
+            alt="Article Image"
+          />
+        </div>
         <div class="article-details">
-          @if(articles[0].author == 'Sofia'){
-          <app-profile-card [profile]="articles[0].author" class="transition-A"/>
+          <!-- @if (article.author == 'Sofia') { -->
+          <app-profile-card [profile]="article.author" class="transition-A"/>
+          <!-- } -->
+          <div class="separator-line transition-vertical-line"></div>
+          <p class="date transition-A">{{ article.date }}</p>
+          <div class="separator-line transition-vertical-line"></div>
+          @if (article.sources.length > 3) {
+            @for (source of article.sources; track source) {
+              <app-source class="transition-A" source="{{ source }}" size="no-image" />
+            }
+          } @else {
+            @for (source of article.sources; track source) {
+              <app-source class="transition-A" source="{{ source }}" size="" />
+            }
           }
-          <div class="separator-line transition-vertical-line"></div>
-          <p class="date transition-A">{{ articles[0].date }}</p>
-          <div class="separator-line transition-vertical-line"></div>
-          <app-source class="transition-A" source="the guardian" />
         </div>
       </section>
 
       <section class="article-body">
         <div class="article-text-header">
-            <h1 class="transition-A">Article Body</h1>
-            <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+          <h1 class="transition-A">Article Body</h1>
+          <div class="horizontal-seaprator-line transition-horizontal-line"></div>
         </div>
         <!-- <div class="article-text"> -->
-          @for (paragraph of paragraphs; track $index) {
+        @for (paragraph of article.text; track $index) {
           <p class="paragraph transition-A">{{ paragraph }}</p>
-          }
+        }
         <!-- </div> -->
       </section>
 
       <section class="next-story">
-        <app-news-card cardType="large" />
+        <div class="article-text-header">
+          <h1 class="transition-A">Read More</h1>
+          <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+        </div>
+        <app-news-card cardType="small-no-image" [article]="article"/>
       </section>
     </div>
     <app-footer />

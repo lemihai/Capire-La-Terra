@@ -1,13 +1,25 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { ProfileCard } from '../profile-card/profile-card';
 import { SourceComponent } from '../source.component/source.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { NavbarGsapService } from '../../../navbar/navbar-gsap-service';
 
 import gsap from 'gsap';
 import CustomEase from 'gsap/CustomEase';
-import { News } from '../../../admin-page/service/news-service/news-service';
 import { AdminService } from '../../../admin-page/service/admin-service';
+import { Article } from '../../../news-page/article-page/article-page';
+import { News } from '../../../admin-page/service/news-service/news-service';
 
 // export interface Article {
 //   _id?: string; // MongoDB ID (optional for new articles)
@@ -26,37 +38,40 @@ import { AdminService } from '../../../admin-page/service/admin-service';
   templateUrl: './news-card.component.html',
   styleUrl: './news-card.component.scss',
 })
-export class NewsCardComponent implements OnInit {
-  @Input() article: News = {
+export class NewsCardComponent implements OnInit, OnChanges {
+  @Input() article: Article = {
     _id: '',
+    title: '',
+    date: '',
+    author: '',
     url: '',
+    imageUrl: '',
+    text: [],
+    sources: [],
+    summary: '',
+    posted: false,
+  };
+
+  @Input() news: News = {
+    _id: '',
     title: '',
     author: '',
     date: '',
     text: '',
     summary: '',
+    url: '',
+    // Add other fields as needed
   };
+  // define input news if they look like news
+  // The errors appear because of two conflicting models inside one component
   @Input() cardType: string = ''; // Default value
   @Input() cardDirection: string = ''; // Default value
 
-  @Output() deleteArticle = new EventEmitter<{ id: string}>();
-  @Output() navigateToArticle = new EventEmitter<{ id: string}>();
+  @Output() deleteArticle = new EventEmitter<{ id: string }>();
+  @Output() navigateToArticle = new EventEmitter<{ id: string }>();
 
   source = '';
   currentRoute: string = '';
-
-  articlesGG: News[] = [
-    {
-      _id: '3243223', // Changed from `id` to `_id` and made it a string
-      url: 'https://example.com/article1', // Added `url`
-      title: 'This is an article example', // Changed from `name` to `title`
-      author: 'Sofia', // Added `author`
-      date: '2010-01-17', // Added `date`
-      text: "Ecco il pilot del nostro podcast, oggi parliamo,  in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.", // Changed from `description` to `text`
-      summary:
-        'Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,', // Added `summary`
-    },
-  ];
 
   constructor(
     private elementRef: ElementRef,
@@ -64,7 +79,7 @@ export class NewsCardComponent implements OnInit {
     private router: Router,
     private ngZone: NgZone,
     private route: ActivatedRoute,
-    private navbarGsapService: NavbarGsapService
+    private navbarGsapService: NavbarGsapService,
   ) {
     gsap.registerPlugin(CustomEase);
   }
@@ -74,8 +89,32 @@ export class NewsCardComponent implements OnInit {
 
   ngOnInit(): void {
     // this.defineSource(this.article.url);
-    this.source = this.article.url;
-    console.log(this.article);
+    // console.log(this.news);
+
+    this.source = this.news.url;
+    
+    // console.log(1, this.article);
+    // const spacePositions = [];
+    // let index = preview.indexOf(' ');
+    // while (index !== -1 && spacePositions.length < 30) {
+    //   spacePositions.push(index);
+    //   index = preview.indexOf(' ', index + 1);
+    // }
+    // const cutIndex = spacePositions[29] || preview.length;
+    // preview = preview.substring(0, cutIndex);
+    // console.log(preview);
+    // console.log(this.source);
+    // console.log(this.article);
+    // console.log(this.article);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // console.log(changes);
+    if (changes['article']) {
+      // this.article = { ...this.article };
+    }
+    console.log(1, this.article);
+    this.cdr.detectChanges();
   }
 
   updateRoute() {
@@ -92,8 +131,15 @@ export class NewsCardComponent implements OnInit {
         // 2. Place the navigation logic in the timeline's main onComplete
         onComplete: () => {
           // --- Single Navigation Point ---
+
           this.ngZone.run(() => {
-            this.router.navigate([url]);
+            const navigationExtras: NavigationExtras = {
+              state: this.article,
+            };
+
+            // console.log(navigationExtras);
+
+            this.router.navigate([url], navigationExtras);
           });
         },
       });
@@ -112,7 +158,7 @@ export class NewsCardComponent implements OnInit {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       );
       exitTimeline.to(
         '.news-card-wrapper.right .image',
@@ -125,7 +171,7 @@ export class NewsCardComponent implements OnInit {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       );
       exitTimeline.to(
         '.news-card-wrapper.left .image',
@@ -138,7 +184,7 @@ export class NewsCardComponent implements OnInit {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       );
       exitTimeline.to(
         '.transition-horizontal-line',
@@ -148,7 +194,7 @@ export class NewsCardComponent implements OnInit {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       );
       exitTimeline.to(
         '.transition-vertical-line',
@@ -158,7 +204,7 @@ export class NewsCardComponent implements OnInit {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       );
       exitTimeline.to(
         '.transition-vertical-line-inside-card',
@@ -169,7 +215,7 @@ export class NewsCardComponent implements OnInit {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       );
       exitTimeline.to(
         '.transition-image-A ',
@@ -180,14 +226,15 @@ export class NewsCardComponent implements OnInit {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       );
     });
   }
 
   navigateToArticlePage() {
     this.updateRoute();
-    this.triggerPageTransition('/article-page', this.currentRoute);
+    // console.log(this.article._id);
+    this.triggerPageTransition(`/article-page/${this.article._id}`, this.currentRoute);
     // Update this so that it navigates to the article page but with the specific ID
   }
 
@@ -195,41 +242,8 @@ export class NewsCardComponent implements OnInit {
     this.deleteArticle.emit();
   }
 
-  onNavigateToArticle(){
+  onNavigateToArticle() {
     this.navigateToArticle.emit();
   }
 
-  // defineSource(url: string) {
-  //   // console.log(url);
-  //   if (url.includes('aljazeera')) {
-  //     this.source = 'aljazeera';
-  //   }
-  //   if (url.includes('cleantechnica')) {
-  //     this.source = 'cleantechnica';
-  //   }
-  //   if (url.includes('climatechange')) {
-  //     this.source = 'climatechange';
-  //   }
-  //   if (url.includes('euronews')) {
-  //     this.source = 'euronews';
-  //   }
-  //   if (url.includes('greenpeace')) {
-  //     this.source = 'greenpeace';
-  //   }
-  //   if (url.includes('iea')) {
-  //     this.source = 'iea';
-  //   }
-  //   if (url.includes('mongabay')) {
-  //     this.source = 'mongabay';
-  //   }
-  //   if (url.includes('nature.')) {
-  //     this.source = 'nature';
-  //   }
-  //   if (url.includes('theguardian')) {
-  //     this.source = 'theguardian';
-  //   }
-  //   if (url.includes('woodcentral')) {
-  //     this.source = 'woodcentral';
-  //   }
-  // }
 }

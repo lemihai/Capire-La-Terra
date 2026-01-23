@@ -274,7 +274,7 @@ export class Navbar implements OnInit, AfterViewInit {
     }, 1600);
 
     this.isLoggedIn$ = this.authService.isAuthenticated$;
-    console.log(this.isLoggedIn$);
+    // console.log(this.isLoggedIn$);
 
     // FIX: Subscribe to Router events to correctly determine the current route
     // after the initial navigation is complete, especially on refresh.

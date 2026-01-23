@@ -93,7 +93,7 @@
   <div class="content-container">
     @for (newsArticle of newsList; track newsArticle._id) {
     <app-news-card
-      [article]="newsArticle"
+      [news]="newsArticle"
       cardType="admin-small"
       (navigateToArticle)="navigateToNewsArticlePage(newsArticle._id, newsArticle)"
       (deleteArticle)="deleteThisArticle(newsArticle._id)"

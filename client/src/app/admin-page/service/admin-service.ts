@@ -10,7 +10,7 @@ import { RobotsService } from './robots-service/robots-service';
 import { Episode, EpisodesService } from './episodes-service/episodes-service';
 import { Article, ArticlesService } from './articles-service/articles-service';
 
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 // {providedIn: 'root',}
@@ -149,6 +149,15 @@ export class AdminService {
         // this.navbarGsapService.exitEpisodesPage();
       }
     });
+  }
+
+  // --------------------------
+  // User Service
+  // --------------------------
+
+  getUser(name: string): Observable<any> {
+      // 💡 Key change: Add <Article> to the Observable type and http.get call
+      return this.http.get<any>(`${this.apiUrl}/users`);
   }
 
   // --------------------------

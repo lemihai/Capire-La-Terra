@@ -159,6 +159,20 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
     this.ngZone.runOutsideAngular(() => {
       const hasLoaded = localStorage.getItem('landingPageLoaded');
 
+      gsap.to('.transition-A', {
+          height: 'auto',
+          x: 0,
+          y: 0,
+          skewX: 0,
+          skewY: 0,
+          opacity: 1,
+          scale: 1,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+
       // --------------------------
       // SMOOTHER LOADUP
       // --------------------------

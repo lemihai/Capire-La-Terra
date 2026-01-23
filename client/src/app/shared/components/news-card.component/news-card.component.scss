@@ -44,11 +44,15 @@
 
 .card-wrapper.small {
   // background-color: red;
+  width: 100%;
+  max-width: 100%;
 
   transition: var(--transition-160);
   .news-card-wrapper {
+    width: 100%;
     height: auto;
-    background-color: #38460500;
+    // background-color: #38460500;
+    background-color: red;
     border: 1px solid #38460500;
     border-radius: 1.6rem;
     padding: 0.8rem;
@@ -63,14 +67,13 @@
     .card-image {
       width: 0rem !important;
       height: 10.8rem !important;
-
-      background-image: url('../../../../../public/assets/episode_placeholder.png');
-      background-size: cover; /* Ensures the image covers the entire div */
-      background-position: center; /* Centers the image */
-      background-repeat: no-repeat; /* Prevents the image from repeating */
-
       border-radius: 0.8rem;
       transition: var(--transition-160);
+      overflow: hidden;
+
+      img {
+        height: 100%;
+      }
     }
 
     .card-container {
@@ -128,10 +131,13 @@
         font-size: 1.4rem;
         // line-height: 1.8rem;
 
-        height: 4.3rem;
-        white-space: normal;
-        text-overflow: clip;
-        overflow: hidden;
+        display: -webkit-box;
+        // max-height: 32px;
+        // color: var(--main-color);
+        -webkit-line-clamp: 3; /* Limit to 4 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Optional: Add ellipsis (...) at the end */
       }
 
       .card-details {
@@ -175,22 +181,6 @@
             align-items: center;
 
             gap: 0.8rem;
-
-            .source-image {
-              height: 1.6rem;
-              width: 1.6rem;
-              background-image: url('../../../../../public/assets/article-illustration-1.jpg');
-              background-size: cover; /* Ensures the image covers the entire div */
-              background-position: center; /* Centers the image */
-              background-repeat: no-repeat; /* Prevents the image from repeating */
-
-              border-radius: 0.4rem;
-            }
-
-            .source-text {
-              font-size: 1.4rem;
-              opacity: 0.64;
-            }
           }
         }
       }
@@ -385,6 +375,8 @@
 
     .abstract {
       display: -webkit-box;
+      // max-height: 32px;
+      // color: var(--main-color);
       -webkit-line-clamp: 3; /* Limit to 4 lines */
       -webkit-box-orient: vertical;
       overflow: hidden; /* Hide overflow */
@@ -502,17 +494,31 @@
     }
 
     .image {
+      min-height: 26.8rem;
       height: 100%;
       width: 52%;
-
-      background-image: url('../../../../../public/assets/article-illustration-1.jpg');
-      background-size: cover; /* Ensures the image covers the entire div */
-      background-position: center; /* Centers the image */
-      background-repeat: no-repeat; /* Prevents the image from repeating */
 
       border-radius: 1.6rem;
       margin-right: 8%;
       transition: var(--transition-160);
+
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        // min-height: 26.8rem;
+        // height: 26.8rem;
+        // min-width: 36rem;
+        min-width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+        // width: 100%;
+        // scale: 1.1;
+        pointer-events: none;
+      }
     }
 
     .card-content {
@@ -709,6 +715,13 @@
       }
 
       .abstract {
+        display: -webkit-box;
+        // max-height: 32px;
+        // color: var(--main-color);
+        -webkit-line-clamp: 3; /* Limit to 4 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Optional: Add ellipsis (...) at the end */
       }
     }
 
@@ -724,11 +737,19 @@
     .image {
       height: 100%;
       width: 80%;
-      max-width: 48rem;
+      max-width: 40rem;
       min-width: 32rem;
 
+      overflow: hidden;
       // height: 48rem;
       // width: auto;
+      border-radius: 1.6rem;
+      img {
+        height: 100%;
+        width: 100%;
+        max-width: 56rem;
+        min-width: 40rem;
+      }
     }
 
     &:hover {
@@ -758,10 +779,23 @@
           gap: 1.2rem;
         }
       }
+
       .image {
-        min-width: 32rem;
-        max-width: 56rem;
-        width: 96%;
+        height: 100%;
+        width: 80%;
+        max-width: 44rem;
+        min-width: 34rem;
+
+        overflow: hidden;
+        // height: 48rem;
+        // width: auto;
+        border-radius: 1.6rem;
+        img {
+          height: 100%;
+          width: 100%;
+          max-width: 56rem;
+          min-width: 40rem;
+        }
       }
     }
   }
@@ -779,6 +813,9 @@
     .hovered-bar {
       // width: 0.8rem;
       height: 128%;
+      min-width: 0rem;
+      width: 0rem;
+      max-width: 0rem;
       // background-color: var(--main-color-dark);
       // border-radius: 1rem;
     }
@@ -799,15 +836,19 @@
       height: 0%;
       width: 100%;
       max-width: 64rem;
-      min-width: 44rem;
+      min-width: 50rem;
       max-height: 0rem;
       min-height: 0rem;
       // max-width: 5rem;
 
-      background-image: url('../../../../../public/assets/article-illustration-1.jpg');
-      background-size: cover; /* Ensures the image covers the entire div */
-      background-position: center; /* Centers the image */
-      background-repeat: no-repeat; /* Prevents the image from repeating */
+      overflow: hidden;
+      border-radius: 1.6rem;
+
+      img {
+        height: 100%;
+        width: 100%;
+        min-width: 100%;
+      }
     }
 
     &:hover {
@@ -815,7 +856,9 @@
       gap: 1.6rem;
 
       .hovered-bar {
-        width: 1.2rem;
+        min-width: 0.4rem;
+        width: 0.4rem;
+        max-width: 0.4rem;
         height: 128%;
         background-color: var(--main-color-dark);
         border-radius: 1rem;
@@ -851,8 +894,9 @@
     transition: var(--transition-160);
 
     .hovered-bar {
-      max-width: 1.2rem;
-      width: 0rem;
+      min-width: 0.4rem;
+      width: 0.4rem;
+      max-width: 0.4rem;
       height: 100%;
       background-color: var(--main-color-dark);
       border-radius: 1rem;
@@ -874,13 +918,24 @@
       max-height: 0rem;
       min-height: 0rem;
 
-      background-image: url('../../../../../public/assets/article-illustration-1.jpg');
-      background-size: cover; /* Ensures the image covers the entire div */
-      background-position: center; /* Centers the image */
-      background-repeat: no-repeat; /* Prevents the image from repeating */
-
       border-radius: 1.6rem;
       transition: var(--transition-160);
+
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        // height: 100%;
+        min-height: 42rem;
+        height: 42rem;
+        // min-width: 48rem;
+        object-fit: cover;
+        // width: 100%;
+        // scale: 1.1;
+        pointer-events: none;
+      }
     }
 
     .content {
@@ -914,8 +969,13 @@
       }
 
       .abstract {
-        // width: 40rem;
-        text-wrap: pretty;
+        display: -webkit-box;
+        // max-height: 32px;
+        // color: var(--main-color);
+        -webkit-line-clamp: 3; /* Limit to 4 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Optional: Add ellipsis (...) at the end */
       }
 
       .date {

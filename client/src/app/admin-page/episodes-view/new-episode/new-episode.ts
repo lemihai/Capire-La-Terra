@@ -170,7 +170,7 @@ export class NewEpisode {
     // _id: '',
     title: 'This is a title',
     about: ['Write you description here', 'add sources'],
-    author: '',
+    author: 'Sofia Lutteri',
     date: '',
     number: 0,
     season: 0,
@@ -180,6 +180,8 @@ export class NewEpisode {
     transcript: '',
     posted: false,
   };
+
+  // test = 'Briana Cirstea';
 
   episodeText: string[] = [];
 

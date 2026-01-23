@@ -40,7 +40,8 @@ export const routes: Routes = [
     //   },
     // ],
   },
-  { path: 'article-page', component: ArticlePage, title: 'Article' },
+  // { path: 'article-page', component: ArticlePage, title: 'Article' },
+  { path: 'article-page/:id', component: ArticlePage, title: 'Article' },
   { path: 'login-page', component: LoginPage, title: 'Login' },
   {
     path: 'admin-page',

@@ -176,6 +176,7 @@ export class AdminArticlePage {
 
   ngOnInit() {
     this.articleId = this.route.snapshot.paramMap.get('id');
+    console.log(this.article);
 
     // let innersource = '';
     if (!this.articleId) {

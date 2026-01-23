@@ -370,7 +370,7 @@
         <div class="list-container-small">
           @for (news of newsListMain; track news._id){
           <app-news-card
-            [article]="news"
+            [news]="news"
             cardType="admin-small-main-view"
             (click)="navigateToNewsArticlePage(news._id, news)"
             (deleteArticle)="deleteThisArticle(news._id)"

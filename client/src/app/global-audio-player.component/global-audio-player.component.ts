@@ -126,7 +126,7 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
       }
     );
 
-    console.log(this.episode);
+    // console.log(this.episode);
 
     setTimeout(() => {
       this.delayedFunction();

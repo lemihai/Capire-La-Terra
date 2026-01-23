@@ -24,13 +24,13 @@
             <h1 class="transition-A">Biggest News</h1>
             <div class="horizontal-seaprator-line transition-horizontal-line"></div>
           </div>
-          <app-news-card cardType="small-no-image" />
+          <app-news-card cardType="small-no-image" [article]="articles[2]"/>
           <div class="horizontal-seaprator-line transition-horizontal-line"></div>
-          <app-news-card cardType="small-no-image" />
+          <app-news-card cardType="small-no-image" [article]="articles[3]"/>
           <div class="horizontal-seaprator-line transition-horizontal-line"></div>
-          <app-news-card cardType="small-no-image" />
+          <app-news-card cardType="small-no-image" [article]="articles[4]"/>
           <div class="horizontal-seaprator-line transition-horizontal-line"></div>
-          <app-news-card cardType="small-no-image" />
+          <app-news-card cardType="small-no-image" [article]="articles[5]"/>
         </div>
       </section>
       <section class="separator-articles">
@@ -64,11 +64,10 @@
           <div class="horizontal-seaprator-line transition-horizontal-line"></div>
         </div>
         <div class="episode-list">
-          <app-news-card cardType="large" />
-          <app-news-card cardType="large" />
-          <app-news-card cardType="large" />
-          <app-news-card cardType="large" />
-          <app-news-card cardType="large" />
+          <app-news-card cardType="large" [article]="articles[6]"/>
+          <app-news-card cardType="large" [article]="articles[7]"/>
+          <app-news-card cardType="large" [article]="articles[8]"/>
+          <app-news-card cardType="large" [article]="articles[9]"/>
         </div>
       </section>
     </div>

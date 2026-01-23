@@ -24,7 +24,7 @@
   border: 1px solid #38460500;
 
   transition: var(--transition-160);
-  
+
   .play {
     display: flex;
     justify-content: flex-start;
@@ -167,12 +167,14 @@
 
     overflow: hidden;
 
-    // background-image: url('../../../../../public/assets/article-illustration-1.jpg');
-    background-size: cover; /* Ensures the image covers the entire div */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-
     transition: var(--transition-160);
+
+    img {
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
 
     .episode-image-filter {
       width: 100%;
@@ -575,11 +577,10 @@
       flex: row;
       justify-content: flex-start;
       align-items: center;
-      gap: .8rem;
+      gap: 0.8rem;
     }
   }
 }
-
 
 .episode.admin-small {
   display: flex;
@@ -602,7 +603,7 @@
   border: 1px solid #38460500;
 
   transition: var(--transition-160);
-  
+
   .play {
     display: flex;
     justify-content: flex-start;

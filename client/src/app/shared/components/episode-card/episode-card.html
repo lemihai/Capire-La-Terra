@@ -4,12 +4,12 @@
   <div class="play">
     <app-play-button />
   </div>
-  <p class="episode-number">#2 -</p>
-  <p class="episode-title">This is a title pam pam pam tram pam</p>
+  <p class="episode-number">#{{episode.number}}</p>
+  <p class="episode-title">{{episode.title}}</p>
   <div class="profile-card-wrapper">
     <!-- <app-profile-card [profile]="episode.author" class="episode-author" /> -->
   </div>
-  <p class="episode-duration">3:46</p>
+  <p class="episode-duration">{{episode.number}}</p>
 
   <!-- Adding these kills the whole app scroll -->
   <!-- <app-audio-track [audioTrackWidth]="audioTrackWidth" /> -->
@@ -19,15 +19,7 @@
 
 <div class="episode medium">
   <div class="episode-image" style="background-image: url('/assets/episode_placeholder.png')">
-    <!-- <img
-      class="episode-image"
-      ngSrc="assets/episode_placeholder.png"
-      height="128"
-      width="128"
-      alt="episode_image"
-      class="episode-image"
-    /> -->
-    <!-- <div class="episode-image-action">few</div> -->
+    <img [src]="episode.imageUrl" alt="Episode Image" />
     <div class="episode-image-filter"></div>
   </div>
   <div class="episode-content-wrapper">
@@ -35,27 +27,26 @@
     <div class="top-container">
       <div class="title-wrapper">
         <div class="play-button-wrapper">
-          <app-play-button />
+          <app-play-button (click)="playEpisode()" />
         </div>
-        <h2 class="episode-number">#2</h2>
+        <h2 class="episode-number">#{{episode.number}}</h2>
         <h2 class="episode-number">-</h2>
-        <h2 class="episode-title">This is a title</h2>
+        <h2 class="episode-title">{{episode.title}}</h2>
       </div>
     </div>
     <div class="bottom-container">
       <div class="app-profile-card-wrapper">
         <div class="app-profile-card-wrapper-for-transform">
           <!-- <app-profile-card [profile]="episode.author" class="aaa" /> -->
+           <app-profile-card [profile]="episode.author" />
         </div>
       </div>
       <div class="separator-line"></div>
-      <p class="date">14/12/2001</p>
-      <div class="separator-line"></div>
-      <p class="topic">topic 1</p>
+      <p class="date">{{episode.date}}</p>
       <!-- <div class="separator-line"></div> -->
       <!-- <app-source /> -->
 
-      <p class="episode-duration">3:46</p>
+      <p class="episode-duration">{{episode.season}}</p>
       <div class="audio-track-wrapper" #audioTrackWrapper>
         <app-audio-track [audioTrackWidth]="audioTrackWidth" />
       </div>
@@ -73,9 +64,9 @@
           <!-- <div class="play-button-wrapper">
             <app-play-button />
           </div> -->
-          <h2 class="episode-number">#2</h2>
+          <h2 class="episode-number">#{{episode.number}}</h2>
           <h2 class="episode-number">-</h2>
-          <h2 class="episode-title">This is a title</h2>
+          <h2 class="episode-title">{{episode.title}}</h2>
         </div>
       </div>
       <div class="bottom-container">
@@ -85,7 +76,7 @@
           </div>
         </div>
         <div class="separator-line"></div>
-        <p class="date">14/12/2001</p>
+        <p class="date">{{episode.date}}</p>
         <div class="separator-line"></div>
         <p class="topic">topic 1</p>
         <!-- <div class="separator-line"></div> -->

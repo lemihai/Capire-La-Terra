@@ -6,6 +6,10 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   HostListener,
+  inject,
+  OnChanges,
+  SimpleChanges,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { AudioTrack } from '../shared/components/audio-track/audio-track';
 import { Button } from '../shared/buttons/button/button';
@@ -17,6 +21,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import CustomEase from 'gsap/CustomEase';
 import { Footer } from '../footer/footer';
+import { EpisodesService } from '../../services/episodes-service/episodes-service';
 
 @Component({
   selector: 'app-episodes-page',
@@ -26,8 +31,12 @@ import { Footer } from '../footer/footer';
 })
 export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
   private smoother: ScrollSmoother | null = null;
+  private episodesService = inject(EpisodesService);
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   focused = 'on-s1';
   se1active = 'seactive';
@@ -69,78 +78,42 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
     this.se3active = 'seactive';
   }
 
-  episodes = [
-    {
-      id: 3243223,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 1,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243224,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 2,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243225,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 3,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243226,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 4,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243227,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 5,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243228,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 6,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243229,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 7,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243230,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 8,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243231,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 9,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-  ];
+  episodes: any = [];
 
   ngOnInit() {
+    this.episodesService.getAllEpisodes().subscribe(
+      (data) => {
+        this.episodes = data;
+        // console.log(this.episodes);
+        this.cdr.detectChanges();
+      },
+      (error) => {
+        this.cdr.detectChanges();
+        // console.log(error);
+      },
+    );
+    this.cdr.detectChanges();
+    // this.episodesService.getAllEpisodes().subscribe((data) => {
+    //   // let dataList = data;
+    //   //  for (const article of data){
+    //     //   console.log(data);
+    //     //  }
+    //     //  for(const a of data ){
+    //       //   console.log(a);
+    //       //  }
+    //       // this.articles = [...data];
+    //       this.articles = data;
+    //   // this.sorting.sortedListView = [...this.articles];
+    //   // this.sort('date');
+    //   // this.cdr.detectChanges(); // Manually trigger change detection if needed
+    // });
     // Register GSAP plugins here once
     this.ngZone.runOutsideAngular(() => {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+      this.cdr.detectChanges();
     });
   }
+
 
   ngOnDestroy() {
     // Kill the smoother and triggers to prevent memory leaks
@@ -150,7 +123,9 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    this.cdr.detectChanges();
     this.ngZone.runOutsideAngular(() => {
+      
       // Create the smoother instance
       this.smoother = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
@@ -326,7 +301,8 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           ease: this.ease,
           overwrite: 'auto',
         });
-      }, 100);
+      }, 900);
     });
+    
   }
 }

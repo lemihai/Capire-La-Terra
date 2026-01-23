@@ -49,7 +49,10 @@
         </div>
       </div>
       <div class="episodes-list">
-        <app-episode-card class="episode-wrapper" cardType="large" />
+        @for (episode of episodes; track episode) {
+          <app-episode-card class="episode-wrapper" cardType="medium" [episode]="episode" />
+        }
+        <!-- <app-episode-card class="episode-wrapper" cardType="large" />
         <app-episode-card class="episode-wrapper" cardType="medium" />
         <app-episode-card class="episode-wrapper" cardType="medium" />
         <app-episode-card class="episode-wrapper" cardType="medium" />
@@ -65,8 +68,7 @@
         <app-episode-card class="episode-wrapper" cardType="medium" />
         <app-episode-card class="episode-wrapper" cardType="medium" />
         <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
+        <app-episode-card class="episode-wrapper" cardType="medium" /> -->
       </div>
     </div>
     <app-footer />
