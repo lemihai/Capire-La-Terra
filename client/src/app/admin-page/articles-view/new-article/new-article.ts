@@ -31,6 +31,8 @@ export class NewArticle implements OnInit {
   textInputFields!: QueryList<ElementRef>;
   @ViewChild('inputOverlay') inputOverlay!: ElementRef;
 
+  authorShow = 'Sofia Lutteri';
+
   @HostListener('keydown', ['$event'])
   handleTabKey(event: KeyboardEvent) {
     this.addSources();
@@ -287,5 +289,26 @@ export class NewArticle implements OnInit {
     // 4. Force change detection to update the view immediately
     this.cdr.detectChanges();
     console.log('Image removed.');
+  }
+
+  changeAuthor() {
+    console.log('test');
+    if (this.authorShow === 'Sofia Lutteri') {
+      this.authorShow = 'Briana Cirstea';
+      this.article.author = 'Briana Cirstea';
+      this.myForm.patchValue({
+        author: this.authorShow,
+      });
+      // this.myForm.controls['author'].value = 'Briana Cirstea';
+    } else if (this.authorShow === 'Briana Cirstea') {
+      this.authorShow = 'Sofia Lutteri';
+      this.article.author = 'Sofia Lutteri';
+      this.myForm.patchValue({
+        author: this.authorShow,
+      });
+    }
+    console.log(this.article.author);
+    console.log(this.myForm);
+    console.log(99, this.myForm.controls['author'].value);
   }
 }

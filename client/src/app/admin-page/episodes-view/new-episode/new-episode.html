@@ -16,201 +16,200 @@
     />
   </div>
   <section class="episode-body">
-    @if(!editMode){
-    <header class="episode-non-edit-mode-header">
-      <div class="top-wrapper" (click)="toggleEditMode()">
-        <div class="image-no-edit-wrapper">
-          <img
-            [src]="episode.imageUrl"
-            height="500"
-            width="500"
-            alt="episode Image"
-            class="episode-image-no-edit"
-          />
-        </div>
-        <h1 class="episode-title">{{ episode?.title }}</h1>
-      </div>
-      @if(episode.audioUrl != ''){
-
-      <div class="audio-player-wrapper">
-        <!-- <div class="audio-card-player"> -->
-        <app-play-button (click)="playEpisode()" />
-        <p class="audio-player-duration">4:32</p>
-        <app-audio-track [audioTrackWidth]="464" />
-        <!-- </div> -->
-      </div>
-      }@else{
-      <div class="audio-file-missing-error">
-        <svg
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M28 16C28 9.375 22.625 4 16 4C9.375 4 4 9.375 4 16C4 22.625 9.375 28 16 28C22.625 28 28 22.625 28 16Z"
-            stroke="black"
-            stroke-width="1.6"
-            stroke-miterlimit="10"
-          />
-          <path
-            d="M15.641 10.3779L15.9997 17.9998L16.3579 10.3779C16.3601 10.3292 16.3523 10.2806 16.3351 10.2349C16.3179 10.1893 16.2915 10.1477 16.2576 10.1126C16.2238 10.0775 16.1831 10.0496 16.1381 10.0308C16.0931 10.0119 16.0448 10.0025 15.996 10.0029C15.9478 10.0034 15.9002 10.0136 15.856 10.0328C15.8118 10.0521 15.772 10.08 15.7388 10.115C15.7057 10.15 15.68 10.1914 15.6632 10.2365C15.6463 10.2817 15.6388 10.3298 15.641 10.3779Z"
-            stroke="black"
-            stroke-width="1.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M16 22.9941C15.7528 22.9941 15.5111 22.9208 15.3055 22.7835C15.1 22.6461 14.9398 22.4509 14.8452 22.2225C14.7505 21.9941 14.7258 21.7428 14.774 21.5003C14.8223 21.2578 14.9413 21.0351 15.1161 20.8603C15.2909 20.6854 15.5137 20.5664 15.7561 20.5182C15.9986 20.4699 16.2499 20.4947 16.4784 20.5893C16.7068 20.6839 16.902 20.8441 17.0393 21.0497C17.1767 21.2552 17.25 21.4969 17.25 21.7441C17.25 22.0757 17.1183 22.3936 16.8839 22.628C16.6495 22.8624 16.3315 22.9941 16 22.9941Z"
-            fill="black"
-          />
-        </svg>
-        <p class="error-text">
-
-          Episode audio file missing
-        </p>
-      </div>
-      }
-      <div class="episode-episode-details">
-        <!-- <p>{{ episode?.url }}</p> -->
-        <!-- <app-profile-card [profile]="'Sofia Lutteri'" /> -->
-        <app-profile-card [profile]="episode.author" />
-        <div class="separator-line"></div>
-        <p class="date">{{ episode?.date }}</p>
-        <div class="separator-line"></div>
-        <div class="app-episode-wrapper">
-          @for (source of episode.sources; track $index) {
-          <app-source [source]="source" />
-          }
-        </div>
-      </div>
-    </header>
-    }@else if(editMode){
-
-    <header class="episode-episode-header">
-      @if(!editMode){
-      <h1 class="episode-title" (click)="toggleEditMode()">{{ episode?.title }}</h1>
-      } @else if(editMode){
-      <div
-        id="episode-title-field "
-        class="input-field title-input"
-        contenteditable="true"
-        (blur)="updateTitle($event)"
-      >
-        {{ episode.title }}
-      </div>
-      } @if(!editMode){ @if(episode.imageUrl != ''){
-      <div class="image-wrapper">
-        <img
-          [src]="episode.imageUrl"
-          height="500"
-          width="500"
-          alt="episode Image"
-          class="episode-image"
-        />
-      </div>
-      } } @else if(editMode){
-      <div class="image-upload-field">
-        <input
-          #fileInput
-          class="image-input"
-          type="file"
-          id="image-upload"
-          accept="image/*"
-          (change)="onFileSelected($event)"
-        />
-        <div class="image-container">
-          @if (episode.imageUrl) {
-          <div class="image-preview-container">
+    @if (!editMode) {
+      <header class="episode-non-edit-mode-header">
+        <div class="top-wrapper" (click)="toggleEditMode()">
+          <div class="image-no-edit-wrapper">
             <img
               [src]="episode.imageUrl"
-              alt="episode Image Preview"
-              class="uploaded-image-preview"
+              height="500"
+              width="500"
+              alt="episode Image"
+              class="episode-image-no-edit"
             />
           </div>
-          } @else {
-          <label class="drop-image-container-label">Drop your image here</label>
-          }
+          <h1 class="episode-title">{{ episode?.title }}</h1>
         </div>
-        <div class="input-field-overlay" #inputOverlay>
-          <label>Add your episodes</label>
-          <label class="details-text">.PNG .JPG</label>
-          @if (episode.imageUrl !== ''){
-          <div class="image-file">
-            <div class="image-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M26 5H6C4.34315 5 3 6.34315 3 8V24C3 25.6569 4.34315 27 6 27H26C27.6569 27 29 25.6569 29 24V8C29 6.34315 27.6569 5 26 5Z"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M21 13C22.1046 13 23 12.1046 23 11C23 9.89543 22.1046 9 21 9C19.8954 9 19 9.89543 19 11C19 12.1046 19.8954 13 21 13Z"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-miterlimit="10"
-                />
-                <path
-                  d="M19 20.9873L13.3337 15.3317C12.9732 14.9712 12.4886 14.7621 11.9789 14.747C11.4693 14.7319 10.9731 14.912 10.5919 15.2505L3 22.0005"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M14 27.0001L21.7087 19.2913C22.0613 18.9381 22.5332 18.7294 23.0317 18.7063C23.5302 18.6831 24.0194 18.8472 24.4031 19.1663L29 23.0001"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <p class="document-text">Your Image</p>
-            <div class="close-icon" (click)="removeImage()">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M22.3643 9.63574L9.63634 22.3637"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M22.3637 22.3637L9.63574 9.63574"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
+        @if (episode.audioUrl != '') {
+          <div class="audio-player-wrapper">
+            <!-- <div class="audio-card-player"> -->
+            <app-play-button (click)="playEpisode()" />
+            <p class="audio-player-duration">4:32</p>
+            <app-audio-track [audioTrackWidth]="464" />
+            <!-- </div> -->
           </div>
-          }
-          <button class="upload-button">
-            <app-button
-              size="small-text"
-              buttonText="Upload image"
-              iconType="open-right"
-              (click)="triggerFileInput()"
-            />
-          </button>
+        } @else {
+          <div class="audio-file-missing-error">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M28 16C28 9.375 22.625 4 16 4C9.375 4 4 9.375 4 16C4 22.625 9.375 28 16 28C22.625 28 28 22.625 28 16Z"
+                stroke="black"
+                stroke-width="1.6"
+                stroke-miterlimit="10"
+              />
+              <path
+                d="M15.641 10.3779L15.9997 17.9998L16.3579 10.3779C16.3601 10.3292 16.3523 10.2806 16.3351 10.2349C16.3179 10.1893 16.2915 10.1477 16.2576 10.1126C16.2238 10.0775 16.1831 10.0496 16.1381 10.0308C16.0931 10.0119 16.0448 10.0025 15.996 10.0029C15.9478 10.0034 15.9002 10.0136 15.856 10.0328C15.8118 10.0521 15.772 10.08 15.7388 10.115C15.7057 10.15 15.68 10.1914 15.6632 10.2365C15.6463 10.2817 15.6388 10.3298 15.641 10.3779Z"
+                stroke="black"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M16 22.9941C15.7528 22.9941 15.5111 22.9208 15.3055 22.7835C15.1 22.6461 14.9398 22.4509 14.8452 22.2225C14.7505 21.9941 14.7258 21.7428 14.774 21.5003C14.8223 21.2578 14.9413 21.0351 15.1161 20.8603C15.2909 20.6854 15.5137 20.5664 15.7561 20.5182C15.9986 20.4699 16.2499 20.4947 16.4784 20.5893C16.7068 20.6839 16.902 20.8441 17.0393 21.0497C17.1767 21.2552 17.25 21.4969 17.25 21.7441C17.25 22.0757 17.1183 22.3936 16.8839 22.628C16.6495 22.8624 16.3315 22.9941 16 22.9941Z"
+                fill="black"
+              />
+            </svg>
+            <p class="error-text">Episode audio file missing</p>
+          </div>
+        }
+        <div class="episode-episode-details">
+          <!-- <p>{{ episode?.url }}</p> -->
+          <!-- <app-profile-card [profile]="'Sofia Lutteri'" /> -->
+          <app-profile-card [profile]="episode.author" />
+
+          <div class="separator-line"></div>
+          <p class="date">{{ episode?.date }}</p>
+          <div class="separator-line"></div>
+          <div class="app-episode-wrapper">
+            @for (source of episode.sources; track $index) {
+              <app-source [source]="source" />
+            }
+          </div>
         </div>
-        <!-- 
+      </header>
+    } @else if (editMode) {
+      <header class="episode-episode-header">
+        @if (!editMode) {
+          <h1 class="episode-title" (click)="toggleEditMode()">{{ episode?.title }}</h1>
+        } @else if (editMode) {
+          <div
+            id="episode-title-field "
+            class="input-field title-input"
+            contenteditable="true"
+            (blur)="updateTitle($event)"
+          >
+            {{ episode.title }}
+          </div>
+        }
+        @if (!editMode) {
+          @if (episode.imageUrl != '') {
+            <div class="image-wrapper">
+              <img
+                [src]="episode.imageUrl"
+                height="500"
+                width="500"
+                alt="episode Image"
+                class="episode-image"
+              />
+            </div>
+          }
+        } @else if (editMode) {
+          <div class="image-upload-field">
+            <input
+              #fileInput
+              class="image-input"
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+            />
+            <div class="image-container">
+              @if (episode.imageUrl) {
+                <div class="image-preview-container">
+                  <img
+                    [src]="episode.imageUrl"
+                    alt="episode Image Preview"
+                    class="uploaded-image-preview"
+                  />
+                </div>
+              } @else {
+                <label class="drop-image-container-label">Drop your image here</label>
+              }
+            </div>
+            <div class="input-field-overlay" #inputOverlay>
+              <label>Add your episodes</label>
+              <label class="details-text">.PNG .JPG</label>
+              @if (episode.imageUrl !== '') {
+                <div class="image-file">
+                  <div class="image-icon">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M26 5H6C4.34315 5 3 6.34315 3 8V24C3 25.6569 4.34315 27 6 27H26C27.6569 27 29 25.6569 29 24V8C29 6.34315 27.6569 5 26 5Z"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M21 13C22.1046 13 23 12.1046 23 11C23 9.89543 22.1046 9 21 9C19.8954 9 19 9.89543 19 11C19 12.1046 19.8954 13 21 13Z"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-miterlimit="10"
+                      />
+                      <path
+                        d="M19 20.9873L13.3337 15.3317C12.9732 14.9712 12.4886 14.7621 11.9789 14.747C11.4693 14.7319 10.9731 14.912 10.5919 15.2505L3 22.0005"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M14 27.0001L21.7087 19.2913C22.0613 18.9381 22.5332 18.7294 23.0317 18.7063C23.5302 18.6831 24.0194 18.8472 24.4031 19.1663L29 23.0001"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <p class="document-text">Your Image</p>
+                  <div class="close-icon" (click)="removeImage()">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M22.3643 9.63574L9.63634 22.3637"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M22.3637 22.3637L9.63574 9.63574"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              }
+              <button class="upload-button">
+                <app-button
+                  size="small-text"
+                  buttonText="Upload image"
+                  iconType="open-right"
+                  (click)="triggerFileInput()"
+                />
+              </button>
+            </div>
+            <!-- 
         <button type="button" class="custom-upload-button">Upload episode Image</button>
         <label class="label-field">Add your Image episode</label>
 
@@ -225,117 +224,150 @@
         <div class="image-preview">
           <img *ngIf="episode.imageUrl" [src]="episode.imageUrl" alt="Preview" />
         </div> -->
-      </div>
-      <div class="audio-upload-field">
-        <input
-          #audioFileInput
-          class="audio-input"
-          type="file"
-          id="audio-upload"
-          accept="audio/*"
-          (change)="onAudioFileSelected($event)"
-        />
-        <div class="audio-container">
-          @if (episode.audioUrl) {
-          <div class="audio-player-wrapper">
-            <div class="mic-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 28H20"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M24 13V15C24 19.4 20.4 23 16 23C11.6 23 8 19.4 8 15V13"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M16 23V28"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M16.0001 4.00005C15.474 3.9974 14.9527 4.09905 14.4662 4.29913C13.9797 4.49921 13.5377 4.79375 13.1657 5.16572C12.7938 5.53768 12.4992 5.97969 12.2991 6.46619C12.0991 6.95269 11.9974 7.47402 12.0001 8.00005V14.9376C12.0001 17.1376 13.8126 19.0001 16.0001 19.0001C18.1876 19.0001 20.0001 17.1876 20.0001 14.9376V8.00005C20.0001 5.75005 18.2501 4.00005 16.0001 4.00005Z"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
+          </div>
+          <div class="audio-upload-field">
+            <input
+              #audioFileInput
+              class="audio-input"
+              type="file"
+              id="audio-upload"
+              accept="audio/*"
+              (change)="onAudioFileSelected($event)"
+            />
+            <div class="audio-container">
+              @if (episode.audioUrl) {
+                <div class="audio-player-wrapper">
+                  <div class="mic-icon">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 28H20"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M24 13V15C24 19.4 20.4 23 16 23C11.6 23 8 19.4 8 15V13"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M16 23V28"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M16.0001 4.00005C15.474 3.9974 14.9527 4.09905 14.4662 4.29913C13.9797 4.49921 13.5377 4.79375 13.1657 5.16572C12.7938 5.53768 12.4992 5.97969 12.2991 6.46619C12.0991 6.95269 11.9974 7.47402 12.0001 8.00005V14.9376C12.0001 17.1376 13.8126 19.0001 16.0001 19.0001C18.1876 19.0001 20.0001 17.1876 20.0001 14.9376V8.00005C20.0001 5.75005 18.2501 4.00005 16.0001 4.00005Z"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <p class="document-text">Your Image</p>
+                  <app-play-button (click)="playEpisode()" />
+                  <p class="audio-player-duration">4:32</p>
+                  <app-audio-track [audioTrackWidth]="180" />
+                  <div class="close-icon" (click)="removeAudio()">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M22.3643 9.63574L9.63634 22.3637"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M22.3637 22.3637L9.63574 9.63574"
+                        stroke="black"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              } @else {
+                <label class="drop-audio-container-label">Drop your audio here</label>
+              }
             </div>
-            <p class="document-text">Your Image</p>
-            <app-play-button (click)="playEpisode()" />
-            <p class="audio-player-duration">4:32</p>
-            <app-audio-track [audioTrackWidth]="180" />
-            <div class="close-icon" (click)="removeAudio()">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M22.3643 9.63574L9.63634 22.3637"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+            <div class="input-field-overlay" #audioInputOverlay>
+              <label>Add audio file</label>
+              <label class="details-text">.MP3 .OGG</label>
+              <button class="upload-button">
+                <app-button
+                  size="small-text"
+                  buttonText="Upload audio"
+                  iconType="open-right"
+                  (click)="triggerAudioFileInput()"
                 />
-                <path
-                  d="M22.3637 22.3637L9.63574 9.63574"
-                  stroke="black"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
+              </button>
             </div>
           </div>
-          } @else {
-          <label class="drop-audio-container-label">Drop your audio here</label>
-          }
+        }
+        <div class="episode-episode-details">
+          <!-- <p>{{ episode?.url }}</p> -->
+          <!-- <app-profile-card [profile]="episode.author" /> -->
+          <div class="profile-dropdown">
+            <div class="dropdown-main-option">
+              @if (authorShow === 'Sofia Lutteri') {
+                <app-profile-card [profile]="'Sofia Lutteri'" />
+              } @else {
+                <app-profile-card [profile]="'Briana Cirstea'" />
+              }
+              <div class="icon-container">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8 12L16 20L24 12"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="dropdown-secondary-option" (click)="changeAuthor()">
+              @if (authorShow === 'Sofia Lutteri') {
+                <app-profile-card [profile]="'Briana Cirstea'" />
+              } @else {
+                <app-profile-card [profile]="'Sofia Lutteri'" />
+              }
+            </div>
+          </div>
+          <div class="separator-line"></div>
+          <p class="date">{{ episode?.date }}</p>
+          <div class="separator-line"></div>
+          <div class="app-episode-wrapper">
+            @for (source of episode.sources; track $index) {
+              <app-source [source]="source" />
+            }
+          </div>
         </div>
-        <div class="input-field-overlay" #audioInputOverlay>
-          <label>Add audio file</label>
-          <label class="details-text">.MP3 .OGG</label>
-          <button class="upload-button">
-            <app-button
-              size="small-text"
-              buttonText="Upload audio"
-              iconType="open-right"
-              (click)="triggerAudioFileInput()"
-            />
-          </button>
-        </div>
-      </div>
-      }
-      <div class="episode-episode-details">
-        <!-- <p>{{ episode?.url }}</p> -->
-        <app-profile-card [profile]="episode.author" />
-        <div class="separator-line"></div>
-        <p class="date">{{ episode?.date }}</p>
-        <div class="separator-line"></div>
-        <div class="app-episode-wrapper">
-          @for (source of episode.sources; track $index) {
-          <app-source [source]="source" />
-          }
-        </div>
-      </div>
-    </header>
+      </header>
     }
     <div class="second-header">
       <h1 class="episode-body-header">About text</h1>
@@ -346,18 +378,18 @@
         @for (paragraph of episode.about; track $index) {
       <p (click)="toggleEditMode()">{{ paragraph }}</p>
       } } @else if(editMode){  -->
-        @for (paragraph of episode.about; track $index) {
-      <div
-        #textInputField
-        id="episode-text-field"
-        class="input-field text-input"
-        contenteditable="true"
-        (blur)="updateParagraph($event, $index)"
-      >
-        {{ paragraph }}
-      </div>
-      } 
-    <!-- } -->
+      @for (paragraph of episode.about; track $index) {
+        <div
+          #textInputField
+          id="episode-text-field"
+          class="input-field text-input"
+          contenteditable="true"
+          (blur)="updateParagraph($event, $index)"
+        >
+          {{ paragraph }}
+        </div>
+      }
+      <!-- } -->
     </div>
     <section class="next-episode-section"></section>
   </section>

@@ -133,7 +133,39 @@
       </div>
 
       <div class="article-details">
-        <app-profile-card profile="sofia lutteri"/>
+        <div class="profile-dropdown">
+            <div class="dropdown-main-option">
+              @if (authorShow === 'Sofia Lutteri') {
+                <app-profile-card [profile]="'Sofia Lutteri'" />
+              } @else {
+                <app-profile-card [profile]="'Briana Cirstea'" />
+              }
+              <div class="icon-container">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8 12L16 20L24 12"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="dropdown-secondary-option" (click)="changeAuthor()">
+              @if (authorShow === 'Sofia Lutteri') {
+                <app-profile-card [profile]="'Briana Cirstea'" />
+              } @else {
+                <app-profile-card [profile]="'Sofia Lutteri'" />
+              }
+            </div>
+          </div>
         <div class="separator-line"></div>
         <p class="date">{{ article.date }}</p>
         <div class="separator-line"></div>

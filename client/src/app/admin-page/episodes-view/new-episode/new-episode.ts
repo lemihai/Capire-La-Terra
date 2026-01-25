@@ -57,20 +57,22 @@ export class NewEpisode {
   @ViewChild('inputOverlay') inputOverlay!: ElementRef;
   // episodeAuthor = '';
 
+  authorShow = 'Sofia Lutteri';
+
   @HostListener('keydown', ['$event'])
   handleTabKey(event: KeyboardEvent) {
     this.addSources();
     const focusedElement = document.activeElement;
     const lastInputField = this.textInputFields.last?.nativeElement;
-    // 
-    // 
+    //
+    //
     let innerHTML = focusedElement?.textContent;
-    // 
+    //
     if (event.key === 'Tab') {
       if (focusedElement == lastInputField) {
-        // 
+        //
         if (focusedElement?.id === 'episode-text-field') {
-          // 
+          //
           event.preventDefault();
           this.episode.about.push('');
 
@@ -84,7 +86,7 @@ export class NewEpisode {
     if (event.key === 'Backspace') {
       if (focusedElement?.id === 'episode-text-field') {
         if (innerHTML === '') {
-          // 
+          //
           this.episode.about.pop();
         }
       }
@@ -94,7 +96,6 @@ export class NewEpisode {
   addSources() {
     let fullText = this.episode.about.join(' ');
     // let fullText = this.episode.about;
-    
 
     if (fullText.toLowerCase().includes('aljazera') && !this.episode.sources.includes('aljazera')) {
       this.episode.sources.push('aljazera');
@@ -151,7 +152,7 @@ export class NewEpisode {
     private route: ActivatedRoute,
     private adminService: AdminService,
     private cdr: ChangeDetectorRef,
-    private globalPlayer: GlobalAudioPlayerService
+    private globalPlayer: GlobalAudioPlayerService,
   ) {
     this.myForm = this.fb.group({
       title: [''],
@@ -203,7 +204,7 @@ export class NewEpisode {
     const pad = (num: number): string => (num < 10 ? '0' + num : String(num));
 
     let finalDate = `${pad(day)} ${month} ${year}`;
-    
+
     // 4. Combine the parts with the specified separator
     return finalDate;
   }
@@ -211,10 +212,10 @@ export class NewEpisode {
   async callForEpisode(id: string): Promise<void> {
     try {
       const response = await lastValueFrom(this.adminService.getOneEpisode(id));
-      
+
       this.episode = response;
       // this.separateParagraphs(this.episode.text);
-      
+
       this.cdr.detectChanges();
     } catch (error) {
       console.error('Error fetching episode:', error);
@@ -255,13 +256,12 @@ export class NewEpisode {
     } else if ((this.editMode = true)) {
       this.editMode = false;
     }
-    
   }
 
   updateEpisodeDetails(details: { season: number; number: number }) {
     this.episode.season = Number(details.season);
     this.episode.number = Number(details.number);
-    
+
     // You might want to force change detection if the display is not updating,
     // although for simple property updates it's usually automatic.
     this.cdr.detectChanges();
@@ -280,7 +280,6 @@ export class NewEpisode {
     this.formatEpisode();
     this.adminService.postEpisode(this.episode).subscribe(
       (response) => {
-        
         this.router.navigate(['/admin-page/episodes-view']);
       },
       (error) => {
@@ -292,13 +291,12 @@ export class NewEpisode {
         if (error.error) {
           console.error('Backend error:', error.error);
         }
-      }
+      },
     );
   }
 
   formatEpisode() {
     let array = this.episode.about;
-    
 
     // Filter out empty strings
     array = array.filter((element: string) => element !== '');
@@ -328,18 +326,15 @@ export class NewEpisode {
 
   triggerFileInput(): void {
     this.fileInput.nativeElement.click();
-    
   }
   triggerAudioFileInput(): void {
     this.audioFileInput.nativeElement.click();
-    
   }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      
 
       // Read the file as a Data URL for an immediate preview
       const reader = new FileReader();
@@ -367,7 +362,7 @@ export class NewEpisode {
       if (file.type.startsWith('audio/')) {
         // Read the file as a Data URL for immediate use/preview
         const reader = new FileReader();
-        // 
+        //
         reader.onload = () => {
           // Assign to the audioUrl property
           this.episode.audioUrl = reader.result as string;
@@ -406,7 +401,6 @@ export class NewEpisode {
 
     // 4. Force change detection to update the view immediately
     this.cdr.detectChanges();
-    
   }
 
   removeAudio() {
@@ -427,10 +421,30 @@ export class NewEpisode {
 
     // 4. Force change detection to update the view immediately
     this.cdr.detectChanges();
-    
   }
 
   playEpisode() {
     this.globalPlayer.playEpisode(this.episode);
+  }
+
+  changeAuthor() {
+    console.log('test');
+    if (this.authorShow === 'Sofia Lutteri') {
+      this.authorShow = 'Briana Cirstea';
+      this.episode.author = 'Briana Cirstea';
+      this.myForm.patchValue({
+        author: this.authorShow,
+      });
+      // this.myForm.controls['author'].value = 'Briana Cirstea';
+    } else if (this.authorShow === 'Briana Cirstea') {
+      this.authorShow = 'Sofia Lutteri';
+      this.episode.author = 'Sofia Lutteri';
+      this.myForm.patchValue({
+        author: this.authorShow,
+      });
+    }
+    console.log(this.episode.author);
+    console.log(this.myForm);
+    console.log(99, this.myForm.controls['author'].value);
   }
 }
