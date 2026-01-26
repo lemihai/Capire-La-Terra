@@ -10,6 +10,7 @@ import {
   OnInit,
   AfterViewInit,
   NgZone,
+  inject,
 } from '@angular/core';
 import { AudioTrack } from '../audio-track/audio-track';
 import { ProfileCard } from '../profile-card/profile-card';
@@ -17,6 +18,7 @@ import { PlayButton } from '../../buttons/play-button/play-button';
 import { NgOptimizedImage } from '@angular/common';
 import { SourceComponent } from '../source.component/source.component';
 import { Episode } from '../../../../services/episodes-service/episodes-service';
+import { GlobalAudioPlayerService } from '../../../global-audio-player.component/global-audio-player-service';
 
 @Component({
   selector: 'app-episode-card',
@@ -30,6 +32,8 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   @ViewChild('playerWidth') playerWidth!: ElementRef<HTMLDivElement>;
   @ViewChild('audioTrackWrapper') audioTrackWrapper!: ElementRef<HTMLDivElement>;
   // episode card can be 'small', 'medium', 'large'
+
+  private globalPlayer = inject(GlobalAudioPlayerService)
 
   viewportWidth = window.innerWidth;
   audioTrackWidth = this.calculateTrack(this.viewportWidth, 'medium');
@@ -73,7 +77,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.episode);
+    // console.log(this.episode);
     // console.log(this.episode);
     // for (let i = 0; i <= 10; i++) {
     //   this.triggerChange();
@@ -89,7 +93,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(1, changes);
+    // console.log(1, changes);
     if (changes['episode']) {
       this.episode = changes['episode'].currentValue;
       // this.article = { ...this.article };
@@ -189,7 +193,8 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
     // console.log('This is a change');
   }
 
-  playEpisode(){
-    console.log('play-episode');
+  playEpisode() {
+    console.log('this episode is being played');
+    this.globalPlayer.playEpisode(this.episode);
   }
 }

@@ -242,6 +242,12 @@
         transition: inherit;
 
         gap: 0.8rem;
+
+
+        .episode-title{
+          text-overflow: ellipsis;
+          width: 100%;
+        }
       }
 
       h2 {

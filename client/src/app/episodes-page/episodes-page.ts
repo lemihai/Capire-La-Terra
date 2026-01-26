@@ -45,6 +45,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
   isPlaying = 'true';
   topPartDisabled = '';
   expandButton = '';
+  numberOfSeasons = 1;
 
   // For animations in gsap
   time = 1.24;
@@ -79,12 +80,14 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
   }
 
   episodes: any = [];
+  sortedListView: any = [];
 
   ngOnInit() {
     this.episodesService.getAllEpisodes().subscribe(
       (data) => {
         this.episodes = data;
         // console.log(this.episodes);
+        this.sort();
         this.cdr.detectChanges();
       },
       (error) => {
@@ -114,7 +117,6 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-
   ngOnDestroy() {
     // Kill the smoother and triggers to prevent memory leaks
     if (this.smoother) {
@@ -125,7 +127,6 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
   ngAfterViewInit() {
     this.cdr.detectChanges();
     this.ngZone.runOutsideAngular(() => {
-      
       // Create the smoother instance
       this.smoother = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
@@ -303,6 +304,69 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
         });
       }, 900);
     });
-    
+  }
+
+  sort() {
+    // 1. Determine the current direction and update the specific key flag
+    // can be -1 or 1
+    const asc = 1;
+    const desc = -1;
+    let numberOfSeasons = 1;
+    let episodesArray: any[] = [];
+
+    for (const episode of this.episodes) {
+      if (episode.season > numberOfSeasons) {
+        numberOfSeasons = episode.season;
+        this.numberOfSeasons = numberOfSeasons;
+      }
+    }
+
+    // Iterating through the episodes array to create an array of seasons.
+    // WHY? to make it easier to arrange afterwards
+    for (let season = 1; season <= numberOfSeasons; season++) {
+      let seasonArray: any[] = [];
+      for (const episode of this.episodes) {
+        if (season === episode.season) {
+          seasonArray.push(episode);
+        }
+      }
+      episodesArray.push(seasonArray);
+
+      // Then, sorting the array
+      episodesArray[season - 1].sort((a: any, b: any) => {
+        // Use 'any' for the list items here
+        let valA = a['number'];
+        let valB = b['number'];
+
+        const numA = Number(valA);
+        const numB = Number(valB);
+        return (numA - numB) * desc;
+      });
+    }
+
+    // Make a list of lists
+    // for each season add an array inside of the array
+    // Sort each season array individually,
+    // spread the arrays
+
+    // 2. Perform the sort
+    this.episodes.sort((a: any, b: any) => {
+      // Use 'any' for the list items here
+      let valA = a['number'];
+      let valB = b['number'];
+
+      const numA = Number(valA);
+      const numB = Number(valB);
+      return (numA - numB) * asc;
+    });
+
+    // console.log(episodesArray);
+    this.episodes = [];
+    for (let i = episodesArray.length - 1; i >= 0; i--) {
+      this.episodes.push(...episodesArray[i]);
+    }
+
+    // console.log(this.numberOfSeasons);
+    this.cdr.detectChanges(); // Update the view after sorting
   }
 }

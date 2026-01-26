@@ -17,7 +17,7 @@
 </div>
 } @if(cardType == 'medium'){
 
-<div class="episode medium">
+<div class="episode medium" (click)="playEpisode()" >
   <div class="episode-image" style="background-image: url('/assets/episode_placeholder.png')">
     <img [src]="episode.imageUrl" alt="Episode Image" />
     <div class="episode-image-filter"></div>
@@ -27,7 +27,7 @@
     <div class="top-container">
       <div class="title-wrapper">
         <div class="play-button-wrapper">
-          <app-play-button (click)="playEpisode()" />
+          <app-play-button />
         </div>
         <h2 class="episode-number">#{{episode.number}}</h2>
         <h2 class="episode-number">-</h2>

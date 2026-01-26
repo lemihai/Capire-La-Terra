@@ -17,9 +17,9 @@ export class ProfileCard implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // console.log(changes['profile']);
     if (changes['profile']) {
-      console.log(1);
-      console.log(this.profile);
-      console.log(1);
+      // console.log(1);
+      // console.log(this.profile);
+      // console.log(1);
       if (this.profile.includes('Sofia')) {
         this.imgsrc = 'assets/sofia-lutteri.png';
       }

@@ -49,8 +49,12 @@
         </div>
       </div>
       <div class="episodes-list">
-        @for (episode of episodes; track episode) {
-          <app-episode-card class="episode-wrapper" cardType="medium" [episode]="episode" />
+        @for (episode of episodes; track episode._id) {
+          @if (episode.number === 1) {
+            <app-episode-card class="episode-wrapper" cardType="large" [episode]="episode" />
+          } @else {
+            <app-episode-card class="episode-wrapper" cardType="medium" [episode]="episode" />
+          }
         }
         <!-- <app-episode-card class="episode-wrapper" cardType="large" />
         <app-episode-card class="episode-wrapper" cardType="medium" />
