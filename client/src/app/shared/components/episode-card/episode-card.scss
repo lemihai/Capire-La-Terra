@@ -136,6 +136,7 @@
   border-radius: 1.6rem;
   padding: 0.4rem 0.4rem 0.4rem 0rem;
   border: 1px solid #31362d00;
+  // overflow: hidden;
 
   transition: var(--transition-160);
   // background-color: red;
@@ -201,10 +202,12 @@
   .episode-content-wrapper {
     height: 7.2rem;
     width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
+    overflow: hidden;
 
     transition: var(--transition-160);
 
@@ -223,6 +226,8 @@
 
     .top-container {
       width: 100%;
+      max-width: 100%;
+      overflow: hidden;
 
       display: flex;
       flex-direction: row;
@@ -235,18 +240,29 @@
 
       .title-wrapper {
         min-height: 35px;
+        max-width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
         transition: inherit;
 
+        overflow: hidden;
         gap: 0.8rem;
 
+        .episode-number{
+          min-width: 4rem !important;
+        }
+        
+        .episode-dash{
+          // max-width: 4.8rem !important;
+        }
 
         .episode-title{
-          text-overflow: ellipsis;
           width: 100%;
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
 
@@ -291,6 +307,7 @@
       // }
 
       p {
+        min-width: auto;
         font-size: 1.4rem;
         opacity: 0.64;
 
@@ -316,6 +333,7 @@
       }
 
       .date {
+        padding-right: .4rem;
         min-width: auto;
         width: auto;
         white-space: nowrap;
@@ -355,6 +373,7 @@
   }
 
   &:hover {
+    // margin-bottom: .4rem;
     padding: 0.4rem 1.2rem 0.4rem 0.4rem;
     background-color: var(--main-color-light);
     border: 1px solid var(--main-color-dark-16);

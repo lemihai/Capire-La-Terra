@@ -30,9 +30,14 @@ export class EpisodesService {
   getAllEpisodes() {
     return this.http.get(`${this.apiUrl}`);
   }
-
+  
   getOneEpisode(id: string): Observable<Episode> {
     // 💡 Key change: Add <Article> to the Observable type and http.get call
     return this.http.get<Episode>(`${this.apiUrl}/${id}`);
+  }
+  
+  getLastEpisode():Observable<Episode> {
+    console.log(this.apiUrl);
+    return this.http.get<Episode>(`http://localhost:3000/lastEpisode`);
   }
 }

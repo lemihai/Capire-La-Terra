@@ -6,6 +6,7 @@ import {
   ChangeDetectorRef,
   OnInit,
   Input,
+  inject,
 } from '@angular/core';
 // import { AudioPlayer } from "../shared/components/audio-player/audio-player";
 import { PlayButton } from '../shared/buttons/play-button/play-button';
@@ -64,8 +65,10 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
   trackTriggeredPlay = false;
   constructor(
     private cdRef: ChangeDetectorRef,
-    private globalPlayerService: GlobalAudioPlayerService
+    // private globalPlayerService: GlobalAudioPlayerService
   ) {}
+
+  private globalPlayerService = inject(GlobalAudioPlayerService)
 
   // Variables of the audio player
   playstate = 0;
@@ -209,7 +212,7 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
 
   play() {
     // this.globalPlayerService.playEpisode();
-    console.log(this.episode);
+    // console.log(this.episode);
     if (this.playstate === 0) {
       this.audioPlayer.nativeElement.play();
       this.playstate = 1;

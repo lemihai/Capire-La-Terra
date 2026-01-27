@@ -52,6 +52,45 @@ episodeRouter.get("/episodes/:id", verifyToken, async (req, res) => {
   }
 });
 
+// GET : Last Episode
+
+episodeRouter.get("/lastEpisode", verifyToken, async (req, res) => {
+  try {
+    // console.log(req);
+
+    let highestSeason = await collections?.episodes
+      ?.aggregate([{ $group: { _id: null, maxSeason: { $max: "$season" } } }])
+      .toArray();
+    // console.log(highestSeason);
+    if (highestSeason) {
+      highestSeason = highestSeason[0].maxSeason;
+    }
+
+    let highestEpisodeInSeason = await collections?.episodes
+      ?.aggregate([
+        { $match: { season: highestSeason } },
+        { $group: { _id: null, maxEpisode: { $max: "$number" } } },
+      ])
+      .toArray();
+    if (highestEpisodeInSeason) {
+      highestEpisodeInSeason = highestEpisodeInSeason[0].maxEpisode;
+    }
+
+    const query = { season: highestSeason, number: highestEpisodeInSeason };
+    const episode = await collections?.episodes?.findOne(query);
+
+    console.log(episode);
+
+    if (episode) {
+      res.status(200).send(episode);
+    } else {
+      res.status(404).send(`Failed to find the last episode ${episode}`);
+    }
+  } catch (error) {
+    res.status(404).send(`Failed to find the last episode `);
+  }
+});
+
 // POST
 // Add one episode
 episodeRouter.post("/episodes", verifyToken, async (req, res) => {
@@ -84,8 +123,11 @@ episodeRouter.post("/episodes", verifyToken, async (req, res) => {
 
 // PUT
 
-episodeRouter.put("/episodes/:id", verifyToken, (async (req: Request, res: Response) => {
-// ^^^ Cast the entire async function to RequestHandler ^^^
+episodeRouter.put("/episodes/:id", verifyToken, (async (
+  req: Request,
+  res: Response,
+) => {
+  // ^^^ Cast the entire async function to RequestHandler ^^^
   try {
     const id = req?.params?.id;
     // Check if ID is a valid ObjectId format
@@ -99,11 +141,14 @@ episodeRouter.put("/episodes/:id", verifyToken, (async (req: Request, res: Respo
     // The entire updated article object is in req.body
     const updatedEpisode = req.body;
     // Remove the _id from the body to prevent issues when setting the document
-    delete updatedEpisode._id; 
+    delete updatedEpisode._id;
 
     const query = { _id: new ObjectId(id) };
 
-    const result = await collections?.episodes?.replaceOne(query, updatedEpisode);
+    const result = await collections?.episodes?.replaceOne(
+      query,
+      updatedEpisode,
+    );
 
     if (result && result.matchedCount) {
       res.status(200).json({
@@ -132,7 +177,10 @@ episodeRouter.put("/episodes/:id", verifyToken, (async (req: Request, res: Respo
 }) as RequestHandler);
 
 // PATH
-episodeRouter.patch("/episodes/:id", verifyToken, (async (req: Request, res: Response) => {
+episodeRouter.patch("/episodes/:id", verifyToken, (async (
+  req: Request,
+  res: Response,
+) => {
   try {
     const id = req?.params?.id;
     const { posted } = req.body;
@@ -175,7 +223,6 @@ episodeRouter.patch("/episodes/:id", verifyToken, (async (req: Request, res: Res
     res.status(400).send(error);
   }
 }) as RequestHandler);
-
 
 // DELETE
 

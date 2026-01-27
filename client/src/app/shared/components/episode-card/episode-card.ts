@@ -48,7 +48,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
     // 800-1300px
     if (wpWidth > 1500) {
       if (cardType === 'medium') {
-        width = 200;
+        width = 240;
       } else if (cardType === 'large') {
         width = 528;
       }
@@ -77,7 +77,6 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    // console.log(this.episode);
     // console.log(this.episode);
     // for (let i = 0; i <= 10; i++) {
     //   this.triggerChange();

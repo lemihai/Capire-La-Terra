@@ -204,9 +204,32 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           overwrite: true,
         });
 
-        gsap.to('h2', {
+        gsap.to('.episode-number', {
           width: 'auto',
           height: 'auto',
+          skewX: 0,
+          skewY: 0,
+          scale: 1,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.episode-dash', {
+          width: '1.6rem',
+          height: 'auto',
+          skewX: 0,
+          skewY: 0,
+          scale: 1,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.episode-title', {
+          width: '100%',
+          height: 'auto',
+          // color: 'red',
           skewX: 0,
           skewY: 0,
           scale: 1,

@@ -363,10 +363,22 @@
               gap: 0.8rem;
               align-items: center;
 
-              img {
-                max-height: 100%;
+              .image-wrapper{
                 height: 3.8rem;
                 width: 3.8rem;
+                // min-width: 3.8rem;
+                // min-height: 3.8rem;
+                max-width: 3.8rem;
+                max-height: 3.8rem;
+              }
+
+              .episode-image {
+                height: 3.8rem;
+                width: 3.8rem;
+                min-width: 3.8rem;
+                min-height: 3.8rem;
+                max-width: 3.8rem;
+                max-height: 3.8rem;
                 border-radius: 0.8rem;
               }
 
