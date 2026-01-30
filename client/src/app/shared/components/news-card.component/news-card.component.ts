@@ -113,7 +113,7 @@ export class NewsCardComponent implements OnInit, OnChanges {
     if (changes['article']) {
       // this.article = { ...this.article };
     }
-    console.log(1, this.article);
+    // console.log(1, this.article);
     this.cdr.detectChanges();
   }
 

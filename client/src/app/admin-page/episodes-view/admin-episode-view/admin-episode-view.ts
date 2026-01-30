@@ -47,7 +47,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   templateUrl: './admin-episode-view.html',
   styleUrl: './admin-episode-view.scss',
 })
-export class AdminEpisodeView {
+export class AdminEpisodeView implements OnChanges, OnInit, AfterViewInit {
   episodeId: string | null = '';
   editBarComponents: string = 'episode-page-view';
   editMode = false;
@@ -58,10 +58,17 @@ export class AdminEpisodeView {
   @ViewChild('audioFileInput') audioFileInput!: ElementRef;
   @ViewChild('audioInputOverlay') audioInputOverlay!: ElementRef;
   @ViewChild('inputOverlay') inputOverlay!: ElementRef;
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
   // episodeAuthor = '';
 
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+
+  duration = {
+    initial: 0,
+    minutes: '00',
+    seconds: '00',
+  };
 
   @HostListener('keydown', ['$event'])
   handleTabKey(event: KeyboardEvent) {
@@ -271,9 +278,24 @@ export class AdminEpisodeView {
   }
 
   ngAfterViewInit(): void {
+    const audioElement = this.audioPlayer.nativeElement;
+    console.log('&&&&&');
+    console.log(audioElement);
+    console.log('&&&&&');
+
+    audioElement.addEventListener('loadedmetadata', () => {
+      this.duration.initial = audioElement.duration;
+      this.formatDuration(audioElement.duration, this.duration);
+      this.cdr.detectChanges();
+    });
+
     setTimeout(() => {
       this.cdr.detectChanges();
     }, 1000);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 
   async deleteEpisode() {
@@ -475,5 +497,45 @@ export class AdminEpisodeView {
 
   playEpisode() {
     this.globalPlayer.playEpisode(this.episode);
+  }
+
+  formatDuration(
+    time: number,
+    finaltime: {
+      minutes: string;
+      seconds: string;
+    },
+  ) {
+    let min = 0;
+    let sec = 0;
+    let test = 0;
+
+    let fmin = '0';
+    let fsec = '0';
+    if (time < 60) {
+      sec = Math.trunc(time);
+    } else {
+      // test = time/60;
+      while (time >= 60) {
+        min += 1;
+        time -= 60;
+        if (time <= 60) {
+          sec = Math.trunc(time);
+        }
+      }
+    }
+    fmin = min.toString();
+    fsec = sec.toString();
+    if (sec < 10) {
+      fsec = '0' + fsec;
+      // sec = '0' + sec;
+    }
+    if (min < 10) {
+      fmin = '0' + fmin;
+      // sec = '0' + sec;
+    }
+    
+    finaltime.minutes = fmin;
+    finaltime.seconds = fsec;
   }
 }

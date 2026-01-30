@@ -34,6 +34,25 @@ episodeRouter.get("/episodes", async (_req, res) => {
   }
 });
 
+// GET all posted episodes
+
+episodeRouter.get("/postedEpisodes", async (_req, res) => {
+  try {
+    // the episode variable awaits for all the objects in the collection episodes and then makes them an array.
+    // Then the response is being sent to the client
+    const episodes = await collections?.episodes
+      ?.find({ posted: true })
+      .toArray();
+    // console.log(episodes);
+
+    res.status(200).send(episodes);
+  } catch (error) {
+    res
+      .status(500)
+      .send(error instanceof Error ? error.message : "Unknown Error");
+  }
+});
+
 // GET : BY ID
 
 episodeRouter.get("/episodes/:id", verifyToken, async (req, res) => {

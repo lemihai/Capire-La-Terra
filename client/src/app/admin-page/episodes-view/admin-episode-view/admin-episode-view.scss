@@ -10,6 +10,14 @@
   max-width: 100%;
 }
 
+.audio-player-invisible {
+  display: none;
+  pointer-events: none;
+  opacity: 0;
+  height: 0rem;
+  width: 0rem;
+}
+
 .audio-file-missing-error{
   width: 100%;
   height: 3.2rem;

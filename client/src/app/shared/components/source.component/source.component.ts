@@ -23,15 +23,15 @@ export class SourceComponent implements OnInit, OnChanges {
     this.source = this.source.replace(' ', '');
     this.defineSource(this.source);
     this.newsSourceImage = `/assets/news_websites_images/${this.outletName}.png`;
-    console.log(this.newsSourceImage);
+    // console.log(this.newsSourceImage);
     // this.newsSourceImage = `/assets/${this.source}.png`;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+    // console.log(changes);
     if (changes['source']) {
       // this.article = { ...this.article };
-      console.log(99999, changes['source'].currentValue);
+      // console.log(99999, changes['source'].currentValue);
       this.defineSource(this.source);
     this.newsSourceImage = `/assets/news_websites_images/${this.outletName}.png`;
     }

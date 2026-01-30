@@ -23,6 +23,7 @@ import { TensecForward } from '../shared/buttons/tensec-forward/tensec-forward';
 import { Episode } from '../admin-page/service/episodes-service/episodes-service';
 import { GlobalAudioPlayerService } from './global-audio-player-service';
 import { Subscription } from 'rxjs';
+import { EpisodesService } from '../../services/episodes-service/episodes-service';
 
 @Component({
   selector: 'app-global-audio-player',
@@ -52,7 +53,7 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
     date: '',
     number: 0,
     season: 0,
-    imageUrl: '',
+    imageUrl: 'assets/article-illustration-1.jpg',
     audioUrl: 'audio/freepik-sermon-in-folds.mp3',
     sources: [],
     transcript: '',
@@ -68,7 +69,8 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
     // private globalPlayerService: GlobalAudioPlayerService
   ) {}
 
-  private globalPlayerService = inject(GlobalAudioPlayerService)
+  private globalPlayerService = inject(GlobalAudioPlayerService);
+  private episodeService = inject(EpisodesService);
 
   // Variables of the audio player
   playstate = 0;
@@ -106,6 +108,16 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
   opacity = '0';
 
   ngOnInit() {
+    this.episodeService.getLastEpisode().subscribe(
+      (data) => {
+        this.episode = data;
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
+    // console.log(this.playstate);
+
     this.episodeSubscription = this.globalPlayerService.episode$.subscribe(
       (newEpisode: Episode) => {
         // 2. Update the component's episode data
@@ -117,16 +129,28 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
         this.audioPlayer.nativeElement.load(); // Reload the audio element
         setTimeout(() => {
           // 4. Start playback automatically (optional, but typical for a 'playEpisode' action)
-          this.play();
+          this.audioPlayer.nativeElement.play();
+          this.playstate = 1;
+
+          this.extended = 'player-wrapper-extended';
+          // if (this.playstate === 1) {
+          // } else {
+          //   this.playstate = 0;
+          // }
+
           this.playstate = 1;
           this.trackTriggeredPlay = true;
 
-          this.extend();
+          // console.log(this.playstate);
+          // 1. If it's playing and the play state comes from outside, stay open
+          // 2. If it's not playing and the play state comes from uotside, then open
+          // 3. Only close if it's closed by hand
+          // 4. If I play it from the button then it doesn't matter if it's open or not.
 
           // Force change detection to update the template bindings
           this.cdRef.detectChanges();
         }, 10);
-      }
+      },
     );
 
     // console.log(this.episode);
@@ -175,7 +199,7 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
     finaltime: {
       minutes: string;
       seconds: string;
-    }
+    },
   ) {
     let min = 0;
     let sec = 0;
@@ -211,6 +235,7 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
   }
 
   play() {
+    console.log(this.playstate);
     // this.globalPlayerService.playEpisode();
     // console.log(this.episode);
     if (this.playstate === 0) {

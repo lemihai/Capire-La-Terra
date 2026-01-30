@@ -20,16 +20,7 @@ export class GlobalAudioPlayerService {
     // Replace 'any' with your Episode type
     console.log(episode);
     this.episodeSource.next(episode);
-    this.episodeService.getLastEpisode().subscribe(
-      (data) => {
-        console.log(1);
-        console.log(data);
-        console.log(1);
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
+    
     // setTimeout(() => {
     //   this.episodeSource.next(episode);
     //   console.log(episode);

@@ -1,97 +1,103 @@
-@if(cardType == 'small'){
+<!-- I have added an audio player so that i can load the audio file in it -->
+<!-- Then, load it's metadata to get the lenghth of the audio file -->
+<audio #audioPlayer controls [src]="episode.audioUrl" class="audio-player-invisible"></audio>
 
-<div class="episode small">
-  <div class="play">
-    <app-play-button />
-  </div>
-  <p class="episode-number">#{{episode.number}}</p>
-  <p class="episode-title">{{episode.title}}</p>
-  <div class="profile-card-wrapper">
-    <!-- <app-profile-card [profile]="episode.author" class="episode-author" /> -->
-  </div>
-  <p class="episode-duration">{{episode.number}}</p>
-
-  <!-- Adding these kills the whole app scroll -->
-  <!-- <app-audio-track [audioTrackWidth]="audioTrackWidth" /> -->
-  <app-audio-track [audioTrackWidth]="100" />
-</div>
-} @if(cardType == 'medium'){
-
-<div class="episode medium" (click)="playEpisode()" >
-  <div class="episode-image" style="background-image: url('/assets/episode_placeholder.png')">
-    <img [src]="episode.imageUrl" alt="Episode Image" />
-    <div class="episode-image-filter"></div>
-  </div>
-  <div class="episode-content-wrapper">
-    <!-- <div class="column-wrapper"> -->
-    <div class="top-container">
-      <div class="title-wrapper">
-        <div class="play-button-wrapper">
-          <app-play-button />
-        </div>
-        <h2 class="episode-number">#{{episode.number}}</h2>
-        <h2 class="episode-dash">-</h2>
-        <h2 class="episode-title">{{episode.title}}</h2>
-      </div>
+@if (cardType == 'small') {
+  <div class="episode small">
+    <div class="play">
+      <app-play-button />
     </div>
-    <div class="bottom-container">
-      <div class="app-profile-card-wrapper">
-        <div class="app-profile-card-wrapper-for-transform">
-          <!-- <app-profile-card [profile]="episode.author" class="aaa" /> -->
-           <app-profile-card [profile]="episode.author" />
-        </div>
-      </div>
-      <div class="separator-line"></div>
-      <p class="date">{{episode.date}}</p>
-      <!-- <div class="separator-line"></div> -->
-      <!-- <app-source /> -->
-
-      <p class="episode-duration">{{episode.season}}</p>
-      <div class="audio-track-wrapper" #audioTrackWrapper>
-        <app-audio-track [audioTrackWidth]="audioTrackWidth" />
-      </div>
+    <p class="episode-number">#{{ episode.number }}</p>
+    <p class="episode-title">{{ episode.title }}</p>
+    <div class="profile-card-wrapper">
+      <!-- <app-profile-card [profile]="episode.author" class="episode-author" /> -->
     </div>
-    <!-- </div> -->
+    <p class="episode-duration">{{ episode.number }}</p>
+    
+    <!-- Adding these kills the whole app scroll -->
+    <!-- <app-audio-track [audioTrackWidth]="audioTrackWidth" /> -->
+    <app-audio-track [audioTrackWidth]="audioTrackWidth" [audioTime]="duration.initial" />
   </div>
-</div>
-} @if(cardType == 'large'){
-
-<div class="episode large" style="background-image: url({{episode.imageUrl}})">
-  <div class="episode-large-filter">
-    <div class="episode-large-content-wrapper">
+}
+@if (cardType == 'medium') {
+  <div class="episode medium" (click)="playEpisode()">
+    <div class="episode-image" style="background-image: url('/assets/episode_placeholder.png')">
+      <img [src]="episode.imageUrl" alt="Episode Image" />
+      <div class="episode-image-filter"></div>
+    </div>
+    <div class="episode-content-wrapper">
+      <!-- <div class="column-wrapper"> -->
       <div class="top-container">
         <div class="title-wrapper">
-          <!-- <div class="play-button-wrapper">
+          <div class="play-button-wrapper">
             <app-play-button />
-          </div> -->
-          <h2 class="episode-number">#{{episode.number}}</h2>
-          <h2 class="episode-number">-</h2>
-          <h2 class="episode-title">{{episode.title}}</h2>
+          </div>
+          <h2 class="episode-number">#{{ episode.number }}</h2>
+          <h2 class="episode-dash">-</h2>
+          <h2 class="episode-title">{{ episode.title }}</h2>
         </div>
       </div>
       <div class="bottom-container">
         <div class="app-profile-card-wrapper">
           <div class="app-profile-card-wrapper-for-transform">
             <!-- <app-profile-card [profile]="episode.author" class="aaa" /> -->
-             <app-profile-card [profile]="episode.author" />
+            <app-profile-card [profile]="episode.author" />
           </div>
         </div>
         <div class="separator-line"></div>
-        <p class="date">{{episode.date}}</p>
-        <div class="separator-line"></div>
-        <p class="topic">topic 1</p>
+        <p class="date">{{ episode.date }}</p>
         <!-- <div class="separator-line"></div> -->
         <!-- <app-source /> -->
+
+        <p class="episode-duration">{{ episode.season }}</p>
+        <div class="audio-track-wrapper" #audioTrackWrapper>
+          <app-audio-track [audioTrackWidth]="audioTrackWidth" [audioTime]="duration.initial" />
+        </div>
       </div>
-      <div class="audio-track-wrapper-large" #audioTrackWrapper>
-        <p class="episode-duration">3:46</p>
-        <app-audio-track [audioTrackWidth]="audioTrackWidthLarge" />
+      <!-- </div> -->
+    </div>
+  </div>
+}
+@if (cardType == 'large') {
+  <div class="episode large" [style.background-image]="'url(' + episode.imageUrl + ')'">
+    <div class="episode-large-filter">
+      <div class="episode-large-content-wrapper">
+        <div class="top-container">
+          <div class="title-wrapper">
+            <!-- <div class="play-button-wrapper">
+            <app-play-button />
+          </div> -->
+            <h2 class="episode-number">#{{ episode.number }}</h2>
+            <h2 class="episode-number">-</h2>
+            <h2 class="episode-title">{{ episode.title }}</h2>
+          </div>
+        </div>
+        <div class="bottom-container">
+          <div class="app-profile-card-wrapper">
+            <div class="app-profile-card-wrapper-for-transform">
+              <!-- <app-profile-card [profile]="episode.author" class="aaa" /> -->
+              <app-profile-card [profile]="episode.author" />
+            </div>
+          </div>
+          <div class="separator-line"></div>
+          <p class="date">{{ episode.date }}</p>
+          <div class="separator-line"></div>
+          <p class="topic">topic 1</p>
+          <!-- <div class="separator-line"></div> -->
+          <!-- <app-source /> -->
+        </div>
+        <div class="audio-track-wrapper-large" #audioTrackWrapper>
+          <p class="episode-duration">{{ duration.minutes }}:{{ duration.seconds }}</p>
+          <app-audio-track
+            [audioTrackWidth]="audioTrackWidthLarge"
+            [audioTime]="duration.initial"
+          />
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- <div class="season-hero">
+  <!-- <div class="season-hero">
   <div class="content">
     <div class="top-container">
       <h1>#1 - {{ episodes[0].name }}</h1>
@@ -105,27 +111,26 @@
       </div>
     </div>
      <div class="controls"> -->
-<!-- this is the app audio player component -->
-<!-- <app-audio-player /> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
+  <!-- this is the app audio player component -->
+  <!-- <app-audio-player /> -->
+  <!-- </div> -->
+  <!-- </div> -->
+  <!-- </div> -->
+}
+@if (cardType == 'admin-small') {
+  <div class="episode small">
+    <div class="play">
+      <app-play-button />
+    </div>
+    <p class="episode-number">#{{ episode.number }} -</p>
+    <p class="episode-title">{{ episode.title }}</p>
+    <div class="profile-card-wrapper">
+      <!-- <app-profile-card [profile]="episode.author" class="episode-author" /> -->
+    </div>
+    <p class="episode-duration">{{ duration.minutes }}:{{ duration.seconds }}</p>
 
-} @if(cardType == 'admin-small'){
-
-<div class="episode small">
-  <div class="play">
-    <app-play-button />
+    <!-- Adding these kills the whole app scroll -->
+    <!-- <app-audio-track [audioTrackWidth]="audioTrackWidth" /> -->
+    <app-audio-track [audioTrackWidth]="audioTrackWidthLarge" [audioTime]="duration.initial" />
   </div>
-  <p class="episode-number">#{{episode.number}} -</p>
-  <p class="episode-title">{{episode.title}}</p>
-  <div class="profile-card-wrapper">
-    <!-- <app-profile-card [profile]="episode.author" class="episode-author" /> -->
-  </div>
-  <p class="episode-duration">3:46</p>
-
-  <!-- Adding these kills the whole app scroll -->
-  <!-- <app-audio-track [audioTrackWidth]="audioTrackWidth" /> -->
-  <app-audio-track [audioTrackWidth]="100" />
-</div>
 }

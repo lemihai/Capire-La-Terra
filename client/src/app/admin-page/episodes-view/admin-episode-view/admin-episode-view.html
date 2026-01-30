@@ -1,4 +1,5 @@
 <div class="episode-episode-view-wrapper">
+  <audio #audioPlayer controls [src]="episode.audioUrl" class="audio-player-invisible"></audio>
   <header class="header-container">
     <h2>Episode S{{ episode.season }} E{{ episode.number }}</h2>
   </header>
@@ -32,11 +33,12 @@
       </div>
       @if(episode.audioUrl != ''){
 
+      
       <div class="audio-player-wrapper">
         <!-- <div class="audio-card-player"> -->
         <app-play-button (click)="playEpisode()" />
-        <p class="audio-player-duration">4:32</p>
-        <app-audio-track [audioTrackWidth]="464" />
+        <p class="audio-player-duration">{{ duration.minutes }}:{{ duration.seconds }}</p>
+        <app-audio-track [audioTrackWidth]="454" [audioTime]="duration.initial"/>
         <!-- </div> -->
       </div>
       }@else{
@@ -275,10 +277,12 @@
                 />
               </svg>
             </div>
-            <p class="document-text">Your Image</p>
+            <!-- this should be the file name. Update later for this -->
+            <p class="document-text">{{episode.title}}</p>
+            <!--  -->
             <app-play-button (click)="playEpisode()" />
-            <p class="audio-player-duration">4:32</p>
-            <app-audio-track [audioTrackWidth]="180" />
+            <p class="audio-player-duration">{{ duration.minutes }}:{{ duration.seconds }}</p>
+            <app-audio-track [audioTrackWidth]="180" [audioTime]="duration.initial"/>
             <div class="close-icon" (click)="removeAudio()">
               <svg
                 width="32"

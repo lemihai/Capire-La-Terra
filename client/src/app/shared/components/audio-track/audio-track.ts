@@ -47,6 +47,7 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
   // ***** Calculating how long should the audio track be
   // **************************
   ngOnInit() {
+    // console.log(this.numberOfLines);
     this.numberOfLines = Math.floor(this.audioTrackWidth / 4.4);
     // console.log('*************************************',this.numberOfLines);
     for (let i = 0; i <= this.numberOfLines; i++) {
@@ -99,11 +100,11 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
   onMouseLeaveLine() {
     let children = this.trackDiv.nativeElement as HTMLElement;
     const firstChild = this.trackDiv.nativeElement.children[0] as HTMLElement;
-    const test = firstChild.parentElement;
     this.isHovered = false;
+    let ratio = this.audioTime / this.numberOfLines;
 
     let currentTime = this.titalTimeB;
-    const index = Math.floor(currentTime / 3.15);
+    const index = Math.floor(currentTime / ratio);
 
     if (index <= 1) {
       for (let i = 0; i <= this.numberOfLines; i++) {
@@ -130,7 +131,9 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
   // TODO: Switch this online hover to be triggered on the parent of the line not on the line
   // This way, the glitch is going to dissapear
   onLineHover(index: number) {
-    this.timeHovered.toCalculate = Math.trunc(index * 3.15);
+    let ratio = this.audioTime / this.numberOfLines;
+    this.timeHovered.toCalculate = Math.trunc(index * ratio);
+    // this.timeHovered.toCalculate = Math.trunc(index * 3.15);
     this.formatDuration(this.timeHovered.toCalculate, this.timeHovered);
     this.isHovered = true;
 
@@ -153,13 +156,33 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if(changes['audioTrackWidth']){
+      // console.log(changes['audioTrackWidth'].currentValue);
+      // console.log('--------------');
+      // console.log('time to calculate ', this.timeHovered.toCalculate);
+      // console.log('audio track width', this.audioTrackWidth);
+      // console.log('number of lines', this.numberOfLines);
+      // console.log(1);
+      // // console.log(this.timeHovered.toCalculate = this.audioTrackWidth/this.audioTime);
+      // console.log('trackWidth/audioTime', this.audioTrackWidth / this.audioTime);
+      // console.log('trackWidth/numberOfLines', this.audioTrackWidth / this.numberOfLines);
+      // console.log('audioTime/numberOfLines', this.audioTime / this.numberOfLines);
+      // console.log(1);
+      // console.log('--------------');
+    }
+    if (changes['audioTime']) {
+      this.audioTime = changes['audioTime'].currentValue;
+      this.timeHovered.toCalculate = this.audioTime;
+      
+    }
     let totaltime = this.formatDurationInverse(this.currentTimeMin, this.currentTimeSec);
-    const widthChange = changes['audioTrackWidth'];
     this.titalTimeB = totaltime;
+    const widthChange = changes['audioTrackWidth'];
     // THIS PART COLORS THE REST OF THE TRACK ON HOVER
+    
 
-    if(!this.trackDiv){
-      return
+    if (!this.trackDiv) {
+      return;
     }
 
     // console.log('It changed', this.audioTrackWidth, widthChange);
@@ -193,7 +216,8 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
     const firstChild = this.trackDiv.nativeElement.children[0] as HTMLElement;
     const test = firstChild.parentElement;
 
-    const index = Math.floor(totaltime / 3.15);
+    let ratio = this.audioTime / this.numberOfLines;
+    const index = Math.floor(totaltime / ratio);
 
     // Divide by 3.15 for no of lines)
     if (this.isHovered == false) {
@@ -210,6 +234,7 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
   }
 
   playFromHere() {
+    console.log(1,this.timeHovered.toCalculate);
     this.audioTrackClicked.emit(this.timeHovered.toCalculate);
   }
 
@@ -221,7 +246,7 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
     finaltime: {
       minutes: string;
       seconds: string;
-    }
+    },
   ) {
     let min = 0;
     let sec = 0;

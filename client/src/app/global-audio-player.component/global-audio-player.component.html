@@ -67,19 +67,20 @@
               <div class="image-wrapper">
                 <img
                   [ngSrc]="episode.imageUrl"
-                  height="40px"
-                  width="40px"
+                  height="40"
+                  width="40"
                   alt="episode_image"
-                  class="episode-image"
+                  class="episode-image-global-player"
                 />
               </div>
 
               <div class="episode-title">
-                <p>Perche si chiamamo la crisi climatica</p>
+                <p>{{episode.title}}</p>
                 <div class="episode-season-details-container">
                   <p>S{{ episode.season }}</p>
                   <!-- <div class="eps-separator-line"></div> -->
                   <p>E{{ episode.number }}</p>
+                  <app-profile-card [profile]="episode.author"  cardMode="small"/>
                   <!-- <p>E12</p> -->
                   <!-- <div class="eps-separator-line"></div> -->
                   <!-- <app-profile-card /> -->

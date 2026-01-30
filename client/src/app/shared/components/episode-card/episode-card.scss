@@ -3,6 +3,15 @@
   width: 100%;
 }
 
+// The audio player needs to be invisible because there is only one player on the page, the global one
+.audio-player-invisible {
+  display: none;
+  pointer-events: none;
+  opacity: 0;
+  height: 0rem;
+  width: 0rem;
+}
+
 .episode.small {
   display: flex;
   flex-direction: row;
@@ -250,15 +259,15 @@
         overflow: hidden;
         gap: 0.8rem;
 
-        .episode-number{
+        .episode-number {
           min-width: 4rem !important;
         }
-        
-        .episode-dash{
+
+        .episode-dash {
           // max-width: 4.8rem !important;
         }
 
-        .episode-title{
+        .episode-title {
           width: 100%;
           max-width: 100%;
           overflow: hidden;
@@ -333,7 +342,7 @@
       }
 
       .date {
-        padding-right: .4rem;
+        padding-right: 0.4rem;
         min-width: auto;
         width: auto;
         white-space: nowrap;

@@ -10,6 +10,8 @@ import {
   OnChanges,
   SimpleChanges,
   ChangeDetectorRef,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { AudioTrack } from '../shared/components/audio-track/audio-track';
 import { Button } from '../shared/buttons/button/button';
@@ -29,7 +31,10 @@ import { EpisodesService } from '../../services/episodes-service/episodes-servic
   templateUrl: './episodes-page.html',
   styleUrl: './episodes-page.scss',
 })
-export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
+export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges {
+  @ViewChild('playerWidth') playerWidth!: ElementRef<HTMLDivElement>;
+  @ViewChild('largeCard') largeCard!: ElementRef<HTMLDivElement>;
+  @ViewChild('seasonComponent') seasonComponent!: ElementRef<HTMLDivElement>;
   private smoother: ScrollSmoother | null = null;
   private episodesService = inject(EpisodesService);
 
@@ -117,6 +122,11 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.largeCard);
+    console.log(changes);
+  }
+
   ngOnDestroy() {
     // Kill the smoother and triggers to prevent memory leaks
     if (this.smoother) {
@@ -124,7 +134,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
     this.cdr.detectChanges();
     this.ngZone.runOutsideAngular(() => {
       // Create the smoother instance
@@ -325,8 +335,21 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy {
           ease: this.ease,
           overwrite: 'auto',
         });
+
+        ScrollTrigger.create({
+        trigger: '.large',
+        start: 'top top',
+        end: 'top top',
+        // pin: '.text-container',
+        // pinType: 'fixed',
+        pinSpacing: false,
+        markers: false,
+      });
       }, 900);
     });
+
+    const largeCards = gsap.utils.toArray('.episode-wrapper[cardType="large"]');
+    console.log(largeCards);
   }
 
   sort() {
