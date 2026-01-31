@@ -11,13 +11,7 @@
   transition: var(--transition-160);
 }
 
-// height: 128%;
-// width: 100%;
-// max-width: 64rem;
-// min-width: 44rem;
 .transition-image {
-  // height: 10%;
-  // max-height: 5rem;
   transition: var(--transition-160);
 }
 
@@ -43,7 +37,6 @@
 }
 
 .card-wrapper.small {
-  // background-color: red;
   width: 100%;
   max-width: 100%;
 
@@ -51,7 +44,7 @@
   .news-card-wrapper {
     width: 100%;
     height: auto;
-    // background-color: #38460500;
+
     background-color: red;
     border: 1px solid #38460500;
     border-radius: 1.6rem;
@@ -94,7 +87,6 @@
         align-items: flex-start;
         transition: var(--transition-160);
 
-        //   gap: 0.4rem;
         .card-title {
           font-size: 2rem;
           transition: var(--transition-160);
@@ -129,15 +121,13 @@
       .article-text {
         font-family: var(--tertiary-font-family) !important;
         font-size: 1.4rem;
-        // line-height: 1.8rem;
 
         display: -webkit-box;
-        // max-height: 32px;
-        // color: var(--main-color);
-        -webkit-line-clamp: 3; /* Limit to 4 lines */
+
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
-        overflow: hidden; /* Hide overflow */
-        text-overflow: ellipsis; /* Optional: Add ellipsis (...) at the end */
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .card-details {
@@ -197,7 +187,6 @@
       padding: 0.8rem 0.8rem;
 
       transition: var(--transition-160);
-      //   gap: 0.8rem;
 
       .card-image {
         margin-right: 0.8rem;
@@ -284,8 +273,6 @@
   justify-content: flex-start;
   align-items: flex-start;
 
-  // transition: var(--transition-160);
-
   .news-card-wrapper {
     width: 100%;
     height: 100%;
@@ -302,7 +289,6 @@
       width: 0rem;
       min-width: 0rem;
       height: 100%;
-      // min-height: 100%;
       background-color: var(--main-color-dark);
       border-radius: 1rem;
       transition: var(--transition-24);
@@ -367,23 +353,24 @@
     .title {
       font-size: 2.4rem;
       display: -webkit-box;
-      -webkit-line-clamp: 2; /* Limit to 4 lines */
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      overflow: hidden; /* Hide overflow */
+      overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .abstract {
       display: -webkit-box;
-      // max-height: 32px;
-      // color: var(--main-color);
-      -webkit-line-clamp: 3; /* Limit to 4 lines */
+
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
-      overflow: hidden; /* Hide overflow */
-      text-overflow: ellipsis; /* Optional: Add ellipsis (...) at the end */
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .date {
+      font-size: 1.6rem;
+      min-width: 8.4rem;
       opacity: 0.64;
     }
 
@@ -469,8 +456,6 @@
   justify-content: flex-start;
   align-items: flex-start;
 
-  // transition: var(--transition-160);
-
   .news-card-wrapper {
     width: 100%;
     height: 100%;
@@ -487,14 +472,13 @@
       width: 0rem;
       min-width: 0rem;
       height: 100%;
-      // min-height: 100%;
       background-color: var(--main-color-dark);
       border-radius: 1rem;
       transition: var(--transition-24);
     }
 
     .image {
-      min-height: 26.8rem;
+      min-height: 25.2rem;
       height: 100%;
       width: 52%;
 
@@ -509,14 +493,9 @@
       align-items: center;
 
       img {
-        // min-height: 26.8rem;
-        // height: 26.8rem;
-        // min-width: 36rem;
         min-width: 100%;
         min-height: 100%;
         object-fit: cover;
-        // width: 100%;
-        // scale: 1.1;
         pointer-events: none;
       }
     }
@@ -581,19 +560,19 @@
     .title {
       font-size: 4rem;
       display: -webkit-box;
-      -webkit-line-clamp: 2; /* Limit to 4 lines */
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      overflow: hidden; /* Hide overflow */
+      overflow: hidden;
       text-overflow: ellipsis;
       transition: var(--transition-160);
     }
 
     .abstract {
       display: -webkit-box;
-      -webkit-line-clamp: 3; /* Limit to 4 lines */
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
-      overflow: hidden; /* Hide overflow */
-      text-overflow: ellipsis; /* Optional: Add ellipsis (...) at the end */
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .date {
@@ -622,7 +601,6 @@
         width: 56%;
       }
 
-      // background-color: var(--main-color-dark-16);
       .card-content {
         .title-wrapper {
           .title-icon {
@@ -692,8 +670,14 @@
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-
     z-index: 0;
+
+    .hovered-bar {
+      width: 0rem;
+      min-width: 0rem;
+      height: 100%;
+      border-radius: 1rem;
+    }
 
     .content {
       max-height: 66%;
@@ -716,23 +700,13 @@
 
       .abstract {
         display: -webkit-box;
-        // max-height: 32px;
-        // color: var(--main-color);
-        -webkit-line-clamp: 3; /* Limit to 4 lines */
+
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
-        overflow: hidden; /* Hide overflow */
-        text-overflow: ellipsis; /* Optional: Add ellipsis (...) at the end */
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
-
-    // .image-wrapper {
-    //   height: 100%;
-    //   width: 80%;
-    //   max-width: 48rem;
-    //   min-width: 32rem;
-    //   overflow: hidden;
-    //   border-radius: 1.6rem;
-    // }
 
     .image {
       height: 100%;
@@ -741,8 +715,7 @@
       min-width: 32rem;
 
       overflow: hidden;
-      // height: 48rem;
-      // width: auto;
+
       border-radius: 1.6rem;
       img {
         height: 100%;
@@ -753,7 +726,6 @@
     }
 
     &:hover {
-      // background-color: var(--main-color-dark-32);
       cursor: pointer;
       gap: 1.6rem;
 
@@ -766,9 +738,7 @@
 
       .content {
         max-height: 66%;
-        // padding-left: .4rem;
-        // background-color: var(--main-color-dark-16);
-        // border: 1px solid var(--main-color-dark-16);
+
         padding: 1.6rem;
         margin: 0rem 0.8rem 0rem 2.4rem;
 
@@ -787,8 +757,6 @@
         min-width: 34rem;
 
         overflow: hidden;
-        // height: 48rem;
-        // width: auto;
         border-radius: 1.6rem;
         img {
           height: 100%;
@@ -816,8 +784,6 @@
       min-width: 0rem;
       width: 0rem;
       max-width: 0rem;
-      // background-color: var(--main-color-dark);
-      // border-radius: 1rem;
     }
 
     .content {
@@ -839,7 +805,6 @@
       min-width: 50rem;
       max-height: 0rem;
       min-height: 0rem;
-      // max-width: 5rem;
 
       overflow: hidden;
       border-radius: 1.6rem;
@@ -886,10 +851,9 @@
     width: 100%;
 
     display: flex;
-    // flex-direction: row;
+
     justify-content: space-between;
     gap: 0.8rem;
-    // align-items: center;
 
     transition: var(--transition-160);
 
@@ -927,13 +891,11 @@
       justify-content: center;
       align-items: center;
       img {
-        // height: 100%;
         min-height: 42rem;
         height: 42rem;
-        // min-width: 48rem;
+
         object-fit: cover;
-        // width: 100%;
-        // scale: 1.1;
+
         pointer-events: none;
       }
     }
@@ -970,12 +932,11 @@
 
       .abstract {
         display: -webkit-box;
-        // max-height: 32px;
-        // color: var(--main-color);
-        -webkit-line-clamp: 3; /* Limit to 4 lines */
+
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
-        overflow: hidden; /* Hide overflow */
-        text-overflow: ellipsis; /* Optional: Add ellipsis (...) at the end */
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .date {
@@ -1246,8 +1207,7 @@
 
 .card-wrapper.admin-small-main-view {
   height: 4rem;
-  // width: 100%;
-  // min-width: 100%;
+
   max-width: 100%;
 
   display: flex;
@@ -1402,9 +1362,9 @@
   .title-wrapper {
     width: 100%;
     max-width: 100%;
-    // height: 3.2rem;
+
     overflow: hidden;
-    // flex-grow: 1;
+
     transition: all 0.6s var(--cubic-bezzier-a);
     mask-image: linear-gradient(
       90deg,
@@ -1419,7 +1379,6 @@
     font-size: var(--font-size-regular);
     flex-grow: 1;
     width: 130%;
-    // max-width: 100%;
 
     line-height: 2.4rem;
     font-weight: 600;
@@ -1439,7 +1398,7 @@
 
   .author {
     height: 2.4rem;
-    // height: 1.6rem;
+
     overflow: hidden;
     font-size: var(--font-size-regular);
     flex-grow: 1;
@@ -1462,7 +1421,6 @@
   &:hover {
     cursor: pointer;
     transition: all 0.6s var(--cubic-bezzier-a);
-    // height: 3.2rem;
 
     .admin-card-inner {
       padding: 0rem 0.8rem;
@@ -1480,7 +1438,6 @@
     }
 
     .title {
-      // font-weight: 700;
       transition: all 0.6s var(--cubic-bezzier-a);
     }
 

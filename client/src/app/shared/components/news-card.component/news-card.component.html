@@ -12,8 +12,7 @@
       <div class="card-content">
         <div class="title-wrapper">
           <h2 class="title transition-A">{{ article.title }}</h2>
-           <!-- The problem is the transition -->
-          <!-- <h2 class="title">This is an example of a title</h2> -->
+
           <div class="title-icon">
             <svg
               width="32"
@@ -47,13 +46,12 @@
           </div>
         </div>
         <div class="article-details">
-          <!-- @if (article.author == 'Sofia') { -->
           <app-profile-card [profile]="article.author" class="transition-A" />
-          <!-- } -->
+
           <div class="separator-line transition-vertical-line-inside-card"></div>
           <p class="date transition-A">{{ article.date }}</p>
           <div class="separator-line transition-vertical-line-inside-card"></div>
-          @if (article.sources.length > 2) {
+          @if (article.sources.length > 1) {
             @for (source of article.sources; track source) {
               <app-source class="transition-A" source="{{ source }}" size="no-image" />
             }
@@ -73,7 +71,7 @@
       </div>
       <div class="card-container">
         <div class="card-title-wrapper">
-          <h1 class="card-title transition-A">{{article.title}}</h1>
+          <h1 class="card-title transition-A">{{ article.title }}</h1>
           <div class="title-icon">
             <svg
               width="32"
@@ -108,14 +106,14 @@
         </div>
         <div class="separator-line"></div>
         <p class="article-text">
-          {{article.text[0]}}
+          {{ article.text[0] }}
         </p>
         <div class="card-details">
-          <div class="card-date transition-A">{{article.date}}</div>
+          <div class="card-date transition-A">{{ article.date }}</div>
           <div class="separator-line transition-vertical-line-inside-card"></div>
-          <!-- @if (article.author == 'Sofia') { -->
+
           <app-profile-card [profile]="article.author" class="transition-A" />
-          <!-- } -->
+
           <div class="separator-line transition-vertical-line-inside-card"></div>
           <div class="sources class=transition-A">
             <p>Sources:</p>
@@ -139,7 +137,6 @@
       <div class="hovered-bar"></div>
       <div class="image transition-image-A">
         <img [src]="article.imageUrl" alt="Article Image" />
-        <!-- <p>{{article.imageUrl}}</p> -->
       </div>
       <div class="card-content">
         <div class="title-wrapper">
@@ -177,9 +174,8 @@
           </div>
         </div>
         <div class="article-details">
-          <!-- @if (article.author == 'Sofia') { -->
           <app-profile-card [profile]="article.author" class="transition-A" />
-          <!-- } -->
+
           <div class="separator-line transition-vertical-line-inside-card"></div>
           <p class="date transition-A">{{ article.date }}</p>
           <div class="separator-line transition-vertical-line-inside-card"></div>
@@ -201,17 +197,15 @@
   } @else if (cardType === 'hero-card') {
     <div class="news-card-wrapper  {{ cardDirection }}" (click)="navigateToArticlePage()">
       <div class="hovered-bar"></div>
-      <!-- <div class="image-wrapper"></div> -->
+
       <div class="image transition-image">
         <img [src]="article.imageUrl" alt="Article Image" />
       </div>
       <div class="content">
-        <!-- <h1 class="title transition-A">{{ article.title }}</h1> -->
         <h1 class="title transition-A">{{ article.title }}</h1>
         <div class="article-details">
-          <!-- @if (article.author == 'Sofia') { -->
           <app-profile-card [profile]="article.author" class="transition-A" />
-          <!-- } -->
+
           <div class="separator-line transition-vertical-line-inside-card"></div>
           <p class="date transition-A">{{ article.date }}</p>
           <div class="separator-line transition-vertical-line-inside-card"></div>
@@ -241,39 +235,12 @@
         </div>
         <div class="separator-line"></div>
         <div class="author-card-wrapper">
-          <!-- Pass the author in this component -->
-          <!-- @if(news.author == 'Sofia'){ -->
           <p class="author">{{ news.author }}</p>
-          <!-- <app-profile-card class="app-profile-card" /> -->
-          <!-- } -->
         </div>
         <div class="separator-line"></div>
         <p class="date">{{ news.date }}</p>
       </div>
       <div class="actions">
-        <!-- <div class="button">
-        <div class="button-icon">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5.74456 20.3636L21.1664 4.94194C21.8253 4.28298 23.9035 3.24389 26.4993 5.84022C29.0954 8.4369 28.0566 10.5143 27.3977 11.1731C26.2625 12.3083 16.6604 21.9437 11.9759 26.5949L4.16992 28.1696L5.74456 20.3636Z"
-              stroke="black"
-              stroke-width="1.6"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path d="M20 6L26 12" stroke="black" stroke-width="1.6" />
-            <path d="M7 20L13 26" stroke="black" stroke-width="1.6" />
-          </svg>
-          <p class="edit"></p>
-        </div>
-      </div> -->
         <div class="button" (click)="onDeleteArticle()">
           <div class="button-icon">
             <svg
@@ -344,29 +311,6 @@
         </div>
       </div>
       <div class="actions">
-        <!-- <div class="button">
-        <div class="button-icon">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5.74456 20.3636L21.1664 4.94194C21.8253 4.28298 23.9035 3.24389 26.4993 5.84022C29.0954 8.4369 28.0566 10.5143 27.3977 11.1731C26.2625 12.3083 16.6604 21.9437 11.9759 26.5949L4.16992 28.1696L5.74456 20.3636Z"
-              stroke="black"
-              stroke-width="1.6"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path d="M20 6L26 12" stroke="black" stroke-width="1.6" />
-            <path d="M7 20L13 26" stroke="black" stroke-width="1.6" />
-          </svg>
-          <p class="edit"></p>
-        </div>
-      </div> -->
         <div class="button" (click)="onDeleteArticle()">
           <div class="button-icon">
             <svg

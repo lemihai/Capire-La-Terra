@@ -27,7 +27,7 @@ export class NavbarGsapService {
           duration: 2,
           ease: this.ease,
         },
-        0
+        0,
       )
       .to(
         '.background-wrapper',
@@ -36,7 +36,7 @@ export class NavbarGsapService {
           duration: this.time,
           ease: this.ease,
         },
-        0
+        0,
       )
       .to(
         '.episodes-text-h1',
@@ -51,7 +51,7 @@ export class NavbarGsapService {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       )
       .to(
         '.latest-news-h1',
@@ -66,7 +66,7 @@ export class NavbarGsapService {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       )
       .to(
         '.episode-list-wrapper',
@@ -75,7 +75,7 @@ export class NavbarGsapService {
           duration: this.time,
           ease: this.ease,
         },
-        0
+        0,
       )
       .to(
         '.about-earth-section',
@@ -84,7 +84,7 @@ export class NavbarGsapService {
           duration: this.time,
           ease: this.ease,
         },
-        0
+        0,
       )
       .to(
         '.about-earth-wrapper',
@@ -94,7 +94,7 @@ export class NavbarGsapService {
           duration: this.time,
           ease: this.ease,
         },
-        0
+        0,
       )
       .to(
         '.left-side-wrapper',
@@ -103,7 +103,7 @@ export class NavbarGsapService {
           duration: this.time,
           ease: this.ease,
         },
-        0
+        0,
       )
       .to(
         '.left-side',
@@ -112,7 +112,7 @@ export class NavbarGsapService {
           duration: this.time,
           ease: this.ease,
         },
-        0
+        0,
       )
       .to(
         '.right-side-wrapper',
@@ -121,7 +121,7 @@ export class NavbarGsapService {
           duration: this.time,
           ease: this.ease,
         },
-        0
+        0,
       )
       .to(
         '.right-side',
@@ -129,7 +129,7 @@ export class NavbarGsapService {
           duration: this.time,
           ease: this.ease,
         },
-        0
+        0,
       )
       .to(
         '.episodes-action-container-button',
@@ -145,7 +145,7 @@ export class NavbarGsapService {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       )
       .to(
         '.episodes-action-container-button-btn',
@@ -160,7 +160,7 @@ export class NavbarGsapService {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       )
       .to(
         '.news-action-container-button',
@@ -176,7 +176,7 @@ export class NavbarGsapService {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       )
       .to(
         '.news-action-container-button-btn',
@@ -191,7 +191,7 @@ export class NavbarGsapService {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       )
       .to(
         '.news-action-container-text',
@@ -207,7 +207,7 @@ export class NavbarGsapService {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       )
       .to(
         '.episodes-action-container-text',
@@ -223,7 +223,7 @@ export class NavbarGsapService {
           ease: this.ease,
           overwrite: true,
         },
-        0
+        0,
       );
   }
 
@@ -261,6 +261,15 @@ export class NavbarGsapService {
       height: '6.4rem',
       minWidth: '32rem',
       opacity: 0,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.large', {
+      height: '8rem',
+      minWidth: '32rem',
+      opacity: 0,
+      // rotate: 45,
       duration: this.time,
       ease: this.ease,
       overwrite: true,
@@ -352,6 +361,7 @@ export class NavbarGsapService {
       ease: this.ease,
       // overwrite: 'auto',
     });
+    
   }
 
   exitNewsPage() {
@@ -405,7 +415,8 @@ export class NavbarGsapService {
       overwrite: true,
     });
     gsap.to('.transition-image-A ', {
-      maxHeight: '0rem',
+      height: '0rem',
+      minHeight: '0rem',
       y: -8,
       duration: this.time,
       ease: this.ease,
@@ -419,8 +430,9 @@ export class NavbarGsapService {
       // TEXT SECTION
       // --------------------------------
 
-      gsap.to('.transition-A', {
+      gsap.to('.article-page-wrapper', {
         height: '0rem',
+        backgroundColor: 'red',
         x: 0,
         y: 0,
         skewX: -24,
@@ -431,7 +443,20 @@ export class NavbarGsapService {
         ease: this.ease,
         overwrite: true,
       });
-      
+      gsap.to('.transition-A', {
+        height: '0rem',
+        color: 'red',
+        x: 0,
+        y: 0,
+        skewX: -24,
+        skewY: -8,
+        opacity: 0,
+        scale: 1,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+
       gsap.to('.article-page-wrapper', {
         minHeight: '100vh',
         maxHeight: '100vh',

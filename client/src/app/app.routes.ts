@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { LandingPage } from './landing-page/landing-page';
 import { EpisodesPage } from './episodes-page/episodes-page';
 import { NewsPage } from './news-page/news-page';
-import { Component } from '@angular/core';
 import { LoginPage } from './login-page/login-page';
 import { AdminPage } from './admin-page/admin-page';
 import { ArticlePage } from './news-page/article-page/article-page';
@@ -13,7 +12,6 @@ import { RobotsView } from './admin-page/robots-view/robots-view';
 import { Settings } from './admin-page/settings/settings';
 import { ArticlesView } from './admin-page/articles-view/articles-view';
 import { NewsArticlePage } from './admin-page/news-view/news-article-page/news-article-page';
-import { ArticleCard } from './admin-page/articles-view/article-card/article-card';
 import { NewArticle } from './admin-page/articles-view/new-article/new-article';
 import { AdminArticlePage } from './admin-page/articles-view/admin-article-page/admin-article-page';
 import { AdminEpisodeView } from './admin-page/episodes-view/admin-episode-view/admin-episode-view';
@@ -27,20 +25,7 @@ export const routes: Routes = [
     path: 'news-page',
     component: NewsPage,
     title: 'News',
-    // children: [
-    //   {
-    //     path: '', // The main News list view (e.g., /admin-page/news-view)
-    //     component: NewsPage, // Now NewsView is treated as a child
-    //     title: 'news-page',
-    //   },
-    //   {
-    //     path: 'article-page/:id',
-    //     component: ArticlePage, // NewsArticlePage replaces NewsView here
-    //     title: 'Article',
-    //   },
-    // ],
   },
-  // { path: 'article-page', component: ArticlePage, title: 'Article' },
   { path: 'article-page/:id', component: ArticlePage, title: 'Article' },
   { path: 'login-page', component: LoginPage, title: 'Login' },
   {
@@ -80,15 +65,13 @@ export const routes: Routes = [
         title: 'News-view',
         children: [
           {
-            path: '', // The main News list view (e.g., /admin-page/news-view)
-            component: NewsView, // Now NewsView is treated as a child
+            path: '',
+            component: NewsView,
             title: 'News-list',
           },
           {
-            // The News Article view (e.g., /admin-page/news-view/article/123)
-            // Note: I renamed the path for clarity, but you can keep 'news-article-view/:id'
             path: 'news-article-view/:id',
-            component: NewsArticlePage, // NewsArticlePage replaces NewsView here
+            component: NewsArticlePage,
             title: 'News-article-view',
           },
         ],

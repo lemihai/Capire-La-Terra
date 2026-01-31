@@ -1,26 +1,20 @@
-@if(cardMode === 'no-text'){
-<div class="profile-wrapper-no-text">
-  <img [ngSrc]="imgsrc" height="40" width="40" alt="profile pic image" class="profile-image" />
-</div>
-} @else if(cardMode === 'navbar'){
-<div class="profile-wrapper-navbar">
-  <img [ngSrc]="imgsrc" height="40" width="40" alt="profile pic image" class="profile-image" />
-  <p class="name">{{ profile }}</p>
-</div>
-} @else if(cardMode === 'small'){
+@if (cardMode === 'no-text') {
+  <div class="profile-wrapper-no-text">
+    <img [ngSrc]="imgsrc" height="40" width="40" alt="profile pic image" class="profile-image" />
+  </div>
+} @else if (cardMode === 'navbar') {
+  <div class="profile-wrapper-navbar">
+    <img [ngSrc]="imgsrc" height="40" width="40" alt="profile pic image" class="profile-image" />
+    <p class="name">{{ profile }}</p>
+  </div>
+} @else if (cardMode === 'small') {
   <div class="profile-wrapper-small">
-  <img [ngSrc]="imgsrc" height="32" width="32" alt="profile pic image" class="profile-image" />
-  <p class="name">{{ profile }}</p>
-</div>
+    <img [ngSrc]="imgsrc" height="32" width="32" alt="profile pic image" class="profile-image" />
+    <p class="name">{{ profile }}</p>
+  </div>
+} @else {
+  <div class="profile-wrapper">
+    <img [ngSrc]="imgsrc" height="40" width="40" alt="profile pic image" class="profile-image" />
+    <p class="name">{{ profile }}</p>
+  </div>
 }
-@else {
-
-<div class="profile-wrapper">
-  <img [ngSrc]="imgsrc" height="40" width="40" alt="profile pic image" class="profile-image" />
-  <p class="name">{{ profile }}</p>
-</div>
-
-}
-
-
-

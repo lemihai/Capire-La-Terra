@@ -21,10 +21,6 @@
 
   position: relative;
 
-  //   background-color: var(--main-color-16);
-  // background-color: red;
-  //   border: 1px solid var(--main-color-dark-08);
-
   height: 4rem;
   width: 100%;
 
@@ -77,8 +73,6 @@
   }
 
   .profile-card-wrapper {
-    // min-width: 8.8rem;
-    //   width: 100%;
   }
 
   .episode-author {
@@ -96,21 +90,18 @@
     left: 0;
     right: 0;
     bottom: 0;
-    // background-color: var(--main-color-light);
-    // background-color: #82ff43;
+
     background-color: #eaefd6;
-    opacity: 0; /* Initially hidden */
-    // transition: var(--transition-160);
-    z-index: -1; /* Place behind the element */
-    border-radius: inherit; /* Match parent's border radius */
+    opacity: 0;
+
+    z-index: -1;
+    border-radius: inherit;
     transition: var(--transition-160);
   }
 
   &:hover {
     transition: var(--transition-160);
 
-    // background-color: var(--main-color-32);
-    // box-shadow: inset 0 0 0 200px var(--main-color-16);
     border: 1px solid var(--main-color-dark-16);
     cursor: pointer;
     padding: 0.8rem 0.4rem 0.8rem 0.4rem;
@@ -120,7 +111,6 @@
       transition: var(--transition-160);
       width: 3.2rem;
       min-width: 3.2rem;
-      // overflow: hidden;
     }
   }
 
@@ -145,13 +135,8 @@
   border-radius: 1.6rem;
   padding: 0.4rem 0.4rem 0.4rem 0rem;
   border: 1px solid #31362d00;
-  // overflow: hidden;
 
   transition: var(--transition-160);
-  // background-color: red;
-  // transition: all 1s ease-out;
-  // .episode-image-wrapper{
-  // }
 
   p {
     height: 0rem;
@@ -220,8 +205,6 @@
 
     transition: var(--transition-160);
 
-    // gap: 1.6rem;
-
     .column-wrapper {
       height: 100%;
 
@@ -264,7 +247,6 @@
         }
 
         .episode-dash {
-          // max-width: 4.8rem !important;
         }
 
         .episode-title {
@@ -293,7 +275,6 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
-      // overflow: hidden;
 
       gap: 0.8rem;
 
@@ -302,18 +283,12 @@
       .app-profile-card-wrapper {
         overflow: hidden;
         width: auto;
-        // transform: skewX(-32deg) skewY(-8deg);
       }
 
       .app-profile-card-wrapper-for-transform {
         opacity: 1;
         transform: translate(-2rem, 4rem) skewX(-16deg) skewY(4deg);
       }
-
-      // app-profile-card {
-      //   opacity: .1;
-      //   transform: skewX(-32deg) skewY(-8deg);
-      // }
 
       p {
         min-width: auto;
@@ -348,7 +323,6 @@
         width: auto;
         white-space: nowrap;
         transition: inherit;
-        // transform: skewX(-32deg) skewY(8deg);
       }
 
       .topic {
@@ -356,7 +330,6 @@
         width: auto;
         white-space: nowrap;
         transition: inherit;
-        // transform: skewX(-32deg) skewY(8deg);
       }
 
       .audio-track-wrapper {
@@ -383,19 +356,15 @@
   }
 
   &:hover {
-    // margin-bottom: .4rem;
     padding: 0.4rem 1.2rem 0.4rem 0.4rem;
     background-color: var(--main-color-light);
     border: 1px solid var(--main-color-dark-16);
-    // border-radius: 1.6rem;
 
     cursor: pointer;
 
     .episode-image {
       width: 7.2rem;
       min-width: 7.2rem !important;
-      // transition: var(--transition-160);
-      // background-color: var(--main-color-dark-32);
 
       .episode-image-filter {
         background-color: var(--main-color-dark-32);
@@ -405,9 +374,7 @@
     .play-button-wrapper {
       height: 100%;
       width: 100%;
-      // transition: var(--transition-160);
 
-      // margin-right: 1rem;
       width: 3.2rem;
       border-radius: 0.8rem;
     }
@@ -459,12 +426,11 @@
 
 .episode.large {
   width: 100%;
-  height: 32rem !important;
-  min-height: 26rem;
+  height: 32rem;
 
-  background-size: cover; /* Ensures the image covers the entire div */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */ /* Options: repeat, repeat-x, repeat-y, no-repeat */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
   border-radius: 1.2rem;
   overflow: hidden;
@@ -496,8 +462,6 @@
     justify-content: space-between;
     align-items: flex-start;
 
-    // backdrop-filter: blur(1.6rem);
-
     .bottom-container {
       width: 100%;
 
@@ -505,7 +469,6 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
-      // overflow: hidden;
 
       gap: 0.8rem;
 
@@ -514,7 +477,6 @@
       .app-profile-card-wrapper {
         overflow: hidden;
         width: auto;
-        // transform: skewX(-32deg) skewY(-8deg);
       }
 
       .app-profile-card-wrapper-for-transform {
@@ -522,11 +484,6 @@
         opacity: 1;
         transform: translate(1.6rem, 1.6rem) skewX(-16deg) skewY(4deg);
       }
-
-      // app-profile-card {
-      //   opacity: .1;
-      //   transform: skewX(-32deg) skewY(-8deg);
-      // }
 
       p {
         font-size: 1.4rem;
@@ -598,7 +555,7 @@
           text-overflow: ellipsis;
         }
 
-        .episode-title-wrapper{
+        .episode-title-wrapper {
           width: 38.8rem;
           min-width: 38.8rem;
           mask-image: linear-gradient(
@@ -611,8 +568,6 @@
         .episode-title {
           width: 100%;
           text-overflow: ellipsis;
-
-          
         }
       }
 
@@ -651,10 +606,6 @@
   gap: 0.8rem;
 
   position: relative;
-
-  //   background-color: var(--main-color-16);
-  // background-color: red;
-  //   border: 1px solid var(--main-color-dark-08);
 
   height: 4rem;
   width: 100%;
@@ -709,7 +660,6 @@
 
   .profile-card-wrapper {
     min-width: 8.8rem;
-    //   width: 100%;
   }
 
   .episode-author {
@@ -727,21 +677,18 @@
     left: 0;
     right: 0;
     bottom: 0;
-    // background-color: var(--main-color-light);
-    // background-color: #82ff43;
+
     background-color: #eaefd6;
-    opacity: 0; /* Initially hidden */
-    // transition: var(--transition-160);
-    z-index: -1; /* Place behind the element */
-    border-radius: inherit; /* Match parent's border radius */
+    opacity: 0;
+
+    z-index: -1;
+    border-radius: inherit;
     transition: var(--transition-160);
   }
 
   &:hover {
     transition: var(--transition-160);
 
-    // background-color: var(--main-color-32);
-    // box-shadow: inset 0 0 0 200px var(--main-color-16);
     border: 1px solid var(--main-color-dark-16);
     cursor: pointer;
     padding: 0.8rem 0.4rem 0.8rem 0.4rem;
@@ -751,7 +698,6 @@
       transition: var(--transition-160);
       width: 3.2rem;
       min-width: 3.2rem;
-      // overflow: hidden;
     }
   }
 

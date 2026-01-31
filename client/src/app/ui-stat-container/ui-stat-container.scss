@@ -1,10 +1,6 @@
 @use '../../variables.scss' as *;
 
 :host {
-  // z-index: 20;
-  // position: relative;
-  // opacity: 0;
-
   .stat-container {
     width: auto;
     height: 4rem;
@@ -94,13 +90,12 @@
   position: fixed;
   z-index: 30 !important;
 
-  bottom: .8rem;
-  left: .8rem;
+  bottom: 0.8rem;
+  left: 0.8rem;
   padding-right: 0.32rem !important;
 
   justify-content: flex-start;
 
-  // background-color: var(--main-color-dark-16);
   background-color: var(--main-color-dark-background);
   z-index: 30 !important;
 
@@ -111,7 +106,6 @@
 
   color: var(--main-color-dark);
   transition: var(--transition-160);
-  // opacity: 0;
 
   .svg-hover {
     transition: var(--transition-160);
@@ -191,13 +185,11 @@
 }
 
 .container-details {
-  // z-index: 29 !important;
   opacity: 1;
   left: 3.2rem;
   bottom: 8vh;
   width: auto;
   height: auto;
-  // background-color: var(--main-color-dark-16);
   background-color: var(--main-color-dark-background);
   border: 1px solid var(--main-color-dark-16);
   padding: 0.8rem;
@@ -206,7 +198,6 @@
   scale: 1;
   transition: var(--transition-160);
   overflow: hidden;
-  // transform: translateX(1.7rem);
 
   backdrop-filter: blur(16px) !important;
 
@@ -222,13 +213,11 @@
 }
 
 .container-details-right {
-  // z-index: 29 !important;
   opacity: 1;
   right: 3.2rem;
   bottom: 8vh;
   width: auto;
   height: auto;
-  // background-color: var(--main-color-dark-16);
   background-color: var(--main-color-dark-background);
   border: 1px solid var(--main-color-dark-16);
   padding: 0.8rem;
@@ -237,7 +226,6 @@
   scale: 1;
   transition: var(--transition-160);
   overflow: hidden;
-  // transform: translateX(1.7rem);
 
   backdrop-filter: blur(16px) !important;
 
@@ -317,7 +305,6 @@
 
     &:hover {
       scale: 1.1;
-      // background-color: var(--main-color-dark-hover) !important;
       background-color: var(--main-color-dark-background);
     }
   }
@@ -380,7 +367,6 @@
 
     &:hover {
       scale: 1.1;
-      // background-color: var(--main-color-dark-hover) !important;
       background-color: var(--main-color-dark-background);
     }
   }
@@ -397,7 +383,6 @@
 
   justify-content: flex-start;
 
-  // background-color: var(--main-color-dark-16);
   background-color: var(--main-color-dark-background);
   z-index: 30 !important;
 
@@ -461,7 +446,6 @@
       &:hover {
         transition: var(--transition-16) !important;
         background-color: var(--main-color-hover);
-        // background-color: var(--main-color-dark-background);
         border: 1px solid #33333300;
 
         svg {

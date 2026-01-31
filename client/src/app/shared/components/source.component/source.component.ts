@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Input } from '@angular/core';
 
 @Component({
@@ -9,37 +9,25 @@ import { Input } from '@angular/core';
   styleUrl: './source.component.scss',
 })
 export class SourceComponent implements OnInit, OnChanges {
-  @Input() source: string = ''; // Default value
-  @Input() size?: string = ''; // Default value
+  @Input() source: string = '';
+  @Input() size?: string = '';
   newsSourceImage = ``;
   outletName = '';
 
-  // constructor(
-  //   private cdr: ChangeDetectorRef,
-  // ) {}
-
   ngOnInit(): void {
-    // console.log(1, this.source);
     this.source = this.source.replace(' ', '');
     this.defineSource(this.source);
     this.newsSourceImage = `/assets/news_websites_images/${this.outletName}.png`;
-    // console.log(this.newsSourceImage);
-    // this.newsSourceImage = `/assets/${this.source}.png`;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log(changes);
     if (changes['source']) {
-      // this.article = { ...this.article };
-      // console.log(99999, changes['source'].currentValue);
       this.defineSource(this.source);
-    this.newsSourceImage = `/assets/news_websites_images/${this.outletName}.png`;
+      this.newsSourceImage = `/assets/news_websites_images/${this.outletName}.png`;
     }
-    // this.cdr.detectChanges();
   }
 
   defineSource(url: string) {
-    // console.log(url);
     if (url.includes('aljazeera')) {
       this.outletName = 'aljazeera';
     }

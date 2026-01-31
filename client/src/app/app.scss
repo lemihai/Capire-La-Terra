@@ -8,9 +8,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  // overflow-x: hidden;
   border-radius: 8rem;
-  // padding: .8rem;
   transition: var(--transition-8);
   position: relative;
 
@@ -21,18 +19,3 @@
 }
 
 
-// .main-wrapper {
-//   // Ensure this has enough height to enable scrolling
-//   height: auto;
-//   background-color: #e9efd1;
-//   position: relative;
-
-//   // display: flex;
-//   // flex-direction: row;
-// }
-
-// app-audio-player {
-//   z-index: 10;
-//   position: fixed;
-//   bottom: 1.6rem;
-// }

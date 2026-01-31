@@ -22,12 +22,12 @@ export class UIStatContainer implements OnInit, OnChanges {
 
   isAdminPage = false;
 
-  constructor(private cdr: ChangeDetectorRef, private router: Router) {
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+  ) {
     this.router.events
-      .pipe(
-        // Use RouterEvent to be explicit and avoid DOM Event conflicts
-        filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)
-      )
+      .pipe(filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.handleRouteChange(event.urlAfterRedirects);
       });
@@ -49,8 +49,6 @@ export class UIStatContainer implements OnInit, OnChanges {
   scaleLeft = '.8';
   opacityLeft = '0';
 
-  // translateXRight = '3.8rem';
-  // translateYRight = '3.2rem';
   translateXRight = '1.6rem';
   translateYRight = '1.6rem';
   scaleRight = '.8';
@@ -75,7 +73,6 @@ export class UIStatContainer implements OnInit, OnChanges {
   }
 
   expand() {
-    // console.log(this.containerDetails, 'fwefew', this.aaa);
     if (this.exp == false) {
       this.isInforActive = 'info-active';
       this.exp = true;
@@ -94,7 +91,6 @@ export class UIStatContainer implements OnInit, OnChanges {
   }
 
   expandRight() {
-    // console.log(this.containerDetailsRight, 'fwefew', this.aaa);
     if (this.expRight == false) {
       this.isInforActiveRight = 'info-active-right';
       this.expRight = true;
@@ -115,14 +111,11 @@ export class UIStatContainer implements OnInit, OnChanges {
 
   ngOnInit() {
     this.handleRouteChange(this.router.url);
-    setTimeout(() => {
-      // this.appearAnimation();
-    }, 2800);
+    setTimeout(() => {}, 2800);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     let page = this.router.url;
-    // this.isAdminPage = this.router.url.includes('/admin-page');
   }
 
   appearAnimation() {
@@ -137,8 +130,6 @@ export class UIStatContainer implements OnInit, OnChanges {
     this.scaleRight = '1';
     this.opacityRight = '1';
     this.cdr.detectChanges();
-
-    // console.log('feawrfer');
   }
 
   enterAdmin() {
@@ -157,43 +148,26 @@ export class UIStatContainer implements OnInit, OnChanges {
 
   private handleRouteChange(url: string) {
     const hasLoaded = localStorage.getItem('landingPageLoaded');
-    // console.log('hasloaded', hasLoaded);
+
     this.isAdminPage = url.includes('admin-page');
     if (url.includes('admin-page')) {
-      // setTimeout(() => {
-        this.enterAdmin();
-      // }, 100);
+      this.enterAdmin();
     } else if (url.includes('')) {
-      if(!hasLoaded){
-
+      if (!hasLoaded) {
         setTimeout(() => {
           this.appearAnimation();
         }, 2800);
-      } else{
-        // setTimeout(() => {
-          this.appearAnimation();
-        // }, 10);
+      } else {
+        this.appearAnimation();
       }
     } else {
-      // setTimeout(() => {
-        this.appearAnimation();
-      // }, 100);
+      this.appearAnimation();
     }
-    // console.log(1);
-    // console.log(1);
-    // console.log('New Route Detected:', url);
-    // console.log(this.isAdminPage);
-    // console.log(1);
-    // console.log(1);
-
-    // Perform any logic needed when the page changes
-    // (e.g., resetting animations, closing expanded containers)
     this.resetContainers();
   }
 
   resetContainers() {
     this.exp = false;
     this.expRight = false;
-    // ... rest of your reset logic
   }
 }
