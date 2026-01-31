@@ -98,8 +98,6 @@ episodeRouter.get("/lastEpisode", verifyToken, async (req, res) => {
     const query = { season: highestSeason, number: highestEpisodeInSeason };
     const episode = await collections?.episodes?.findOne(query);
 
-    console.log(episode);
-
     if (episode) {
       res.status(200).send(episode);
     } else {

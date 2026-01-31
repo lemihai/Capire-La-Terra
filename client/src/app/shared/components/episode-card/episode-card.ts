@@ -102,6 +102,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
     // console.log(1, changes);
     if (changes['episode']) {
       this.episode = changes['episode'].currentValue;
+      console.log(this.episode);
       // this.article = { ...this.article };
       // this.episode = changes['episode'].currentValue;
       // console.log(changes['episode'].currentValue);

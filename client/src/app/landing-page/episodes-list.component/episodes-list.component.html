@@ -1,9 +1,11 @@
 <div class="episode-list-wrapper">
   <div class="episode-list">
+    <!-- 
+     
     <div class="season-hero">
       <div class="content">
         <div class="top-container">
-          <!-- <h1>#1 - {{ episodes[0].name }}</h1> -->
+          <h1>#1 - {{ episodes[0].name }}</h1>
           <div class="episode-separator-line"></div>
           <div class="details">
             <p>17-09-2025</p>
@@ -13,19 +15,18 @@
             <p>4:08</p>
           </div>
         </div>
-        <!-- <div class="controls"> -->
-        <!-- this is the app audio player component -->
         <app-audio-player />
-        <!-- </div> -->
       </div>
     </div>
+    -->
+    <app-episode-card cardType="large" [episode]="episodes[0]" />
 
     <!-- Episode card with different ways of seeing it or multiple types of tracks???? Episode card with multiple views -->
     <div class="season-episode-list">
-      <!-- <app-episode-card cardType="small" />
-      <app-episode-card cardType="small" />
-      <app-episode-card cardType="small" />
-      <app-episode-card cardType="small" /> -->
+      <app-episode-card cardType="small" [episode]="episodes[1]" />
+      <app-episode-card cardType="small" [episode]="episodes[2]" />
+      <app-episode-card cardType="small" [episode]="episodes[3]" />
+      <app-episode-card cardType="small" [episode]="episodes[4]" />
     </div>
   </div>
 </div>

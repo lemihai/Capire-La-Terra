@@ -3,16 +3,17 @@
 <audio #audioPlayer controls [src]="episode.audioUrl" class="audio-player-invisible"></audio>
 
 @if (cardType == 'small') {
-  <div class="episode small">
+  <div class="episode small" (click)="playEpisode()">
     <div class="play">
       <app-play-button />
     </div>
-    <p class="episode-number">#{{ episode.number }}</p>
+    <p class="episode-number">S{{ episode.season }} #{{ episode.number }}</p>
     <p class="episode-title">{{ episode.title }}</p>
     <div class="profile-card-wrapper">
-      <!-- <app-profile-card [profile]="episode.author" class="episode-author" /> -->
+      <app-profile-card [profile]="episode.author" cardMode="no-text"/>
     </div>
-    <p class="episode-duration">{{ episode.number }}</p>
+    <!-- <p class="episode-duration">{{ episode.number }}</p> -->
+    <p class="episode-duration">{{ duration.minutes }}:{{ duration.seconds }}</p>
     
     <!-- Adding these kills the whole app scroll -->
     <!-- <app-audio-track [audioTrackWidth]="audioTrackWidth" /> -->
@@ -67,9 +68,12 @@
             <!-- <div class="play-button-wrapper">
             <app-play-button />
           </div> -->
-            <h2 class="episode-number">#{{ episode.number }}</h2>
-            <h2 class="episode-number">-</h2>
-            <h2 class="episode-title">{{ episode.title }}</h2>
+            <h2 class="episode-number">#{{ episode.number }} - </h2>
+            <!-- <h2 class="episode-number">-</h2> -->
+             <div class="episode-title-wrapper">
+
+               <h2 class="episode-title">{{ episode.title }}</h2>
+              </div>
           </div>
         </div>
         <div class="bottom-container">
@@ -81,8 +85,7 @@
           </div>
           <div class="separator-line"></div>
           <p class="date">{{ episode.date }}</p>
-          <div class="separator-line"></div>
-          <p class="topic">topic 1</p>
+          <!-- <div class="separator-line"></div> -->
           <!-- <div class="separator-line"></div> -->
           <!-- <app-source /> -->
         </div>

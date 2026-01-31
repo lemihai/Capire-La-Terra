@@ -41,7 +41,11 @@ import { NewsSectionComponent } from './news-section.component/news-section.comp
 export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
   private smoother: ScrollSmoother | null = null;
 
-  constructor(private ngZone: NgZone, private cdr: ChangeDetectorRef, private router: Router) {}
+  constructor(
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+  ) {}
 
   episodes = [
     {
@@ -159,19 +163,124 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
     this.ngZone.runOutsideAngular(() => {
       const hasLoaded = localStorage.getItem('landingPageLoaded');
 
+      // --------------------------
+      // EEPISODE CARD
+      // --------------------------
+      gsap.to('.episode-number', {
+        width: 'auto',
+        height: 'auto',
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.episode-dash', {
+        width: '1.6rem',
+        height: 'auto',
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.episode-title', {
+        width: '100%',
+        height: 'auto',
+        // color: 'red',
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.app-profile-card-wrapper-for-transform', {
+        width: 'auto',
+        height: 'auto',
+        translateX: 0,
+        translateY: 0,
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.audio-track-wrapper-large', {
+        // width: '100%',
+        translateX: 0,
+        translateY: 0,
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        opacity: 1,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: 'auto',
+      });
+      gsap.to('.date', {
+        width: 'auto',
+        height: 'auto',
+        translateX: 0,
+        translateY: 0,
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.topic', {
+        width: 'auto',
+        height: 'auto',
+        translateX: 0,
+        translateY: 0,
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.separator-line', {
+        height: '1rem',
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.bottom-container', {
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+
       gsap.to('.transition-A', {
-          height: 'auto',
-          x: 0,
-          y: 0,
-          skewX: 0,
-          skewY: 0,
-          opacity: 1,
-          scale: 1,
-          rotate: 0,
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
+        height: 'auto',
+        x: 0,
+        y: 0,
+        skewX: 0,
+        skewY: 0,
+        opacity: 1,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
 
       // --------------------------
       // SMOOTHER LOADUP
@@ -330,7 +439,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               y: '0vh',
               duration: 0.8,
               ease: this.ease,
-            }
+            },
           );
           gsap.fromTo(
             '#smooth-content',
@@ -339,7 +448,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               opacity: 1,
               duration: 0.8,
               ease: this.ease,
-            }
+            },
           );
           gsap.fromTo(
             '.image',
@@ -348,7 +457,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               height: 'calc(100vh - 1.6rem)',
               duration: 1.6,
               ease: this.ease,
-            }
+            },
           );
         }, 1200);
 
@@ -396,7 +505,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               y: '0vh',
               duration: 0.64,
               ease: this.ease,
-            }
+            },
           );
           gsap.fromTo(
             '#smooth-content',
@@ -405,7 +514,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               opacity: 1,
               duration: 0.64,
               ease: this.ease,
-            }
+            },
           );
 
           // --------------------------
@@ -419,7 +528,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               height: 'calc(100vh - 1.6rem)',
               duration: 1.2,
               ease: this.ease,
-            }
+            },
           );
           console.log('LOADED SKIPPED');
         }, 100);

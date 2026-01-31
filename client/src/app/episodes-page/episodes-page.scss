@@ -183,25 +183,27 @@
     .line-container {
     }
 
-    &:hover {
-      // transform: translateY(12rem) !important;
-      // background-color: #31be5b;
-      // background-color: var(--main-color-hover);
-      height: 38rem !important;
-      visibility: visible;
-      transition: var(--transition-160);
+    // &:hover {
+    //   // transform: translateY(12rem) !important;
+    //   // background-color: #31be5b;
+    //   // background-color: var(--main-color-hover);
+    //   height: 38rem !important;
+    //   visibility: visible;
+    //   transition: var(--transition-160);
+    //   transform: translateY(0rem) !important;
+    //   background-color: red;
 
-      .line-container {
-      }
+    //   .line-container {
+    //   }
 
-      .line-container-icon{
-        transition: var(--transition-experiment);
-        .icon{
-          transition: var(--transition-experiment);
-          transform: scaleY(-1) translateY(.4rem);
-        }
-      }
-    }
+    //   .line-container-icon{
+    //     transition: var(--transition-experiment);
+    //     .icon{
+    //       transition: var(--transition-experiment);
+    //       transform: scaleY(-1) translateY(.4rem);
+    //     }
+    //   }
+    // }
 
     // &:after{
     //   position: absolute;

@@ -12,6 +12,8 @@ import {
   ChangeDetectorRef,
   ViewChild,
   ElementRef,
+  ViewChildren,
+  QueryList,
 } from '@angular/core';
 import { AudioTrack } from '../shared/components/audio-track/audio-track';
 import { Button } from '../shared/buttons/button/button';
@@ -34,7 +36,10 @@ import { EpisodesService } from '../../services/episodes-service/episodes-servic
 export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges {
   @ViewChild('playerWidth') playerWidth!: ElementRef<HTMLDivElement>;
   @ViewChild('largeCard') largeCard!: ElementRef<HTMLDivElement>;
+  @ViewChildren('largeCard', { read: ElementRef }) largeCards!: QueryList<ElementRef>;
   @ViewChild('seasonComponent') seasonComponent!: ElementRef<HTMLDivElement>;
+
+  private observer: IntersectionObserver | null = null;
   private smoother: ScrollSmoother | null = null;
   private episodesService = inject(EpisodesService);
 
@@ -335,21 +340,72 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
           ease: this.ease,
           overwrite: 'auto',
         });
-
-        ScrollTrigger.create({
-        trigger: '.large',
-        start: 'top top',
-        end: 'top top',
-        // pin: '.text-container',
-        // pinType: 'fixed',
-        pinSpacing: false,
-        markers: false,
-      });
       }, 900);
+      this.cdr.detectChanges();
+      
+      setTimeout(() => {
+        // Assuming largeCards is a QueryList<ElementRef>
+        this.largeCards.forEach((cardRef, index) => {
+          console.log(cardRef.nativeElement);
+          ScrollTrigger.create({
+            trigger: cardRef.nativeElement, // Use the specific element here
+            start: 'top 120px', // Adjust 120px to match your header height
+            end: 'bottom 120px',
+            markers: {
+              startColor: 'fuchsia',
+              endColor: 'orange',
+            },
+            onEnter: () => this.entered(index),
+            onEnterBack: () => this.entered(index),
+            onLeave: () => this.left(index),
+            onLeaveBack: () => this.left(index),
+          });
+          this.cdr.detectChanges();
+        });
+      }, 500);
     });
+  }
 
-    const largeCards = gsap.utils.toArray('.episode-wrapper[cardType="large"]');
-    console.log(largeCards);
+  entered(index: number) {
+    // season3 = index 0
+    // season2 = index 1
+    // season1 = index 2
+    if(index === 0){
+      console.log(index);
+      gsap.to('#seasonComponent', {
+          // width: 'auto',
+          // height: 'auto',
+          translateY: '0rem',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+
+    } else if (index === 1){
+      console.log(index);
+      gsap.to('#seasonComponent', {
+          // width: 'auto',
+          // height: 'auto',
+          translateY: '-12rem',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+    } else if (index ===2){
+      console.log(index);
+      gsap.to('#seasonComponent', {
+          // width: 'auto',
+          // height: 'auto',
+          translateY: '-24rem',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+    }
+  }
+  left(index: number) {
+    console.log(2);
+    console.log(index);
   }
 
   sort() {

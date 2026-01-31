@@ -1,9 +1,17 @@
-import { Component } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { AudioTrack } from '../../shared/components/audio-track/audio-track';
 import { NgOptimizedImage } from '@angular/common';
-import { PlayButton } from "../../shared/buttons/play-button/play-button";
-import { AudioPlayer } from "../../shared/components/audio-player/audio-player";
-import { EpisodeCard } from "../../shared/components/episode-card/episode-card";
+import { PlayButton } from '../../shared/buttons/play-button/play-button';
+import { AudioPlayer } from '../../shared/components/audio-player/audio-player';
+import { EpisodeCard } from '../../shared/components/episode-card/episode-card';
+import { EpisodesService } from '../../../services/episodes-service/episodes-service';
 
 @Component({
   selector: 'app-episodes-list-component',
@@ -11,10 +19,16 @@ import { EpisodeCard } from "../../shared/components/episode-card/episode-card";
   templateUrl: './episodes-list.component.html',
   styleUrl: './episodes-list.component.scss',
 })
-export class EpisodesListComponent {
+export class EpisodesListComponent implements OnInit, OnChanges {
   isPlaying = 'true';
   topPartDisabled = '';
   expandButton = '';
+  private episodesService = inject(EpisodesService);
+  private cdr = inject(ChangeDetectorRef);
+  numberOfSeasons = 1;
+
+  episodes: any = [];
+  sortedListView: any = [];
 
   play() {
     if (this.isPlaying == 'true') {
@@ -24,69 +38,86 @@ export class EpisodesListComponent {
     }
   }
 
-  episodes = [
-    {
-      id: 3243223,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 1,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243224,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 2,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243225,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 3,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243226,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 4,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243227,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 5,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243228,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 6,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243229,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 7,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243230,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 8,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243231,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 9,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-  ];
+  ngOnInit(): void {
+    this.episodesService.getAllEpisodes().subscribe(
+      (data) => {
+        this.episodes = data;
+        // console.log(this.episodes);
+        this.sort();
+        this.cdr.detectChanges();
+      },
+      (error) => {
+        this.cdr.detectChanges();
+        // console.log(error);
+      },
+    );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
+
+  sort() {
+    // 1. Determine the current direction and update the specific key flag
+    // can be -1 or 1
+    const asc = 1;
+    const desc = -1;
+    let numberOfSeasons = 1;
+    let episodesArray: any[] = [];
+
+    for (const episode of this.episodes) {
+      if (episode.season > numberOfSeasons) {
+        numberOfSeasons = episode.season;
+        this.numberOfSeasons = numberOfSeasons;
+      }
+    }
+
+    // Iterating through the episodes array to create an array of seasons.
+    // WHY? to make it easier to arrange afterwards
+    for (let season = 1; season <= numberOfSeasons; season++) {
+      let seasonArray: any[] = [];
+      for (const episode of this.episodes) {
+        if (season === episode.season) {
+          seasonArray.push(episode);
+        }
+      }
+      episodesArray.push(seasonArray);
+
+      // Then, sorting the array
+      episodesArray[season - 1].sort((a: any, b: any) => {
+        // Use 'any' for the list items here
+        let valA = a['number'];
+        let valB = b['number'];
+
+        const numA = Number(valA);
+        const numB = Number(valB);
+        return (numA - numB) * desc;
+      });
+    }
+
+    // Make a list of lists
+    // for each season add an array inside of the array
+    // Sort each season array individually,
+    // spread the arrays
+
+    // 2. Perform the sort
+    this.episodes.sort((a: any, b: any) => {
+      // Use 'any' for the list items here
+      let valA = a['number'];
+      let valB = b['number'];
+
+      const numA = Number(valA);
+      const numB = Number(valB);
+      return (numA - numB) * asc;
+    });
+
+    // console.log(episodesArray);
+    this.episodes = [];
+    for (let i = episodesArray.length - 1; i >= 0; i--) {
+      this.episodes.push(...episodesArray[i]);
+    }
+
+    // console.log(this.numberOfSeasons);
+    this.cdr.detectChanges(); // Update the view after sorting
+  }
 }
