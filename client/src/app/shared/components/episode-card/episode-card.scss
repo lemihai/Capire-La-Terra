@@ -434,6 +434,7 @@
 
   border-radius: 1.2rem;
   overflow: hidden;
+  transition: var(--transition-160);
 
   .episode-large-filter {
     height: 100%;
@@ -446,6 +447,7 @@
     padding: 0.4rem;
 
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0) 100%);
+    transition: var(--transition-160);
   }
 
   .episode-large-content-wrapper {
@@ -463,6 +465,8 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 0rem;
+    transition: var(--transition-160);
 
     .bottom-container {
       width: 100%;
@@ -596,6 +600,33 @@
       justify-content: flex-start;
       align-items: center;
       gap: 0.8rem;
+    }
+  }
+
+  &:hover {
+    height: 34rem;
+    cursor: pointer;
+    transition: var(--transition-160);
+
+    .episode-large-filter {
+      transition: var(--transition-160);
+      padding: 0.8rem;
+    }
+
+    .episode-large-content-wrapper {
+      // background-color: var(--main-color-light-80);
+      transition: var(--transition-160);
+      gap: 0.24rem;
+
+      .top-container {
+        .title-wrapper {
+          gap: 1.2rem;
+        }
+      }
+
+      .bottom-container {
+        gap: 1.2rem;
+      }
     }
   }
 }

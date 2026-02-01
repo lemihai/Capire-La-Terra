@@ -19,10 +19,6 @@ export class EpisodesView {
   constructor(
     private cdr: ChangeDetectorRef,
     private adminService: AdminService,
-    private newsService: EpisodesService,
-    private ngZone: NgZone,
-    private router: Router,
-    private globalPlayer: GlobalAudioPlayerService,
   ) {}
 
   time = 1.24;
@@ -119,10 +115,7 @@ export class EpisodesView {
   };
 
   sort(key: string) {
-    // 1. Determine the current direction and update the specific key flag
-
     this.sorting.sortUIupdate(key);
-    // Reset all key sort flags except the current one
     this.sorting.seasonSort = key === 'season';
     this.sorting.episodeSort = key === 'number';
     this.sorting.postedSort = key === 'posted';
@@ -130,8 +123,6 @@ export class EpisodesView {
     this.sorting.dateSort = key === 'date';
     this.sorting.authorSort = key === 'author';
 
-    // If the *same* key is clicked, flip the direction. Otherwise, default to 'asc'.
-    // NOTE: Your date logic is inverted (see notes below), so for date, we default to 'desc' (newest first)
     if (this.sorting.sortDirection === 'asc') {
       this.sorting.sortDirection = 'desc';
     } else {
@@ -140,31 +131,19 @@ export class EpisodesView {
 
     const direction = this.sorting.sortDirection === 'asc' ? 1 : -1;
 
-    // 2. Perform the sort
     this.sorting.sortedListView.sort((a: any, b: any) => {
-      // Use 'any' for the list items here
       let valA = a[key];
       let valB = b[key];
       if (key === 'date') {
-        // Date comparison:
-        // For 'desc' (newest first), the result of (dateA - dateB) should be negative
-        // if A is newer than B (and thus A should come first).
-        // (dateA - dateB) is negative if A is earlier (older) than B.
-        // So, for 'desc' (newest first), we use (dateB - dateA)
         const dateA = new Date(valA).getTime();
         const dateB = new Date(valB).getTime();
 
-        // NOTE: The direction is handled by the sorting function itself,
-        // so if 'asc' (oldest first) is 1, we use (dateA - dateB) * 1
-        // if 'desc' (newest first) is -1, we use (dateA - dateB) * -1 = (dateB - dateA)
         return (dateA - dateB) * direction;
       } else if (key === 'number' || key === 'season') {
-        // Numeric comparison for episode/season numbers
         const numA = Number(valA);
         const numB = Number(valB);
         return (numA - numB) * direction;
       } else {
-        // String comparison (case-insensitive for alphabetical sort)
         valA = String(valA).toLowerCase();
         valB = String(valB).toLowerCase();
 
@@ -174,12 +153,9 @@ export class EpisodesView {
       }
     });
 
-    // console.log(this.sorting.sortedListView[32]);
-
     this.episodes = this.sorting.sortedListView;
 
-    // console.log(`Sorted by ${key} in ${this.sorting.sortDirection} order.`);
-    this.cdr.detectChanges(); // Update the view after sorting
+    this.cdr.detectChanges();
   }
 
   ngOnInit(): void {
@@ -187,8 +163,7 @@ export class EpisodesView {
       this.episodes = data;
       this.sorting.sortedListView = [...this.episodes];
       this.sort('date');
-      // console.log('Episodes result ', this.episodes);
-      this.cdr.detectChanges(); // Manually trigger change detection if needed
+      this.cdr.detectChanges();
     });
   }
 
@@ -207,21 +182,17 @@ export class EpisodesView {
   }
 
   postEpisode(episode: Episode) {
-    // console.log(episode._id);
     if (episode.posted === true) {
       episode.posted = false;
-      // console.log(episode);
-      // if (this.episode._id) {
+
       if (!episode._id) {
         console.error('Cannot update episode status: Episode ID is missing.');
-        return; // Exit the function if no ID is available
+        return;
       }
       this.adminService.patchEpisodePostedStatus(episode._id, episode.posted).subscribe({
-        next: (response) => {
-          // console.log('Posted status updated successfully:', response);
-        },
+        next: (response) => {},
         error: (error) => {
-          // console.error('Error :', error);
+          console.log(error);
         },
       });
       // }

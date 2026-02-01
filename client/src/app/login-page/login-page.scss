@@ -28,8 +28,21 @@
     transition: var(--transition-160);
   }
 
+  .image-wrapper {
+    height: 0%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    border-radius: 1.6rem;
+    transition: var(--transition-160);
+  }
+
   .image {
-    height: 100%;
+    height: 90vh;
     width: 100%;
 
     background-image: url('../../../public/assets/article-illustration-1.jpg');
@@ -38,6 +51,62 @@
     background-repeat: no-repeat;
 
     border-radius: 1.6rem;
+    transition: var(--transition-160);
+  }
+
+  .transition-A {
+    overflow: hidden;
+    height: 0rem;
+    transform: translate(1.6rem, 3.2rem) skewX(-12deg) skewY(-6deg);
+    opacity: 0;
+  }
+  .transition-B {
+    // overflow: hidden;
+    width: 0%;
+    opacity: 0.32;
+  }
+  .transition-C {
+    overflow: hidden;
+    scale: 0.1;
+    opacity: 0;
+  }
+  .transition-D {
+    height: 0.8rem;
+    width: 0.8rem;
+    opacity: 0;
+    transform: translate(1.6rem, 3.2rem);
+  }
+  .transition-login-button {
+    width: 0%;
+    min-width: 0%;
+    opacity: 0;
+  }
+  .transition-icon {
+    height: 0.8rem;
+    width: 0.8rem;
+    scale: 0.4;
+    opacity: 0;
+  }
+
+  .eye-open-parent {
+    background-color: var(--main-color-dark) !important;
+    svg {
+      opacity: 1 !important;
+      path {
+        opacity: 1 !important;
+        stroke: var(--main-color);
+      }
+    }
+  }
+
+  .eye-open {
+    display: flex !important;
+    opacity: 1;
+    transition: var(--transition-160);
+  }
+
+  .eye-invisible {
+    display: none !important;
     transition: var(--transition-160);
   }
 
@@ -50,6 +119,10 @@
     justify-content: center;
     align-items: center;
     gap: 2.4rem;
+
+    .header-wrapper {
+      overflow: hidden;
+    }
 
     .welcome-text {
       width: 30rem;
@@ -76,10 +149,10 @@
 
       label {
         height: 100%;
-        width: 100%;
+        width: 0%;
         min-height: 4.8rem;
         max-height: 4.8rem;
-        min-width: 30rem;
+        min-width: 0rem;
 
         display: flex;
         flex-direction: row;
@@ -95,6 +168,12 @@
 
         transition: var(--transition-160);
         z-index: 1;
+
+        .icon-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
 
         .separator-line {
           height: 1.2rem;
@@ -464,10 +543,10 @@
 
       button {
         height: 100%;
-        width: 100%;
+        width: 0%;
         // MIN
         min-height: 4.8rem;
-        min-width: 26.8rem;
+        min-width: 0rem;
 
         display: flex;
         flex-direction: row;

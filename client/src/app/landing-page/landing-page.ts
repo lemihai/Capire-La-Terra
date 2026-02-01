@@ -6,10 +6,10 @@ import {
   OnInit,
   ChangeDetectorRef,
   HostListener,
+  inject,
 } from '@angular/core';
 
 import { Router } from '@angular/router';
-
 
 // GSAP IMPORTS
 import { gsap } from 'gsap';
@@ -22,6 +22,8 @@ import { EpisodesListComponent } from './episodes-list.component/episodes-list.c
 import { Button } from '../shared/buttons/button/button';
 import { AboutEarthComponent } from './about-earth.component/about-earth.component';
 import { NewsSectionComponent } from './news-section.component/news-section.component';
+import { Navbar } from '../navbar/navbar';
+import { NavbarGsapService } from '../navbar/navbar-gsap-service';
 
 @Component({
   selector: 'app-landing-page',
@@ -31,11 +33,14 @@ import { NewsSectionComponent } from './news-section.component/news-section.comp
 })
 export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
   private smoother: ScrollSmoother | null = null;
+  private navbarGsapService = inject(NavbarGsapService);
+  // private navbar = inject(Navbar);
 
   constructor(
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
     private router: Router,
+    // private navbar: Navbar,
   ) {}
 
   episodes = [
@@ -147,6 +152,36 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
     // Kill the smoother and triggers to prevent memory leaks
     if (this.smoother) {
       this.smoother.kill();
+    }
+  }
+
+  navigateToPage(page: string) {
+    if (page === 'episodes') {
+      this.ngZone.runOutsideAngular(() => {
+        const exitTimeline = gsap.timeline({
+          onComplete: () => {
+            this.ngZone.run(() => {
+              this.router.navigate(['/episodes-page']);
+            });
+          },
+        });
+
+        this.navbarGsapService.exitFrontPage(exitTimeline);
+      });
+      // this.router.navigate(['/episodes-page']);
+    } else if (page === 'news') {
+      this.ngZone.runOutsideAngular(() => {
+        const exitTimeline = gsap.timeline({
+          onComplete: () => {
+            this.ngZone.run(() => {
+              this.router.navigate(['/news-page']);
+            });
+          },
+        });
+
+        this.navbarGsapService.exitFrontPage(exitTimeline);
+      });
+      // this.navbar.navigateToNewsPage();
     }
   }
 

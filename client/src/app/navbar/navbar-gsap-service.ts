@@ -224,6 +224,22 @@ export class NavbarGsapService {
           overwrite: true,
         },
         0,
+      )
+      .to(
+        '.transition-A',
+        {
+          height: '0rem',
+          x: 0,
+          y: 0,
+          skewX: 16,
+          skewY: 8,
+          opacity: 0,
+          scale: 1,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        },
+        0,
       );
   }
 
@@ -361,7 +377,6 @@ export class NavbarGsapService {
       ease: this.ease,
       // overwrite: 'auto',
     });
-    
   }
 
   exitNewsPage() {
@@ -417,6 +432,7 @@ export class NavbarGsapService {
     gsap.to('.transition-image-A ', {
       height: '0rem',
       minHeight: '0rem',
+      maxHeight: '0rem',
       y: -8,
       duration: this.time,
       ease: this.ease,
@@ -432,7 +448,6 @@ export class NavbarGsapService {
 
       gsap.to('.article-page-wrapper', {
         height: '0rem',
-        backgroundColor: 'red',
         x: 0,
         y: 0,
         skewX: -24,
@@ -445,7 +460,6 @@ export class NavbarGsapService {
       });
       gsap.to('.transition-A', {
         height: '0rem',
-        color: 'red',
         x: 0,
         y: 0,
         skewX: -24,
@@ -493,5 +507,68 @@ export class NavbarGsapService {
 
   exitAdminPage() {}
 
-  exitLoginPage() {}
+  exitLoginPage() {
+    setTimeout(() => {
+      // --------------------------------
+      // TEXT SECTION
+      // --------------------------------
+      gsap.to('.image-wrapper', {
+        height: '0%',
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.image', {
+        height: '90vh',
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.transition-A', {
+        height: '0rem',
+        x: 0,
+        y: 0,
+        skewX: -24,
+        skewY: -8,
+        opacity: 0,
+        scale: 1,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.transition-B', {
+        width: '0%',
+        minWidth: '0rem',
+        opacity: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.transition-C', {
+        opacity: '0',
+        scale: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.transition-login-button', {
+        width: '0%',
+        minWidth: '0rem',
+        opacity: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.transition-D', {
+        height: '.8rem',
+        widows: '.8rem',
+        x: '-2.4rem',
+        y: '-1.6rem',
+        opacity: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+    }, 100);
+  }
 }

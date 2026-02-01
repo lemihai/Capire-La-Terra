@@ -15,14 +15,12 @@ import {
 import { AudioTrack } from '../audio-track/audio-track';
 import { ProfileCard } from '../profile-card/profile-card';
 import { PlayButton } from '../../buttons/play-button/play-button';
-import { NgOptimizedImage } from '@angular/common';
-import { SourceComponent } from '../source.component/source.component';
 import { Episode } from '../../../../services/episodes-service/episodes-service';
 import { GlobalAudioPlayerService } from '../../../global-audio-player.component/global-audio-player-service';
 
 @Component({
   selector: 'app-episode-card',
-  imports: [AudioTrack, ProfileCard, PlayButton, NgOptimizedImage, SourceComponent],
+  imports: [AudioTrack, ProfileCard, PlayButton],
   templateUrl: './episode-card.html',
   styleUrl: './episode-card.scss',
 })
@@ -57,7 +55,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
       if (cardType === 'medium') {
         width = 240;
       } else if (cardType === 'large') {
-        width = 520;
+        width = 512;
       }
     } else if (wpWidth > 1300 && wpWidth <= 1500) {
       if (cardType === 'medium') {

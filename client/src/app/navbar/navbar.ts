@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone, AfterViewInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 
-import { Router, RouterLink, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { gsap } from 'gsap';
 import CustomEase from 'gsap/CustomEase';
 import { filter, Observable } from 'rxjs';
@@ -349,7 +349,7 @@ export class Navbar implements OnInit, AfterViewInit {
         this.navbarGsapService.exitNewsPage();
       }
 
-      if (fromRoute == '/article-page') {
+      if (fromRoute.includes('/article-page')) {
         this.navbarGsapService.exitArticlePage();
       }
 

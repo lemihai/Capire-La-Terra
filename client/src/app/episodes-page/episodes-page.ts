@@ -124,7 +124,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
         content: '#smooth-content',
         smooth: 1,
         effects: true,
-        normalizeScroll: false,
+        normalizeScroll: true,
         ignoreMobileResize: true,
         smoothTouch: false,
       });
@@ -175,7 +175,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
         });
         gsap.to('.header-dropdown', {
           height: '120px',
-          width: '22rem',
+          width: '20rem',
           skewX: 0,
           skewY: 0,
           scale: 1,
@@ -325,10 +325,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
             trigger: cardRef.nativeElement,
             start: 'top 120px',
             end: 'bottom 120px',
-            markers: {
-              startColor: 'fuchsia',
-              endColor: 'orange',
-            },
+            markers: true,
             onEnter: () => this.entered(index),
             onEnterBack: () => this.entered(index),
             onLeave: () => this.left(index),

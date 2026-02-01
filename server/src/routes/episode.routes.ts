@@ -73,7 +73,7 @@ episodeRouter.get("/episodes/:id", verifyToken, async (req, res) => {
 
 // GET : Last Episode
 
-episodeRouter.get("/lastEpisode", verifyToken, async (req, res) => {
+episodeRouter.get("/lastEpisode", async (req, res) => {
   try {
     // console.log(req);
 
