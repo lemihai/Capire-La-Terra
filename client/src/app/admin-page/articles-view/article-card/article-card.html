@@ -2,7 +2,7 @@
 <div class="article-card-wrapper-main-view" (click)="navigateToArticlePage($event)">
   <div class="hover-bar"></div>
   <div class="article-image">
-    @if (article?.imageUrl) {
+    @if (article.imageUrl) {
     <img [src]="article.imageUrl" alt="Article Image" class="article-image" />
     }
   </div>
@@ -212,7 +212,7 @@
 <div class="article-card-wrapper" (click)="navigateToArticlePage($event)">
   <div class="hover-bar"></div>
   <div class="article-image">
-    @if (article?.imageUrl) {
+    @if (article.imageUrl) {
     <img [src]="article.imageUrl" alt="Article Image" class="article-image" />
     }
   </div>
@@ -273,9 +273,6 @@
   <app-profile-card [profile]="article.author" />
   <div class="separator-line"></div>
   <p class="article-date">{{ article.date }}</p>
-  <!-- <div class="article-sources-wrapper">
-    <app-source />
-  </div> -->
 </div>
 <div class="actions">
   @if (article.posted == false){

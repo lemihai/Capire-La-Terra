@@ -1,26 +1,20 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectorRef,
-  NgZone,
-  AfterViewInit, // 1. Import NgZone
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone, AfterViewInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 
-import { Router, RouterLink, ActivatedRoute, NavigationEnd } from '@angular/router'; // 2. Import Router
-import { gsap } from 'gsap'; // 3. Import gsap (assuming it's installed)
+import { Router, RouterLink, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { gsap } from 'gsap';
 import CustomEase from 'gsap/CustomEase';
-import { filter, from, Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { NavbarGsapService } from './navbar-gsap-service';
 import { AuthService } from '../../services/login-service/auth-service';
-import { ProfileCard } from "../shared/components/profile-card/profile-card";
+import { ProfileCard } from '../shared/components/profile-card/profile-card';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, AsyncPipe, ProfileCard],
+  imports: [ AsyncPipe, ProfileCard],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
-  standalone: true, // Assuming this is a standalone component based on the original snippet
+  standalone: true,
 })
 export class Navbar implements OnInit, AfterViewInit {
   // Initial state for the Navbar component's load-in animation
@@ -115,7 +109,7 @@ export class Navbar implements OnInit, AfterViewInit {
         this.news = '';
         this.admin = 'active';
         this.login = '';
-        
+
         this.backgroundWidth = '91.55px';
         this.backgroundHeight = '3.2rem';
         this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px)';
@@ -146,16 +140,14 @@ export class Navbar implements OnInit, AfterViewInit {
           this.backgroundWidth = '0px';
           this.backgroundHeight = '3.2rem';
           this.backgroundLeft = 'calc(.8rem + 65.16px + 28rem)';
-        }else if (this.previousActive === 'home') {
+        } else if (this.previousActive === 'home') {
           this.backgroundWidth = '0px';
           this.backgroundHeight = '3.2rem';
           this.backgroundLeft = 'calc(.4rem + 38rem)';
-        }else {
+        } else {
           this.backgroundWidth = '0px';
           this.backgroundHeight = '.8rem';
-          
         }
-        // this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px)';
 
         this.loginBackgroundWidth = '7.87rem';
         this.loginBackgroundHeight = '3.2rem';
@@ -166,13 +158,10 @@ export class Navbar implements OnInit, AfterViewInit {
     },
 
     hovered(button: string, flag: boolean) {
-      // console.log(this.currentInFocus);
       switch (this.currentInFocus) {
         case 'home':
-          // console.log('fioenwdfje');
           break;
         case 'episodes':
-          // console.log('4352g5r');
           if (button == 'home') {
             if (flag == true) {
               this.backgroundLeft = 'calc(.8rem + 87.56px)';
@@ -185,7 +174,6 @@ export class Navbar implements OnInit, AfterViewInit {
           break;
 
         case 'news':
-          // console.log('c4m19xumh53');
           if (button == 'home') {
             if (flag == true) {
               this.backgroundLeft = 'calc(1.2rem + 87.56px + 79.91px)';
@@ -197,17 +185,14 @@ export class Navbar implements OnInit, AfterViewInit {
 
           if (button == 'episodes') {
             if (flag == true) {
-              // this.backgroundWidth = '87.56px';
               this.backgroundLeft = 'calc(1.2rem + 65.16px + 102.31px)';
             }
             if (flag == false) {
-              // this.backgroundWidth = '87.56px';
               this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px)';
             }
           }
           break;
         case 'admin':
-          // console.log('124hxm5789');
           if (button == 'home') {
             if (flag == true) {
               this.backgroundLeft = 'calc(1.5rem + 87.56px + 79.91px + 60.04px)';
@@ -219,11 +204,9 @@ export class Navbar implements OnInit, AfterViewInit {
 
           if (button == 'episodes') {
             if (flag == true) {
-              // this.backgroundWidth = '87.56px';
               this.backgroundLeft = 'calc(1.5rem + 65.16px + 102.31px + 60.04px)';
             }
             if (flag == false) {
-              // this.backgroundWidth = '87.56px';
               this.backgroundLeft = 'calc(1.5rem + 65.16px + 79.91px + 60.04px)';
             }
           }
@@ -257,57 +240,38 @@ export class Navbar implements OnInit, AfterViewInit {
   time = 0.64;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
 
-  // Inject ChangeDetectorRef, Router, and NgZone
   constructor(
     private cdr: ChangeDetectorRef,
-    private router: Router, // 4. Inject Router
-    private ngZone: NgZone, // 5. Inject NgZone
+    private router: Router,
+    private ngZone: NgZone,
     private route: ActivatedRoute,
     private navbarGsapService: NavbarGsapService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
-    // ... your existing setTimeout ...
     setTimeout(() => {
       this.animateNavbarIn();
     }, 1600);
 
     this.isLoggedIn$ = this.authService.isAuthenticated$;
-    // console.log(this.isLoggedIn$);
 
-    // FIX: Subscribe to Router events to correctly determine the current route
-    // after the initial navigation is complete, especially on refresh.
     this.router.events
-      .pipe(
-        // Filter for the NavigationEnd event, which signals the completion of a navigation cycle
-        filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-      )
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        // 'event.url' or 'event.urlAfterRedirects' now holds the correct, navigated URL
         this.currentRoute = event.urlAfterRedirects;
         this.logRouteInfo(this.currentRoute);
-        this.updateNavbarActiveState(this.currentRoute); // Call a method to update the navbar's active state
+        this.updateNavbarActiveState(this.currentRoute);
       });
   }
 
-  ngAfterViewInit(): void {
-    // This is often too early on page load. The subscription in ngOnInit is more reliable.
-    // If you need the URL immediately for any reason, use the snapshot.
-    // However, the router.events subscription handles the refresh scenario best.
-  }
+  ngAfterViewInit(): void {}
 
   // Update logRouteInfo to accept the URL
-  logRouteInfo(url: string) {
-    // console.log(`--- Router URL (Corrected): ${url} ---`);
-    // console.log(`Current Route set: ${this.currentRoute}`);
-    // Example: You might want to strip query params or fragments here
-  }
+  logRouteInfo(url: string) {}
 
-  // New method to process the route and set the navbarObj active state
+  // Process the route and set the navbarObj active state
   updateNavbarActiveState(url: string): void {
-    // Logic to determine which view is active based on the URL
-    // You'll need to match your routes ('/', '/episodes-page', etc.) to your navbarObj keys.
     if (url === '/') {
       this.navbarObj.setActive('home');
     } else if (url.startsWith('/episodes-page')) {
@@ -321,7 +285,7 @@ export class Navbar implements OnInit, AfterViewInit {
     } else if (url.startsWith('/login')) {
       this.navbarObj.setActive('login');
     }
-    this.cdr.detectChanges(); // Ensure the view updates with the new state
+    this.cdr.detectChanges();
   }
 
   animateNavbarIn() {
@@ -329,22 +293,16 @@ export class Navbar implements OnInit, AfterViewInit {
     this.translateY = '0px';
     this.scale = '1';
     this.opacity = '1';
-    // Trigger change detection to apply CSS property updates
-    this.cdr.detectChanges();
 
-    // console.log('Navbar load-in animation finished.');
+    this.cdr.detectChanges();
   }
 
   private triggerPageTransition(url: string, fromRoute: string) {
     const customEase = 'cubic-bezier(0,.55,.52,.96)';
-    // console.log('THIS IS the route we are coming from', fromRoute);
 
     this.ngZone.runOutsideAngular(() => {
-      // 1. Create a new GSAP Timeline
       const exitTimeline = gsap.timeline({
-        // 2. Place the navigation logic in the timeline's main onComplete
         onComplete: () => {
-          // --- Single Navigation Point ---
           this.ngZone.run(() => {
             this.router.navigate([url]);
           });
@@ -367,7 +325,7 @@ export class Navbar implements OnInit, AfterViewInit {
           duration: this.time,
           ease: this.ease,
         },
-        0
+        0,
       );
 
       // ******************************************
@@ -388,12 +346,10 @@ export class Navbar implements OnInit, AfterViewInit {
       // TRIGGER FOR NEWS PAGE
       // ******************************************
       if (fromRoute == '/news-page') {
-        // this.exitNewsPage();
         this.navbarGsapService.exitNewsPage();
       }
 
       if (fromRoute == '/article-page') {
-        // this.exitNewsPage();
         this.navbarGsapService.exitArticlePage();
       }
 
@@ -404,17 +360,8 @@ export class Navbar implements OnInit, AfterViewInit {
       if (fromRoute == '/login-page') {
         this.navbarGsapService.exitLoginPage();
       }
-
-      // 3. Add the first animation to the timeline (starts at 0 seconds)
-
-      // 4. Add the second animation to the timeline (starts at the same time)
-
-      // The navigation will only fire when the timeline is complete,
-      // which is after the longest animation (the 2-second one) finishes.
     });
   }
-
-  // --- Public navigation methods called from the template (e.g., via (click) events) ---
 
   // Separate into change page transition from home or from episodes page.
   navigateToHome() {
@@ -448,8 +395,5 @@ export class Navbar implements OnInit, AfterViewInit {
 
   updateRoute() {
     this.currentRoute = this.router.url;
-    // console.log('************-------*************');
-    // console.log('Current route URL:', this.router.url);
-    // console.log('************-------*************');
   }
 }

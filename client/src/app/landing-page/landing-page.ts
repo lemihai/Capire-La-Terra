@@ -4,14 +4,12 @@ import {
   NgZone,
   OnDestroy,
   OnInit,
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   HostListener,
 } from '@angular/core';
 
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 
-import { NgOptimizedImage } from '@angular/common';
 
 // GSAP IMPORTS
 import { gsap } from 'gsap';
@@ -27,14 +25,7 @@ import { NewsSectionComponent } from './news-section.component/news-section.comp
 
 @Component({
   selector: 'app-landing-page',
-  imports: [
-    NgOptimizedImage,
-    Footer,
-    EpisodesListComponent,
-    Button,
-    AboutEarthComponent,
-    NewsSectionComponent,
-  ],
+  imports: [Footer, EpisodesListComponent, Button, AboutEarthComponent, NewsSectionComponent],
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.scss',
 })

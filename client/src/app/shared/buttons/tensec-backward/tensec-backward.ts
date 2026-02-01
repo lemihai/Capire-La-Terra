@@ -8,6 +8,5 @@ import { Component } from '@angular/core';
 })
 export class TensecBackward {
   backtensec(){
-    // console.log('the video is player 10 seconds before')
   }
 }

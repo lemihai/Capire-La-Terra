@@ -4,7 +4,6 @@ import {
   NgZone,
   OnDestroy,
   OnInit,
-  ChangeDetectionStrategy,
   inject,
 } from '@angular/core';
 import { gsap } from 'gsap';
@@ -34,15 +33,8 @@ export class NewsPage implements AfterViewInit, OnInit, OnDestroy {
   articles: any = [];
 
   ngOnInit() {
-     this.articlesService.getAllArticles().subscribe((data) => {
-       // let dataList = data;
-      //  console.log(data);
-       this.articles = data
-      //  console.log(this.articles);
-      // this.articles = data;
-      // this.sorting.sortedListView = [...this.articles];
-      // this.sort('date');
-      // this.cdr.detectChanges(); // Manually trigger change detection if needed
+    this.articlesService.getAllArticles().subscribe((data) => {
+      this.articles = data;
     });
     // Register GSAP plugins here once
     this.ngZone.runOutsideAngular(() => {

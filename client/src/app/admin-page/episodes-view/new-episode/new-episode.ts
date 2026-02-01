@@ -1,13 +1,9 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
-  OnChanges,
-  OnInit,
   QueryList,
-  SimpleChanges,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
@@ -18,29 +14,17 @@ import { SourceComponent } from '../../../shared/components/source.component/sou
 import { lastValueFrom } from 'rxjs'; // <-- New Import
 import { Episode } from '../../service/episodes-service/episodes-service';
 import { ProfileCard } from '../../../shared/components/profile-card/profile-card';
-import { NgOptimizedImage } from '@angular/common';
+
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Button } from '../../../shared/buttons/button/button';
-import { AudioPlayer } from '../../../shared/components/audio-player/audio-player';
-import { EpisodeCard } from '../../../shared/components/episode-card/episode-card';
+
 import { AudioTrack } from '../../../shared/components/audio-track/audio-track';
 import { PlayButton } from '../../../shared/buttons/play-button/play-button';
 import { GlobalAudioPlayerService } from '../../../global-audio-player.component/global-audio-player-service';
-import { GlobalAudioPlayerComponent } from '../../../global-audio-player.component/global-audio-player.component';
 
 @Component({
   selector: 'app-new-episode',
-  imports: [
-    EditBar,
-    SourceComponent,
-    ProfileCard,
-    NgOptimizedImage,
-    Button,
-    AudioPlayer,
-    EpisodeCard,
-    AudioTrack,
-    PlayButton,
-  ],
+  imports: [EditBar, SourceComponent, ProfileCard, Button, AudioTrack, PlayButton],
   templateUrl: './new-episode.html',
   styleUrl: './new-episode.scss',
 })

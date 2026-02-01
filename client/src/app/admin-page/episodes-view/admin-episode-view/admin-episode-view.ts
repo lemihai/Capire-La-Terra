@@ -20,30 +20,19 @@ import { SourceComponent } from '../../../shared/components/source.component/sou
 import { lastValueFrom } from 'rxjs'; // <-- New Import
 import { Episode } from '../../service/episodes-service/episodes-service';
 import { ProfileCard } from '../../../shared/components/profile-card/profile-card';
-import { NgOptimizedImage } from '@angular/common';
+
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Button } from '../../../shared/buttons/button/button';
-import { AudioPlayer } from '../../../shared/components/audio-player/audio-player';
-import { EpisodeCard } from '../../../shared/components/episode-card/episode-card';
+
 import { AudioTrack } from '../../../shared/components/audio-track/audio-track';
 import { PlayButton } from '../../../shared/buttons/play-button/play-button';
 import { GlobalAudioPlayerService } from '../../../global-audio-player.component/global-audio-player-service';
-import { GlobalAudioPlayerComponent } from '../../../global-audio-player.component/global-audio-player.component';
+
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-admin-episode-view',
-  imports: [
-    EditBar,
-    SourceComponent,
-    ProfileCard,
-    NgOptimizedImage,
-    Button,
-    AudioPlayer,
-    EpisodeCard,
-    AudioTrack,
-    PlayButton,
-  ],
+  imports: [EditBar, SourceComponent, ProfileCard, Button, AudioTrack, PlayButton],
   templateUrl: './admin-episode-view.html',
   styleUrl: './admin-episode-view.scss',
 })
@@ -164,7 +153,7 @@ export class AdminEpisodeView implements OnChanges, OnInit, AfterViewInit {
     // private route: ActivatedRoute,
     private adminService: AdminService,
     private cdr: ChangeDetectorRef,
-    private globalPlayer: GlobalAudioPlayerService
+    private globalPlayer: GlobalAudioPlayerService,
   ) {
     this.myForm = this.fb.group({
       title: [''],
@@ -241,7 +230,6 @@ export class AdminEpisodeView implements OnChanges, OnInit, AfterViewInit {
       const navigation = this.router.getCurrentNavigation();
       let episodeData = navigation?.extras.state?.['data'];
 
-      
       if (episodeData != undefined) {
         this.episode = episodeData;
         // innersource = episodeData.url;
@@ -357,7 +345,7 @@ export class AdminEpisodeView implements OnChanges, OnInit, AfterViewInit {
         if (error.error) {
           console.error('Backend error:', error.error);
         }
-      }
+      },
     );
   }
 
@@ -534,7 +522,7 @@ export class AdminEpisodeView implements OnChanges, OnInit, AfterViewInit {
       fmin = '0' + fmin;
       // sec = '0' + sec;
     }
-    
+
     finaltime.minutes = fmin;
     finaltime.seconds = fsec;
   }

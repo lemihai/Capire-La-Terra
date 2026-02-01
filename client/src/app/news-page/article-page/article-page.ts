@@ -1,10 +1,6 @@
 import {
   Component,
-  AfterViewInit,
   NgZone,
-  OnDestroy,
-  OnInit,
-  ChangeDetectionStrategy,
   inject,
   ChangeDetectorRef,
 } from '@angular/core';
@@ -66,23 +62,6 @@ export class ArticlePage {
 
   paragraphs: string[] = [];
 
-  // separateParagraphs() {
-  //   let wholeText = this.articles[0].text;
-  //   let parts = wholeText.split('.');
-  //   for (let i = 0; i < parts.length; i += 2) {
-  //     let part = parts
-  //       .slice(i, i + 2)
-  //       .join('.')
-  //       .trim();
-  //     if (part) this.paragraphs.push(part);
-  //   }
-  //   for (let i = 0; i < parts.length - 1; i += 2) {
-  //     this.paragraphs[i] = parts[i];
-  //     // console.log(this.paragraphs[i]);
-  //   }
-  //   // console.log(this.paragraphs, parts.length);
-  // }
-
   ngOnInit() {
     // Register GSAP plugins here once
     let id = this.route.snapshot.paramMap.get('id');
@@ -91,10 +70,7 @@ export class ArticlePage {
         (data) => {
           this.article = data;
           console.log('Article data:', this.article);
-
-          // Call any dependent logic here
-          // this.separateParagraphs(); // Uncomment if needed
-          this.cdr.detectChanges(); // Trigger change detection if UI updates are needed
+          this.cdr.detectChanges();
 
           // Initialize GSAP after data is loaded
           this.ngZone.runOutsideAngular(() => {
@@ -160,7 +136,6 @@ export class ArticlePage {
               });
             }, 400);
           });
-
         },
         (error) => {
           console.error('Error fetching article:', error);
@@ -181,7 +156,6 @@ export class ArticlePage {
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
 
   ngAfterViewInit() {
-    
     setTimeout(() => {
       this.cdr.detectChanges();
     }, 2000);

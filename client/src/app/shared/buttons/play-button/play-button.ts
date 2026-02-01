@@ -5,7 +5,6 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
-  ViewChild,
 } from '@angular/core';
 
 @Component({
@@ -24,8 +23,6 @@ export class PlayButton implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.triggeredThroughTrack == true) {
       this.isPlaying = 'true';
-      // Optionally, emit the change back to the parent
-      // this.triggeredThroughTrackChange.emit(false);
     }
   }
 

@@ -72,7 +72,7 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
         width = 400;
       }
     }
-    // console.log('This is the viewport', wpWidth, typeof wpWidth);
+
     return width;
   }
 
@@ -91,7 +91,6 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['episode']) {
       this.episode = changes['episode'].currentValue;
-      console.log(this.episode);
     }
     this.cdr.detectChanges();
   }
@@ -113,7 +112,6 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   }
 
   playEpisode() {
-    console.log('this episode is being played');
     this.globalPlayer.playEpisode(this.episode);
   }
 

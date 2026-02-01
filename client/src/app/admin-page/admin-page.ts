@@ -5,15 +5,11 @@ import {
   OnInit,
   NgZone,
   ChangeDetectorRef,
-  OnChanges,
-  SimpleChanges,
   inject,
 } from '@angular/core';
 import {
   Router,
   RouterOutlet,
-  RouterModule,
-  RouterLink,
   NavigationEnd,
   ActivatedRoute,
   NavigationExtras,
@@ -137,7 +133,7 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     private ngZone: NgZone,
     private router: Router,
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   time = 1.24;
@@ -311,7 +307,6 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       let a = view.split('?')[0];
       let editM = view.split('?')[1];
       view = a;
-      
     }
 
     if (view === 'admin-page') {
@@ -399,7 +394,7 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     this.cdr.detectChanges();
   }
 
-  Logout(){
+  Logout() {
     console.log('test');
     this.authService.logout();
     // this.router.navigate(['']);

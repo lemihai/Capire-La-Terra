@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { Api } from '../../../environments/api';
+ 
 import { Button } from '../../shared/buttons/button/button';
-import { EpisodeCard } from '../../shared/components/episode-card/episode-card';
+
 import { AdminEpisodeCard } from '../episodes-view/admin-episode-card/admin-episode-card';
 import { AdminService } from '../service/admin-service';
 import { forkJoin } from 'rxjs';
@@ -12,13 +12,12 @@ import { Episode } from '../service/episodes-service/episodes-service';
 import { News } from '../service/news-service/news-service';
 import { RobotCard } from '../robots-view/robot-card/robot-card';
 
-import { SlicePipe } from '@angular/common';
 import { NewsCardComponent } from '../../shared/components/news-card.component/news-card.component';
 import { ArticleCard } from '../articles-view/article-card/article-card';
 
 @Component({
   selector: 'app-main-view',
-  imports: [Button, EpisodeCard, AdminEpisodeCard, RobotCard, NewsCardComponent, ArticleCard],
+  imports: [Button, AdminEpisodeCard, RobotCard, NewsCardComponent, ArticleCard],
   templateUrl: './main-view.html',
   styleUrl: './main-view.scss',
 })
@@ -144,11 +143,8 @@ export class MainView implements OnInit, AfterViewInit {
     });
   }
 
-  navigateToPage(page: string){
-    this.adminService.triggerViewChange(
-      page,
-      ''
-    );
+  navigateToPage(page: string) {
+    this.adminService.triggerViewChange(page, '');
   }
 
   ngAfterViewInit(): void {}
@@ -161,13 +157,12 @@ export class MainView implements OnInit, AfterViewInit {
   }
 
   navigateToEpisodePage(episodeId: string, episodeData: any, editMode?: string) {
-    
     this.adminService.triggerViewChange(
       'episode-page',
       'episodes-view',
       episodeId,
       episodeData,
-      editMode
+      editMode,
     );
   }
 
@@ -227,7 +222,7 @@ export class MainView implements OnInit, AfterViewInit {
       },
       (error) => {
         console.error('Error deleting article', error);
-      }
+      },
     );
   }
 
@@ -249,7 +244,7 @@ export class MainView implements OnInit, AfterViewInit {
         // Error: Handle the error (e.g., show an error message)
         console.error('Error deleting article:', error);
         alert(`Failed to delete article: ${error.message || error}`);
-      }
+      },
     );
   }
 
@@ -278,7 +273,7 @@ export class MainView implements OnInit, AfterViewInit {
       'articles-view',
       articleId,
       articleData,
-      editMode
+      editMode,
     );
   }
 
@@ -325,7 +320,7 @@ export class MainView implements OnInit, AfterViewInit {
       },
       (error) => {
         console.error('Error deleting article', error);
-      }
+      },
     );
   }
 

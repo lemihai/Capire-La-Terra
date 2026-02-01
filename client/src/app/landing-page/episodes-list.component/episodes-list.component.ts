@@ -6,16 +6,12 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { AudioTrack } from '../../shared/components/audio-track/audio-track';
-import { NgOptimizedImage } from '@angular/common';
-import { PlayButton } from '../../shared/buttons/play-button/play-button';
-import { AudioPlayer } from '../../shared/components/audio-player/audio-player';
 import { EpisodeCard } from '../../shared/components/episode-card/episode-card';
 import { EpisodesService } from '../../../services/episodes-service/episodes-service';
 
 @Component({
   selector: 'app-episodes-list-component',
-  imports: [AudioTrack, NgOptimizedImage, PlayButton, AudioPlayer, EpisodeCard],
+  imports: [EpisodeCard],
   templateUrl: './episodes-list.component.html',
   styleUrl: './episodes-list.component.scss',
 })

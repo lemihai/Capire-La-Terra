@@ -1,13 +1,17 @@
-<div class="track" #trackDiv [style.width.px]="audioTrackWidth" (mousemove)="onMouseMove($event)" >
-  @for(line of numberOfLinesArray; track line.n; let i= $index){
-  <div class="line-wrapper" (mouseleave)="onMouseLeaveLine()">
-    <div class="line-{{ line.type }}" (mouseenter)="onLineHover(i)" (click)="playFromHere()"></div>
-  </div>
+<div class="track" #trackDiv [style.width.px]="audioTrackWidth" (mousemove)="onMouseMove($event)">
+  @for (line of numberOfLinesArray; track line.n; let i = $index) {
+    <div class="line-wrapper" (mouseleave)="onMouseLeaveLine()">
+      <div
+        class="line-{{ line.type }}"
+        (mouseenter)="onLineHover(i)"
+        (click)="playFromHere()"
+      ></div>
+    </div>
   }
 </div>
 
 <div class="hoverer" [style.left.px]="hovererLeft">
-  <p>{{timeHovered.minutes}}</p>
+  <p>{{ timeHovered.minutes }}</p>
   <p>:</p>
-  <p>{{timeHovered.seconds}}</p>
+  <p>{{ timeHovered.seconds }}</p>
 </div>

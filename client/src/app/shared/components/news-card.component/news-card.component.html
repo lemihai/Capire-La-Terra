@@ -61,7 +61,7 @@
             }
           }
         </div>
-        <p class="abstract transition-A">{{ article.text[0] }}</p>
+        <p class="abstract transition-A">{{ article.text[0] + ' ' + article.text[1] }}</p>
       </div>
     </div>
   } @else if (cardType === 'small') {
@@ -219,7 +219,7 @@
             }
           }
         </div>
-        <p class="abstract transition-A">{{ article.text[0] }}</p>
+        <p class="abstract transition-A">{{ article.text[0] + ' ' + article.text[1] }}</p>
       </div>
     </div>
   } @else if (cardType === 'admin-small') {

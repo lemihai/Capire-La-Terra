@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-parallax-background',
   imports: [],
   templateUrl: './parallax-background.html',
-  styleUrl: './parallax-background.scss'
+  styleUrl: './parallax-background.scss',
 })
 export class ParallaxBackground {
-
+  // TODO
 }

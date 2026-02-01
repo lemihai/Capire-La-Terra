@@ -8,20 +8,17 @@
 .transition-A {
   overflow: hidden;
   height: 0rem;
-  transform: translate(1.6rem, 3.2rem) skewX(-12deg) skewY(-6deg) ;
+  transform: translate(1.6rem, 3.2rem) skewX(-12deg) skewY(-6deg);
   opacity: 0;
 }
 
 .transition-horizontal-line {
-  // min-width: 0rem;
   max-width: 0rem;
-  // width: 0rem;
 }
 
 .transition-vertical-line {
   max-height: 0rem;
 }
-
 
 #smooth-wrapper {
   #smooth-content {
@@ -30,7 +27,6 @@
     height: auto;
     min-height: 100vh;
     overflow: hidden;
-    // position: relative; /* All children are positioned relative to this */
 
     position: relative;
     padding: 0.8rem;
@@ -67,15 +63,12 @@
   align-items: stretch;
 
   gap: 3.2rem;
-  // border-radius: 3.2rem;
 
   section {
-    // height: 100%;
     width: 100%;
     min-height: 95vh;
 
     border-radius: 3.2rem;
-    // background-color: var(--main-color-dark-16);
   }
 
   // ****************************
@@ -92,7 +85,6 @@
     padding: 8rem 1.6rem 0.8rem 1.6rem;
 
     .main-wrapper {
-      // background-color: #ffe10032;
       width: 70%;
       height: 100%;
       min-height: 100%;
@@ -114,8 +106,6 @@
       justify-content: center;
       align-items: flex-start;
       gap: 1.2rem;
-
-      // min-height: 100%;
     }
   }
 

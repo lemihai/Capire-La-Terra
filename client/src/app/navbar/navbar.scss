@@ -91,22 +91,18 @@ nav {
 
       li:nth-child(1) {
         &:hover ~ .button-hover-background {
-          // background-color: red !important;
         }
       }
       li:nth-child(2) {
         &:hover ~ .button-hover-background {
-          // background-color: rgb(255, 238, 0) !important;
         }
       }
       li:nth-child(3) {
         &:hover ~ .button-hover-background {
-          // background-color: rgb(38, 255, 0) !important;
         }
       }
       li:nth-child(4) {
         &:hover ~ .button-hover-background {
-          // background-color: rgb(13, 0, 255) !important;
         }
       }
 
@@ -136,7 +132,7 @@ nav {
       overflow: hidden;
       gap: 0.8rem;
 
-      li{
+      li {
         z-index: 10;
       }
 
@@ -183,7 +179,6 @@ nav {
           }
 
           .ln-active {
-            // background-color: red;
             z-index: 99 !important;
             transition: var(--transition-160);
           }
@@ -191,13 +186,9 @@ nav {
           .ln-inactive {
             z-index: 98 !important;
             transition: var(--transition-160);
-            // background-color: blue;
           }
 
           .italian {
-            // height: 3.2rem;
-            // width: 3.2rem;
-            // position: absolute;
             svg {
               height: 2rem;
               width: 2rem;
@@ -208,11 +199,6 @@ nav {
           }
 
           .english {
-            // position: absolute;
-            // height: 3.2rem;
-            // width: 3.2rem;
-            // top: 0rem;
-
             svg {
               height: 2rem;
               width: 2rem;
@@ -236,15 +222,14 @@ nav {
           content: '';
           height: 1.6rem;
           width: 3.2rem;
-          // background-color: var(--main-color-dark-invisible);
-          // background-color: red;
+
           transform: translateY(-1.6rem);
-          // pointer-events: none;
+
           top: 7.2rem;
         }
 
         &:hover {
-          padding: 0rem .24rem;
+          padding: 0rem 0.24rem;
           transition: var(--transition-160);
 
           .language-button-wrapper {
@@ -304,13 +289,12 @@ nav {
           flex-direction: row;
           justify-content: center;
           align-items: center;
-          // background-color: var(--main-color-dark-16);
-          // border: 1px solid var(--main-color-dark-16);
+
           transition: var(--transition-160);
           cursor: pointer;
 
           svg {
-            transform: translateX(.8rem);
+            transform: translateX(0.8rem);
             height: 1.2rem;
             width: 1.2rem;
             transition: var(--transition-32);
@@ -356,7 +340,6 @@ nav {
           border-radius: 1rem;
           margin: 0rem 0.8rem 0rem 0.24rem;
 
-          /* Add the animation */
           animation: pulseShadow 3.2s infinite var(--cubic-bezzier-a);
         }
 
@@ -430,7 +413,6 @@ nav {
             border-radius: 1rem;
             margin: 0rem 0.8rem 0rem 0.24rem;
 
-            /* Add the animation */
             animation: pulseShadow 3.2s infinite var(--cubic-bezzier-a);
           }
 
@@ -462,7 +444,6 @@ nav {
       .login-button-hover-background {
         position: absolute;
         left: 0.4rem;
-        // height: 3.2rem;
         width: 12rem;
         background-color: var(--main-color-dark);
         pointer-events: none;
@@ -490,7 +471,6 @@ nav {
     transition: var(--transition-160);
     cursor: pointer;
 
-    // background-color: var(--main-color-dark-16);
     svg {
       height: 1.8rem !important;
       width: 1.8rem !important;
@@ -558,7 +538,6 @@ nav {
       transition: var(--transition-160);
       cursor: pointer;
 
-      // background-color: var(--main-color-dark-16);
       svg {
         height: 1.8rem;
         width: 1.8rem;

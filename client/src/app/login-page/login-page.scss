@@ -33,9 +33,9 @@
     width: 100%;
 
     background-image: url('../../../public/assets/article-illustration-1.jpg');
-    background-size: cover; /* Ensures the image covers the entire div */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
     border-radius: 1.6rem;
     transition: var(--transition-160);
@@ -71,14 +71,12 @@
         width: 2rem;
         height: 2rem;
         min-width: 2rem;
-        // min-height: 2rem;
         transition: var(--transition-160);
       }
 
       label {
         height: 100%;
         width: 100%;
-        // MIN
         min-height: 4.8rem;
         max-height: 4.8rem;
         min-width: 30rem;
@@ -112,7 +110,6 @@
           transition: var(--transition-160);
 
           path {
-            // stroke: var(--main-color-dark);
             stroke-width: 0.28rem;
           }
         }
@@ -147,7 +144,6 @@
         }
 
         input[type='password'] {
-          // -webkit-text-security: disc;
         }
 
         .eye-button {
@@ -169,7 +165,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            // display: none;
             transition: var(--transition-160);
           }
 
@@ -250,7 +245,6 @@
             opacity: 1;
 
             path {
-              // stroke: var(--main-color-dark);
               stroke-width: 0.28rem;
             }
           }

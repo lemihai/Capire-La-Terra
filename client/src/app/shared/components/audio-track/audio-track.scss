@@ -17,14 +17,12 @@
   transition: var(--transition-08);
 
   div {
-    // background-color: red !important;
     transition: var(--transition-08);
   }
 
   .line-wrapper {
     width: 100%;
     height: 2.4rem;
-    // padding: 0rem 0.08rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -34,28 +32,28 @@
 
     .line-a {
       height: 0.4rem;
-      width:100%;
+      width: 100%;
       background-color: #323d0664;
       border-radius: 0.8rem;
     }
 
     .line-b {
       height: 0.8rem;
-      width:100%;
+      width: 100%;
       background-color: #323d0664;
       border-radius: 0.8rem;
     }
 
     .line-c {
       height: 1.2rem;
-      width:100%;
+      width: 100%;
       background-color: #323d0664;
       border-radius: 0.8rem;
     }
 
     .line-d {
       height: 1.6rem;
-      width:100%;
+      width: 100%;
       background-color: #323d0664;
       border-radius: 0.8rem;
     }
@@ -63,11 +61,6 @@
 
   .line-wrapper:hover {
     cursor: pointer;
-    // width: 200%;
-    // padding: 0rem;
-    // margin: 0rem 0rem;
-    // scale: 1;
-    // margin: 0rem 0.24rem;
     transition: var(--transition-08);
 
     div {

@@ -453,6 +453,8 @@
     height: auto;
 
     background-color: var(--main-color-light);
+    backdrop-filter: blur(2.4rem);
+    // color: var(--main-color-light) !important;
     color: var(--main-color-dark);
 
     border-radius: 1.2rem;

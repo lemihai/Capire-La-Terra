@@ -7,15 +7,14 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Article, ArticlesService } from '../../service/articles-service/articles-service';
-import { SourceComponent } from '../../../shared/components/source.component/source.component';
+import { Article } from '../../service/articles-service/articles-service';
 import { ProfileCard } from '../../../shared/components/profile-card/profile-card';
 import { AdminService } from '../../service/admin-service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article-card',
-  imports: [SourceComponent, ProfileCard],
+  imports: [ ProfileCard],
   templateUrl: './article-card.html',
   styleUrl: './article-card.scss',
 })

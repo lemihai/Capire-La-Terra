@@ -28,7 +28,7 @@
               class="episode-image-no-edit"
             />
           </div>
-          <h1 class="episode-title">{{ episode?.title }}</h1>
+          <h1 class="episode-title">{{ episode.title }}</h1>
         </div>
         @if (episode.audioUrl != '') {
           <div class="audio-player-wrapper">
@@ -74,7 +74,7 @@
           <app-profile-card [profile]="episode.author" />
 
           <div class="separator-line"></div>
-          <p class="date">{{ episode?.date }}</p>
+          <p class="date">{{ episode.date }}</p>
           <div class="separator-line"></div>
           <div class="app-episode-wrapper">
             @for (source of episode.sources; track $index) {
@@ -86,7 +86,7 @@
     } @else if (editMode) {
       <header class="episode-episode-header">
         @if (!editMode) {
-          <h1 class="episode-title" (click)="toggleEditMode()">{{ episode?.title }}</h1>
+          <h1 class="episode-title" (click)="toggleEditMode()">{{ episode.title }}</h1>
         } @else if (editMode) {
           <div
             id="episode-title-field "
@@ -359,7 +359,7 @@
             </div>
           </div>
           <div class="separator-line"></div>
-          <p class="date">{{ episode?.date }}</p>
+          <p class="date">{{ episode.date }}</p>
           <div class="separator-line"></div>
           <div class="app-episode-wrapper">
             @for (source of episode.sources; track $index) {

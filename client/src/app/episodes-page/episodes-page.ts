@@ -4,8 +4,6 @@ import {
   NgZone,
   OnDestroy,
   OnInit,
-  ChangeDetectionStrategy,
-  HostListener,
   inject,
   OnChanges,
   SimpleChanges,
@@ -15,11 +13,8 @@ import {
   ViewChildren,
   QueryList,
 } from '@angular/core';
-import { AudioTrack } from '../shared/components/audio-track/audio-track';
-import { Button } from '../shared/buttons/button/button';
 import { EpisodeCard } from '../shared/components/episode-card/episode-card';
 
-import { NgOptimizedImage } from '@angular/common';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
@@ -29,7 +24,7 @@ import { EpisodesService } from '../../services/episodes-service/episodes-servic
 
 @Component({
   selector: 'app-episodes-page',
-  imports: [NgOptimizedImage, AudioTrack, Button, EpisodeCard, Footer],
+  imports: [EpisodeCard, Footer],
   templateUrl: './episodes-page.html',
   styleUrl: './episodes-page.scss',
 })
@@ -60,7 +55,6 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
   // For animations in gsap
   time = 1.24;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
-  // ease = 'power3.out';
 
   play() {
     if (this.isPlaying == 'true') {
@@ -96,30 +90,15 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
     this.episodesService.getAllEpisodes().subscribe(
       (data) => {
         this.episodes = data;
-        // console.log(this.episodes);
         this.sort();
         this.cdr.detectChanges();
       },
       (error) => {
         this.cdr.detectChanges();
-        // console.log(error);
       },
     );
     this.cdr.detectChanges();
-    // this.episodesService.getAllEpisodes().subscribe((data) => {
-    //   // let dataList = data;
-    //   //  for (const article of data){
-    //     //   console.log(data);
-    //     //  }
-    //     //  for(const a of data ){
-    //       //   console.log(a);
-    //       //  }
-    //       // this.articles = [...data];
-    //       this.articles = data;
-    //   // this.sorting.sortedListView = [...this.articles];
-    //   // this.sort('date');
-    //   // this.cdr.detectChanges(); // Manually trigger change detection if needed
-    // });
+
     // Register GSAP plugins here once
     this.ngZone.runOutsideAngular(() => {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -127,10 +106,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.largeCard);
-    console.log(changes);
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnDestroy() {
     // Kill the smoother and triggers to prevent memory leaks
@@ -342,14 +318,12 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
         });
       }, 900);
       this.cdr.detectChanges();
-      
+
       setTimeout(() => {
-        // Assuming largeCards is a QueryList<ElementRef>
         this.largeCards.forEach((cardRef, index) => {
-          console.log(cardRef.nativeElement);
           ScrollTrigger.create({
-            trigger: cardRef.nativeElement, // Use the specific element here
-            start: 'top 120px', // Adjust 120px to match your header height
+            trigger: cardRef.nativeElement,
+            start: 'top 120px',
             end: 'bottom 120px',
             markers: {
               startColor: 'fuchsia',
@@ -370,47 +344,32 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
     // season3 = index 0
     // season2 = index 1
     // season1 = index 2
-    if(index === 0){
-      console.log(index);
+    if (index === 0) {
       gsap.to('#seasonComponent', {
-          // width: 'auto',
-          // height: 'auto',
-          translateY: '0rem',
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
-
-    } else if (index === 1){
-      console.log(index);
+        translateY: '0rem',
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+    } else if (index === 1) {
       gsap.to('#seasonComponent', {
-          // width: 'auto',
-          // height: 'auto',
-          translateY: '-12rem',
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
-    } else if (index ===2){
-      console.log(index);
+        translateY: '-12rem',
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+    } else if (index === 2) {
       gsap.to('#seasonComponent', {
-          // width: 'auto',
-          // height: 'auto',
-          translateY: '-24rem',
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
+        translateY: '-24rem',
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
     }
   }
-  left(index: number) {
-    console.log(2);
-    console.log(index);
-  }
+  left(index: number) {}
 
   sort() {
-    // 1. Determine the current direction and update the specific key flag
-    // can be -1 or 1
     const asc = 1;
     const desc = -1;
     let numberOfSeasons = 1;
@@ -423,8 +382,6 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
       }
     }
 
-    // Iterating through the episodes array to create an array of seasons.
-    // WHY? to make it easier to arrange afterwards
     for (let season = 1; season <= numberOfSeasons; season++) {
       let seasonArray: any[] = [];
       for (const episode of this.episodes) {
@@ -434,9 +391,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
       }
       episodesArray.push(seasonArray);
 
-      // Then, sorting the array
       episodesArray[season - 1].sort((a: any, b: any) => {
-        // Use 'any' for the list items here
         let valA = a['number'];
         let valB = b['number'];
 
@@ -446,14 +401,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
       });
     }
 
-    // Make a list of lists
-    // for each season add an array inside of the array
-    // Sort each season array individually,
-    // spread the arrays
-
-    // 2. Perform the sort
     this.episodes.sort((a: any, b: any) => {
-      // Use 'any' for the list items here
       let valA = a['number'];
       let valB = b['number'];
 
@@ -462,13 +410,11 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
       return (numA - numB) * asc;
     });
 
-    // console.log(episodesArray);
     this.episodes = [];
     for (let i = episodesArray.length - 1; i >= 0; i--) {
       this.episodes.push(...episodesArray[i]);
     }
 
-    // console.log(this.numberOfSeasons);
-    this.cdr.detectChanges(); // Update the view after sorting
+    this.cdr.detectChanges();
   }
 }

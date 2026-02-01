@@ -29,7 +29,7 @@
             class="episode-image-no-edit"
           />
         </div>
-        <h1 class="episode-title">{{ episode?.title }}</h1>
+        <h1 class="episode-title">{{ episode.title }}</h1>
       </div>
       @if(episode.audioUrl != ''){
 
@@ -78,7 +78,7 @@
         <!-- <p>{{ episode?.url }}</p> -->
         <app-profile-card [profile]="episode.author" />
         <div class="separator-line"></div>
-        <p class="date">{{ episode?.date }}</p>
+        <p class="date">{{ episode.date }}</p>
         <div class="separator-line"></div>
         <div class="app-episode-wrapper">
           @for (source of episode.sources; track $index) {
@@ -91,7 +91,7 @@
 
     <header class="episode-episode-header">
       @if(!editMode){
-      <h1 class="episode-title" (click)="toggleEditMode()">{{ episode?.title }}</h1>
+      <h1 class="episode-title" (click)="toggleEditMode()">{{ episode.title }}</h1>
       } @else if(editMode){
       <div
         id="episode-title-field "
@@ -211,21 +211,7 @@
             />
           </button>
         </div>
-        <!-- 
-        <button type="button" class="custom-upload-button">Upload episode Image</button>
-        <label class="label-field">Add your Image episode</label>
 
-        <input
-          class="image-input"
-          type="file"
-          id="image-upload"
-          accept="image/*"
-          (change)="onFileSelected($event)"
-        />
-
-        <div class="image-preview">
-          <img *ngIf="episode.imageUrl" [src]="episode.imageUrl" alt="Preview" />
-        </div> -->
       </div>
       <div class="audio-upload-field">
         <input
@@ -330,7 +316,7 @@
         <!-- <p>{{ episode?.url }}</p> -->
         <app-profile-card [profile]="episode.author" />
         <div class="separator-line"></div>
-        <p class="date">{{ episode?.date }}</p>
+        <p class="date">{{ episode.date }}</p>
         <div class="separator-line"></div>
         <div class="app-episode-wrapper">
           @for (source of episode.sources; track $index) {

@@ -120,7 +120,7 @@
 
       .article-text {
         font-family: var(--tertiary-font-family) !important;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
 
         display: -webkit-box;
 
@@ -340,7 +340,7 @@
       align-items: center;
       gap: 0.8rem;
 
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       transition: var(--transition-160);
     }
 
@@ -353,7 +353,7 @@
     .title {
       font-size: 2.4rem;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -547,7 +547,7 @@
       align-items: center;
       gap: 0.8rem;
 
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       transition: var(--transition-160);
     }
 
@@ -915,7 +915,7 @@
         align-items: center;
         gap: 0.8rem;
 
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         transition: var(--transition-160);
       }
 
@@ -940,6 +940,7 @@
       }
 
       .date {
+        min-width: 8.8rem !important;
         opacity: 0.64;
         transition: var(--transition-160);
       }

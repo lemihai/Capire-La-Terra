@@ -12,7 +12,7 @@
   }
 
   .track-container {
-    // background-color: #ff000032;
+
     height: 2rem;
     width: 2rem;
     position: absolute;
@@ -41,7 +41,7 @@
       justify-content: center;
       align-items: center;
       width: 1.6rem;
-      // width: 10.8rem;
+
       height: 1.6rem;
       transition: var(--transition-160);
 
@@ -57,7 +57,7 @@
 
       .volume-input {
         -webkit-appearance: none;
-        // background-color: var(--main-color-16);
+
         background: linear-gradient(
           to right,
           var(--main-color) 0%,
@@ -91,7 +91,7 @@
         background-color: var(--main-color-dark);
         transform: scale(2);
         z-index: 20;
-        // opacity: 0.32;
+
         transition: var(--transition-160);
         cursor: grab;
 
@@ -104,7 +104,7 @@
         scale: 1.1;
         background-color: var(--main-color-dark-hover);
         transition: var(--transition-160);
-        // opacity: 0.32;
+
       }
 
       .volume-input::-webkit-slider-thumb:active {
@@ -118,7 +118,7 @@
   transition: var(--transition-160);
 
   .track-container {
-    // background-color: #ff000032;
+
     height: 16.4rem;
     width: 4.2rem;
     bottom: -0.4rem;
@@ -127,8 +127,7 @@
 
     .volume-button-dial {
       opacity: 1;
-      // bottom: 4rem;
-      // right: 0rem;
+
       width: 10.8rem;
       transition: var(--transition-160);
       transform: rotate(90deg) translateX(5.6rem);

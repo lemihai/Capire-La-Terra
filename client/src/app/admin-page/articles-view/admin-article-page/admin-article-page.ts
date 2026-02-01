@@ -6,10 +6,7 @@ import {
   ElementRef,
   HostListener,
   inject,
-  OnChanges,
-  OnInit,
   QueryList,
-  SimpleChanges,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
@@ -20,14 +17,13 @@ import { SourceComponent } from '../../../shared/components/source.component/sou
 import { lastValueFrom } from 'rxjs'; // <-- New Import
 import { Article } from '../../service/articles-service/articles-service';
 import { ProfileCard } from '../../../shared/components/profile-card/profile-card';
-import { NgOptimizedImage } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Button } from '../../../shared/buttons/button/button';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-admin-article-page',
-  imports: [EditBar, SourceComponent, ProfileCard, NgOptimizedImage, Button],
+  imports: [EditBar, SourceComponent, ProfileCard, Button],
   templateUrl: './admin-article-page.html',
   styleUrl: './admin-article-page.scss',
 })
@@ -50,15 +46,12 @@ export class AdminArticlePage {
     this.addSources();
     const focusedElement = document.activeElement;
     const lastInputField = this.textInputFields.last?.nativeElement;
-    // console.log(lastInputField);
-    // console.log(focusedElement);
+
     let innerHTML = focusedElement?.textContent;
-    // console.log('Focused element:', focusedElement);
+
     if (event.key === 'Tab') {
       if (focusedElement == lastInputField) {
-        // console.log('flag');
         if (focusedElement?.id === 'article-text-field') {
-          // console.log('flag 2');
           event.preventDefault();
           this.article.text.push('');
 
@@ -134,10 +127,9 @@ export class AdminArticlePage {
 
   constructor(
     private fb: FormBuilder,
-    // private router: Router,
-    // private route: ActivatedRoute,
+
     private adminService: AdminService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
     this.myForm = this.fb.group({
       title: [''],
@@ -178,9 +170,7 @@ export class AdminArticlePage {
     this.articleId = this.route.snapshot.paramMap.get('id');
     console.log(this.article);
 
-    // let innersource = '';
     if (!this.articleId) {
-      // Redirect or handle missing ID
       this.router.navigate(['/admin-page/articles-view']);
       return;
     }
@@ -192,28 +182,15 @@ export class AdminArticlePage {
       this.editMode = editModeParam === 'true';
       this.editModeFromState = this.editMode;
 
-      // console.log('Article Edit Mode from URL:', params);
       this.cdr.detectChanges();
     });
 
     try {
-      // this.route.queryParams.subscribe((params) => {
-      //   // Query parameters are always strings, so you must convert 'true'/'false' to boolean
-      //   const editModeParam = params['editMode'];
-
-      //   // Check if the parameter exists and is explicitly 'true'
-      //   this.editModeFromState = editModeParam === 'true';
-
-      //   console.log('THIS IS THE EDIT MODE FROM QUERY PARAMS', this.editModeFromState);
-
-      //   // Now you can safely use the 'this.editMode' property elsewhere.
-      // });
       const navigation = this.router.getCurrentNavigation();
       let articleData = navigation?.extras.state?.['data'];
 
       if (articleData != undefined) {
         this.article = articleData;
-        // innersource = articleData.url;
       } else {
         this.callForArticle(this.articleId);
       }
@@ -234,13 +211,11 @@ export class AdminArticlePage {
       const response = await lastValueFrom(this.adminService.getOneArticle(id));
       console.log(response);
       this.article = response;
-      // this.separateParagraphs(this.article.text);
+
       console.log('Article source URL:', this.article.url);
       this.cdr.detectChanges();
     } catch (error) {
       console.error('Error fetching article:', error);
-      // Optionally, re-throw the error if you want the caller to handle it
-      // throw error;
     }
 
     this.cdr.detectChanges();
@@ -255,11 +230,10 @@ export class AdminArticlePage {
   async deleteArticle() {
     try {
       await lastValueFrom(this.adminService.deleteArticle(this.article._id));
-      // After successful deletion, navigate back to the articles list
+
       this.router.navigate(['/admin-page/articles-view']);
     } catch (error) {
       console.error('Error deleting article:', error);
-      // Optionally, show an error message to the user
     }
   }
 
@@ -302,7 +276,7 @@ export class AdminArticlePage {
         if (error.error) {
           console.error('Backend error:', error.error);
         }
-      }
+      },
     );
   }
 
@@ -354,9 +328,6 @@ export class AdminArticlePage {
       };
       reader.readAsDataURL(file);
       this.cdr.detectChanges();
-
-      // Optionally, send the file to a backend service for permanent storage
-      // this.uploadService.uploadImage(file).subscribe(imageUrl => this.article.imageUrl = imageUrl);
     }
     setTimeout(() => {
       this.inputOverlay.nativeElement.style.bottom = '1.2rem';
@@ -365,22 +336,16 @@ export class AdminArticlePage {
   }
 
   removeImage() {
-    // 1. Reset the imageUrl property
     this.article.imageUrl = '';
 
-    // 2. Reset the file input element so the same file can be selected again
-    // The ViewChild reference is 'fileInput'
     if (this.fileInput && this.fileInput.nativeElement) {
       this.fileInput.nativeElement.value = null;
     }
 
-    // 3. (Optional) Reset the position of the input overlay
-    // The ViewChild reference is 'inputOverlay'
     if (this.inputOverlay && this.inputOverlay.nativeElement) {
-      this.inputOverlay.nativeElement.style.bottom = '3.2rem'; // Or whatever value hides it
+      this.inputOverlay.nativeElement.style.bottom = '3.2rem';
     }
 
-    // 4. Force change detection to update the view immediately
     this.cdr.detectChanges();
     console.log('Image removed.');
   }

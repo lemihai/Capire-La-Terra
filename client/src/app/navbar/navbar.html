@@ -202,67 +202,67 @@
         </button>
       </li>
       @if (isLoggedIn$ | async) {
-      <li
-        class="nav-button-wrapper"
-        (click)="nagivateToAdminPage()"
-        (mouseenter)="navbarObj.hovered('admin', true)"
-        (mouseleave)="navbarObj.hovered('admin', false)"
-      >
-        <button class="nav-button {{ navbarObj.admin }}">
-          <div class="nav-icon">
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M24 5H8C6.375 5 5.3125 5.875 5 7.5L3 17V24C3.00231 24.7949 3.31912 25.5567 3.88123 26.1188C4.44334 26.6809 5.20506 26.9977 6 27H26C26.7949 26.9977 27.5567 26.6809 28.1188 26.1188C28.6809 25.5567 28.9977 24.7949 29 24V17L27 7.5C26.6875 5.8125 25.5625 5 24 5Z"
-                stroke="black"
-                stroke-width="1.6"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M3 17H12"
-                stroke="black"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M20 17H29"
-                stroke="black"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M12 17C12 18.0609 12.4214 19.0783 13.1716 19.8284C13.9217 20.5786 14.9391 21 16 21C17.0609 21 18.0783 20.5786 18.8284 19.8284C19.5786 19.0783 20 18.0609 20 17"
-                stroke="black"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M9 9H23"
-                stroke="black"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M8 13H24"
-                stroke="black"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-          <p class="nav-text">Admin</p>
-        </button>
-      </li>
+        <li
+          class="nav-button-wrapper"
+          (click)="nagivateToAdminPage()"
+          (mouseenter)="navbarObj.hovered('admin', true)"
+          (mouseleave)="navbarObj.hovered('admin', false)"
+        >
+          <button class="nav-button {{ navbarObj.admin }}">
+            <div class="nav-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24 5H8C6.375 5 5.3125 5.875 5 7.5L3 17V24C3.00231 24.7949 3.31912 25.5567 3.88123 26.1188C4.44334 26.6809 5.20506 26.9977 6 27H26C26.7949 26.9977 27.5567 26.6809 28.1188 26.1188C28.6809 25.5567 28.9977 24.7949 29 24V17L27 7.5C26.6875 5.8125 25.5625 5 24 5Z"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M3 17H12"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M20 17H29"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12 17C12 18.0609 12.4214 19.0783 13.1716 19.8284C13.9217 20.5786 14.9391 21 16 21C17.0609 21 18.0783 20.5786 18.8284 19.8284C19.5786 19.0783 20 18.0609 20 17"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9 9H23"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M8 13H24"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="nav-text">Admin</p>
+          </button>
+        </li>
       }
       <div
         class="button-hover-background"
@@ -276,53 +276,54 @@
   <header class="nav-login-navigation">
     <ul>
       @if (isLoggedIn$ | async) {
-      <li class="profile-wrapper">
-        <app-profile-card profile="Sofia Lutteri" cardMode="navbar" />
-      </li>
+        <li class="profile-wrapper">
+          <app-profile-card profile="Sofia Lutteri" cardMode="navbar" />
+        </li>
       } @else {
-      <li
-        class="nav-button-wrapper"
-        (click)="nagivateToLoginPage()"
-        (mouseenter)="navbarObj.hovered('login', true)"
-        (mouseleave)="navbarObj.hovered('login', false)"
-      >
-        <button class="nav-button {{ navbarObj.login }}">
-          <div class="nav-icon">
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5 13.25V28C5 28.2652 5.10536 28.5196 5.29289 28.7071C5.48043 28.8946 5.73478 29 6 29H12V20.5C12 20.1022 12.158 19.7206 12.4393 19.4393C12.7206 19.158 13.1022 19 13.5 19H18.5C18.8978 19 19.2794 19.158 19.5607 19.4393C19.842 19.7206 20 20.1022 20 20.5V29H26C26.2652 29 26.5196 28.8946 26.7071 28.7071C26.8946 28.5196 27 28.2652 27 28V13.25"
-                stroke="black"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M30 15.9999L16.6806 3.24988C16.3681 2.91988 15.6375 2.91613 15.3194 3.24988L2 15.9999"
-                stroke="black"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M25 11.1875V4H22V8.3125"
-                stroke="black"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-          <p class="nav-text">login</p>
-        </button>
-      </li>
+        <li
+          class="nav-button-wrapper"
+          (click)="nagivateToLoginPage()"
+          (mouseenter)="navbarObj.hovered('login', true)"
+          (mouseleave)="navbarObj.hovered('login', false)"
+        >
+          <button class="nav-button {{ navbarObj.login }}">
+            <div class="nav-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 13.25V28C5 28.2652 5.10536 28.5196 5.29289 28.7071C5.48043 28.8946 5.73478 29 6 29H12V20.5C12 20.1022 12.158 19.7206 12.4393 19.4393C12.7206 19.158 13.1022 19 13.5 19H18.5C18.8978 19 19.2794 19.158 19.5607 19.4393C19.842 19.7206 20 20.1022 20 20.5V29H26C26.2652 29 26.5196 28.8946 26.7071 28.7071C26.8946 28.5196 27 28.2652 27 28V13.25"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M30 15.9999L16.6806 3.24988C16.3681 2.91988 15.6375 2.91613 15.3194 3.24988L2 15.9999"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M25 11.1875V4H22V8.3125"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="nav-text">login</p>
+          </button>
+        </li>
       }
       <div class="separator-line-right-container"></div>
+      <!-- TODO: LATER -->
       <!-- 
        
       <li class="language-button">
@@ -487,19 +488,3 @@
     </ul>
   </header>
 </nav>
-
-<!-- 
-  <li class="navbar_button">CO2 of website</li>
-  <li class="navbar_button">Energy score</li>
-  <li class="navbar_button">language</li> 
--->
-
-<!-- 
-  class="navbar_physical"
-  #navbar
-  [style.background]="backgroundColor"
-  [style.transform]="`translateY(${translateY})`"
-  [style.scale]="scale"
-  [style.opacity]="opacity"
-  [style.width]="width"
--->
