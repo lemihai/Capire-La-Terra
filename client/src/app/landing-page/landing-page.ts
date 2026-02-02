@@ -166,7 +166,8 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           },
         });
 
-        this.navbarGsapService.exitFrontPage(exitTimeline);
+        // this.navbarGsapService.exitFrontPage(exitTimeline);
+        this.navbarGsapService.exitFrontPage();
       });
       // this.router.navigate(['/episodes-page']);
     } else if (page === 'news') {
@@ -179,7 +180,8 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           },
         });
 
-        this.navbarGsapService.exitFrontPage(exitTimeline);
+        // this.navbarGsapService.exitFrontPage(exitTimeline);
+        this.navbarGsapService.exitFrontPage();
       });
       // this.navbar.navigateToNewsPage();
     }
@@ -581,7 +583,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-text-h1', {
             height: '120px',
             width: '400px',
-            y: -120,
+            y: -60,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -593,7 +595,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-text', {
             height: '24px',
             width: '189px',
-            y: 0,
+            y: 32,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -605,7 +607,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-button', {
             height: '40px',
             width: '140px',
-            y: 0,
+            y: 32,
             // scale: '1',
             skewX: 0,
             skewY: 0,
@@ -618,6 +620,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-button-btn', {
             height: '40px',
             y: 0,
+            opacity: 1,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -645,7 +648,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-text', {
             height: '24px',
             width: '189px',
-            y: 0,
+            y: 32,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -657,7 +660,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-button', {
             height: '40px',
             width: '140px',
-            y: 0,
+            y: 32,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -669,6 +672,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-button-btn', {
             height: '40px',
             y: 0,
+            opacity: 1,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -718,6 +722,9 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           });
           gsap.to('.episodes-action-container-button-btn', {
             height: '0px',
+            width: '0px',
+ 
+            opacity: 0,
             y: 0,
             skewX: 32,
             skewY: 8,
@@ -768,7 +775,9 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           });
           gsap.to('.episodes-action-container-button-btn', {
             height: '0px',
+            width: '0px',
             y: 0,
+            opacity: 0,
             skewX: 32,
             skewY: 8,
             scale: 1,
@@ -804,7 +813,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             height: '120px',
             width: '500px',
             // x: 0,
-            y: 0,
+            y: 32,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -819,7 +828,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.news-action-container-text', {
             height: '24px',
             width: '288px',
-            y: 0,
+            y: 80,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -831,7 +840,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.news-action-container-button', {
             height: '40px',
             width: '140px',
-            y: 0,
+            y: 80,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -843,6 +852,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.news-action-container-button-btn', {
             height: '40px',
             y: 0,
+            opacity: 1,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -863,7 +873,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.latest-news-h1', {
             height: '120px',
             width: '400px',
-            y: -60,
+            y: 32,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -875,7 +885,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.news-action-container-text', {
             height: '24px',
             width: '288px',
-            y: 0,
+            y: 80,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -887,7 +897,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.news-action-container-button', {
             height: '40px',
             width: '140px',
-            y: 0,
+            y: 80,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -899,6 +909,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.news-action-container-button-btn', {
             height: '40px',
             y: 0,
+            opacity: 1,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -955,6 +966,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.news-action-container-button-btn', {
             height: '0px',
             y: 0,
+            opacity: 0,
             skewX: 32,
             skewY: 8,
             scale: 1,
@@ -1011,6 +1023,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.news-action-container-button-btn', {
             height: '0px',
             y: 0,
+            opacity: 0,
             skewX: 32,
             skewY: 8,
             scale: 1,

@@ -89,12 +89,13 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
   ngOnInit() {
     this.episodesService.getAllEpisodes().subscribe(
       (data) => {
+        this.focuss1();
         this.episodes = data;
         this.sort();
         this.cdr.detectChanges();
       },
       (error) => {
-        this.cdr.detectChanges();
+        console.log(error);
       },
     );
     this.cdr.detectChanges();
@@ -102,6 +103,17 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
     // Register GSAP plugins here once
     this.ngZone.runOutsideAngular(() => {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+      gsap.to('.hero-h1-A', {
+        height: '120px',
+        width: '48rem',
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
       this.cdr.detectChanges();
     });
   }
@@ -117,6 +129,9 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
 
   async ngAfterViewInit() {
     this.cdr.detectChanges();
+    // setTimeout(() => {
+
+    // }, 500);
     this.ngZone.runOutsideAngular(() => {
       // Create the smoother instance
       this.smoother = ScrollSmoother.create({
@@ -132,9 +147,25 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
         // --------------------------------
         // TEXT SECTION
         // --------------------------------
-        gsap.to('.hero-h1', {
+        // gsap.fromTo(
+        //   '.hero-h1',
+        //   { skewX: -32, skewY: 8, scale: 0.8, opacity: 0 }, // Start state
+        //   { skewX: 0, skewY: 0, scale: 1, opacity: 1, duration: this.time, ease: this.ease }, // End state
+        // );
+        gsap.to('.hero-h1-A', {
           height: '120px',
           width: '48rem',
+          skewX: 0,
+          skewY: 0,
+          scale: 1,
+          rotate: 0,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.hero-h1A', {
+          height: '120px',
+          width: '26rem',
           skewX: 0,
           skewY: 0,
           scale: 1,
@@ -151,17 +182,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
           ease: this.ease,
           overwrite: true,
         });
-        gsap.to('.hero-h1A', {
-          height: '120px',
-          width: '26rem',
-          skewX: 0,
-          skewY: 0,
-          scale: 1,
-          rotate: 0,
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
+
         gsap.to('.season-h1', {
           height: '120px',
           width: '128px',
@@ -206,17 +227,17 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
           ease: this.ease,
           overwrite: true,
         });
-        gsap.to('.episode-dash', {
-          width: '1.6rem',
-          height: 'auto',
-          skewX: 0,
-          skewY: 0,
-          scale: 1,
-          rotate: 0,
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
+        // gsap.to('.episode-dash', {
+        //   width: '1.6rem',
+        //   height: 'auto',
+        //   skewX: 0,
+        //   skewY: 0,
+        //   scale: 1,
+        //   rotate: 0,
+        //   duration: this.time,
+        //   ease: this.ease,
+        //   overwrite: true,
+        // });
         gsap.to('.episode-title', {
           width: '100%',
           height: 'auto',
@@ -255,19 +276,19 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
           ease: this.ease,
           overwrite: true,
         });
-        gsap.to('.topic', {
-          width: 'auto',
-          height: 'auto',
-          translateX: 0,
-          translateY: 0,
-          skewX: 0,
-          skewY: 0,
-          scale: 1,
-          rotate: 0,
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
+        // gsap.to('.topic', {
+        //   width: 'auto',
+        //   height: 'auto',
+        //   translateX: 0,
+        //   translateY: 0,
+        //   skewX: 0,
+        //   skewY: 0,
+        //   scale: 1,
+        //   rotate: 0,
+        //   duration: this.time,
+        //   ease: this.ease,
+        //   overwrite: true,
+        // });
         gsap.to('.bottom-container', {
           skewX: 0,
           skewY: 0,
@@ -316,15 +337,14 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
           ease: this.ease,
           overwrite: 'auto',
         });
-      }, 900);
+      }, 640);
       this.cdr.detectChanges();
-
       setTimeout(() => {
         this.largeCards.forEach((cardRef, index) => {
           ScrollTrigger.create({
             trigger: cardRef.nativeElement,
-            start: 'top 120px',
-            end: 'bottom 120px',
+            start: 'top 320px',
+            end: 'bottom 320px',
             markers: true,
             onEnter: () => this.entered(index),
             onEnterBack: () => this.entered(index),

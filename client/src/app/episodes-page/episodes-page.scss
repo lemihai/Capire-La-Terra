@@ -128,6 +128,7 @@
 
   .ln-A {
     width: auto !important;
+    margin-right: 4rem;
   }
 
   .line-container-icon {
@@ -185,7 +186,18 @@
 
   }
 
-  .hero-h1 {
+  .hero-h1-A {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 8rem;
+    transform: skewX(-32deg) skewY(-8deg);
+    color: var(--main-color-dark);
+    height: 0rem;
+    width: auto;
+    transition: var(--transition-160);
+  }
+  
+  .hero-h1-B {
     overflow: hidden;
     white-space: nowrap;
     font-size: 8rem;

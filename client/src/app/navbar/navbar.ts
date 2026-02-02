@@ -11,7 +11,7 @@ import { ProfileCard } from '../shared/components/profile-card/profile-card';
 
 @Component({
   selector: 'app-navbar',
-  imports: [ AsyncPipe, ProfileCard],
+  imports: [AsyncPipe, ProfileCard],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
   standalone: true,
@@ -328,11 +328,16 @@ export class Navbar implements OnInit, AfterViewInit {
         0,
       );
 
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+
       // ******************************************
       // TRIGGER FOR HOME PAGE
       // ******************************************
       if (fromRoute == '/') {
-        this.navbarGsapService.exitFrontPage(exitTimeline);
+        this.navbarGsapService.exitFrontPage();
       }
 
       // ******************************************
