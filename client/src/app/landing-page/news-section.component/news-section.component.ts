@@ -24,20 +24,27 @@ export class NewsSectionComponent implements OnInit {
   };
 
   private articlesService = inject(ArticlesService);
+  viewportWidth = window.innerWidth;
+  cardtype: string = 'small-no-image';
 
   articles: any = [];
 
   ngOnInit() {
+    if (this.viewportWidth >= 1100) {
+      this.cardtype = 'small-no-image';
+    } else {
+      this.cardtype = 'large';
+    }
     this.articlesService.getAllArticles().subscribe((data) => {
       // let dataList = data;
       //  for (const article of data){
-        //   console.log(data);
-        //  }
-        //  for(const a of data ){
-          //   console.log(a);
-          //  }
-          // this.articles = [...data];
-          this.articles = data;
+      //   console.log(data);
+      //  }
+      //  for(const a of data ){
+      //   console.log(a);
+      //  }
+      // this.articles = [...data];
+      this.articles = data;
       // this.sorting.sortedListView = [...this.articles];
       // this.sort('date');
       // this.cdr.detectChanges(); // Manually trigger change detection if needed

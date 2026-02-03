@@ -8,49 +8,51 @@
 <div id="smooth-wrapper">
   <div id="smooth-content">
     <!-- <div class="main"> -->
-    <div class="text-container" data-speed="0.1">
-      <div class="hero-text">
-        <div class="line-container">
-          <h1 class="hero-h1">Benvenuto</h1>
-          <h1 class="episodes-text-h1">Check Out</h1>
-          <h1 class="latest-news-h1">This is</h1>
-        </div>
-        <div class="line-container">
-          <h1 class="hero-h1">A Capire</h1>
-          <h1 class="episodes-text-h1">Our latest</h1>
-          <h1 class="latest-news-h1">An Example</h1>
-        </div>
-        <div class="line-container">
-          <h1 class="hero-h1">La Terra</h1>
-          <h1 class="episodes-text-h1">Episodes</h1>
-          <h1 class="latest-news-h1">Of a Title</h1>
-        </div>
-        <div class="action-container">
-          <div class="episodes-action-container">
-            <p class="episodes-action-container-text">Check out all of our episodes</p>
-            <div class="episodes-action-container-button">
-              <app-button
-                class="episodes-action-container-button-btn"
-                buttonText="To Episodes"
-                iconType="open-right"
-                (click)="navigateToPage('episodes')"
-              />
-            </div>
+    @if (viewportWidth >= 1100) {
+      <div class="text-container" data-speed="0.1">
+        <div class="hero-text">
+          <div class="line-container">
+            <h1 class="hero-h1">Benvenuto</h1>
+            <h1 class="episodes-text-h1">Check Out</h1>
+            <h1 class="latest-news-h1">This is</h1>
           </div>
-          <div class="news-action-container">
-            <p class="news-action-container-text">Check all the climate developments</p>
-            <div class="news-action-container-button">
-              <app-button
-                class="news-action-container-button-btn"
-                buttonText="To News"
-                iconType="arrow-right"
-                (click)="navigateToPage('news')"
-              />
+          <div class="line-container">
+            <h1 class="hero-h1">A Capire</h1>
+            <h1 class="episodes-text-h1">Our latest</h1>
+            <h1 class="latest-news-h1">An Example</h1>
+          </div>
+          <div class="line-container">
+            <h1 class="hero-h1">La Terra</h1>
+            <h1 class="episodes-text-h1">Episodes</h1>
+            <h1 class="latest-news-h1">Of a Title</h1>
+          </div>
+          <div class="action-container">
+            <div class="episodes-action-container">
+              <p class="episodes-action-container-text">Check out all of our episodes</p>
+              <div class="episodes-action-container-button">
+                <app-button
+                  class="episodes-action-container-button-btn"
+                  buttonText="To Episodes"
+                  iconType="open-right"
+                  (click)="navigateToPage('episodes')"
+                />
+              </div>
+            </div>
+            <div class="news-action-container">
+              <p class="news-action-container-text">Check all the climate developments</p>
+              <div class="news-action-container-button">
+                <app-button
+                  class="news-action-container-button-btn"
+                  buttonText="To News"
+                  iconType="arrow-right"
+                  (click)="navigateToPage('news')"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    }
 
     <div class="background {{ changeanimation }}">
       <div class="background-wrapper">

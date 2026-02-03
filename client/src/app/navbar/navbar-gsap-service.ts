@@ -52,17 +52,17 @@ export class NavbarGsapService {
       overwrite: true,
     });
     gsap.to('.episode-list-wrapper', {
-      height: '0px',
+      // height: '0rem',
       duration: this.time,
       ease: this.ease,
     });
     gsap.to('.about-earth-section', {
-      height: '0rem',
+      // height: '0rem',
       duration: this.time,
       ease: this.ease,
     });
     gsap.to('.about-earth-wrapper', {
-      height: '0rem',
+      // height: '0rem',
       paddingTop: '8rem',
       duration: this.time,
       ease: this.ease,
@@ -545,6 +545,15 @@ export class NavbarGsapService {
       skewX: 16,
       skewY: 8,
       opacity: 0,
+      scale: 1,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.card-image', {
+      height: '0rem',
+      minHeight: '0rem',
+      maxHeight: '0rem',
       scale: 1,
       duration: this.time,
       ease: this.ease,

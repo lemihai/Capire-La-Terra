@@ -12,13 +12,14 @@
         <h1 class="transition-A">Biggest News</h1>
         <div class="horizontal-seaprator-line transition-horizontal-line"></div>
       </div>
-      <app-news-card cardType="small-no-image" [article]="articles[0]" />
+
+      <!-- the reason these cards are different sizes could be because of the gsap animation -->
+
+      <app-news-card cardType="{{cardtype}}" [article]="articles[0]" />
       <div class="horizontal-seaprator-line transition-horizontal-line"></div>
-      <app-news-card cardType="small-no-image" [article]="articles[1]" />
+      <app-news-card cardType="{{cardtype}}" [article]="articles[1]" />
       <div class="horizontal-seaprator-line transition-horizontal-line"></div>
-      <app-news-card cardType="small-no-image" [article]="articles[2]" />
-      <!-- <div class="horizontal-seaprator-line transition-horizontal-line"></div>
-      <app-news-card cardType="small-no-image" [article]="articles[3]" /> -->
+      <app-news-card cardType="{{cardtype}}" [article]="articles[2]" />
     </div>
   </div>
 </div>

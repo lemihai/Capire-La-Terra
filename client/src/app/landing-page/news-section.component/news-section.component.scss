@@ -59,6 +59,12 @@
         border-radius: 1.6rem;
       }
     }
+
+    @media (min-width: 900px) and (max-width:1410px) {
+
+        width: 80%;
+      
+    }
   }
 
   .right-side {
@@ -113,6 +119,19 @@
 
       .transition-horizontal-line {
         // max-width: 0rem;
+      }
+    }
+  }
+
+  @media (min-width: 300px) and (max-width: 1100px) {
+    .left-side{
+      display: none;
+    }
+    .right-side{
+      width: 100%;
+
+      .right-side-wrapper{
+        
       }
     }
   }

@@ -345,7 +345,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
             trigger: cardRef.nativeElement,
             start: 'top 320px',
             end: 'bottom 320px',
-            markers: true,
+            // markers: true,
             onEnter: () => this.entered(index),
             onEnterBack: () => this.entered(index),
             onLeave: () => this.left(index),

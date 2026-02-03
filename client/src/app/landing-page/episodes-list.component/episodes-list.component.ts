@@ -22,6 +22,7 @@ export class EpisodesListComponent implements OnInit, OnChanges {
   private episodesService = inject(EpisodesService);
   private cdr = inject(ChangeDetectorRef);
   numberOfSeasons = 1;
+  viewportWidth = window.innerWidth;
 
   episodes: any = [];
   sortedListView: any = [];

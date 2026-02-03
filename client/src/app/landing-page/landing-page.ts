@@ -40,74 +40,9 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
     private router: Router,
-    // private navbar: Navbar,
   ) {}
 
-  episodes = [
-    {
-      id: 3243223,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 1,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243224,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 2,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243225,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 3,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243226,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 4,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243227,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 5,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243228,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 6,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243229,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 7,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243230,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 8,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-    {
-      id: 3243231,
-      name: 'Perchè la chiamiamo crisi climatica?',
-      number: 9,
-      description:
-        "Ecco il pilot del nostro podcast, oggi parliamo, in meno di 5 minuti, di perché è nostra responsabilità chiamare la crisi climatica tale e non solamente con l'espressione cambiamento climatico. Ammetto che so essere più simpatica negli altri episodi. Siamo molto emozionate e speriamo di ricevere tanto feedback da parte vostra.",
-    },
-  ];
+  viewportWidth = window.innerWidth;
 
   changeanimation = '';
   height = '100vh';
@@ -443,17 +378,22 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         // --------------------------
 
         setTimeout(() => {
-          gsap.to('.hero-h1', {
-            width: '46.4rem',
-            height: '12rem',
-            y: 0,
-            scale: 1,
-            skewX: 0,
-            skewY: 0,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-          });
+          console.log(1);
+          console.log(window.scrollY);
+          console.log(1);
+          if (window.scrollY < 80) {
+            gsap.to('.hero-h1', {
+              width: '46.4rem',
+              height: '12rem',
+              y: 0,
+              scale: 1,
+              skewX: 0,
+              skewY: 0,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+            });
+          }
         }, 2400);
 
         // --------------------------
@@ -595,7 +535,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-text', {
             height: '24px',
             width: '189px',
-            y: 32,
+            y: 0,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -607,7 +547,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-button', {
             height: '40px',
             width: '140px',
-            y: 32,
+            y: 0,
             // scale: '1',
             skewX: 0,
             skewY: 0,
@@ -648,7 +588,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-text', {
             height: '24px',
             width: '189px',
-            y: 32,
+            y: 0,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -660,7 +600,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-button', {
             height: '40px',
             width: '140px',
-            y: 32,
+            y: 0,
             skewX: 0,
             skewY: 0,
             scale: 1,
@@ -723,7 +663,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           gsap.to('.episodes-action-container-button-btn', {
             height: '0px',
             width: '0px',
- 
+
             opacity: 0,
             y: 0,
             skewX: 32,
