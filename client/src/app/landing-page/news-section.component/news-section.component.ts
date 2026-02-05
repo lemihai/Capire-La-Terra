@@ -33,7 +33,7 @@ export class NewsSectionComponent implements OnInit {
     if (this.viewportWidth >= 1100) {
       this.cardtype = 'small-no-image';
     } else {
-      this.cardtype = 'large';
+      this.cardtype = 'medium';
     }
     this.articlesService.getAllArticles().subscribe((data) => {
       // let dataList = data;

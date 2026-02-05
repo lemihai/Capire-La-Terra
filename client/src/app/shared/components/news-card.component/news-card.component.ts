@@ -40,6 +40,8 @@ export class NewsCardComponent implements OnInit, OnChanges {
     posted: false,
   };
 
+  viewportWidth = window.innerWidth;
+
   @Input() news: News = {
     _id: '',
     title: '',

@@ -1,8 +1,15 @@
+@use '../../../../variables.scss' as *;
+
+:host{
+  flex-shrink: 0;
+}
+
 .source {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  min-width: fit-content;
 
   gap: 0.8rem;
 
@@ -21,6 +28,7 @@
     font-size: 1.6rem;
     opacity: 1;
     min-width: max-content;
+    // min-width: fit-content;
   }
 }
 

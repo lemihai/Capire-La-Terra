@@ -441,7 +441,7 @@ export class NavbarGsapService {
       overwrite: true,
     });
     gsap.to('.medium', {
-      height: '6.4rem',
+      // height: '6.4rem',
       minWidth: '32rem',
       opacity: 0,
       duration: this.time,
@@ -449,7 +449,7 @@ export class NavbarGsapService {
       overwrite: true,
     });
     gsap.to('.large', {
-      height: '8rem',
+      // height: '8rem',
       minWidth: '32rem',
       opacity: 0,
       // rotate: 45,
@@ -596,15 +596,15 @@ export class NavbarGsapService {
       ease: this.ease,
       overwrite: true,
     });
-    gsap.to('.transition-image-A ', {
-      height: '0rem',
-      minHeight: '0rem',
-      maxHeight: '0rem',
-      y: -8,
-      duration: this.time,
-      ease: this.ease,
-      overwrite: true,
-    });
+    // gsap.to('.transition-image-A ', {
+    //   height: '0rem',
+    //   minHeight: '0rem',
+    //   maxHeight: '0rem',
+    //   y: -8,
+    //   duration: this.time,
+    //   ease: this.ease,
+    //   overwrite: true,
+    // });
   }
 
   exitArticlePage() {

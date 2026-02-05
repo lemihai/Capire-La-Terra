@@ -304,6 +304,15 @@ export class Navbar implements OnInit, AfterViewInit {
       const exitTimeline = gsap.timeline({
         onComplete: () => {
           this.ngZone.run(() => {
+            // setTimeout(()=>{
+
+            // WINDOW SCROLLS TO TOP
+            window.scrollTo({
+              top: 0,
+              // behavior: 'smooth',
+              behavior: 'instant',
+            });
+            // },200);
             this.router.navigate([url]);
           });
         },
@@ -327,11 +336,6 @@ export class Navbar implements OnInit, AfterViewInit {
         },
         0,
       );
-
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
 
       // ******************************************
       // TRIGGER FOR HOME PAGE

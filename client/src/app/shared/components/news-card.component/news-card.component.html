@@ -4,7 +4,7 @@
   [attr.data-card-type]="cardDirection"
 >
   @if (cardType === 'smallest') {
-    <p>This is a large card.</p>
+    <p>This is the smallest card.</p>
   }
   @if (cardType === 'small-no-image') {
     <div class="news-card-wrapper" (click)="navigateToArticlePage()">
@@ -131,7 +131,41 @@
       </div>
     </div>
   } @else if (cardType === 'medium') {
-    <p>This is a medium card.</p>
+    <div class="medium-news-card-wrapper" (click)="navigateToArticlePage()">
+      <div class="medium-hovered-bar"></div>
+      <div class="medium-card-image">
+        <img [src]="article.imageUrl" alt="Article Image" />
+      </div>
+      <div class="medium-card-content">
+        <!-- <div class="medium-title-wrapper"> -->
+        <h2 class="medium-title">{{ article.title }}</h2>
+        <!-- </div> -->
+        <div class="medium-card-details-wrapper">
+          <app-profile-card [profile]="article.author" class="" />
+          <div class="medium-separator-line"></div>
+          <p class="medium-date">{{ article.date }}</p>
+          <div class="medium-separator-line"></div>
+          <div class="medium-card-source-parent-wrapper">
+            <div class="medium-card-source-wrapper">
+              @if (article.sources.length > (viewportWidth >= 1000 ? 2 : 1)) {
+                @for (source of article.sources; track source) {
+                  <app-source class="transition-A" source="{{ source }}" size="no-image" />
+                }
+              } @else {
+                @for (source of article.sources; track source) {
+                  <app-source class="transition-A" source="{{ source }}" size="" />
+                }
+              }
+            </div>
+          </div>
+        </div>
+        <div class="medium-text-wrapper">
+          <p class="medium-text">
+            {{ article.text[0] + ' ' + article.text[1] }}
+          </p>
+        </div>
+      </div>
+    </div>
   } @else if (cardType === 'large') {
     <div class="news-card-wrapper" (click)="navigateToArticlePage()">
       <div class="hovered-bar"></div>
@@ -179,21 +213,81 @@
           <div class="separator-line transition-vertical-line-inside-card"></div>
           <p class="date transition-A">{{ article.date }}</p>
           <div class="separator-line transition-vertical-line-inside-card"></div>
-          @if (article.sources.length > 5) {
-            @for (source of article.sources; track source) {
-              <app-source class="transition-A" source="{{ source }}" size="no-image" />
+          <div class="card-large-source-wrapper">
+            @if (article.sources.length > (viewportWidth >= 1400 ? 5 : 2)) {
+              @for (source of article.sources; track source) {
+                <app-source class="transition-A" source="{{ source }}" size="no-image" />
+              }
+            } @else {
+              @for (source of article.sources; track source) {
+                <app-source class="transition-A" source="{{ source }}" size="" />
+              }
             }
-          } @else {
-            @for (source of article.sources; track source) {
-              <app-source class="transition-A" source="{{ source }}" size="" />
-            }
-          }
+          </div>
         </div>
         <p class="abstract transition-A">{{ article.text[0] }}</p>
       </div>
     </div>
-  } @else if (cardType === 'extra-large') {
-    <p>This is a large card.</p>
+  } @else if (cardType === 'front-page') {
+    <div class="fp-news-card-wrapper" (click)="navigateToArticlePage()">
+      <div class="fp-hovered-bar"></div>
+      <div class="fp-card-image fp-transition-image-A">
+        <img [src]="article.imageUrl" alt="Article Image" />
+      </div>
+      <div class="fp-card-content">
+        <div class="fp-title-wrapper">
+          <h2 class="fp-title fp-transition-A">{{ article.title }}</h2>
+          <div class="fp-title-icon">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M24.2728 15.173V26.3412C24.2728 27.0464 23.9926 27.7228 23.4939 28.2215C22.9953 28.7202 22.3189 29.0003 21.6136 29.0003H5.65909C4.95386 29.0003 4.27751 28.7202 3.77883 28.2215C3.28016 27.7228 3 27.0464 3 26.3412V10.3867C3 9.68141 3.28016 9.00504 3.77883 8.50641C4.27751 8.00773 4.95386 7.72754 5.65909 7.72754H16.8272"
+                stroke="black"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M29.0003 11.2727V3H20.7275"
+                stroke="black"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.5 18.5L29 3"
+                stroke="black"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="fp-article-details">
+          <app-profile-card [profile]="article.author" class="fp-transition-A" />
+
+          <div class="fp-separator-line fp-transition-vertical-line-inside-card"></div>
+          <p class="fp-date fp-transition-A">{{ article.date }}</p>
+          <div class="fp-separator-line fp-transition-vertical-line-inside-card"></div>
+          @if (article.sources.length > 5) {
+            @for (source of article.sources; track source) {
+              <app-source class="fp-transition-A" source="{{ source }}" size="no-image" />
+            }
+          } @else {
+            @for (source of article.sources; track source) {
+              <app-source class="fp-transition-A" source="{{ source }}" size="" />
+            }
+          }
+        </div>
+        <p class="fp-abstract fp-transition-A">{{ article.text[0] }}</p>
+      </div>
+    </div>
   } @else if (cardType === 'hero-card') {
     <div class="news-card-wrapper  {{ cardDirection }}" (click)="navigateToArticlePage()">
       <div class="hovered-bar"></div>
