@@ -124,6 +124,7 @@
   }
 
   @media (min-width: 1000px) and (max-width: 1100px) {
+    height: auto;
     .left-side{
       display: none;
     }
@@ -142,6 +143,7 @@
   }
 
   @media (min-width: 900px) and (max-width: 1000px) {
+    height: auto;
     .left-side{
       display: none;
     }
@@ -159,6 +161,7 @@
     }
   }
   @media (min-width: 760px) and (max-width: 900px) {
+    height: auto;
     .left-side{
       display: none;
     }
@@ -177,12 +180,13 @@
   }
 
   @media (min-width: 200px) and (max-width: 760px) {
+    height: auto;
     .left-side{
       display: none;
     }
     .right-side{
       width: 100%;
-      padding: 1.2rem;
+      padding: .8rem;
 
       .right-side-wrapper{
         width: 100%;
@@ -193,4 +197,6 @@
       }
     }
   }
+
+
 }

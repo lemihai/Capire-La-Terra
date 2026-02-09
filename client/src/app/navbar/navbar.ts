@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, NgZone, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  NgZone,
+  AfterViewInit,
+  HostListener,
+} from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
@@ -25,6 +32,16 @@ export class Navbar implements OnInit, AfterViewInit {
   opacity = '0';
   width = '0px';
   currentRoute: string = '';
+
+  // ViewPortWidth for responsiveness
+  // 768px breakpoint
+  viewportWidth = window.innerWidth;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.viewportWidth = window.innerWidth;
+    this.cdr.detectChanges();
+    console.log(this.viewportWidth);
+  }
 
   navbarObj = {
     home: 'active',

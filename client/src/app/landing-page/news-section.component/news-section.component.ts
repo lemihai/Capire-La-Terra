@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, inject, Input, OnInit } from '@angular/core';
 import { NewsCardComponent } from '../../shared/components/news-card.component/news-card.component';
 import { Article } from '../../news-page/article-page/article-page';
 import { ArticlesService } from '../../../services/articles-service/articles-service';
@@ -23,14 +23,31 @@ export class NewsSectionComponent implements OnInit {
     posted: false,
   };
 
+  private cdr = inject(ChangeDetectorRef)
   private articlesService = inject(ArticlesService);
   viewportWidth = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.viewportWidth = window.innerWidth;
+    if (this.viewportWidth >= 1100) {
+      this.cardtype = 'small-no-image';
+    } else if (this.viewportWidth <= 560) {
+      this.cardtype = 'small-no-image';
+    } else {
+      this.cardtype = 'medium';
+    }
+    this.cdr.detectChanges()
+  }
+
   cardtype: string = 'small-no-image';
 
   articles: any = [];
 
   ngOnInit() {
     if (this.viewportWidth >= 1100) {
+      this.cardtype = 'small-no-image';
+    } else if (this.viewportWidth <= 560) {
       this.cardtype = 'small-no-image';
     } else {
       this.cardtype = 'medium';

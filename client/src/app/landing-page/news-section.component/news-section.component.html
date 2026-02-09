@@ -17,6 +17,10 @@
       <app-news-card cardType="{{ cardtype }}" [article]="articles[1]" />
       <div class="horizontal-seaprator-line transition-horizontal-line"></div>
       <app-news-card cardType="{{ cardtype }}" [article]="articles[2]" />
+      @if (viewportWidth <= 560) {
+        <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+        <app-news-card cardType="{{ cardtype }}" [article]="articles[3]" />
+      }
     </div>
   </div>
 </div>

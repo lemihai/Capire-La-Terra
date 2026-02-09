@@ -1,7 +1,6 @@
 import {
   ChangeDetectorRef,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   NgZone,
@@ -12,8 +11,7 @@ import {
 } from '@angular/core';
 import { ProfileCard } from '../profile-card/profile-card';
 import { SourceComponent } from '../source.component/source.component';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { NavbarGsapService } from '../../../navbar/navbar-gsap-service';
+import {  NavigationExtras, Router } from '@angular/router';
 
 import gsap from 'gsap';
 import CustomEase from 'gsap/CustomEase';
@@ -60,12 +58,9 @@ export class NewsCardComponent implements OnInit, OnChanges {
   currentRoute: string = '';
 
   constructor(
-    private elementRef: ElementRef,
     private cdr: ChangeDetectorRef,
     private router: Router,
     private ngZone: NgZone,
-    private route: ActivatedRoute,
-    private navbarGsapService: NavbarGsapService,
   ) {
     gsap.registerPlugin(CustomEase);
   }
@@ -78,9 +73,10 @@ export class NewsCardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['article']) {
+    if (changes['cardType']) {
+      this.cardType = changes['cardType'].currentValue;
+      this.cdr.detectChanges();
     }
-    this.cdr.detectChanges();
   }
 
   updateRoute() {

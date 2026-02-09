@@ -25,6 +25,30 @@
 
     gap: 2.4rem;
 
+    .header {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      h1 {
+        color: var(--main-color-dark);
+      }
+      
+      .horizontal-seaprator-line {
+        min-height: 0.24rem;
+        width: 100%;
+        background-color: var(--main-color-dark-32);
+        border-radius: 1rem;
+      }
+
+      .transition-horizontal-line {
+        // max-width: 0rem;
+      }
+    }
+
     .season-episode-list {
       display: flex;
       flex-direction: column;

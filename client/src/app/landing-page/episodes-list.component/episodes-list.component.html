@@ -1,5 +1,11 @@
 <div class="episode-list-wrapper">
   <div class="episode-list">
+    @if (viewportWidth <= 1100) {
+      <div class="header">
+        <h1 class="transition-A">Latest Episodes</h1>
+        <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+      </div>
+    }
     <app-episode-card cardType="large" [episode]="episodes[0]" />
     <div class="season-episode-list">
       <app-episode-card cardType="small" [episode]="episodes[1]" />

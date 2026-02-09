@@ -34,6 +34,13 @@ nav {
       padding: 0.4rem;
       transition: var(--transition-160);
     }
+
+    @media (max-width: 768px) {
+      ul {
+        height: 4rem;
+        border-radius: 1.6rem;
+      }
+    }
   }
 
   // ***************************
@@ -69,6 +76,45 @@ nav {
         padding-top: 0.2rem;
         font-size: 1.4rem;
         transition: var(--transition-160);
+      }
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+
+      ul {
+        justify-content: space-between;
+
+        .nav-left-wrapper {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+
+          gap: 0.8rem;
+        }
+
+        .nav-chevron {
+          height: 2.4rem;
+          width: 2.4rem;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          svg {
+            transition: var(--transition-160);
+            height: 2.4rem;
+            width: 2.4rem;
+            path {
+              stroke-width: 0.24rem;
+              transition: var(--transition-160);
+            }
+          }
+        }
+      }
+
+      .buttons-list {
       }
     }
   }
@@ -452,6 +498,11 @@ nav {
         z-index: 0;
       }
     }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.6rem 1.6rem 0rem 1.6rem;
+    flex-direction: column;
   }
 }
 

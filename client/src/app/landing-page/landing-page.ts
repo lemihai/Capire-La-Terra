@@ -502,6 +502,8 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         }, 100);
       }
 
+      if(this.viewportWidth >= 1100){
+
       // --------------------------
       // THIS NEEDS TO HAPPEN NO MATTER HOW THE PAGE LOADS
       // --------------------------
@@ -1022,6 +1024,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           });
         },
       });
+      }
     });
   }
 }
