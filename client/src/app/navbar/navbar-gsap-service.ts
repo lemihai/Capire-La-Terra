@@ -738,4 +738,46 @@ export class NavbarGsapService {
     });
     // }, 100);
   }
+
+  // --------------------------------
+  // Navbar Collapse
+  // --------------------------------
+  navbarCollapse() {
+    gsap.to('nav', {
+      height: 'auto',
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+    gsap.to('.nav-logo-wrapper', {
+      height: '4rem',
+      padding: '.4rem .8rem',
+      rotate: 0,
+      duration: 2,
+      ease: this.ease,
+    });
+  }
+
+  // --------------------------------
+  // Navbar Expand
+  // --------------------------------
+
+  navbarExpand() {
+    gsap.to('nav', {
+      height: '100%',
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+
+    gsap.to('.nav-logo-wrapper', {
+      height: '100%',
+      maxHeight: '100%',
+      padding: '1.6rem',
+      justifyContent: 'space-between',
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+  }
 }

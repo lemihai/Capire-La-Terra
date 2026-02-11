@@ -33,6 +33,15 @@ export class Navbar implements OnInit, AfterViewInit {
   width = '0px';
   currentRoute: string = '';
 
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+    private ngZone: NgZone,
+    private route: ActivatedRoute,
+    private navbarGsapService: NavbarGsapService,
+    private authService: AuthService,
+  ) {}
+
   // ViewPortWidth for responsiveness
   // 768px breakpoint
   viewportWidth = window.innerWidth;
@@ -49,6 +58,11 @@ export class Navbar implements OnInit, AfterViewInit {
     news: '',
     admin: '',
     login: '',
+    iconHome: 'nav-small-icon-active',
+    iconEpisodes: '',
+    iconNews: '',
+    iconaAdmin: '',
+    iconLogin: '',
     backgroundWidth: '87.56px',
     backgroundHeight: '3.2rem',
     backgroundLeft: '',
@@ -251,20 +265,24 @@ export class Navbar implements OnInit, AfterViewInit {
         this.languageEnglish = 'ln-active';
       }
     },
+
+    // ************************
+    // FOR MOBILE
+    // ************************
+
+    chevronExpanded: '',
+  };
+
+  socials = {
+    capireLaTerraInsta: 'https://www.instagram.com/capirelaterrapodcast/',
+    capireLaTerraSpotify: 'https://open.spotify.com/show/0lBbMLBVG9USZhiTZeOU8E',
+    capireLaTerraInstaApp: 'instagram://user?username=capirelaterrapodcast',
+    capireLaTerraSpotifyApp: 'spotify:show:0lBbMLBVG9USZhiTZeOU8E',
   };
 
   // For animations in gsap
   time = 0.64;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
-
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private router: Router,
-    private ngZone: NgZone,
-    private route: ActivatedRoute,
-    private navbarGsapService: NavbarGsapService,
-    private authService: AuthService,
-  ) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -421,5 +439,18 @@ export class Navbar implements OnInit, AfterViewInit {
 
   updateRoute() {
     this.currentRoute = this.router.url;
+  }
+
+  // ************************
+  // FOR MOBILE
+  // ************************
+  expandNavbar() {
+    if (this.navbarObj.chevronExpanded === '') {
+      this.navbarGsapService.navbarExpand();
+      this.navbarObj.chevronExpanded = 'nav-small-chevron-active';
+    } else {
+      this.navbarGsapService.navbarCollapse();
+      this.navbarObj.chevronExpanded = '';
+    }
   }
 }
