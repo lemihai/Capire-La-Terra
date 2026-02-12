@@ -7,6 +7,7 @@ import {
   OnInit,
   Input,
   inject,
+  HostListener,
 } from '@angular/core';
 // import { AudioPlayer } from "../shared/components/audio-player/audio-player";
 import { PlayButton } from '../shared/buttons/play-button/play-button';
@@ -61,13 +62,23 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
   };
   externalFlag = false;
 
-  private episodeSubscription!: Subscription;
-
-  trackTriggeredPlay = false;
   constructor(
     private cdRef: ChangeDetectorRef,
     // private globalPlayerService: GlobalAudioPlayerService
   ) {}
+
+  viewportWidth = window.innerWidth;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.viewportWidth = window.innerWidth;
+    console.log(this.viewportWidth);
+    // 548
+    this.cdRef.detectChanges();
+  }
+
+  private episodeSubscription!: Subscription;
+
+  trackTriggeredPlay = false;
 
   private globalPlayerService = inject(GlobalAudioPlayerService);
   private episodeService = inject(EpisodesService);

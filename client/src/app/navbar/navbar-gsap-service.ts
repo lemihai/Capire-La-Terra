@@ -11,6 +11,7 @@ gsap.registerPlugin(CustomEase);
 export class NavbarGsapService {
   time = 0.64;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
+  viewportWidth = window.innerWidth;
 
   exitFrontPage() {
     gsap.to('.hero-h1', {
@@ -749,11 +750,69 @@ export class NavbarGsapService {
       duration: 1,
       ease: this.ease,
     });
+
     gsap.to('.nav-logo-wrapper', {
       height: '4rem',
       padding: '.4rem .8rem',
       rotate: 0,
-      duration: 2,
+      duration: 1,
+      ease: this.ease,
+       overwrite:true,
+    });
+    
+    gsap.to('.nav-small-wrapper', {
+      height: '3.2rem',
+      // padding: '.4rem .8rem',
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+
+    // ******************************
+    gsap.to('.nav-text', {
+      y: -40,
+      skewX: 24,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+    gsap.to('.nav-small-header-text', {
+      y: -8,
+      skewX: 16,
+      skewY: 4,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+
+    // ******************************
+    gsap.to('.button-hover-background', {
+      height: '0rem',
+      minHeight: '0rem',
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+
+    gsap.to('.nav-small-horizontal-separator-line', {
+      width: '0rem',
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+
+    // ******************************
+    gsap.to('.nav-small-icon-active', {
+      y: -40,
+      skewX: 32,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
       ease: this.ease,
     });
   }
@@ -770,11 +829,76 @@ export class NavbarGsapService {
       ease: this.ease,
     });
 
-    gsap.to('.nav-logo-wrapper', {
+    if (this.viewportWidth < 464) {
+      gsap.to('.nav-logo-wrapper', {
+        height: '100%',
+        maxHeight: '100%',
+        padding: '1.2rem',
+        rotate: 0,
+        duration: 1,
+        ease: this.ease,
+        overwrite:true,
+      });
+    } else if (this.viewportWidth >= 464) {
+      gsap.to('.nav-logo-wrapper', {
+        height: '100%',
+        maxHeight: '100%',
+        padding: '1.6rem',
+        rotate: 0,
+        duration: 1,
+        ease: this.ease,
+         overwrite:true,
+      });
+    }
+    gsap.to('.nav-small-wrapper', {
       height: '100%',
       maxHeight: '100%',
-      padding: '1.6rem',
-      justifyContent: 'space-between',
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+    gsap.to('.nav-text', {
+      y: 0,
+      skewX: 0,
+      skewY: 0,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+    gsap.to('.nav-small-header-text', {
+      y: 0,
+      skewX: 0,
+      skewY: 0,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+
+    // ******************************
+    gsap.to('.button-hover-background', {
+      height: '4.8rem',
+      minHeight: '4.8rem',
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+    });
+
+    gsap.to('.nav-small-horizontal-separator-line', {
+      width: '100%',
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+
+    // ******************************
+    gsap.to('.nav-small-icon-active', {
+      y: 0,
+      skewX: 0,
+      skewY: 0,
+      scale: 1,
       rotate: 0,
       duration: 1,
       ease: this.ease,

@@ -1,6 +1,7 @@
 @use '../../variables.scss' as *;
 
 :host {
+  transition: var(--transition-24);
   .stat-container {
     width: auto;
     height: 4rem;
@@ -83,6 +84,11 @@
         }
       }
     }
+  }
+
+  @media (max-width: 792px) {
+    opacity: 0;
+    pointer-events: none;
   }
 }
 

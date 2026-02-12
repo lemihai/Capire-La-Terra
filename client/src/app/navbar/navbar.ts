@@ -48,11 +48,13 @@ export class Navbar implements OnInit, AfterViewInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.viewportWidth = window.innerWidth;
+    this.navbarObj.viewPortWidthNav = this.viewportWidth;
+    this.updateNavbarActiveState(this.currentRoute);
     this.cdr.detectChanges();
-    console.log(this.viewportWidth);
   }
 
   navbarObj = {
+    viewPortWidthNav: this.viewportWidth,
     home: 'active',
     episodes: '',
     news: '',
@@ -66,6 +68,7 @@ export class Navbar implements OnInit, AfterViewInit {
     backgroundWidth: '87.56px',
     backgroundHeight: '3.2rem',
     backgroundLeft: '',
+    backgroundTop: '0rem',
 
     loginBackgroundWidth: '0rem',
     loginBackgroundHeight: '.8rem',
@@ -78,113 +81,181 @@ export class Navbar implements OnInit, AfterViewInit {
     previousActive: 'home',
 
     setActive(view: string) {
-      if (view == 'home') {
-        this.currentInFocus = 'home';
+      if (this.viewPortWidthNav > 792) {
+        if (view == 'home') {
+          this.currentInFocus = 'home';
 
-        this.home = 'active';
-        this.episodes = '';
-        this.news = '';
-        this.admin = '';
-        this.login = '';
-        this.backgroundWidth = '87.56px';
-        this.backgroundHeight = '3.2rem';
-        this.backgroundLeft = '.4rem';
-
-        this.loginBackgroundWidth = '0rem';
-        this.loginBackgroundHeight = '3.2rem';
-        this.loginBackgroundLeft = '-6rem';
-
-        this.previousActive = view;
-      }
-      if (view == 'episodes') {
-        this.currentInFocus = 'episodes';
-
-        this.home = '';
-        this.episodes = 'active';
-        this.news = '';
-        this.admin = '';
-        this.login = '';
-        this.backgroundWidth = '102.31px';
-        this.backgroundHeight = '3.2rem';
-        this.backgroundLeft = 'calc(.8rem + 65.16px)';
-
-        this.loginBackgroundWidth = '0rem';
-        this.loginBackgroundHeight = '3.2rem';
-        this.loginBackgroundLeft = '-6rem';
-
-        this.previousActive = view;
-      }
-      if (view == 'news') {
-        this.currentInFocus = 'news';
-
-        this.home = '';
-        this.episodes = '';
-        this.news = 'active';
-        this.admin = '';
-        this.login = '';
-        this.backgroundWidth = '82.44px';
-        this.backgroundHeight = '3.2rem';
-        this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px)';
-
-        this.loginBackgroundWidth = '0rem';
-        this.loginBackgroundHeight = '3.2rem';
-        this.loginBackgroundLeft = '-6rem';
-
-        this.previousActive = view;
-      }
-      if (view == 'admin') {
-        this.currentInFocus = 'admin';
-
-        this.home = '';
-        this.episodes = '';
-        this.news = '';
-        this.admin = 'active';
-        this.login = '';
-
-        this.backgroundWidth = '91.55px';
-        this.backgroundHeight = '3.2rem';
-        this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px)';
-
-        this.loginBackgroundWidth = '0rem';
-        this.loginBackgroundHeight = '3.2rem';
-        this.loginBackgroundLeft = '-6rem';
-
-        this.previousActive = view;
-      }
-      if (view == 'login') {
-        this.currentInFocus = 'admin';
-
-        this.home = '';
-        this.episodes = '';
-        this.news = '';
-        this.admin = '';
-        this.login = 'active';
-        if (this.previousActive === 'admin') {
-          this.backgroundWidth = '0px';
+          this.home = 'active';
+          this.episodes = '';
+          this.news = '';
+          this.admin = '';
+          this.login = '';
+          this.backgroundWidth = '87.56px';
           this.backgroundHeight = '3.2rem';
-          this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px + 10rem)';
-        } else if (this.previousActive === 'news') {
-          this.backgroundWidth = '0px';
-          this.backgroundHeight = '3.2rem';
-          this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px + 16rem)';
-        } else if (this.previousActive === 'episodes') {
-          this.backgroundWidth = '0px';
-          this.backgroundHeight = '3.2rem';
-          this.backgroundLeft = 'calc(.8rem + 65.16px + 28rem)';
-        } else if (this.previousActive === 'home') {
-          this.backgroundWidth = '0px';
-          this.backgroundHeight = '3.2rem';
-          this.backgroundLeft = 'calc(.4rem + 38rem)';
-        } else {
-          this.backgroundWidth = '0px';
-          this.backgroundHeight = '.8rem';
+          this.backgroundLeft = '.4rem';
+
+          this.loginBackgroundWidth = '0rem';
+          this.loginBackgroundHeight = '3.2rem';
+          this.loginBackgroundLeft = '-6rem';
+
+          this.previousActive = view;
         }
+        if (view == 'episodes') {
+          this.currentInFocus = 'episodes';
 
-        this.loginBackgroundWidth = '7.87rem';
-        this.loginBackgroundHeight = '3.2rem';
-        this.loginBackgroundLeft = '.4rem';
+          this.home = '';
+          this.episodes = 'active';
+          this.news = '';
+          this.admin = '';
+          this.login = '';
+          this.backgroundWidth = '102.31px';
+          this.backgroundHeight = '3.2rem';
+          this.backgroundLeft = 'calc(.8rem + 65.16px)';
 
-        this.previousActive = view;
+          this.loginBackgroundWidth = '0rem';
+          this.loginBackgroundHeight = '3.2rem';
+          this.loginBackgroundLeft = '-6rem';
+
+          this.previousActive = view;
+        }
+        if (view == 'news') {
+          this.currentInFocus = 'news';
+
+          this.home = '';
+          this.episodes = '';
+          this.news = 'active';
+          this.admin = '';
+          this.login = '';
+          this.backgroundWidth = '82.44px';
+          this.backgroundHeight = '3.2rem';
+          this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px)';
+
+          this.loginBackgroundWidth = '0rem';
+          this.loginBackgroundHeight = '3.2rem';
+          this.loginBackgroundLeft = '-6rem';
+
+          this.previousActive = view;
+        }
+        if (view == 'admin') {
+          this.currentInFocus = 'admin';
+
+          this.home = '';
+          this.episodes = '';
+          this.news = '';
+          this.admin = 'active';
+          this.login = '';
+
+          this.backgroundWidth = '91.55px';
+          this.backgroundHeight = '3.2rem';
+          this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px)';
+
+          this.loginBackgroundWidth = '0rem';
+          this.loginBackgroundHeight = '3.2rem';
+          this.loginBackgroundLeft = '-6rem';
+
+          this.previousActive = view;
+        }
+        if (view == 'login') {
+          this.currentInFocus = 'admin';
+
+          this.home = '';
+          this.episodes = '';
+          this.news = '';
+          this.admin = '';
+          this.login = 'active';
+          if (this.previousActive === 'admin') {
+            this.backgroundWidth = '0px';
+            this.backgroundHeight = '3.2rem';
+            this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px + 10rem)';
+          } else if (this.previousActive === 'news') {
+            this.backgroundWidth = '0px';
+            this.backgroundHeight = '3.2rem';
+            this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px + 16rem)';
+          } else if (this.previousActive === 'episodes') {
+            this.backgroundWidth = '0px';
+            this.backgroundHeight = '3.2rem';
+            this.backgroundLeft = 'calc(.8rem + 65.16px + 28rem)';
+          } else if (this.previousActive === 'home') {
+            this.backgroundWidth = '0px';
+            this.backgroundHeight = '3.2rem';
+            this.backgroundLeft = 'calc(.4rem + 38rem)';
+          } else {
+            this.backgroundWidth = '0px';
+            this.backgroundHeight = '.8rem';
+          }
+
+          this.loginBackgroundWidth = '7.87rem';
+          this.loginBackgroundHeight = '3.2rem';
+          this.loginBackgroundLeft = '.4rem';
+
+          this.previousActive = view;
+        }
+      } else {
+        if (view == 'home') {
+          this.currentInFocus = 'home';
+
+          this.home = 'active';
+          this.episodes = '';
+          this.news = '';
+          this.admin = '';
+          this.login = '';
+          this.backgroundTop = '5.1rem';
+          this.backgroundHeight = '4.8rem';
+          this.backgroundLeft = '.8rem';
+          this.previousActive = view;
+        }
+        if (view == 'episodes') {
+          this.currentInFocus = 'episodes';
+
+          this.home = '';
+          this.episodes = 'active';
+          this.news = '';
+          this.admin = '';
+          this.login = '';
+          this.backgroundTop = 'calc(5.1rem + 1.2rem + 4.8rem)';
+          this.backgroundHeight = '4.8rem';
+          this.backgroundLeft = '.8rem';
+          this.previousActive = view;
+        }
+        if (view == 'news') {
+          this.currentInFocus = 'news';
+
+          this.home = '';
+          this.episodes = '';
+          this.news = 'active';
+          this.admin = '';
+          this.login = '';
+          this.backgroundTop = 'calc(5.1rem + 1.2rem * 2 + 4.8rem * 2)';
+          this.backgroundHeight = '4.8rem';
+          this.backgroundLeft = '.8rem';
+          this.previousActive = view;
+        }
+        if (view == 'admin') {
+          this.currentInFocus = 'admin';
+
+          this.home = '';
+          this.episodes = '';
+          this.news = '';
+          this.admin = 'active';
+          this.login = '';
+          this.backgroundTop = 'calc(5.1rem + 1.2rem * 3 + 4.8rem * 3)';
+          this.backgroundHeight = '4.8rem';
+          this.backgroundLeft = '.8rem';
+          this.previousActive = view;
+        }
+        if (view == 'login') {
+          this.currentInFocus = 'login';
+
+          this.home = '';
+          this.episodes = '';
+          this.news = '';
+          this.admin = '';
+          this.login = 'active';
+          this.backgroundTop = 'calc(5.1rem + 1.2rem * 3 + 4.8rem * 3)';
+          this.backgroundHeight = '4.8rem';
+          this.backgroundLeft = '.8rem';
+          this.previousActive = view;
+        }
       }
     },
 
@@ -412,29 +483,49 @@ export class Navbar implements OnInit, AfterViewInit {
     this.updateRoute();
     this.triggerPageTransition('/', this.currentRoute);
     this.navbarObj.setActive('home');
+    if (this.viewportWidth < 792) {
+      this.navbarGsapService.navbarCollapse();
+      this.navbarObj.chevronExpanded = '';
+    }
   }
 
   navigateToEpisodesPage() {
     this.updateRoute();
     this.triggerPageTransition('/episodes-page', this.currentRoute);
     this.navbarObj.setActive('episodes');
+    if (this.viewportWidth < 792) {
+      this.navbarGsapService.navbarCollapse();
+      this.navbarObj.chevronExpanded = '';
+    }
   }
 
   navigateToNewsPage() {
     this.updateRoute();
     this.triggerPageTransition('/news-page', this.currentRoute);
     this.navbarObj.setActive('news');
+    if (this.viewportWidth < 792) {
+      this.navbarGsapService.navbarCollapse();
+      this.navbarObj.chevronExpanded = '';
+    }
   }
 
   nagivateToAdminPage() {
     this.updateRoute();
     this.triggerPageTransition('/admin-page', this.currentRoute);
     this.navbarObj.setActive('admin');
+    if (this.viewportWidth < 792) {
+      this.navbarGsapService.navbarCollapse();
+      this.navbarObj.chevronExpanded = '';
+    }
   }
 
   nagivateToLoginPage() {
     this.updateRoute();
     this.triggerPageTransition('/login-page', this.currentRoute);
+    if (this.viewportWidth < 792) {
+      this.navbarGsapService.navbarCollapse();
+      this.navbarObj.chevronExpanded = '';
+    }
   }
 
   updateRoute() {

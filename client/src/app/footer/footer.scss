@@ -15,13 +15,41 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 12rem;
-  padding: 4.8rem 1.6rem 1.6rem 1.6rem;
+  padding: 4.8rem 8rem 1.6rem 8rem;
 
   border-radius: 3.2rem;
 
   .footer-left {
     padding-top: 1.3rem;
     width: 24%;
+    @media (max-width: 876px) {
+      width: 32%;
+      .column {
+        height: 100%;
+        p:first-child {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          height: 100%;
+          order: 2;
+          justify-self: flex-start;
+        }
+      }
+    }
+    @media (max-width: 548px) {
+      width: 40%;
+    }
+    @media (max-width: 472px) {
+      width: 100%;
+      .column {
+        height: 100%;
+        justify-content: flex-start;
+        p:first-child {
+          order: 0;
+        }
+      }
+    }
+    
   }
 
   .footer-right {
@@ -29,8 +57,31 @@
     display: flex;
     flex-direction: row;
     gap: 6.4rem;
-    padding-right: 8rem;
+    // padding-right: 8rem;
     transition: var(--transition-160);
+
+    .column:first-child {
+      @media (max-width: 1272px) {
+        width: 80%;
+      }
+      @media (max-width: 988px) {
+        width: 64%;
+      }
+      @media (max-width: 876px) {
+        width: 100%;
+      }
+    }
+    .column:last-child {
+      @media (max-width: 1272px) {
+        width: 80%;
+      }
+      @media (max-width: 964px) {
+        width: 72%;
+      }
+      @media (max-width: 876px) {
+        width: 100%;
+      }
+    }
 
     .social-link {
       display: flex;
@@ -262,6 +313,20 @@
         }
       }
     }
+    @media (max-width: 1146px) {
+      gap: 4rem;
+    }
+
+    @media (max-width: 876px) {
+      flex-direction: column;
+      gap: 4rem;
+      width: 50%;
+    }
+    @media (max-width: 472px) {
+      flex-direction: column;
+      gap: 4rem;
+      width: 100%;
+    }
   }
 
   .column {
@@ -287,5 +352,41 @@
   p {
     color: var(--main-color-light);
     // opacity: 0.64;
+  }
+
+  @media (max-width: 1164px) {
+    padding: 4rem 6.4rem 1.6rem 6.4rem;
+  }
+  @media (max-width: 1112px) {
+    padding: 4rem 4rem 1.6rem 4rem;
+  }
+  @media (max-width: 1022px) {
+    gap: 8rem;
+  }
+  @media (max-width: 916px) {
+    padding: 2.4rem 2.4rem 1.6rem 2.4rem;
+    gap: 4.8rem;
+  }
+  @media (max-width: 876px) {
+    height: auto;
+    gap: 4.8rem;
+    padding: 4.8rem 8rem 6.4rem 4.8rem;
+  }
+
+  @media (max-width: 648px) {
+    height: auto;
+    gap: 4rem;
+    padding: 3.2rem 5.6rem 4rem 3.2rem;
+  }
+  @media (max-width: 548px) {
+    height: auto;
+    gap: 2.4rem;
+    padding: 2.4rem 3.2rem 3.2rem 2.4rem;
+  }
+  @media (max-width: 472px) {
+    flex-direction: column;
+    height: auto;
+    gap: 2.4rem;
+    padding: 2.4rem 2.4rem 3.2rem 2.4rem;
   }
 }

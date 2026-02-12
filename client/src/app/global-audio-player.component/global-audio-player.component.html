@@ -1,105 +1,23 @@
-<div
-  class="wrapper {{ extended }}"
-  [style.transform]="`translate(${translateX}, ${translateY})`"
-  [style.scale]="scale"
-  [style.opacity]="opacity"
->
-  <!-- <div class="player-play-button-wrapper"> -->
-  <app-play-button
-    (click)="play()"
-    class="app-button"
-    [(triggeredThroughTrack)]="trackTriggeredPlay"
-  />
+@if (viewportWidth > 548) {
+  <div
+    class="wrapper {{ extended }}"
+    [style.transform]="`translate(${translateX}, ${translateY})`"
+    [style.scale]="scale"
+    [style.opacity]="opacity"
+  >
+    <!-- <div class="player-play-button-wrapper"> -->
+    <app-play-button
+      (click)="play()"
+      class="app-button"
+      [(triggeredThroughTrack)]="trackTriggeredPlay"
+    />
 
-  <!-- </div> -->
-  <div class="player-wrapper">
-    <div class="rw">
-      <div (click)="extend()" class="extender-button">
-        <svg
-          class="chevron-left"
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M20 8L12 16L20 24"
-            stroke="black"
-            stroke-width="1.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </div>
-      <div class="cl">
-        <div class="player-wrapper-inside">
-          <div class="inside-cl">
-            <div class="timer-text">
-              <p>
-                {{ currentTime.minutes }}
-              </p>
-              :
-              <p>
-                {{ currentTime.seconds }}
-              </p>
-            </div>
-            <app-audio-track
-              [audioTrackWidth]="audioTrackWidth"
-              [audioTime]="duration.initial"
-              (audioTrackClicked)="handleTrackClicked($event)"
-              [currentTimeMin]="currentTime.minutes"
-              [currentTimeSec]="currentTime.seconds"
-            />
-            <div class="timer-text">
-              <p>
-                {{ duration.minutes }}
-              </p>
-              :
-              <p>
-                {{ duration.seconds }}
-              </p>
-            </div>
-            <audio #audioPlayer controls [src]="episode.audioUrl"></audio>
-          </div>
-          <div class="inside-cl">
-            <div class="episode-details-container">
-              <div class="image-wrapper">
-                <img
-                  [ngSrc]="episode.imageUrl"
-                  height="40"
-                  width="40"
-                  alt="episode_image"
-                  class="episode-image-global-player"
-                />
-              </div>
-
-              <div class="episode-title">
-                <p>{{episode.title}}</p>
-                <div class="episode-season-details-container">
-                  <p>S{{ episode.season }}</p>
-                  <!-- <div class="eps-separator-line"></div> -->
-                  <p>E{{ episode.number }}</p>
-                  <app-profile-card [profile]="episode.author"  cardMode="small"/>
-                  <!-- <p>E12</p> -->
-                  <!-- <div class="eps-separator-line"></div> -->
-                  <!-- <app-profile-card /> -->
-                  <!-- <p>Sofia Lutteri</p> -->
-                </div>
-              </div>
-            </div>
-            <div class="player-controls-container">
-              <app-one-forward-button />
-              <app-tensec-forward (click)="forwardTenSec()" />
-              <app-volume-button (volumeSet)="setVolume($event)" />
-              <app-tensec-backward (click)="backTenSec()" />
-              <app-one-backward-button />
-            </div>
-          </div>
-        </div>
-        <div (click)="extend()" class="collapser-button">
+    <!-- </div> -->
+    <div class="player-wrapper">
+      <div class="rw">
+        <div (click)="extend()" class="extender-button">
           <svg
-            class="chevron-top"
+            class="chevron-left"
             width="32"
             height="32"
             viewBox="0 0 32 32"
@@ -107,14 +25,97 @@
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M24 20L16 12L8 20"
+              d="M20 8L12 16L20 24"
               stroke="black"
               stroke-width="1.6"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
           </svg>
-          <!-- <svg
+        </div>
+        <div class="cl">
+          <div class="player-wrapper-inside">
+            <div class="inside-cl">
+              <div class="timer-text">
+                <p>
+                  {{ currentTime.minutes }}
+                </p>
+                :
+                <p>
+                  {{ currentTime.seconds }}
+                </p>
+              </div>
+              <app-audio-track
+                [audioTrackWidth]="audioTrackWidth"
+                [audioTime]="duration.initial"
+                (audioTrackClicked)="handleTrackClicked($event)"
+                [currentTimeMin]="currentTime.minutes"
+                [currentTimeSec]="currentTime.seconds"
+              />
+              <div class="timer-text">
+                <p>
+                  {{ duration.minutes }}
+                </p>
+                :
+                <p>
+                  {{ duration.seconds }}
+                </p>
+              </div>
+              <audio #audioPlayer controls [src]="episode.audioUrl"></audio>
+            </div>
+            <div class="inside-cl">
+              <div class="episode-details-container">
+                <div class="image-wrapper">
+                  <img
+                    [ngSrc]="episode.imageUrl"
+                    height="40"
+                    width="40"
+                    alt="episode_image"
+                    class="episode-image-global-player"
+                  />
+                </div>
+
+                <div class="episode-title">
+                  <p>{{ episode.title }}</p>
+                  <div class="episode-season-details-container">
+                    <p>S{{ episode.season }}</p>
+                    <!-- <div class="eps-separator-line"></div> -->
+                    <p>E{{ episode.number }}</p>
+                    <app-profile-card [profile]="episode.author" cardMode="small" />
+                    <!-- <p>E12</p> -->
+                    <!-- <div class="eps-separator-line"></div> -->
+                    <!-- <app-profile-card /> -->
+                    <!-- <p>Sofia Lutteri</p> -->
+                  </div>
+                </div>
+              </div>
+              <div class="player-controls-container">
+                <app-one-forward-button />
+                <app-tensec-forward (click)="forwardTenSec()" />
+                <app-volume-button (volumeSet)="setVolume($event)" />
+                <app-tensec-backward (click)="backTenSec()" />
+                <app-one-backward-button />
+              </div>
+            </div>
+          </div>
+          <div (click)="extend()" class="collapser-button">
+            <svg
+              class="chevron-top"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M24 20L16 12L8 20"
+                stroke="black"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <!-- <svg
             class="chevron-down"
             width="32"
             height="32"
@@ -130,26 +131,97 @@
               stroke-linejoin="round"
             />
           </svg> -->
+          </div>
         </div>
-      </div>
-      <div (click)="extend()" class="extender-button">
-        <svg
-          class="chevron-right"
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 24L20 16L12 8"
-            stroke="black"
-            stroke-width="1.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+        <div (click)="extend()" class="extender-button">
+          <svg
+            class="chevron-right"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 24L20 16L12 8"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
       </div>
     </div>
   </div>
-</div>
+} @else {
+  <div class="mobile-player-wrapper">
+    <div class="mobile-player-details-wrapper">
+      <div class="mobile-player-image-wrapper">
+        <img
+          [ngSrc]="episode.imageUrl"
+          height="40"
+          width="40"
+          alt="episode_image"
+          class="episode-image-global-player"
+        />
+      </div>
+      <div class="mobile-player-details-wrapper">
+        <div class="mobile-player-title-wrapper">
+          <h4 class="mobile-player-title">This is a title</h4>
+        </div>
+        <div class="mobile-player-episode-details">
+          <p class="mobile-player-">S{{ episode.season }}</p>
+          <p class="mobile-player-">E{{ episode.number }}</p>
+          <div class="mobile-player-profile-card-wrapper">
+            <app-profile-card [profile]="episode.author" cardMode="small" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-player-track-wrapper">
+      <div class="mobile-player-timer-text">
+        <p>
+          {{ currentTime.minutes }}
+        </p>
+        :
+        <p>
+          {{ currentTime.seconds }}
+        </p>
+      </div>
+      <div class="mobile-player-audio-track-wrapper">
+        <app-audio-track
+          [audioTrackWidth]="audioTrackWidth"
+          [audioTime]="duration.initial"
+          (audioTrackClicked)="handleTrackClicked($event)"
+          [currentTimeMin]="currentTime.minutes"
+          [currentTimeSec]="currentTime.seconds"
+        />
+      </div>
+      <div class="mobile-player-timer-text">
+        <p>
+          {{ duration.minutes }}
+        </p>
+        :
+        <p>
+          {{ duration.seconds }}
+        </p>
+      </div>
+      <audio #audioPlayer controls [src]="episode.audioUrl"></audio>
+    </div>
+    <div class="mobile-player-controls-wrapper">
+      <div class="mobile-player-controls-container">
+        <app-one-backward-button />
+        <app-tensec-backward (click)="backTenSec()" />
+        <app-play-button
+          (click)="play()"
+          class="app-button"
+          [(triggeredThroughTrack)]="trackTriggeredPlay"
+        />
+        <app-tensec-forward (click)="forwardTenSec()" />
+        <app-one-forward-button />
+        <app-volume-button (volumeSet)="setVolume($event)" />
+      </div>
+    </div>
+  </div>
+}

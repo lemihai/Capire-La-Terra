@@ -111,15 +111,421 @@
             </div>
           </div>
           <div class="nav-small-buttons-wraper">
-            <div class="test">test</div>
-            <div class="test">test</div>
-            <div class="test">test</div>
+            <div class="nav-small-header-wrapper">
+              <div class="nav-small-header-transition-wrapper">
+                <p class="nav-small-header-text">Pages</p>
+              </div>
+              <div class="nav-small-horizontal-separator-line"></div>
+            </div>
+            <button class="nav-button {{ navbarObj.home }}" (click)="navigateToHome()">
+              <div class="nav-selector-line"></div>
+              <div class="nav-icon">
+                <svg
+                  class="{{ navbarObj.iconHome }}"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 13.25V28C5 28.2652 5.10536 28.5196 5.29289 28.7071C5.48043 28.8946 5.73478 29 6 29H12V20.5C12 20.1022 12.158 19.7206 12.4393 19.4393C12.7206 19.158 13.1022 19 13.5 19H18.5C18.8978 19 19.2794 19.158 19.5607 19.4393C19.842 19.7206 20 20.1022 20 20.5V29H26C26.2652 29 26.5196 28.8946 26.7071 28.7071C26.8946 28.5196 27 28.2652 27 28V13.25"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M30 15.9999L16.6806 3.24988C16.3681 2.91988 15.6375 2.91613 15.3194 3.24988L2 15.9999"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M25 11.1875V4H22V8.3125"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <div class="nav-text-wrapper">
+                <p class="nav-text">Home</p>
+              </div>
+            </button>
+            <button class="nav-button {{ navbarObj.episodes }}" (click)="navigateToEpisodesPage()">
+              <div class="nav-selector-line"></div>
+              <div class="nav-icon">
+                <svg
+                  class="{{ navbarObj.iconEpisodes }}"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 28H20"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M24 13V15C24 19.4 20.4 23 16 23C11.6 23 8 19.4 8 15V13"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16 23V28"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16.0001 4.00005C15.474 3.9974 14.9527 4.09905 14.4662 4.29913C13.9797 4.49921 13.5377 4.79375 13.1657 5.16572C12.7938 5.53768 12.4992 5.97969 12.2991 6.46619C12.0991 6.95269 11.9974 7.47402 12.0001 8.00005V14.9376C12.0001 17.1376 13.8126 19.0001 16.0001 19.0001C18.1876 19.0001 20.0001 17.1876 20.0001 14.9376V8.00005C20.0001 5.75005 18.2501 4.00005 16.0001 4.00005Z"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <div class="nav-text-wrapper">
+                <p class="nav-text">Episodes</p>
+              </div>
+            </button>
+            <button class="nav-button {{ navbarObj.news }}" (click)="navigateToNewsPage()">
+              <div class="nav-selector-line"></div>
+              <div class="nav-icon">
+                <svg
+                  class="{{ navbarObj.iconNews }}"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M23 25.9912V4.5C22.9988 4.10253 22.8404 3.72167 22.5594 3.44061C22.2783 3.15956 21.8975 3.00115 21.5 3H4.5C4.10253 3.00115 3.72167 3.15956 3.44061 3.44061C3.15956 3.72167 3.00115 4.10253 3 4.5V26.5C3.00198 27.1624 3.26601 27.7972 3.73442 28.2656C4.20283 28.734 4.83757 28.998 5.5 29H26"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M26 29C25.2044 29 24.4413 28.6839 23.8787 28.1213C23.3161 27.5587 23 26.7956 23 26V8H27.5C27.8978 8 28.2794 8.15804 28.5607 8.43934C28.842 8.72064 29 9.10218 29 9.5V26C29 26.7956 28.6839 27.5587 28.1213 28.1213C27.5587 28.6839 26.7956 29 26 29Z"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15 8H19"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15 12H19"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M7 16H19"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M7 20H19"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M7 24H19"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11 13H7C6.73478 13 6.48043 12.8946 6.29289 12.7071C6.10536 12.5196 6 12.2652 6 12V8C6 7.73478 6.10536 7.48043 6.29289 7.29289C6.48043 7.10536 6.73478 7 7 7H11C11.2652 7 11.5196 7.10536 11.7071 7.29289C11.8946 7.48043 12 7.73478 12 8V12C12 12.2652 11.8946 12.5196 11.7071 12.7071C11.5196 12.8946 11.2652 13 11 13Z"
+                    fill="black"
+                  />
+                </svg>
+              </div>
+              <div class="nav-text-wrapper">
+                <p class="nav-text">News</p>
+              </div>
+            </button>
+            @if (isLoggedIn$ | async) {
+              <button class="nav-button {{ navbarObj.admin }}" (click)="nagivateToAdminPage()">
+                <div class="nav-selector-line"></div>
+                <div class="nav-icon">
+                  <svg
+                    class="{{ navbarObj.iconaAdmin }}"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M24 5H8C6.375 5 5.3125 5.875 5 7.5L3 17V24C3.00231 24.7949 3.31912 25.5567 3.88123 26.1188C4.44334 26.6809 5.20506 26.9977 6 27H26C26.7949 26.9977 27.5567 26.6809 28.1188 26.1188C28.6809 25.5567 28.9977 24.7949 29 24V17L27 7.5C26.6875 5.8125 25.5625 5 24 5Z"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M3 17H12"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M20 17H29"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M12 17C12 18.0609 12.4214 19.0783 13.1716 19.8284C13.9217 20.5786 14.9391 21 16 21C17.0609 21 18.0783 20.5786 18.8284 19.8284C19.5786 19.0783 20 18.0609 20 17"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M9 9H23"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M8 13H24"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div class="nav-text-wrapper">
+                  <p class="nav-text">Admin</p>
+                </div>
+              </button>
+            } @else {
+              <button class="nav-button {{ navbarObj.login }}" (click)="nagivateToLoginPage()">
+                <div class="nav-selector-line"></div>
+                <div class="nav-icon">
+                  <svg
+                    class="{{ navbarObj.iconLogin }}"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M24 5H8C6.375 5 5.3125 5.875 5 7.5L3 17V24C3.00231 24.7949 3.31912 25.5567 3.88123 26.1188C4.44334 26.6809 5.20506 26.9977 6 27H26C26.7949 26.9977 27.5567 26.6809 28.1188 26.1188C28.6809 25.5567 28.9977 24.7949 29 24V17L27 7.5C26.6875 5.8125 25.5625 5 24 5Z"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M3 17H12"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M20 17H29"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M12 17C12 18.0609 12.4214 19.0783 13.1716 19.8284C13.9217 20.5786 14.9391 21 16 21C17.0609 21 18.0783 20.5786 18.8284 19.8284C19.5786 19.0783 20 18.0609 20 17"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M9 9H23"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M8 13H24"
+                      stroke="black"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div class="nav-text-wrapper">
+                  <p class="nav-text">Login</p>
+                </div>
+              </button>
+            }
+            <div
+              class="button-hover-background"
+              [style.height]="navbarObj.backgroundHeight"
+              [style.left]="navbarObj.backgroundLeft"
+              [style.top]="navbarObj.backgroundTop"
+            ></div>
           </div>
         </div>
         <div class="nav-small-bottom-wrapper">
-          <div class="test">test</div>
-          <div class="test">test</div>
-          <div class="test">test</div>
+          <div class="nav-small-header-wrapper">
+            <div class="nav-small-header-transition-wrapper">
+              <p class="nav-small-header-text">Socials</p>
+            </div>
+            <div class="nav-small-horizontal-separator-line"></div>
+          </div>
+          <div class="nav-small-social-links-wrapper">
+            <a
+              class="nav-social-link insta"
+              href="{{ socials.capireLaTerraInstaApp }}"
+              target="_blank"
+            >
+              <div class="social-icon-wrapper">
+                <div class="social-icon instagram">
+                  <svg
+                    class="nav-social-icon"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M21.8331 4.33313C23.3789 4.33774 24.8601 4.95385 25.9531 6.04689C27.0462 7.13993 27.6623 8.62109 27.6669 10.1669V21.8331C27.6623 23.3789 27.0462 24.8601 25.9531 25.9531C24.8601 27.0462 23.3789 27.6623 21.8331 27.6669H10.1669C8.62109 27.6623 7.13993 27.0462 6.04689 25.9531C4.95385 24.8601 4.33774 23.3789 4.33313 21.8331V10.1669C4.33774 8.62109 4.95385 7.13993 6.04689 6.04689C7.13993 4.95385 8.62109 4.33774 10.1669 4.33313H21.8331ZM21.8331 2H10.1669C5.675 2 2 5.675 2 10.1669V21.8331C2 26.325 5.675 30 10.1669 30H21.8331C26.325 30 30 26.325 30 21.8331V10.1669C30 5.675 26.325 2 21.8331 2Z"
+                      fill="black"
+                    />
+                    <path
+                      d="M23.583 10.167C23.2369 10.167 22.8985 10.0644 22.6108 9.87207C22.323 9.67977 22.0987 9.40646 21.9662 9.08669C21.8338 8.76692 21.7991 8.41505 21.8666 8.07558C21.9342 7.73612 22.1008 7.4243 22.3456 7.17956C22.5903 6.93481 22.9021 6.76814 23.2416 6.70062C23.5811 6.63309 23.9329 6.66775 24.2527 6.8002C24.5725 6.93266 24.8458 7.15696 25.0381 7.44475C25.2304 7.73253 25.333 8.07088 25.333 8.41699C25.3335 8.64694 25.2886 8.87473 25.2008 9.08727C25.113 9.29982 24.9841 9.49293 24.8215 9.65553C24.6589 9.81813 24.4658 9.94702 24.2533 10.0348C24.0407 10.1226 23.813 10.1675 23.583 10.167Z"
+                      fill="black"
+                    />
+                    <path
+                      d="M16 11.3331C16.923 11.3331 17.8253 11.6068 18.5928 12.1196C19.3602 12.6324 19.9584 13.3613 20.3116 14.2141C20.6649 15.0668 20.7573 16.0052 20.5772 16.9105C20.3971 17.8157 19.9527 18.6473 19.3 19.3C18.6473 19.9527 17.8157 20.3971 16.9105 20.5772C16.0052 20.7573 15.0668 20.6649 14.2141 20.3116C13.3613 19.9584 12.6324 19.3602 12.1196 18.5928C11.6068 17.8253 11.3331 16.923 11.3331 16C11.3345 14.7627 11.8266 13.5764 12.7015 12.7015C13.5764 11.8266 14.7627 11.3344 16 11.3331ZM16 9C14.6155 9 13.2622 9.41054 12.111 10.1797C10.9599 10.9489 10.0627 12.0421 9.53285 13.3212C9.00303 14.6003 8.86441 16.0078 9.13451 17.3656C9.4046 18.7235 10.0713 19.9708 11.0503 20.9497C12.0292 21.9287 13.2765 22.5954 14.6344 22.8655C15.9922 23.1356 17.3997 22.997 18.6788 22.4672C19.9579 21.9373 21.0511 21.0401 21.8203 19.889C22.5895 18.7378 23 17.3845 23 16C23 14.1435 22.2625 12.363 20.9497 11.0503C19.637 9.7375 17.8565 9 16 9Z"
+                      fill="black"
+                    />
+                  </svg>
+                </div>
+                <div class="nav-social-link-text-wrapper">
+                  <p class="nav-social-link-text">Instagram</p>
+                </div>
+              </div>
+              <div class="open-icon">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M24.2728 15.173V26.3412C24.2728 27.0464 23.9926 27.7228 23.4939 28.2215C22.9953 28.7202 22.3189 29.0003 21.6136 29.0003H5.65909C4.95386 29.0003 4.27751 28.7202 3.77883 28.2215C3.28016 27.7228 3 27.0464 3 26.3412V10.3867C3 9.68141 3.28016 9.00504 3.77883 8.50641C4.27751 8.00773 4.95386 7.72754 5.65909 7.72754H16.8272"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M29.0003 11.2727V3H20.7275"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M13.5 18.5L29 3"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </a>
+            <a
+              class="nav-social-link spotify"
+              href="{{ socials.capireLaTerraSpotifyApp }}"
+              target="_blank"
+            >
+              <div class="social-icon-wrapper">
+                <div class="social-icon">
+                  <svg
+                    class="nav-social-icon"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16 3C13.4288 3 10.9154 3.76244 8.77759 5.1909C6.63975 6.61935 4.97351 8.64968 3.98957 11.0251C3.00563 13.4006 2.74819 16.0144 3.2498 18.5362C3.75141 21.0579 4.98953 23.3743 6.80762 25.1924C8.6257 27.0105 10.9421 28.2486 13.4638 28.7502C15.9856 29.2518 18.5995 28.9944 20.9749 28.0104C23.3503 27.0265 25.3807 25.3603 26.8091 23.2224C28.2376 21.0846 29 18.5712 29 16C28.9964 12.5533 27.6256 9.24882 25.1884 6.81163C22.7512 4.37445 19.4467 3.00364 16 3ZM19.8838 21.2175C19.7597 21.4518 19.5477 21.6273 19.2943 21.7054C19.0409 21.7834 18.7669 21.7577 18.5325 21.6338C17.754 21.2153 16.8839 20.9962 16 20.9962C15.1161 20.9962 14.246 21.2153 13.4675 21.6338C13.2338 21.7513 12.9633 21.7725 12.714 21.6929C12.4648 21.6133 12.2567 21.4392 12.1344 21.2079C12.0121 20.9766 11.9852 20.7066 12.0596 20.4558C12.1341 20.205 12.3038 19.9934 12.5325 19.8662C13.6009 19.3011 14.7913 19.0057 16 19.0057C17.2087 19.0057 18.3991 19.3011 19.4675 19.8662C19.7018 19.9903 19.8773 20.2023 19.9554 20.4557C20.0335 20.7091 20.0077 20.9831 19.8838 21.2175ZM21.8838 17.7175C21.7591 17.9515 21.5466 18.1264 21.2929 18.2038C21.0393 18.2812 20.7653 18.2546 20.5313 18.13C19.1369 17.3871 17.5812 16.9985 16.0013 16.9985C14.4213 16.9985 12.8656 17.3871 11.4713 18.13C11.2377 18.2493 10.9666 18.2721 10.7165 18.1934C10.4663 18.1148 10.257 17.941 10.1338 17.7095C10.0105 17.478 9.98306 17.2074 10.0574 16.9559C10.1318 16.7044 10.3019 16.4922 10.5313 16.365C12.2148 15.4673 14.0933 14.9977 16.0013 14.9977C17.9092 14.9977 19.7878 15.4673 21.4713 16.365C21.5874 16.4268 21.6901 16.511 21.7736 16.6126C21.8572 16.7142 21.9198 16.8313 21.958 16.9572C21.9962 17.083 22.0092 17.2152 21.9963 17.3461C21.9833 17.477 21.9446 17.6041 21.8825 17.72L21.8838 17.7175ZM23.8838 14.2175C23.8219 14.3334 23.7378 14.436 23.6363 14.5195C23.5348 14.6029 23.4178 14.6655 23.2921 14.7037C23.1664 14.7419 23.0344 14.7549 22.9036 14.7421C22.7728 14.7292 22.6459 14.6907 22.53 14.6287C20.5219 13.5532 18.2792 12.9904 16.0013 12.9904C13.7233 12.9904 11.4806 13.5532 9.47251 14.6287C9.23845 14.7537 8.96434 14.7806 8.71046 14.7035C8.45658 14.6264 8.24374 14.4516 8.11876 14.2175C7.99377 13.9834 7.96689 13.7093 8.04401 13.4555C8.12113 13.2016 8.29595 12.9887 8.53001 12.8638C10.8282 11.6338 13.3946 10.9902 16.0013 10.9902C18.6079 10.9902 21.1743 11.6338 23.4725 12.8638C23.5887 12.9257 23.6914 13.01 23.7749 13.1117C23.8585 13.2135 23.921 13.3307 23.9591 13.4567C23.9972 13.5827 24.0101 13.715 23.9969 13.846C23.9838 13.977 23.9449 14.1041 23.8825 14.22L23.8838 14.2175Z"
+                      fill="black"
+                    />
+                  </svg>
+                </div>
+                <div class="nav-social-link-text-wrapper">
+                  <p class="nav-social-link-text">Play on Spotify</p>
+                </div>
+              </div>
+              <div class="open-icon">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M24.2728 15.173V26.3412C24.2728 27.0464 23.9926 27.7228 23.4939 28.2215C22.9953 28.7202 22.3189 29.0003 21.6136 29.0003H5.65909C4.95386 29.0003 4.27751 28.7202 3.77883 28.2215C3.28016 27.7228 3 27.0464 3 26.3412V10.3867C3 9.68141 3.28016 9.00504 3.77883 8.50641C4.27751 8.00773 4.95386 7.72754 5.65909 7.72754H16.8272"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M29.0003 11.2727V3H20.7275"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M13.5 18.5L29 3"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
       <!-- <div class="nav-top-section">
