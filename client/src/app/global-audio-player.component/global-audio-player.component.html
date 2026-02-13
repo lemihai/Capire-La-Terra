@@ -166,13 +166,13 @@
           class="episode-image-global-player"
         />
       </div>
-      <div class="mobile-player-details-wrapper">
+      <div class="mobile-player-details-inner-wrapper">
         <div class="mobile-player-title-wrapper">
           <h4 class="mobile-player-title">This is a title</h4>
         </div>
         <div class="mobile-player-episode-details">
-          <p class="mobile-player-">S{{ episode.season }}</p>
-          <p class="mobile-player-">E{{ episode.number }}</p>
+          <p class="mobile-player-episode-text">S{{ episode.season }}</p>
+          <p class="mobile-player-episode-text">E{{ episode.number }}</p>
           <div class="mobile-player-profile-card-wrapper">
             <app-profile-card [profile]="episode.author" cardMode="small" />
           </div>
@@ -210,17 +210,24 @@
       <audio #audioPlayer controls [src]="episode.audioUrl"></audio>
     </div>
     <div class="mobile-player-controls-wrapper">
-      <div class="mobile-player-controls-container">
+      <div class="mobile-player-button-wrapper">
         <app-one-backward-button />
+      </div>
+      <div class="mobile-player-button-wrapper">
         <app-tensec-backward (click)="backTenSec()" />
+      </div>
+      <div class="mobile-player-button-wrapper">
         <app-play-button
           (click)="play()"
           class="app-button"
           [(triggeredThroughTrack)]="trackTriggeredPlay"
         />
+      </div>
+      <div class="mobile-player-button-wrapper">
         <app-tensec-forward (click)="forwardTenSec()" />
+      </div>
+      <div class="mobile-player-button-wrapper">
         <app-one-forward-button />
-        <app-volume-button (volumeSet)="setVolume($event)" />
       </div>
     </div>
   </div>

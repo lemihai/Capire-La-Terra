@@ -68,10 +68,18 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
   ) {}
 
   viewportWidth = window.innerWidth;
+
+  // AudioTrackWidths
+  // audioTrackWidth = this.viewportWidth - 64 - 48 * 2 - 16;
+  audioTrackWidth = this.viewportWidth < 548 ? this.viewportWidth - 64 - 48 * 2 - 16 : 365;
+
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.viewportWidth = window.innerWidth;
-    console.log(this.viewportWidth);
+    let test = this.viewportWidth - 64 - 48 * 2 - 16;
+    if (this.viewportWidth < 548) {
+      this.audioTrackWidth = this.viewportWidth - 64 - 48 * 2 - 16;
+    }
     // 548
     this.cdRef.detectChanges();
   }
@@ -95,9 +103,6 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
     minutes: '00',
     seconds: '00',
   };
-
-  // AudioTrackWidths
-  audioTrackWidth = 365;
 
   ngAfterViewInit() {
     const audioElement = this.audioPlayer.nativeElement;

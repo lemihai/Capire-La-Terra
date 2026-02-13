@@ -1,1 +1,12 @@
 @use '../control-button-style.scss' as *;
+
+@media (max-width: 548px) {
+  svg {
+    height: 4rem !important;
+    width: 4rem !important;
+    path {
+      height: 4rem !important;
+      width: 4rem !important;
+    }
+  }
+}

@@ -290,34 +290,129 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      align-items: stretch;
+      align-items: center;
 
-      background-color: var(--main-color-light);
+      background-color: var(--main-color-dark-background);
       border-radius: 1.6rem;
       padding: 0.8rem;
+      gap: 1.6rem;
 
       // *************************
       // Top Container
       // *************************
       .mobile-player-details-wrapper {
+        width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
+        margin-bottom: .8rem;
+        gap: 1.2rem;
+
+        .mobile-player-image-wrapper {
+          height: 6.4rem;
+          width: 6.4rem;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            height: 6.4rem;
+            width: 6.4rem;
+            min-width: 6.4rem;
+            min-height: 6.4rem;
+            max-width: 6.4rem;
+            max-height: 6.4rem;
+            border-radius: 1.2rem;
+          }
+        }
+
+        .mobile-player-details-inner-wrapper {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: flex-start;
+
+          color: var(--main-color-dark);
+
+          .mobile-player-title-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            .mobile-player-title {
+              font-size: 2.4rem;
+            }
+          }
+
+          .mobile-player-episode-details {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            .mobile-player-episode-text {
+            }
+            .mobile-player-profile-card-wrapper {
+              app-profile-card {
+              }
+            }
+          }
+        }
       }
       // *************************
       // Middle Container
       // *************************
       .mobile-player-track-wrapper {
+        width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
+        // gap: 1.6rem;
+
+        .mobile-player-timer-text {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          min-width: fit-content;
+          color: var(--main-color-dark);
+
+          p {
+            font-size: 1.4rem;
+          }
+        }
       }
       // *************************
       // Bottom Container
       // *************************
       .mobile-player-controls-wrapper {
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .mobile-player-button-wrapper {
+          height: auto;
+          width: auto;
+          padding: 0rem 0.8rem;
+
+          app-play-button {
+            height: 5.6rem !important;
+            width: 5.6rem !important;
+            min-height: 5.6rem !important;
+            min-width: 5.6rem !important;
+          }
+
+          &:nth-child(3) {
+            margin: 0rem 0.8rem;
+          }
+        }
       }
     }
   }

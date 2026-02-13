@@ -147,6 +147,38 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['audioTrackWidth']) {
+      console.log(0);
+      console.log(0);
+      this.audioTrackWidth = changes['audioTrackWidth'].currentValue;
+      this.numberOfLines = Math.floor(this.audioTrackWidth / 4.4);
+      console.log(this.numberOfLines);
+
+      // reset the array at the beginnig
+      this.numberOfLinesArray = [];
+
+      for (let i = 0; i <= this.numberOfLines; i++) {
+        let a = Math.floor(Math.random() * 4) + 1;
+        let n = i;
+        if (a === 1) {
+          let type = 'a';
+          this.numberOfLinesArray[i] = { n, type };
+        }
+        if (a === 2) {
+          let type = 'b';
+          this.numberOfLinesArray[i] = { n, type };
+        }
+        if (a === 3) {
+          let type = 'c';
+          this.numberOfLinesArray[i] = { n, type };
+        }
+        if (a === 4) {
+          let type = 'd';
+          this.numberOfLinesArray[i] = { n, type };
+        }
+      }
+      this.cdr.detectChanges();
+      console.log(0);
+      console.log(0);
     }
     if (changes['audioTime']) {
       this.audioTime = changes['audioTime'].currentValue;
@@ -162,7 +194,6 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
 
     let children = this.trackDiv.nativeElement as HTMLElement;
     const firstChild = this.trackDiv.nativeElement.children[0] as HTMLElement;
-    const test = firstChild.parentElement;
 
     let ratio = this.audioTime / this.numberOfLines;
     const index = Math.floor(totaltime / ratio);

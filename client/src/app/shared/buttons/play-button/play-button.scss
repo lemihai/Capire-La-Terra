@@ -36,6 +36,20 @@
       transition: var(--transition-24);
     }
   }
+
+  @media (max-width: 548px) {
+    border-radius: 1.6rem;
+    // background-color: var(--main-color-dark-16);
+    // border: 1px solid var(--main-color-dark-16);
+    svg {
+      height: 4rem;
+      width: 4rem;
+      path {
+        height: 4rem;
+        width: 4rem;
+      }
+    }
+  }
 }
 
 .play-button:hover {

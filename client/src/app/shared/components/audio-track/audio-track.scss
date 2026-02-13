@@ -91,6 +91,10 @@
   transition: var(--transition-08);
 
   backdrop-filter: blur(0.4rem);
+
+  p{
+    color: var(--main-color-dark);
+  }
 }
 
 :host:hover > .hoverer {
