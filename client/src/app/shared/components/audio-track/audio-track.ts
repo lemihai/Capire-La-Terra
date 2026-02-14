@@ -147,11 +147,8 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['audioTrackWidth']) {
-      console.log(0);
-      console.log(0);
       this.audioTrackWidth = changes['audioTrackWidth'].currentValue;
       this.numberOfLines = Math.floor(this.audioTrackWidth / 4.4);
-      console.log(this.numberOfLines);
 
       // reset the array at the beginnig
       this.numberOfLinesArray = [];
@@ -177,8 +174,6 @@ export class AudioTrack implements OnInit, OnChanges, AfterViewInit {
         }
       }
       this.cdr.detectChanges();
-      console.log(0);
-      console.log(0);
     }
     if (changes['audioTime']) {
       this.audioTime = changes['audioTime'].currentValue;

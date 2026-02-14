@@ -378,9 +378,6 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         // --------------------------
 
         setTimeout(() => {
-          console.log(1);
-          console.log(window.scrollY);
-          console.log(1);
           if (window.scrollY < 80) {
             gsap.to('.hero-h1', {
               width: '46.4rem',

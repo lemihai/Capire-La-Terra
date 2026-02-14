@@ -66,6 +66,8 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
     private cdRef: ChangeDetectorRef,
     // private globalPlayerService: GlobalAudioPlayerService
   ) {}
+  private globalPlayerService = inject(GlobalAudioPlayerService);
+  private episodeService = inject(EpisodesService);
 
   viewportWidth = window.innerWidth;
 
@@ -84,12 +86,38 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
     this.cdRef.detectChanges();
   }
 
+  touchObject = {
+    touchStartX: 0,
+    touchStartY: 0,
+    touchEndX: 0,
+    touchEndY: 0,
+  };
+
+  
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {
+    this.touchObject.touchStartX = event.changedTouches[0].clientX;
+    this.touchObject.touchStartY = event.changedTouches[0].clientY;
+  }
+
+  @HostListener('touchend', ['$event'])
+  onTouchEnd(event: TouchEvent) {
+    this.touchObject.touchEndX = event.changedTouches[0].clientX;
+    this.touchObject.touchEndY = event.changedTouches[0].clientY;
+    console.log(this.touchObject.touchStartY - this.touchObject.touchEndY);
+    if (this.touchObject.touchStartY - this.touchObject.touchEndY > 0) {
+      this.globalPlayerService.mobileBigState();
+      this.audioTrackWidth = (this.viewportWidth - 64 - 48 * 2 - 16);
+    }
+    if (this.touchObject.touchStartY - this.touchObject.touchEndY < 0) {
+      this.globalPlayerService.mobileMediumState();
+      this.audioTrackWidth = (this.viewportWidth - 64 - 48 * 2 - 16) / 2;
+    }
+  }
+
   private episodeSubscription!: Subscription;
 
   trackTriggeredPlay = false;
-
-  private globalPlayerService = inject(GlobalAudioPlayerService);
-  private episodeService = inject(EpisodesService);
 
   // Variables of the audio player
   playstate = 0;
