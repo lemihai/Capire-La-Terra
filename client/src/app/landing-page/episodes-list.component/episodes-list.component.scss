@@ -50,6 +50,8 @@
     }
 
     .season-episode-list {
+      height: fit-content;
+      min-height: fit-content;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -60,6 +62,8 @@
       border: 1px solid var(--main-color-dark-16);
 
       border-radius: 1.6rem;
+
+      overflow: hidden;
 
       padding: 0.8rem;
       z-index: 50;

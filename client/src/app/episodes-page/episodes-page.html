@@ -1,29 +1,30 @@
 <div id="smooth-wrapper">
   <div id="smooth-content">
     <div class="episodes-page-wrapper">
-      <div class="season-3-scroll-trigger"></div>
-      <div class="season-2-scroll-trigger"></div>
-      <div class="season-1-scroll-trigger"></div>
-      <div class="text-container" data-speed="0.01">
-        <div class="hero-text">
-          <div class="line-container">
-            <h1 class="hero-h1-A">Check out</h1>
-          </div>
-          <div class="line-container">
-            <h1 class="hero-h1-A">The episodes</h1>
-          </div>
-          <div class="line-container-wrapper">
-            <div class="line-container ln-A">
-              <h1 class="hero-h1-A ln-A">of the</h1>
+      @if (viewportWidth > 1100) {
+        <!-- <div class="season-3-scroll-trigger"></div>
+        <div class="season-2-scroll-trigger"></div>
+        <div class="season-1-scroll-trigger"></div> -->
+        <div class="text-container" data-speed="0.01">
+          <div class="hero-text">
+            <div class="line-container">
+              <h1 class="hero-h1-A">Check out</h1>
             </div>
-            <div class="header-dropdown">
-              <div class="line-container" id='seasonComponent' #seasonComponent>
-                <h1 class="season-h1">3rd</h1>
-                <h1 class="season-h1">2nd</h1>
-                <h1 class="season-h1">1st</h1>
+            <div class="line-container">
+              <h1 class="hero-h1-A">The episodes</h1>
+            </div>
+            <div class="line-container-wrapper">
+              <div class="line-container ln-A">
+                <h1 class="hero-h1-A ln-A">of the</h1>
               </div>
-              <!-- Too hard to also expand it now, do this later in the next release -->
-              <!--
+              <div class="header-dropdown">
+                <div class="line-container" id="seasonComponent" #seasonComponent>
+                  <h1 class="season-h1">3rd</h1>
+                  <h1 class="season-h1">2nd</h1>
+                  <h1 class="season-h1">1st</h1>
+                </div>
+                <!-- Too hard to also expand it now, do this later in the next release -->
+                <!--
               <div class="line-container-icon">
                 <div class="icon">
                   <svg
@@ -43,39 +44,33 @@
                   </svg>
                 </div>
               </div>
-              -->
+              --></div>
+            </div>
+            <div class="line-container">
+              <h1 class="hero-h1-A">season</h1>
             </div>
           </div>
-          <div class="line-container">
-            <h1 class="hero-h1-A">season</h1>
-          </div>
         </div>
+      }
+      @if (viewportWidth <= 1100) {
+      <div class="header">
+        <h1 class="transition-A">Latest Episodes</h1>
+        <div class="horizontal-seaprator-line transition-horizontal-line"></div>
       </div>
+    }
       <div class="episodes-list">
         @for (episode of episodes; track episode._id) {
           @if (episode.number === 1) {
-            <app-episode-card #largeCard class="episode-wrapper" cardType="large" [episode]="episode" />
+            <app-episode-card
+              #largeCard
+              class="episode-wrapper"
+              cardType="large"
+              [episode]="episode"
+            />
           } @else {
-            <app-episode-card  class="episode-wrapper" cardType="medium" [episode]="episode" />
+            <app-episode-card class="episode-wrapper" cardType="medium" [episode]="episode" />
           }
         }
-        <!-- <app-episode-card class="episode-wrapper" cardType="large" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" />
-        <app-episode-card class="episode-wrapper" cardType="medium" /> -->
       </div>
     </div>
     <app-footer />

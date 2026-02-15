@@ -12,6 +12,7 @@ import {
   ElementRef,
   ViewChildren,
   QueryList,
+  HostListener,
 } from '@angular/core';
 import { EpisodeCard } from '../shared/components/episode-card/episode-card';
 
@@ -51,6 +52,60 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
   topPartDisabled = '';
   expandButton = '';
   numberOfSeasons = 1;
+
+  viewportWidth = window.innerWidth;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.viewportWidth = window.innerWidth;
+    console.log(this.viewportWidth);
+    if (this.viewportWidth > 1100) {
+      gsap.to('.hero-h1-A', {
+        height: '120px',
+        width: '48rem',
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.hero-h1A', {
+        height: '120px',
+        width: '26rem',
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.season-h1', {
+        height: '120px',
+        width: '128px',
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.header-dropdown', {
+        height: '120px',
+        width: '20rem',
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+    }
+    this.cdr.detectChanges();
+  }
 
   // For animations in gsap
   time = 1.24;

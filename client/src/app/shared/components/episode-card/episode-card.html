@@ -7,15 +7,27 @@
     <div class="play">
       <app-play-button />
     </div>
-    <p class="episode-number">S{{ episode.season }} #{{ episode.number }}</p>
-    <p class="episode-title">{{ episode.title }}</p>
-    <div class="profile-card-wrapper">
-      <app-profile-card [profile]="episode.author" cardMode="no-text" />
+    <div class="episode-small-transition-wrapper">
+      <p class="episode-number">S{{ episode.season }} #{{ episode.number }}</p>
     </div>
-
-    <p class="episode-duration">{{ duration.minutes }}:{{ duration.seconds }}</p>
-
-    <app-audio-track [audioTrackWidth]="audioTrackWidth" [audioTime]="duration.initial" />
+    <div class="episode-small-transition-wrapper">
+      <p class="episode-title">{{ episode.title }}</p>
+    </div>
+    <div class="profile-card-wrapper">
+      <app-profile-card
+        [profile]="episode.author"
+        cardMode="no-text"
+        class="small-card-profile-card-transition"
+      />
+    </div>
+    <div class="episode-small-transition-wrapper">
+      <p class="episode-duration">{{ duration.minutes }}:{{ duration.seconds }}</p>
+    </div>
+    <div class="audio-track-wrapper">
+      <div class="small-card-audio-track">
+        <app-audio-track [audioTrackWidth]="audioTrackWidthSmall" [audioTime]="duration.initial" />
+      </div>
+    </div>
   </div>
 }
 @if (cardType == 'medium') {
@@ -30,15 +42,22 @@
           <div class="play-button-wrapper">
             <app-play-button />
           </div>
-          <h2 class="episode-number">#{{ episode.number }}</h2>
-          <h2 class="episode-dash">-</h2>
+          @if (viewportWidth < 1100) {
+            <h2 class="episode-number">S{{ episode.season }}</h2>
+          }
+          <h2 class="episode-number">E{{ episode.number }} -</h2>
+          <!-- <h2 class="episode-dash">-</h2> -->
           <h2 class="episode-title">{{ episode.title }}</h2>
         </div>
       </div>
       <div class="bottom-container">
         <div class="app-profile-card-wrapper">
           <div class="app-profile-card-wrapper-for-transform">
-            <app-profile-card [profile]="episode.author" />
+            @if (viewportWidth < 564) {
+              <app-profile-card [profile]="episode.author" cardMode="no-text" />
+            } @else {
+              <app-profile-card [profile]="episode.author" />
+            }
           </div>
         </div>
         <div class="separator-line"></div>
@@ -58,7 +77,11 @@
       <div class="episode-large-content-wrapper">
         <div class="top-container">
           <div class="title-wrapper">
-            <h2 class="episode-number">#{{ episode.number }} -</h2>
+            @if (viewportWidth < 1100) {
+              <h2 class="episode-number">S{{ episode.season }} E{{ episode.number }} -</h2>
+            } @else {
+              <h2 class="episode-number">#{{ episode.number }} -</h2>
+            }
 
             <div class="episode-title-wrapper">
               <h2 class="episode-title">{{ episode.title }}</h2>

@@ -11,6 +11,7 @@ import {
   AfterViewInit,
   NgZone,
   inject,
+  HostListener,
 } from '@angular/core';
 import { AudioTrack } from '../audio-track/audio-track';
 import { ProfileCard } from '../profile-card/profile-card';
@@ -43,31 +44,98 @@ export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
   viewportWidth = window.innerWidth;
   audioTrackWidth = this.calculateTrack(this.viewportWidth, 'medium');
   audioTrackWidthLarge = this.calculateTrack(this.viewportWidth, 'large');
+  audioTrackWidthSmall = this.calculateTrack(this.viewportWidth, 'small');
   currentAudioTrackWidth!: number;
   imageUrl = '../../../../../public/assets/article-illustration-1.jpg';
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.viewportWidth = window.innerWidth;
+    this.audioTrackWidth = this.calculateTrack(this.viewportWidth, 'medium');
+    this.audioTrackWidthLarge = this.calculateTrack(this.viewportWidth, 'large');
+    this.audioTrackWidthSmall = this.calculateTrack(this.viewportWidth, 'small');
+    this.cdr.detectChanges();
+  }
 
   calculateTrack(wpWidth: number, cardType: string) {
     let width: number = 0;
     // 1500px
     // 1300-1500px
     // 800-1300px
-    if (wpWidth > 1500) {
-      if (cardType === 'medium') {
-        width = 240;
-      } else if (cardType === 'large') {
+
+    if (cardType === 'small') {
+      if (wpWidth > 1256) {
+        width = 412;
+      }
+      if (wpWidth <= 1256) {
+        width = 242;
+      }
+      if (wpWidth <= 1100) {
+        width = 412;
+      }
+
+      if (wpWidth <= 900) {
+        width = 324;
+      }
+
+      if (wpWidth <= 700) {
+        width = 288;
+      }
+      if (wpWidth <= 512) {
+        width = 164;
+      }
+      if (wpWidth <= 400) {
+        width = 112;
+      }
+    } else if (cardType === 'large') {
+      if (wpWidth > 1500) {
         width = 512;
       }
-    } else if (wpWidth > 1300 && wpWidth <= 1500) {
-      if (cardType === 'medium') {
-        width = 164;
-      } else if (cardType === 'large') {
-        width = 440;
+      if (wpWidth > 1300 && wpWidth <= 1500) {
+        width = 436;
       }
-    } else if (wpWidth > 800 && wpWidth <= 1300) {
-      if (cardType === 'medium') {
+      if (wpWidth > 1100 && wpWidth <= 1300) {
+        width = 392;
+      }
+      if (wpWidth <= 1100) {
+        width = wpWidth - 0.8 * 2 - 3.2 * 2 - 0.8 * 2 - 416;
+        // width = 412;
+      }
+
+      if (wpWidth <= 1000) {
+       width = wpWidth - 0.8 * 2 - 3.2 * 2 - 0.8 * 2 - 338;
+      }
+      if (wpWidth <= 900) {
+       width = wpWidth - 0.8 * 2 - 3.2 * 2 - 0.8 * 2 - 256;
+      }
+      if (wpWidth <= 760) {
+       width = wpWidth - 0.8 * 2 - 3.2 * 2 - 0.8 * 2 - 116;
+      }
+    } else if (cardType === 'medium') {
+      if (wpWidth > 1500) {
+        width = 240;
+      } else if (wpWidth > 1300 && wpWidth <= 1500) {
+        width = 164;
+      } else if (wpWidth > 1100 && wpWidth <= 1300) {
         width = 132;
-      } else if (cardType === 'large') {
-        width = 400;
+      }
+      if (wpWidth <= 1100) {
+        width = wpWidth/4;
+        // width = 256;
+      }
+
+      if (wpWidth <= 900) {
+        width = wpWidth/4;
+      }
+
+      if (wpWidth <= 760) {
+        width = wpWidth/4;
+      }
+      if (wpWidth <= 512) {
+        width = wpWidth/4;
+      }
+      if (wpWidth <= 400) {
+        width = wpWidth/4;
       }
     }
 

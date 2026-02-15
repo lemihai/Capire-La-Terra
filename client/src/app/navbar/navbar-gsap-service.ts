@@ -58,13 +58,13 @@ export class NavbarGsapService {
       ease: this.ease,
     });
     gsap.to('.about-earth-section', {
-      // height: '0rem',
+      height: '0rem',
+      translateY: '-4.8rem',
       duration: this.time,
       ease: this.ease,
     });
     gsap.to('.about-earth-wrapper', {
       // height: '0rem',
-      paddingTop: '8rem',
       duration: this.time,
       ease: this.ease,
     });
@@ -87,6 +87,146 @@ export class NavbarGsapService {
       duration: this.time,
       ease: this.ease,
     });
+
+    // Episodes Components
+    //  --------
+    gsap.to('.large', {
+      // height: '8rem',
+      minWidth: '24rem',
+      opacity: 0,
+      // rotate: 45,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('h2', {
+      width: '0rem',
+      height: '0rem',
+      skewX: 32,
+      skewY: 8,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.app-profile-card-wrapper-for-transform', {
+      // clearProps: 'all',
+      width: '0rem',
+      height: '0rem',
+      translateX: '2rem',
+      translateY: '-4rem',
+      skewX: 32,
+      skewY: 8,
+      opacity: 0,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.date', {
+      width: '0rem',
+      height: '0rem',
+      skewX: 32,
+      skewY: 8,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.bottom-container', {
+      // width: '100%',
+      // height: 'auto',
+      skewX: 0,
+      skewY: 0,
+      rotate: 0,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.episode-image', {
+      width: '0rem',
+      minWidth: '0rem',
+      // height: 'auto',
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.separator-line', {
+      height: '0rem',
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.audio-track-wrapper', {
+      translateY: '-1.6rem',
+      skewX: 8,
+      skewY: 4,
+      rotate: 4,
+      opacity: 0,
+      duration: this.time,
+      ease: this.ease,
+      // overwrite: 'auto',
+    });
+    gsap.to('.episode-title', {
+      height: '0rem',
+      width: '0rem',
+      y: -24,
+      skewX: 24,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 2,
+      ease: this.ease,
+    });
+    gsap.to('.episode-number', {
+      height: '0rem',
+      width: '0rem',
+      y: -24,
+      skewX: 24,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 2,
+      ease: this.ease,
+    });
+    gsap.to('.episode-duration', {
+      height: '0rem',
+      width: '0rem',
+      y: -24,
+      skewX: 24,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 2,
+      ease: this.ease,
+    });
+    gsap.to('.profile-wrapper-no-text', {
+      y: -24,
+      skewX: 24,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 2,
+      ease: this.ease,
+    });
+    gsap.to('.season-episode-list', {
+      height: '0rem',
+      minHeight: '0rem',
+      opacity: 0,
+      scale: 1,
+      rotate: 0,
+      duration: 2,
+      ease: this.ease,
+    });
+    
+    // gsap.to('.small-card-audio-track', {
+    //   y: -8,
+    //   skewX: 8,
+    //   skewY: 4,
+    //   scale: 1,
+    //   rotate: 0,
+    //   duration: 2,
+    //   ease: this.ease,
+    // });
+    
+    //  --------
     gsap.to('.episodes-action-container-button', {
       height: '0px',
       width: '0px',

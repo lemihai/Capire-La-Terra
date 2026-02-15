@@ -92,7 +92,6 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
     touchEndX: 0,
     touchEndY: 0,
   };
-
   
   @HostListener('touchstart', ['$event'])
   onTouchStart(event: TouchEvent) {
@@ -111,7 +110,7 @@ export class GlobalAudioPlayerComponent implements AfterViewInit, OnInit {
     }
     if (this.touchObject.touchStartY - this.touchObject.touchEndY < 0) {
       this.globalPlayerService.mobileMediumState();
-      this.audioTrackWidth = (this.viewportWidth - 64 - 48 * 2 - 16) / 2;
+      this.audioTrackWidth = (this.viewportWidth - 64 - 48 * 2 - 16 - 102);
     }
   }
 
