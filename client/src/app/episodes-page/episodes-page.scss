@@ -356,14 +356,18 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  overflow: hidden;
 
   h1 {
+    // height: 0rem;
+    // width: 0rem;
     color: var(--main-color-dark);
+    transform: skewX(-32deg) skewY(-8deg) translateY(-5.6rem);
   }
 
   .horizontal-seaprator-line {
     min-height: 0.24rem;
-    width: 100%;
+    width: 0rem;
     background-color: var(--main-color-dark-32);
     border-radius: 1rem;
   }

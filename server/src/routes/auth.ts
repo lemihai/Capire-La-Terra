@@ -26,15 +26,15 @@ const loginHandler = async (req: Request, res: Response) => {
 
     const [salt, storedHash] = checkUser.password.split(":");
 
-    console.log(salt, storedHash);
     // Safety check for malformed DB entries
     if (!salt || !storedHash) {
       res
       
-        .status(500)
-        .json({ success: false, message: "Database password format error" });
+      .status(500)
+      .json({ success: false, message: "Database password format error" });
       return;
     }
+    console.log(salt, storedHash);
 
     const hashToVerify = scryptSync(password, salt, 64).toString("hex");
 

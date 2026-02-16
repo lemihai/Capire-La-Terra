@@ -159,17 +159,17 @@ export class AdminService {
     return this.http.get<any>(`${this.apiUrl}/users`);
   }
   getOneUser(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/users/${id}`);
   }
 
   updatePassword(id: string, password: string): Observable<any> {
     const body = { password: password };
 
-    return this.http.patch<any>(`${this.apiUrl}/${id}`, body);
+    return this.http.patch<any>(`${this.apiUrl}/users/${id}`, body);
   }
 
   updateDetails(id: string, body: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, body);
+    return this.http.put<any>(`${this.apiUrl}/users/${id}`, body);
   }
 
   // --------------------------

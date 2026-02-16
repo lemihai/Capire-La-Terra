@@ -6,8 +6,38 @@
   <!-- <div class="separator-line"></div> -->
   <div class="content-container">
     <header class="top-wrapper-containers">
-      <div class="profile-picture" [style.background-image]="'url(profilePicture)'">
-        <div class="upload-new-picture"></div>
+      <div class="profile-picture" [style.background-image]="'url(currentUser.profilePic)'">
+        <div class="profile-image">
+          <img [src]="currentUser.profilePic" alt="Profile Image" />
+        </div>
+        <div class="upload-new-picture" (click)="triggerFileInput()">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5.74456 20.3636L21.1664 4.94194C21.8253 4.28298 23.9035 3.24389 26.4993 5.84022C29.0954 8.4369 28.0566 10.5143 27.3977 11.1731C26.2625 12.3083 16.6604 21.9437 11.9759 26.5949L4.16992 28.1696L5.74456 20.3636Z"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path d="M20 6L26 12" stroke="black" stroke-width="1.6" />
+            <path d="M7 20L13 26" stroke="black" stroke-width="1.6" />
+          </svg>
+        </div>
+        <input
+          #fileInput
+          class="image-input"
+          type="file"
+          id="image-upload"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        />
       </div>
       <!-- edit button -->
       <!-- Here I will ut profile pic and name -->

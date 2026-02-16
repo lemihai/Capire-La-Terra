@@ -28,7 +28,7 @@ export class EpisodesService {
   private http = inject(HttpClient);
 
   getAllEpisodes() {
-    return this.http.get(`${this.apiUrl}`);
+    return this.http.get(`${this.apiUrl}/published`);
   }
   
   getOneEpisode(id: string): Observable<Episode> {

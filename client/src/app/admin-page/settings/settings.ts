@@ -14,6 +14,7 @@ export class Settings implements OnInit {
   @ViewChild('emailInput') emailInput!: ElementRef;
   @ViewChild('passwordInput') passwordInput!: ElementRef;
   @ViewChild('confirmPasswordInput') confirmPasswordInput!: ElementRef;
+  @ViewChild('fileInput') fileInput!: ElementRef;
   profilePicture = 'https://example.com/image.jpg';
   usernameFocused = '';
   emailFocused = '';
@@ -116,12 +117,12 @@ export class Settings implements OnInit {
       return;
     }
 
-    if (!this.currentUser.id) {
+    if (!this.currentUser._id) {
       console.error('No user ID found');
       return;
     }
 
-    this.adminService.updatePassword(this.currentUser.id, this.password).subscribe({
+    this.adminService.updatePassword(this.currentUser._id, this.password).subscribe({
       next: (response) => {
         console.log('Password updated successfully', response);
         // Clear fields after success
@@ -136,7 +137,7 @@ export class Settings implements OnInit {
   }
 
   updateDetails() {
-    if (!this.currentUser.id) {
+    if (!this.currentUser._id) {
       console.error('No user ID found');
       return;
     }
@@ -145,9 +146,10 @@ export class Settings implements OnInit {
     const updateBody = {
       name: this.currentUser.name,
       email: this.currentUser.email,
+      profilePic: this.currentUser.profilePic,
     };
 
-    this.adminService.updateDetails(this.currentUser.id, updateBody).subscribe({
+    this.adminService.updateDetails(this.currentUser._id, updateBody).subscribe({
       next: (response) => {
         console.log('Profile updated successfully', response);
         // Optional: Show a success toast/notification
@@ -156,5 +158,35 @@ export class Settings implements OnInit {
         console.error('Error updating profile', err);
       },
     });
+  }
+
+  triggerFileInput(){
+    this.updateDetails();
+    this.fileInput.nativeElement.click();
+    console.log('fweiuabfueiws');
+  
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      console.log(file);
+
+      // Read the file as a Data URL for an immediate preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.currentUser.profilePic = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+      this.cdr.detectChanges();
+
+      // Optionally, send the file to a backend service for permanent storage
+      // this.uploadService.uploadImage(file).subscribe(imageUrl => this.article.imageUrl = imageUrl);
+    }
+    setTimeout(() => {
+      // this.inputOverlay.nativeElement.style.bottom = '1.2rem';
+      this.cdr.detectChanges();
+    }, 1600);
   }
 }

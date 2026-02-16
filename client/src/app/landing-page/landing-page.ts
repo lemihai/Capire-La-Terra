@@ -252,6 +252,26 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         overwrite: true,
       });
 
+      if (this.viewportWidth < 1100) {
+        gsap.to('h1', {
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          scale: 1,
+          translateY: 0,
+          translateX: '-.8rem',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.transition-horizontal-line', {
+          width: '100%',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+      }
+
       // --------------------------
       // SMOOTHER LOADUP
       // --------------------------
@@ -506,528 +526,527 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         }, 100);
       }
 
-      if(this.viewportWidth >= 1100){
+      if (this.viewportWidth >= 1100) {
+        // --------------------------
+        // THIS NEEDS TO HAPPEN NO MATTER HOW THE PAGE LOADS
+        // --------------------------
 
-      // --------------------------
-      // THIS NEEDS TO HAPPEN NO MATTER HOW THE PAGE LOADS
-      // --------------------------
+        // ******************************************
+        // Trigger for entering Episodes section
+        // ******************************************
 
-      // ******************************************
-      // Trigger for entering Episodes section
-      // ******************************************
+        ScrollTrigger.create({
+          trigger: '.episode-section-top-enter-trigger',
+          start: 'top center',
+          end: '+=300',
+          // pin: true,
+          scrub: false,
+          anticipatePin: 1,
+          markers: false,
+          onEnter: () => {
+            // Play entering animation when entering from the top
+            gsap.to('.episodes-text-h1', {
+              height: '120px',
+              width: '400px',
+              y: -60,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 0,
+              ease: this.ease,
+              overwrite: true, // Overwrite any existing animations on these elements
+            });
+            gsap.to('.episodes-action-container-text', {
+              height: '24px',
+              width: '189px',
+              y: 0,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-button', {
+              height: '40px',
+              width: '140px',
+              y: 0,
+              // scale: '1',
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-button-btn', {
+              height: '40px',
+              y: 0,
+              opacity: 1,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              // scale: '1',
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+          onEnterBack: () => {
+            // Play entering animation when entering from the bottom
+            gsap.to('.episodes-text-h1', {
+              height: '120px',
+              width: '400px',
+              y: -60,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-text', {
+              height: '24px',
+              width: '189px',
+              y: 0,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-button', {
+              height: '40px',
+              width: '140px',
+              y: 0,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-button-btn', {
+              height: '40px',
+              y: 0,
+              opacity: 1,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+          onLeave: () => {
+            // Play exiting animation when leaving from the bottom
+            gsap.to('.episodes-text-h1', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-text', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-button', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-button-btn', {
+              height: '0px',
+              width: '0px',
 
-      ScrollTrigger.create({
-        trigger: '.episode-section-top-enter-trigger',
-        start: 'top center',
-        end: '+=300',
-        // pin: true,
-        scrub: false,
-        anticipatePin: 1,
-        markers: false,
-        onEnter: () => {
-          // Play entering animation when entering from the top
-          gsap.to('.episodes-text-h1', {
-            height: '120px',
-            width: '400px',
-            y: -60,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 0,
-            ease: this.ease,
-            overwrite: true, // Overwrite any existing animations on these elements
-          });
-          gsap.to('.episodes-action-container-text', {
-            height: '24px',
-            width: '189px',
-            y: 0,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-button', {
-            height: '40px',
-            width: '140px',
-            y: 0,
-            // scale: '1',
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-button-btn', {
-            height: '40px',
-            y: 0,
-            opacity: 1,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            // scale: '1',
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-        onEnterBack: () => {
-          // Play entering animation when entering from the bottom
-          gsap.to('.episodes-text-h1', {
-            height: '120px',
-            width: '400px',
-            y: -60,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-text', {
-            height: '24px',
-            width: '189px',
-            y: 0,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-button', {
-            height: '40px',
-            width: '140px',
-            y: 0,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-button-btn', {
-            height: '40px',
-            y: 0,
-            opacity: 1,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-        onLeave: () => {
-          // Play exiting animation when leaving from the bottom
-          gsap.to('.episodes-text-h1', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-text', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-button', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-button-btn', {
-            height: '0px',
-            width: '0px',
+              opacity: 0,
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+          onLeaveBack: () => {
+            // Play exiting animation when leaving from the top
+            gsap.to('.episodes-text-h1', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-text', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-button', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.episodes-action-container-button-btn', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              opacity: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+        });
 
-            opacity: 0,
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-        onLeaveBack: () => {
-          // Play exiting animation when leaving from the top
-          gsap.to('.episodes-text-h1', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-text', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-button', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.episodes-action-container-button-btn', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            opacity: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-      });
+        // ******************************************
+        // Trigger for entering Latest News section
+        // ******************************************
 
-      // ******************************************
-      // Trigger for entering Latest News section
-      // ******************************************
+        ScrollTrigger.create({
+          trigger: '.news-section-enter-trigger',
+          start: 'top center',
+          end: '+=364',
+          // pin: true,
+          scrub: false,
+          anticipatePin: 1,
+          markers: false,
+          onEnter: () => {
+            // Play entering animation when entering from the top
+            gsap.to('.line-container', {
+              width: '500px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.latest-news-h1', {
+              height: '120px',
+              width: '500px',
+              // x: 0,
+              y: 32,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true, // Overwrite any existing animations on these elements
+            });
+            gsap.to('.news-action-container', {
+              // x: 0,
+            });
+            gsap.to('.news-action-container-text', {
+              height: '24px',
+              width: '288px',
+              y: 80,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-button', {
+              height: '40px',
+              width: '140px',
+              y: 80,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-button-btn', {
+              height: '40px',
+              y: 0,
+              opacity: 1,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+          onEnterBack: () => {
+            gsap.to('.line-container', {
+              width: '500px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            // Play entering animation when entering from the bottom
+            gsap.to('.latest-news-h1', {
+              height: '120px',
+              width: '400px',
+              y: 32,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-text', {
+              height: '24px',
+              width: '288px',
+              y: 80,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-button', {
+              height: '40px',
+              width: '140px',
+              y: 80,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-button-btn', {
+              height: '40px',
+              y: 0,
+              opacity: 1,
+              skewX: 0,
+              skewY: 0,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+          onLeave: () => {
+            gsap.to('.line-container', {
+              width: '400px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            // Play exiting animation when leaving from the bottom
+            gsap.to('.latest-news-h1', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-text', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-button', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-button-btn', {
+              height: '0px',
+              y: 0,
+              opacity: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to('.line-container', {
+              width: '400px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            // Play exiting animation when leaving from the top
+            gsap.to('.latest-news-h1', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-text', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-button', {
+              height: '0px',
+              width: '0px',
+              y: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+            gsap.to('.news-action-container-button-btn', {
+              height: '0px',
+              y: 0,
+              opacity: 0,
+              skewX: 32,
+              skewY: 8,
+              scale: 1,
+              rotate: 0,
+              duration: 1,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+        });
 
-      ScrollTrigger.create({
-        trigger: '.news-section-enter-trigger',
-        start: 'top center',
-        end: '+=364',
-        // pin: true,
-        scrub: false,
-        anticipatePin: 1,
-        markers: false,
-        onEnter: () => {
-          // Play entering animation when entering from the top
-          gsap.to('.line-container', {
-            width: '500px',
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.latest-news-h1', {
-            height: '120px',
-            width: '500px',
-            // x: 0,
-            y: 32,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true, // Overwrite any existing animations on these elements
-          });
-          gsap.to('.news-action-container', {
-            // x: 0,
-          });
-          gsap.to('.news-action-container-text', {
-            height: '24px',
-            width: '288px',
-            y: 80,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-button', {
-            height: '40px',
-            width: '140px',
-            y: 80,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-button-btn', {
-            height: '40px',
-            y: 0,
-            opacity: 1,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-        onEnterBack: () => {
-          gsap.to('.line-container', {
-            width: '500px',
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          // Play entering animation when entering from the bottom
-          gsap.to('.latest-news-h1', {
-            height: '120px',
-            width: '400px',
-            y: 32,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-text', {
-            height: '24px',
-            width: '288px',
-            y: 80,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-button', {
-            height: '40px',
-            width: '140px',
-            y: 80,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-button-btn', {
-            height: '40px',
-            y: 0,
-            opacity: 1,
-            skewX: 0,
-            skewY: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-        onLeave: () => {
-          gsap.to('.line-container', {
-            width: '400px',
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          // Play exiting animation when leaving from the bottom
-          gsap.to('.latest-news-h1', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-text', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-button', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-button-btn', {
-            height: '0px',
-            y: 0,
-            opacity: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to('.line-container', {
-            width: '400px',
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          // Play exiting animation when leaving from the top
-          gsap.to('.latest-news-h1', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-text', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-button', {
-            height: '0px',
-            width: '0px',
-            y: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-          gsap.to('.news-action-container-button-btn', {
-            height: '0px',
-            y: 0,
-            opacity: 0,
-            skewX: 32,
-            skewY: 8,
-            scale: 1,
-            rotate: 0,
-            duration: 1,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-      });
-
-      ScrollTrigger.create({
-        trigger: '.news-section-enter-trigger-2',
-        start: 'top center',
-        end: '+=800',
-        // pin: true,
-        scrub: false,
-        anticipatePin: 1,
-        markers: false,
-        onEnter: () => {
-          // Play entering animation when entering from the top
-          gsap.to('.left-side', {
-            height: '981px',
-            borderRadius: '32px',
-            duration: 2,
-            ease: this.ease,
-            overwrite: true, // Overwrite any existing animations on these elements
-          });
-        },
-        onEnterBack: () => {
-          // Play entering animation when entering from the bottom
-          gsap.to('.left-side', {
-            height: '981px',
-            borderRadius: '32px',
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-        onLeave: () => {
-          // Play exiting animation when leaving from the bottom
-          gsap.to('.left-side', {
-            height: '100px',
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-        onLeaveBack: () => {
-          // Play exiting animation when leaving from the top
-          gsap.to('.left-side', {
-            height: '100px',
-            duration: 2,
-            ease: this.ease,
-            overwrite: true,
-          });
-        },
-      });
+        ScrollTrigger.create({
+          trigger: '.news-section-enter-trigger-2',
+          start: 'top center',
+          end: '+=800',
+          // pin: true,
+          scrub: false,
+          anticipatePin: 1,
+          markers: false,
+          onEnter: () => {
+            // Play entering animation when entering from the top
+            gsap.to('.left-side', {
+              height: '981px',
+              borderRadius: '32px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: true, // Overwrite any existing animations on these elements
+            });
+          },
+          onEnterBack: () => {
+            // Play entering animation when entering from the bottom
+            gsap.to('.left-side', {
+              height: '981px',
+              borderRadius: '32px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+          onLeave: () => {
+            // Play exiting animation when leaving from the bottom
+            gsap.to('.left-side', {
+              height: '100px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+          onLeaveBack: () => {
+            // Play exiting animation when leaving from the top
+            gsap.to('.left-side', {
+              height: '100px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: true,
+            });
+          },
+        });
       }
     });
   }

@@ -192,6 +192,7 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     if (currentRouter.includes('new-episode')) {
       currentRoute = currentRouter;
     }
+    
 
     // console.log(398439, currentRoute, currentRouter);
     this.fromMain = currentRoute;
@@ -378,6 +379,7 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   SetSidebarView(view: string, extras?: NavigationExtras) {
+    console.log(view);
     if (view.includes('?editMode')) {
       extras = {
         queryParams: {
@@ -430,7 +432,7 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
           : 'calc(.4rem + (4.8rem*3) + (0.4rem*3)) !important';
       this.router.navigate(['admin-page/robots-view']);
       // return
-    } else if (view === 'episodes-view' || view === 'admin-page/episodes-view') {
+    } else if (view === 'episodes-view' || view === 'admin-page/episodes-view' || view === '/admin-page/episodes-view') {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
       // this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';

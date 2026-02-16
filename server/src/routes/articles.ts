@@ -32,10 +32,26 @@ articlesRouter.get("/articles", async (_req, res) => {
   }
 });
 
+articlesRouter.get("/articles/published", async (_req, res) => {
+  try {
+    const articles = await collections?.articles
+      ?.find({ posted: true })
+      .toArray();
+
+      console.log(articles);
+
+    res.status(200).send(articles);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown Error";
+    // console.log(message);
+    res.status(400).send(message);
+  }
+});
+
 // GET : BY ID
 
 articlesRouter.get("/articles/:id", async (req, res) => {
-   const id = req?.params?.id;
+  const id = req?.params?.id;
   try {
     const query = { _id: new ObjectId(id) }; // This looks correct for MongoDB
 
@@ -82,8 +98,11 @@ articlesRouter.post("/articles", verifyToken, async (req, res) => {
 
 // PUT
 
-articlesRouter.put("/articles/:id", verifyToken, (async (req: Request, res: Response) => {
-// ^^^ Cast the entire async function to RequestHandler ^^^
+articlesRouter.put("/articles/:id", verifyToken, (async (
+  req: Request,
+  res: Response,
+) => {
+  // ^^^ Cast the entire async function to RequestHandler ^^^
   try {
     const id = req?.params?.id;
     // Check if ID is a valid ObjectId format
@@ -97,11 +116,14 @@ articlesRouter.put("/articles/:id", verifyToken, (async (req: Request, res: Resp
     // The entire updated article object is in req.body
     const updatedArticle = req.body;
     // Remove the _id from the body to prevent issues when setting the document
-    delete updatedArticle._id; 
+    delete updatedArticle._id;
 
     const query = { _id: new ObjectId(id) };
 
-    const result = await collections?.articles?.replaceOne(query, updatedArticle);
+    const result = await collections?.articles?.replaceOne(
+      query,
+      updatedArticle,
+    );
 
     if (result && result.matchedCount) {
       res.status(200).json({
@@ -132,7 +154,10 @@ articlesRouter.put("/articles/:id", verifyToken, (async (req: Request, res: Resp
 // PATCH
 // Partially updating the Article data
 
-articlesRouter.patch("/articles/:id", verifyToken, (async (req: Request, res: Response) => {
+articlesRouter.patch("/articles/:id", verifyToken, (async (
+  req: Request,
+  res: Response,
+) => {
   try {
     const id = req?.params?.id;
     const { posted } = req.body;

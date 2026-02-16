@@ -61,7 +61,7 @@ userRouter.get("/users/:id", (async (req: Request, res: Response) => {
 userRouter.put("/users/:id", (async (req: Request, res: Response) => {
   try {
     const id = req?.params?.id;
-    const { name, email } = req.body;
+    const { name, email, profilePic } = req.body;
 
     if (!ObjectId.isValid(id)) {
       res.status(400).json({ message: "Invalid ID", success: false });
@@ -73,6 +73,7 @@ userRouter.put("/users/:id", (async (req: Request, res: Response) => {
     const updateData: any = {};
     if (name) updateData.name = name;
     if (email) updateData.email = email;
+    if (profilePic) updateData.profilePic = profilePic;
 
     const result = await collections?.users?.updateOne(query, {
       $set: updateData,

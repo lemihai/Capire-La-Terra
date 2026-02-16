@@ -27,8 +27,11 @@ export class ArticlesService {
   private http = inject(HttpClient);
 
   getAllArticles() {
-    return this.http.get(`${this.apiUrl}`);
+    return this.http.get(`${this.apiUrl}/published`);
   }
+  // getAllPublishedArticles() {
+  //   return this.http.get(`${this.apiUrl}/published`);
+  // }
 
   getOneArticle(id: string): Observable<Article> {
     // 💡 Key change: Add <Article> to the Observable type and http.get call

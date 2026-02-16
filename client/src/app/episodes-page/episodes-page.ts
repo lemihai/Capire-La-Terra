@@ -146,6 +146,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
       (data) => {
         this.focuss1();
         this.episodes = data;
+        console.log(data);
         this.sort();
         this.cdr.detectChanges();
       },
@@ -229,6 +230,27 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
           ease: this.ease,
           overwrite: true,
         });
+
+        gsap.to('h1', {
+          // width: '32rem',
+          // height: '4.7rem',
+          skewX: 0,
+          skewY: 0,
+          rotate: 0,
+          scale: 1,
+          translateY: 0,
+          translateX: '-.8rem',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+        gsap.to('.transition-horizontal-line', {
+          width: '100%',
+          duration: this.time,
+          ease: this.ease,
+          overwrite: true,
+        });
+
         gsap.to('.episodes-list', {
           height: 'auto',
           opacity: 1,

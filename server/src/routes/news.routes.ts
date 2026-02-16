@@ -46,16 +46,18 @@ newsRouter.get("/news/:id", verifyToken, async (_req, res) => {
   }
 });
 
-newsRouter.get("/scrape", verifyToken, async (_req, res) => {
+newsRouter.get("/scrape/:name", verifyToken, async (req, res) => {
   try {
-    // storing the result of the call in the articles constant
-    const articles = await collections?.news?.find({}).toArray();
-    const result = "Hello from the server";
+    // 2. Access the parameter using req.params
+    const scraperName = req.params.name;
+
+    // 3. Console log it
+    console.log("The scraper name is:", scraperName);
 
     main_scraper();
+    const result = `Hello from the server, you requested ${scraperName}`;
 
-    // Handling results and sending it to the front-end
-    res.status(200).send(articles);
+    res.status(200).send({ result });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -109,7 +111,6 @@ newsRouter.put("/news/:id", verifyToken, async (req, res) => {
 });
 
 // PATCH
-
 
 // DELETE
 // Deleting an article

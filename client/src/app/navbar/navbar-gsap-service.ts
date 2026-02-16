@@ -88,6 +88,26 @@ export class NavbarGsapService {
       ease: this.ease,
     });
 
+    if (this.viewportWidth < 1100) {
+      gsap.to('h1', {
+        width: '0rem',
+        height: '0rem',
+        translateY: '-6.4rem',
+        skewX: 32,
+        skewY: 8,
+        scale: 1,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.transition-horizontal-line', {
+        width: '0rem',
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+    }
+
     // Episodes Components
     //  --------
     gsap.to('.large', {
@@ -674,6 +694,15 @@ export class NavbarGsapService {
       overwrite: true,
     });
 
+    gsap.to('h1', {
+      width: '0rem',
+      height: '0rem',
+      skewX: 32,
+      skewY: 8,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
     gsap.to('h2', {
       width: '0rem',
       height: '0rem',
@@ -725,6 +754,12 @@ export class NavbarGsapService {
     });
     gsap.to('.separator-line', {
       height: '0rem',
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.transition-horizontal-line', {
+      width: '0rem',
       duration: this.time,
       ease: this.ease,
       overwrite: true,

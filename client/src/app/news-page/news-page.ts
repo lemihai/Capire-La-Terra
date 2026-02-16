@@ -76,6 +76,7 @@ export class NewsPage implements AfterViewInit, OnInit, OnDestroy {
   ngOnInit() {
     this.articlesService.getAllArticles().subscribe((data) => {
       this.articles = data;
+      this.sortArticles();
     });
     // Register GSAP plugins here once
     this.ngZone.runOutsideAngular(() => {
@@ -177,5 +178,15 @@ export class NewsPage implements AfterViewInit, OnInit, OnDestroy {
         });
       }, 400);
     });
+  }
+
+  sortArticles() {
+    this.articles.sort((a: any, b: any) => {
+      const dateA = new Date(a.date).getTime(); // Assuming 'date' is a property of your article
+      const dateB = new Date(b.date).getTime();
+      return dateB - dateA; // For descending (newest first)
+      // return dateA - dateB; // For ascending (oldest first)
+    });
+    this.cdr.detectChanges(); // Trigger change detection
   }
 }

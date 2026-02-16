@@ -41,6 +41,6 @@ export class RobotsService {
   }
 
   startScraper(name: string|undefined){
-    return this.http.get(`${this.apiUrl}/scrape/${name}`)
+    return this.http.get(`${environment.apiUrl}/scrape/${name}`)
   }
 }

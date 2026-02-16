@@ -62,9 +62,19 @@ export class NewsSectionComponent implements OnInit {
       //  }
       // this.articles = [...data];
       this.articles = data;
+      this.sortArticles();
       // this.sorting.sortedListView = [...this.articles];
       // this.sort('date');
       // this.cdr.detectChanges(); // Manually trigger change detection if needed
     });
+  }
+  sortArticles() {
+    this.articles.sort((a: any, b: any) => {
+      const dateA = new Date(a.date).getTime(); // Assuming 'date' is a property of your article
+      const dateB = new Date(b.date).getTime();
+      return dateB - dateA; // For descending (newest first)
+      // return dateA - dateB; // For ascending (oldest first)
+    });
+    this.cdr.detectChanges(); // Trigger change detection
   }
 }
