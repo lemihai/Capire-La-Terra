@@ -215,7 +215,7 @@ export class NavbarGsapService {
       duration: 2,
       ease: this.ease,
     });
-    
+
     // gsap.to('.small-card-audio-track', {
     //   y: -8,
     //   skewX: 8,
@@ -225,7 +225,7 @@ export class NavbarGsapService {
     //   duration: 2,
     //   ease: this.ease,
     // });
-    
+
     //  --------
     gsap.to('.episodes-action-container-button', {
       height: '0px',
@@ -306,6 +306,72 @@ export class NavbarGsapService {
       opacity: 0,
       scale: 1,
       duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.medium-text', {
+      height: '0px',
+      width: '0px',
+      y: -24,
+      skewX: 32,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.medium-card-image', {
+      height: '0rem',
+      minHeight: '0rem',
+      maxHeight: '0rem',
+      scale: 1,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.medium-date', {
+      height: '0px',
+      width: '0px',
+      y: -24,
+      skewX: 32,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.medium-separator-line', {
+      height: '0px',
+      minHeight: '0px',
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.profile-wrapper', {
+      height: '0px',
+      width: '0px',
+      y: -24,
+      skewX: 32,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.source', {
+      height: '0px',
+      width: '0px',
+      y: 0,
+      skewX: 32,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
       ease: this.ease,
       overwrite: true,
     });
@@ -700,6 +766,15 @@ export class NavbarGsapService {
       ease: this.ease,
       overwrite: true,
     });
+    gsap.to('.transition-image-A', {
+      height: '0rem',
+      minHeight: '0rem',
+      maxHeight: '0rem',
+      scale: 1,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
     gsap.to('.news-card-wrapper.right .image', {
       height: '0rem',
       minHeight: '0rem',
@@ -746,6 +821,98 @@ export class NavbarGsapService {
     //   ease: this.ease,
     //   overwrite: true,
     // });
+
+    // *****
+    // Medium card
+    // *****
+    gsap.to('h2', {
+      width: '0rem',
+      height: '0rem',
+      skewX: 32,
+      skewY: 8,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.medium-text', {
+      height: '0px',
+      width: '0px',
+      y: -24,
+      skewX: 32,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.medium-card-image', {
+      height: '0rem',
+      minHeight: '0rem',
+      maxHeight: '0rem',
+      scale: 1,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.medium-date', {
+      height: '0px',
+      width: '0px',
+      y: -24,
+      skewX: 32,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.medium-separator-line', {
+      height: '0px',
+      minHeight: '0px',
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.profile-wrapper', {
+      height: '0px',
+      width: '0px',
+      y: -24,
+      skewX: 32,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.profile-wrapper-no-text', {
+      height: '0px',
+      width: '0px',
+      y: -24,
+      skewX: 32,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.source', {
+      height: '0px',
+      width: '0px',
+      y: 0,
+      skewX: 32,
+      skewY: 8,
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: this.ease,
+      overwrite: true,
+    });
+    // *****
   }
 
   exitArticlePage() {
@@ -755,7 +922,19 @@ export class NavbarGsapService {
     // --------------------------------
 
     gsap.to('.article-page-wrapper', {
-      height: '0rem',
+      // height: '0rem',
+      x: 0,
+      y: 0,
+      // skewX: -24,
+      // skewY: -8,
+      opacity: 0,
+      scale: 1,
+      duration: this.time,
+      ease: this.ease,
+      overwrite: true,
+    });
+    gsap.to('.transition-A', {
+      // height: '0rem',
       x: 0,
       y: 0,
       skewX: -24,
@@ -766,10 +945,9 @@ export class NavbarGsapService {
       ease: this.ease,
       overwrite: true,
     });
-    gsap.to('.transition-A', {
-      height: '0rem',
-      x: 0,
-      y: 0,
+    gsap.to('.paragraph-transition', {
+      // height: '0rem',
+      translateY: '-4rem',
       skewX: -24,
       skewY: -8,
       opacity: 0,
@@ -897,9 +1075,9 @@ export class NavbarGsapService {
       rotate: 0,
       duration: 1,
       ease: this.ease,
-       overwrite:true,
+      overwrite: true,
     });
-    
+
     gsap.to('.nav-small-wrapper', {
       height: '3.2rem',
       // padding: '.4rem .8rem',
@@ -977,7 +1155,7 @@ export class NavbarGsapService {
         rotate: 0,
         duration: 1,
         ease: this.ease,
-        overwrite:true,
+        overwrite: true,
       });
     } else if (this.viewportWidth >= 464) {
       gsap.to('.nav-logo-wrapper', {
@@ -987,7 +1165,7 @@ export class NavbarGsapService {
         rotate: 0,
         duration: 1,
         ease: this.ease,
-         overwrite:true,
+        overwrite: true,
       });
     }
     gsap.to('.nav-small-wrapper', {

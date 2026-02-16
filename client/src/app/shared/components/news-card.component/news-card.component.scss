@@ -578,6 +578,8 @@
         gap: 1.2rem;
         transition: var(--transition-160);
 
+        overflow: hidden;
+
         app-profile-card {
           width: auto;
           transition: var(--transition-160);
@@ -592,10 +594,15 @@
           transition: var(--transition-160);
         }
 
-        .medium-date {
+        .medium-date-wrapper {
           min-width: fit-content;
-          // min-width: 8.4rem;
+          overflow: hidden;
           transition: var(--transition-160);
+          .medium-date {
+            min-width: fit-content;
+
+            transition: var(--transition-160);
+          }
         }
 
         .medium-card-source-parent-wrapper {
@@ -667,6 +674,7 @@
         }
 
         .medium-card-details-wrapper {
+
           gap: 1.6rem;
         }
       }
@@ -1106,7 +1114,6 @@
     }
 
     @media (max-width: 1264px) {
-      background-color: #ff000032;
       .image {
         width: 100%;
         max-width: 64%;
@@ -1212,7 +1219,6 @@
     }
 
     @media (max-width: 1264px) {
-      background-color: #00ff5532;
       .image {
         width: 100%;
         max-width: 64%;

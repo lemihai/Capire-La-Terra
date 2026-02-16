@@ -3,8 +3,10 @@
     <div class="page-wrapper">
       <div class="sidebar sidebar-transition">
         <div class="top-part">
-          <div class="logo-container"></div>
-          <div class="sidebar-line-horizontal"></div>
+          @if (viewportWidth > 1024) {
+            <div class="logo-container"></div>
+            <div class="sidebar-line-horizontal"></div>
+          }
           <!-- **************** -->
           <!-- DASHBOARD -->
           <button
@@ -51,7 +53,9 @@
                 />
               </svg>
             </div>
-            dashboard
+            <!-- @if (viewportWidth > 1024) { -->
+              <p class="button-text">dashboard</p>
+            <!-- } -->
           </button>
 
           <div class="sidebar-line-horizontal"></div>
@@ -124,6 +128,7 @@
                 />
               </svg>
             </div>
+            
             <p class="button-text">news</p>
           </button>
           <!-- **************** -->

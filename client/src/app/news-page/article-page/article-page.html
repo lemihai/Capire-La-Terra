@@ -40,7 +40,13 @@
         </div>
         <!-- <div class="article-text"> -->
         @for (paragraph of article.text; track $index) {
-          <p class="paragraph transition-A">{{ paragraph }}</p>
+          <div class="paragraph">
+            <p class="paragraph-transition transition-A">
+
+              {{ paragraph }}
+            </p>
+
+          </div>
         }
         <!-- </div> -->
       </section>

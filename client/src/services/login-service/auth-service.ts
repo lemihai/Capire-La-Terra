@@ -64,10 +64,10 @@ export class AuthService {
     const decodedToken = jwtDecode(token);
     const expiresAt = new Date(decodedToken.exp! * 1000);
     const iat = new Date(decodedToken.iat! * 1000);
-    console.log('DecodedToken: ', decodedToken);
+    // console.log('DecodedToken: ', decodedToken);
     // expiresAt += 1000;
-    console.log('expires at:', expiresAt, 'IAT:', iat);
-    console.log(expiresAt.toISOString());
+    // console.log('expires at:', expiresAt, 'IAT:', iat);
+    // console.log(expiresAt.toISOString());
     localStorage.setItem(this.SESSION_EXPIRATION_TOKEN, expiresAt.toISOString());
   }
 

@@ -1,82 +1,74 @@
-import { Router } from "express";
-import { ObjectId } from "mongodb";
-import cors from "cors";
+import { Router, Request, Response, RequestHandler } from "express";
 import { collections } from "../database.js";
-import { router } from "../routes.js";
 import jwt from "jsonwebtoken";
+import { scryptSync, timingSafeEqual } from "node:crypto";
 
 export const logInRouter = Router();
-
 const JWT_SECRET = process.env.JWT_SECRET;
-let JWT_EXPIRATION = "1h";
 
-// --------------------------------------
-// <|||||||||> lOGIN Routes <|||||||||>
-// --------------------------------------
-
-logInRouter.post("/login", async (req, res) => {
+// Define the handler separately to keep the router.post line clean
+const loginHandler = async (req: Request, res: Response) => {
   try {
     const { username, password, rememberMe } = req.body;
-    // console.log({ username, password });
-
-    const checkUser = await collections?.users?.findOne({
-      username: `${username}`,
-    });
-
-    const expiresIn = rememberMe ? "30d" : "1h";
-
-    const checkUserName = checkUser?.username;
-    const checkUserPassword = checkUser?.password;
 
     if (!JWT_SECRET) {
-      // This will stop the server from starting if the secret is missing
       throw new Error(
-        "FATAL: JWT_SECRET environment variable is not configured."
+        "FATAL: JWT_SECRET environment variable is not configured.",
       );
     }
 
-    if (checkUserName === username && checkUserPassword === password) {
-      // console.log("FUCKING WORKS", JWT_SECRET);
+    const checkUser = await collections?.users?.findOne({ username });
 
+    if (!checkUser || !checkUser.password) {
+      res.status(401).json({ success: false, message: "Invalid credentials" });
+      return; // Return void, not the response
+    }
+
+    const [salt, storedHash] = checkUser.password.split(":");
+
+    console.log(salt, storedHash);
+    // Safety check for malformed DB entries
+    if (!salt || !storedHash) {
+      res
+      
+        .status(500)
+        .json({ success: false, message: "Database password format error" });
+      return;
+    }
+
+    const hashToVerify = scryptSync(password, salt, 64).toString("hex");
+
+    const isMatch = timingSafeEqual(
+      Buffer.from(storedHash, "hex"),
+      Buffer.from(hashToVerify, "hex"),
+    );
+
+    if (isMatch) {
+      const expiresIn = rememberMe ? "30d" : "1h";
       const payload = {
-        userId: checkUser?._id.toHexString(), // Use .toHexString() to ensure it's a string
-        username: checkUser?.username,
+        userId: checkUser._id.toHexString(),
+        username: checkUser.username,
       };
 
-      const token = jwt.sign(payload, JWT_SECRET!, {
-        expiresIn,
-      });
-
-      console.log(23432324, token);
-
-      // console.log(token);
+      const token = jwt.sign(payload, JWT_SECRET, { expiresIn });
 
       res.status(200).json({
         success: true,
-        message: `Login successful ${checkUser?._id}`,
-        token: token, // Send the token back to the client
-        userId: checkUser?._id.toHexString(),
+        message: `Login successful`,
+        token: token,
+        userId: checkUser._id.toHexString(),
       });
     } else {
-      // Failed login
-      res.status(401).json({
-        success: false,
-        message: `Invalid username or password ${checkUser?.password}`,
-      });
+      res.status(401).json({ success: false, message: "Invalid credentials" });
     }
-
-    // const user = await collections?.users?.find({}).toArray();
-
-    // Check if user exists
-
-    // Check if the password and username is the same
-
-    // Check if the password is correct
   } catch (error) {
-    // Server error
+    
     res.status(500).json({
       success: false,
       message: error instanceof Error ? error.message : "Unknown Error",
     });
   }
-});
+};
+
+// Use the double-cast (as unknown as RequestHandler) to squash the TS(2352) error
+logInRouter.post("/login", loginHandler as unknown as RequestHandler);

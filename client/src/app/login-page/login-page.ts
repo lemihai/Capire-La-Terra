@@ -206,7 +206,7 @@ export class LoginPage implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.password);
+    
   }
 
   focusInput(type: number) {

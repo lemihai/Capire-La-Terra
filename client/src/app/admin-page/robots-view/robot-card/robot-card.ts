@@ -20,14 +20,14 @@ import { NewsWebsite } from '../../service/robots-service/robots-service';
 export class RobotCard implements OnInit {
   @Input() robot?: NewsWebsite;
   @Input() cardMode?: String;
-  constructor(private cdr: ChangeDetectorRef, private adminService: AdminService) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private adminService: AdminService,
+  ) {}
 
-  ngOnInit() {
-    console.log(this.cardMode);
-  }
+  ngOnInit() {}
   startScraper(robot: string | undefined) {
     this.adminService.startScraper(robot).subscribe((data) => {
-      console.log(data);
       this.cdr.detectChanges();
     });
   }

@@ -201,8 +201,14 @@
       justify-content: flex-start;
       align-items: flex-start;
       gap: 1.6rem;
+
+      
       .paragraph {
         height: auto;
+        overflow: hidden;
+        .paragraph-transition{
+
+        }
       }
     }
 

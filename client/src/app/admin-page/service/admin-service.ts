@@ -29,7 +29,7 @@ export class AdminService {
     private episodesService: EpisodesService,
     private articlesService: ArticlesService,
     private ngZone: NgZone,
-    private router: Router
+    private router: Router,
   ) {}
 
   // --------------------------
@@ -41,7 +41,7 @@ export class AdminService {
     fromRoute: string,
     Id?: string | undefined,
     data?: any | undefined,
-    editMode?: string
+    editMode?: string,
   ) {
     const customEase = 'cubic-bezier(0,.55,.52,.96)';
     let sidebarKey = fromRoute;
@@ -132,7 +132,7 @@ export class AdminService {
           duration: 0,
           ease: this.ease,
         },
-        0
+        0,
       );
 
       // ******************************************
@@ -156,8 +156,20 @@ export class AdminService {
   // --------------------------
 
   getUser(name: string): Observable<any> {
-      // 💡 Key change: Add <Article> to the Observable type and http.get call
-      return this.http.get<any>(`${this.apiUrl}/users`);
+    return this.http.get<any>(`${this.apiUrl}/users`);
+  }
+  getOneUser(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  updatePassword(id: string, password: string): Observable<any> {
+    const body = { password: password };
+
+    return this.http.patch<any>(`${this.apiUrl}/${id}`, body);
+  }
+
+  updateDetails(id: string, body: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, body);
   }
 
   // --------------------------

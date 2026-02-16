@@ -6,6 +6,7 @@ import {
   NgZone,
   ChangeDetectorRef,
   inject,
+  HostListener,
 } from '@angular/core';
 import {
   Router,
@@ -45,6 +46,14 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
   bottomHoverBottom = 'auto';
   buttonActive = '';
 
+  viewportWidth = window.innerWidth;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.viewportWidth = window.innerWidth;
+    this.Sidebar.viewportWidthSidebar = this.viewportWidth;
+    this.cdr.detectChanges();
+  }
+
   Sidebar = {
     dashbaord: 'active',
     news: '',
@@ -54,9 +63,13 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
     settings: '',
     logout: '',
 
+    viewportWidthSidebar: this.viewportWidth,
+
     currentRoute: '',
 
     setActive(view: string) {
+      // if(this.viewportWidthSidebar > 1024){
+
       if (view == 'admin-page') {
         this.dashbaord = 'active';
         this.news = '';
@@ -120,6 +133,7 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
         this.settings = '';
         this.logout = 'active';
       }
+      // }else if(this.viewportWidthSidebar < 1024){}
     },
   };
 
@@ -141,6 +155,13 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
 
   ngOnInit() {
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    ) {
+      alert(
+        'This admin dashboard is optimized for desktop use. Please use a laptop or desktop computer.',
+      );
+    }
     // Register GSAP plugins
     this.ngZone.runOutsideAngular(() => {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -238,60 +259,120 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
         // TEXT SECTION
         // --------------------------------
 
-        gsap.to('.intro-button-transition', {
-          width: '100%',
-          minWidth: '100%',
-          maxWidth: '100%',
-          height: '4rem',
-          x: 0,
-          y: 0,
-          skewX: 0,
-          skewY: 0,
-          opacity: 1,
-          scale: 1,
-          rotate: 0,
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
-        gsap.to('.transition-A', {
-          height: 'auto',
-          x: 0,
-          y: 0,
-          skewX: 0,
-          skewY: 0,
-          opacity: 1,
-          scale: 1,
-          rotate: 0,
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
-        gsap.to('.sidebar-transition', {
-          height: 'auto',
-          width: '18rem',
-          minWidth: '18rem',
-          maxWidth: '18rem',
-          skewX: 0,
-          skewY: 0,
-          opacity: 1,
-          scale: 1,
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
-        gsap.to('.sidebar-button-transition', {
-          width: '16.2rem',
-          skewX: 0,
-          skewY: 0,
-          y: 0,
-          x: 0,
-          rotate: 0,
-          scale: 1,
-          duration: this.time,
-          ease: this.ease,
-          overwrite: true,
-        });
+        if (this.viewportWidth > 1024) {
+          gsap.to('.intro-button-transition', {
+            width: '100%',
+            minWidth: '100%',
+            maxWidth: '100%',
+            height: '4rem',
+            x: 0,
+            y: 0,
+            skewX: 0,
+            skewY: 0,
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            duration: this.time,
+            ease: this.ease,
+            overwrite: true,
+          });
+          gsap.to('.transition-A', {
+            height: 'auto',
+            x: 0,
+            y: 0,
+            skewX: 0,
+            skewY: 0,
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            duration: this.time,
+            ease: this.ease,
+            overwrite: true,
+          });
+
+          gsap.to('.sidebar-transition', {
+            height: 'auto',
+            width: '18rem',
+            minWidth: '18rem',
+            maxWidth: '18rem',
+            skewX: 0,
+            skewY: 0,
+            opacity: 1,
+            scale: 1,
+            duration: this.time,
+            ease: this.ease,
+            overwrite: true,
+          });
+
+          gsap.to('.sidebar-button-transition', {
+            width: '16.2rem',
+            skewX: 0,
+            skewY: 0,
+            y: 0,
+            x: 0,
+            rotate: 0,
+            scale: 1,
+            duration: this.time,
+            ease: this.ease,
+            overwrite: true,
+          });
+        } else if (this.viewportWidth <= 1024) {
+          gsap.to('.intro-button-transition', {
+            width: '4.8rem',
+            minWidth: '4.8rem',
+            maxWidth: '4.8rem',
+            height: '4.8rem',
+            x: 0,
+            y: 0,
+            skewX: 0,
+            skewY: 0,
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            duration: this.time,
+            ease: this.ease,
+            overwrite: true,
+          });
+          gsap.to('.transition-A', {
+            height: 'auto',
+            x: 0,
+            y: 0,
+            skewX: 0,
+            skewY: 0,
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            duration: this.time,
+            ease: this.ease,
+            overwrite: true,
+          });
+          gsap.to('.sidebar-transition', {
+            height: 'auto',
+            width: '5.6rem',
+            minWidth: '5.6rem',
+            maxWidth: '5.6rem',
+            skewX: 0,
+            skewY: 0,
+            opacity: 1,
+            scale: 1,
+            duration: this.time,
+            ease: this.ease,
+            overwrite: true,
+          });
+
+          gsap.to('.sidebar-button-transition', {
+            width: '4.8rem',
+            skewX: 0,
+            skewY: 0,
+            y: 0,
+            x: 0,
+            rotate: 0,
+            scale: 1,
+            duration: this.time,
+            ease: this.ease,
+            overwrite: true,
+          });
+        }
       }, 100);
     });
   }
@@ -311,7 +392,8 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
 
     if (view === 'admin-page') {
       this.Sidebar.setActive('admin-page');
-      this.buttonHoverTop = 'calc(6.1rem)';
+      // this.buttonHoverTop = 'calc(6.1rem)';
+      this.buttonHoverTop = this.viewportWidth > 1024 ? 'calc(6.1rem)' : 'calc(.4rem)';
       this.router.navigate(['admin-page']);
     } else if (view === 'news-view' || view === 'admin-page/news-view') {
       // console.log('');
@@ -321,69 +403,110 @@ export class AdminPage implements OnInit, OnDestroy, AfterViewInit {
       // console.log('');
       this.Sidebar.setActive('news-view');
       this.bottomHoverBottom = 'auto';
-      this.buttonHoverTop = 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important';
+      // this.buttonHoverTop = 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important';
+      this.buttonHoverTop =
+        this.viewportWidth > 1024
+          ? 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important'
+          : 'calc(.4rem + (4.8rem*1) + (0.4rem*1)) !important';
       this.router.navigate(['admin-page/news-view']);
       // return
     } else if (view === 'articles-view' || view === 'admin-page/articles-view') {
       this.Sidebar.setActive('articles-view');
       this.bottomHoverBottom = 'auto';
-      this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
+      // this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
+      this.buttonHoverTop =
+        this.viewportWidth > 1024
+          ? 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important'
+          : 'calc(.4rem + (4.8rem*2) + (0.4rem*2)) !important';
       this.router.navigate(['admin-page/articles-view']);
       // return
     } else if (view === 'robots-view' || view === 'admin-page/robots-view') {
       this.Sidebar.setActive('robots-view');
       this.bottomHoverBottom = 'auto';
-      this.buttonHoverTop = 'calc(6.1rem + (4rem*3) + (0.4rem*3)) !important';
+      // this.buttonHoverTop = 'calc(6.1rem + (4rem*3) + (0.4rem*3)) !important';
+      this.buttonHoverTop =
+        this.viewportWidth > 1024
+          ? 'calc(6.1rem + (4rem*3) + (0.4rem*3)) !important'
+          : 'calc(.4rem + (4.8rem*3) + (0.4rem*3)) !important';
       this.router.navigate(['admin-page/robots-view']);
       // return
     } else if (view === 'episodes-view' || view === 'admin-page/episodes-view') {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
-      this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
+      // this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
+      this.buttonHoverTop =
+        this.viewportWidth > 1024
+          ? 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important'
+          : 'calc(.4rem + (4.8rem*4) + (0.4rem*4)) !important';
       this.router.navigate(['admin-page/episodes-view']);
       // return
     } else if (view === 'settings') {
       this.Sidebar.setActive('settings');
       this.bottomHoverBottom = 'auto';
-      this.buttonHoverTop = 'calc(6.1rem + (4rem*5) + (0.4rem*5)) !important';
+      // this.buttonHoverTop = 'calc(6.1rem + (4rem*5) + (0.4rem*5)) !important';
+      this.buttonHoverTop =
+        this.viewportWidth > 1024
+          ? 'calc(6.1rem + (4rem*5) + (0.4rem*5)) !important'
+          : 'calc(.4rem + (4.8rem*5) + (0.4rem*5)) !important';
       this.router.navigate(['admin-page/settings']);
       // return
     } else if (view === 'logout') {
       this.Sidebar.setActive('logout');
       this.buttonHoverTop = 'auto';
-      this.bottomHoverBottom = '.8rem !important';
+      // this.bottomHoverBottom = '.8rem !important';
+      this.bottomHoverBottom = this.viewportWidth > 1024 ? '.8rem !important' : '.4rem !important';
       this.router.navigate(['']);
       // return
     } else if (view.includes('news-article-view')) {
       this.Sidebar.setActive('news-view');
       this.bottomHoverBottom = 'auto';
-      this.buttonHoverTop = 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important';
+      // this.buttonHoverTop = 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important';
+      this.buttonHoverTop =
+        this.viewportWidth > 1024
+          ? 'calc(6.1rem + (4rem*1) + (0.4rem*1)) !important'
+          : 'calc(.4rem + (4.8rem*1) + (0.4rem*1)) !important';
       this.router.navigate([`${view}`]);
       // return
     } else if (view.includes('admin-article-page')) {
       this.Sidebar.setActive('articles-view');
       this.bottomHoverBottom = 'auto';
-      this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
+      // this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
+      this.buttonHoverTop =
+        this.viewportWidth > 1024
+          ? 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important'
+          : 'calc(.4rem + (4.8rem*2) + (0.4rem*2)) !important';
       this.router.navigate([`${view}`], extras);
 
       // return
     } else if (view === '/admin-page/articles-view/new-article') {
       this.Sidebar.setActive('articles-view');
       this.bottomHoverBottom = 'auto';
-      this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
+      // this.buttonHoverTop = 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important';
+      this.buttonHoverTop =
+        this.viewportWidth > 1024
+          ? 'calc(6.1rem + (4rem*2) + (0.4rem*2)) !important'
+          : 'calc(.4rem + (4.8rem*2) + (0.4rem*2)) !important';
       // this.router.navigate([`admin-page/new-article`]);
       this.router.navigate([`${view}`], extras);
       // return
     } else if (view.includes('new-episode')) {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
-      this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
+      // this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
+      this.buttonHoverTop =
+        this.viewportWidth > 1024
+          ? 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important'
+          : 'calc(.4rem + (4.8rem*4) + (0.4rem*4)) !important';
       this.router.navigate([`${view}`], extras);
       // return
     } else if (view.includes('episode-page')) {
       this.Sidebar.setActive('episodes-view');
       this.bottomHoverBottom = 'auto';
-      this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
+      // this.buttonHoverTop = 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important';
+      this.buttonHoverTop =
+        this.viewportWidth > 1024
+          ? 'calc(6.1rem + (4rem*4) + (0.4rem*4)) !important'
+          : 'calc(.4rem + (4.8rem*4) + (0.4rem*4)) !important';
       this.router.navigate([`${view}`], extras);
       // return
     } else {

@@ -193,7 +193,7 @@ episodeRouter.put("/episodes/:id", verifyToken, (async (
   }
 }) as RequestHandler);
 
-// PATH
+// PATCH
 episodeRouter.patch("/episodes/:id", verifyToken, (async (
   req: Request,
   res: Response,

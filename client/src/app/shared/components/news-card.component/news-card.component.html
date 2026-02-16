@@ -149,7 +149,10 @@
             <app-profile-card [profile]="article.author" class="" />
           }
           <div class="medium-separator-line"></div>
-          <p class="medium-date">{{ article.date }}</p>
+          <div class="medium-date-wrapper">
+
+            <p class="medium-date">{{ article.date }}</p>
+          </div>
           <div class="medium-separator-line"></div>
           <div class="medium-card-source-parent-wrapper">
             <div class="medium-card-source-wrapper">
