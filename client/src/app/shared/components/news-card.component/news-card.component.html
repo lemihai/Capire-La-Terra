@@ -141,7 +141,13 @@
         <h2 class="medium-title">{{ article.title }}</h2>
         <!-- </div> -->
         <div class="medium-card-details-wrapper">
-          <app-profile-card [profile]="article.author" class="" />
+          @if (viewportWidth < 760){
+            <app-profile-card [profile]="article.author" class="" cardMode="no-text"/>
+
+          } @else {
+
+            <app-profile-card [profile]="article.author" class="" />
+          }
           <div class="medium-separator-line"></div>
           <p class="medium-date">{{ article.date }}</p>
           <div class="medium-separator-line"></div>
@@ -298,12 +304,20 @@
       <div class="content">
         <h1 class="title transition-A">{{ article.title }}</h1>
         <div class="article-details">
-          <app-profile-card [profile]="article.author" class="transition-A" />
+          @if (viewportWidth <= 1264) {
+            <app-profile-card [profile]="article.author" class="transition-A" cardMode="no-text" />
+          } @else {
+            <app-profile-card [profile]="article.author" class="transition-A" />
+          }
 
           <div class="separator-line transition-vertical-line-inside-card"></div>
           <p class="date transition-A">{{ article.date }}</p>
           <div class="separator-line transition-vertical-line-inside-card"></div>
           @if (article.sources.length > 3) {
+            @for (source of article.sources; track source) {
+              <app-source class="transition-A" source="{{ source }}" size="no-image" />
+            }
+          } @else if (viewportWidth <= 1264) {
             @for (source of article.sources; track source) {
               <app-source class="transition-A" source="{{ source }}" size="no-image" />
             }

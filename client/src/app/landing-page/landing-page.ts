@@ -57,6 +57,13 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
     localStorage.removeItem('landingPageLoaded');
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.viewportWidth = window.innerWidth;
+    console.log(this.viewportWidth);
+    this.cdr.detectChanges();
+  }
+
   ngOnInit() {
     // Register GSAP plugins here once
     this.ngZone.runOutsideAngular(() => {

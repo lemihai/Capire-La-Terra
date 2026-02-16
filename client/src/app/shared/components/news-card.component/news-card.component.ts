@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  HostListener,
   Input,
   NgZone,
   OnChanges,
@@ -11,7 +12,7 @@ import {
 } from '@angular/core';
 import { ProfileCard } from '../profile-card/profile-card';
 import { SourceComponent } from '../source.component/source.component';
-import {  NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 import gsap from 'gsap';
 import CustomEase from 'gsap/CustomEase';
@@ -39,6 +40,11 @@ export class NewsCardComponent implements OnInit, OnChanges {
   };
 
   viewportWidth = window.innerWidth;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.viewportWidth = window.innerWidth;
+    this.cdr.detectChanges();
+  }
 
   @Input() news: News = {
     _id: '',

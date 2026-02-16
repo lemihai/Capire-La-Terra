@@ -5,6 +5,8 @@ import {
   OnDestroy,
   OnInit,
   inject,
+  HostListener,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -28,9 +30,48 @@ export class NewsPage implements AfterViewInit, OnInit, OnDestroy {
   timeFast = 0.64;
   ease = CustomEase.create('custom', 'M0,0 C0.119,1.118 0.437,0.964 1,1 ');
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   articles: any = [];
+
+  viewportWidth = window.innerWidth;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.viewportWidth = window.innerWidth;
+    if (this.viewportWidth >= 1464) {
+      gsap.to('.transition-A', {
+        height: 'auto',
+        x: 0,
+        y: 0,
+        skewX: 0,
+        skewY: 0,
+        opacity: 1,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.transition-vertical-line', {
+        maxHeight: '100%',
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      gsap.to('.transition-horizontal-line', {
+        maxWidth: '100%',
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+    }
+    this.cdr.detectChanges();
+  }
 
   ngOnInit() {
     this.articlesService.getAllArticles().subscribe((data) => {

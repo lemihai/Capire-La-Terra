@@ -642,7 +642,7 @@ nav {
         }
 
         .nav-small-header-wrapper {
-          .nav-small-header-transition-wrapper{
+          .nav-small-header-transition-wrapper {
             overflow: hidden;
             .nav-small-header-text {
               font-size: 1.6rem;
@@ -657,6 +657,25 @@ nav {
           }
         }
       }
+    }
+  }
+}
+
+.nav-onAdmin {
+  .nav-logo-wrapper {
+    margin-right: 12.8rem;
+    ul {
+      padding: 0.4rem 1.4rem 0.4rem 0.64rem;
+
+      h3{
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  @media (max-width: 792px) {
+    .nav-logo-wrapper {
+      margin-right: 0rem;
     }
   }
 }

@@ -434,8 +434,8 @@
 
       .title {
         text-decoration: underline;
-          color: var(--main-color-hover);
-          transition: var(--transition-160);
+        color: var(--main-color-hover);
+        transition: var(--transition-160);
       }
 
       .abstract {
@@ -798,6 +798,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
+      gap: 0rem;
       transition: var(--transition-160);
 
       overflow: hidden;
@@ -809,6 +810,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        transform: var(--transition-160);
 
         .title-icon {
           height: 2.4rem;
@@ -848,6 +850,7 @@
         justify-content: flex-start;
         align-items: center;
         gap: 0.64rem;
+        transform: var(--transition-160);
 
         overflow: hidden;
       }
@@ -857,6 +860,7 @@
       height: 1.2rem;
       width: 0.18rem;
       background-color: var(--main-color-dark-64);
+      transform: var(--transition-160);
     }
 
     .title {
@@ -875,15 +879,18 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
+      transform: var(--transition-160);
     }
 
     .date {
       min-width: 8.8rem;
       opacity: 0.64;
+      transform: var(--transition-160);
     }
 
     .source {
       opacity: 0.64;
+      transform: var(--transition-160);
     }
   }
 
@@ -893,6 +900,7 @@
 
     .news-card-wrapper {
       gap: 1.6rem;
+      transform: var(--transition-160);
 
       .hovered-bar {
         width: 0.32rem;
@@ -907,10 +915,14 @@
         // min-width: 26rem;
         // max-width: 56rem;
         margin-right: 10%;
+        transform: var(--transition-160);
       }
 
       .card-content {
+        gap: 0.48rem;
+        transform: var(--transition-160);
         .title-wrapper {
+          transform: var(--transition-160);
           .title-icon {
             transition: var(--transition-32);
             height: 2.4rem;
@@ -962,6 +974,24 @@
       }
 
       .source {
+      }
+    }
+  }
+
+  @media (max-width: 1400px) {
+    .news-card-wrapper {
+      .card-image {
+        margin-right: 2.8%;
+        transition: var(--transition-160);
+      }
+    }
+
+    &:hover {
+      .news-card-wrapper {
+        .card-image {
+          margin-right: 3.6%;
+          transition: var(--transition-160);
+        }
       }
     }
   }
@@ -1074,6 +1104,34 @@
         }
       }
     }
+
+    @media (max-width: 1264px) {
+      background-color: #ff000032;
+      .image {
+        width: 100%;
+        max-width: 64%;
+        min-width: 40%;
+      }
+
+      .content {
+        width: 100%;
+        max-width: 64%;
+        min-width: 40%;
+      }
+
+      &:hover {
+        .image {
+          width: 100%;
+          max-width: 64%;
+          min-width: 48%;
+        }
+        .content {
+          width: 80%;
+          max-width: 64%;
+          min-width: 32%;
+        }
+      }
+    }
   }
 
   // ******************************
@@ -1152,6 +1210,34 @@
         width: 112%;
       }
     }
+
+    @media (max-width: 1264px) {
+      background-color: #00ff5532;
+      .image {
+        width: 100%;
+        max-width: 64%;
+        min-width: 40%;
+      }
+
+      .content {
+        width: 100%;
+        max-width: 64%;
+        min-width: 40%;
+      }
+
+      &:hover {
+        .image {
+          width: 100%;
+          max-width: 64%;
+          min-width: 48%;
+        }
+        .content {
+          width: 80%;
+          max-width: 64%;
+          min-width: 32%;
+        }
+      }
+    }
   }
 
   .news-card-wrapper {
@@ -1211,6 +1297,7 @@
     .content {
       height: 100%;
       width: auto;
+      min-height: fit-content;
 
       display: flex;
       flex-direction: column;
@@ -1234,8 +1321,15 @@
       }
 
       .title {
+        min-height: fit-content;
         font-size: 5.6rem;
         transition: var(--transition-160);
+        display: -webkit-box;
+
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .abstract {
@@ -1258,6 +1352,17 @@
         transition: var(--transition-160);
       }
     }
+
+    @media (max-width: 1264px) {
+      // .image {
+      //   width: 40%;
+      //   max-width: 60%;
+      //   min-width: 32%;
+      // }
+    }
+  }
+
+  @media (max-width: 1264px) {
   }
 }
 

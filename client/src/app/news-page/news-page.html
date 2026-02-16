@@ -2,34 +2,66 @@
   <div id="smooth-content">
     <div class="content-wrapper">
       <section class="main-articles">
-        <div class="main-wrapper">
-          <app-news-card
-            cardType="hero-card"
-            cardDirection="right"
-            [article]="articles[0]"
-            (navigateToArticle)="navigateToArticlePage(articles[0]._id, articles[0])"
-          />
-          <app-news-card
-            cardType="hero-card"
-            cardDirection="left"
-            [article]="articles[1]"
-            (navigateToArticle)="navigateToArticlePage(articles[1]._id, articles[1])"
-          />
-        </div>
-        <div class="separator-line transition-vertical-line"></div>
-        <div class="latest-news-wrapper">
+        @if (viewportWidth < 760) {
           <div class="header">
             <h1 class="transition-A">Biggest News</h1>
             <div class="horizontal-seaprator-line transition-horizontal-line"></div>
           </div>
-          <app-news-card cardType="small-no-image" [article]="articles[2]" />
-          <div class="horizontal-seaprator-line transition-horizontal-line"></div>
-          <app-news-card cardType="small-no-image" [article]="articles[3]" />
-          <div class="horizontal-seaprator-line transition-horizontal-line"></div>
-          <app-news-card cardType="small-no-image" [article]="articles[4]" />
-          <div class="horizontal-seaprator-line transition-horizontal-line"></div>
-          <app-news-card cardType="small-no-image" [article]="articles[5]" />
+        }
+        <div class="main-wrapper">
+          @if (viewportWidth <= 764 && viewportWidth > 546) {
+            <app-news-card
+              cardType="medium"
+              [article]="articles[0]"
+              (navigateToArticle)="navigateToArticlePage(articles[0]._id, articles[0])"
+            />
+            <app-news-card
+              cardType="medium"
+              [article]="articles[1]"
+              (navigateToArticle)="navigateToArticlePage(articles[1]._id, articles[1])"
+            />
+          } @else if (viewportWidth <= 546) {
+            <app-news-card
+              cardType="small-no-image"
+              [article]="articles[0]"
+              (navigateToArticle)="navigateToArticlePage(articles[0]._id, articles[0])"
+            />
+            <app-news-card
+              cardType="small-no-image"
+              [article]="articles[1]"
+              (navigateToArticle)="navigateToArticlePage(articles[1]._id, articles[1])"
+            />
+          } @else {
+            <app-news-card
+              cardType="hero-card"
+              cardDirection="right"
+              [article]="articles[0]"
+              (navigateToArticle)="navigateToArticlePage(articles[0]._id, articles[0])"
+            />
+            <app-news-card
+              cardType="hero-card"
+              cardDirection="left"
+              [article]="articles[1]"
+              (navigateToArticle)="navigateToArticlePage(articles[1]._id, articles[1])"
+            />
+          }
         </div>
+        @if (viewportWidth >= 1464) {
+          <div class="separator-line transition-vertical-line"></div>
+          <div class="latest-news-wrapper">
+            <div class="header">
+              <h1 class="transition-A">Latest News</h1>
+              <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+            </div>
+            <app-news-card cardType="small-no-image" [article]="articles[2]" />
+            <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+            <app-news-card cardType="small-no-image" [article]="articles[3]" />
+            <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+            <app-news-card cardType="small-no-image" [article]="articles[4]" />
+            <div class="horizontal-seaprator-line transition-horizontal-line"></div>
+            <app-news-card cardType="small-no-image" [article]="articles[5]" />
+          </div>
+        }
       </section>
       <section class="separator-articles">
         <div class="separator-wrapper">
@@ -58,14 +90,26 @@
       </section>
       <section class="all-articles">
         <div class="header">
-          <h1 class="transition-A">Latest News</h1>
+          <h1 class="transition-A">All News</h1>
           <div class="horizontal-seaprator-line transition-horizontal-line"></div>
         </div>
         <div class="episode-list">
-          <app-news-card cardType="large" [article]="articles[6]" />
-          <app-news-card cardType="large" [article]="articles[7]" />
-          <app-news-card cardType="large" [article]="articles[8]" />
-          <app-news-card cardType="large" [article]="articles[9]" />
+          @if (viewportWidth <= 764 && viewportWidth > 546) {
+            <app-news-card cardType="medium" [article]="articles[6]" />
+            <app-news-card cardType="medium" [article]="articles[7]" />
+            <app-news-card cardType="medium" [article]="articles[8]" />
+            <app-news-card cardType="medium" [article]="articles[9]" />
+          } @else if (viewportWidth <= 546) {
+            <app-news-card cardType="small-no-image" [article]="articles[6]" />
+            <app-news-card cardType="small-no-image" [article]="articles[7]" />
+            <app-news-card cardType="small-no-image" [article]="articles[8]" />
+            <app-news-card cardType="small-no-image" [article]="articles[9]" />
+          } @else {
+            <app-news-card cardType="large" [article]="articles[6]" />
+            <app-news-card cardType="large" [article]="articles[7]" />
+            <app-news-card cardType="large" [article]="articles[8]" />
+            <app-news-card cardType="large" [article]="articles[9]" />
+          }
         </div>
       </section>
     </div>

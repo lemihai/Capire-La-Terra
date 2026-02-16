@@ -39,6 +39,11 @@
 
     border-radius: 1.6rem;
     transition: var(--transition-160);
+
+    @media (max-width: 764px) {
+      transition: var(--transition-160);
+      display: none;
+    }
   }
 
   .image {
@@ -659,6 +664,20 @@
             }
           }
         }
+      }
+    }
+
+    @media (max-width: 400px) {
+      padding: 0rem 1.2rem 8rem 1.2rem;
+      .header-wrapper {
+      }
+
+      .welcome-text {
+        width: 100%;
+      }
+      
+      form {
+        width: 100%;
       }
     }
   }

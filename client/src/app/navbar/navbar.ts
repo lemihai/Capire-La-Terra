@@ -69,6 +69,7 @@ export class Navbar implements OnInit, AfterViewInit {
     backgroundHeight: '3.2rem',
     backgroundLeft: '',
     backgroundTop: '0rem',
+    isOnAdmin: 'nav-onAdmin',
 
     loginBackgroundWidth: '0rem',
     loginBackgroundHeight: '.8rem',
@@ -84,6 +85,7 @@ export class Navbar implements OnInit, AfterViewInit {
       if (this.viewPortWidthNav > 792) {
         if (view == 'home') {
           this.currentInFocus = 'home';
+          this.isOnAdmin = '';
 
           this.home = 'active';
           this.episodes = '';
@@ -102,6 +104,7 @@ export class Navbar implements OnInit, AfterViewInit {
         }
         if (view == 'episodes') {
           this.currentInFocus = 'episodes';
+          this.isOnAdmin = '';
 
           this.home = '';
           this.episodes = 'active';
@@ -120,6 +123,7 @@ export class Navbar implements OnInit, AfterViewInit {
         }
         if (view == 'news') {
           this.currentInFocus = 'news';
+          this.isOnAdmin = '';
 
           this.home = '';
           this.episodes = '';
@@ -138,6 +142,7 @@ export class Navbar implements OnInit, AfterViewInit {
         }
         if (view == 'admin') {
           this.currentInFocus = 'admin';
+          this.isOnAdmin = 'nav-onAdmin'
 
           this.home = '';
           this.episodes = '';
@@ -156,7 +161,8 @@ export class Navbar implements OnInit, AfterViewInit {
           this.previousActive = view;
         }
         if (view == 'login') {
-          this.currentInFocus = 'admin';
+          this.currentInFocus = 'login';
+          this.isOnAdmin = '';
 
           this.home = '';
           this.episodes = '';
@@ -193,6 +199,7 @@ export class Navbar implements OnInit, AfterViewInit {
       } else {
         if (view == 'home') {
           this.currentInFocus = 'home';
+          this.isOnAdmin = '';
 
           this.home = 'active';
           this.episodes = '';
@@ -206,6 +213,7 @@ export class Navbar implements OnInit, AfterViewInit {
         }
         if (view == 'episodes') {
           this.currentInFocus = 'episodes';
+          this.isOnAdmin = '';
 
           this.home = '';
           this.episodes = 'active';
@@ -219,6 +227,7 @@ export class Navbar implements OnInit, AfterViewInit {
         }
         if (view == 'news') {
           this.currentInFocus = 'news';
+          this.isOnAdmin = '';
 
           this.home = '';
           this.episodes = '';
@@ -232,6 +241,7 @@ export class Navbar implements OnInit, AfterViewInit {
         }
         if (view == 'admin') {
           this.currentInFocus = 'admin';
+          this.isOnAdmin = 'nav-onAdmin'
 
           this.home = '';
           this.episodes = '';
@@ -245,6 +255,7 @@ export class Navbar implements OnInit, AfterViewInit {
         }
         if (view == 'login') {
           this.currentInFocus = 'login';
+          this.isOnAdmin = '';
 
           this.home = '';
           this.episodes = '';

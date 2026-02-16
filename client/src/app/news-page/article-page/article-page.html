@@ -8,19 +8,20 @@
           </div>
         </div>
         <div class="image transition-image">
-          <img
-            [src]="article.imageUrl"
-            alt="Article Image"
-          />
+          <img [src]="article.imageUrl" alt="Article Image" />
         </div>
         <div class="article-details">
           <!-- @if (article.author == 'Sofia') { -->
-          <app-profile-card [profile]="article.author" class="transition-A"/>
+          <app-profile-card [profile]="article.author" class="transition-A" />
           <!-- } -->
           <div class="separator-line transition-vertical-line"></div>
           <p class="date transition-A">{{ article.date }}</p>
           <div class="separator-line transition-vertical-line"></div>
           @if (article.sources.length > 3) {
+            @for (source of article.sources; track source) {
+              <app-source class="transition-A" source="{{ source }}" size="no-image" />
+            }
+          } @else if (viewportWidth < 446) {
             @for (source of article.sources; track source) {
               <app-source class="transition-A" source="{{ source }}" size="no-image" />
             }
@@ -49,7 +50,7 @@
           <h1 class="transition-A">Read More</h1>
           <div class="horizontal-seaprator-line transition-horizontal-line"></div>
         </div>
-        <app-news-card cardType="small-no-image" [article]="article"/>
+        <app-news-card cardType="small-no-image" [article]="article" />
       </section>
     </div>
     <app-footer />

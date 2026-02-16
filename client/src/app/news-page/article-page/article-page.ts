@@ -1,9 +1,4 @@
-import {
-  Component,
-  NgZone,
-  inject,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, NgZone, inject, ChangeDetectorRef, HostListener } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
@@ -61,6 +56,14 @@ export class ArticlePage {
   };
 
   paragraphs: string[] = [];
+
+  viewportWidth = window.innerWidth;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.viewportWidth = window.innerWidth;
+
+    this.cdr.detectChanges();
+  }
 
   ngOnInit() {
     // Register GSAP plugins here once
