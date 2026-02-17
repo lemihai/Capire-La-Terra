@@ -90,6 +90,9 @@ export async function cleanTechnicaScraper(
         ?.find({ url: articleUrl })
         .toArray();
 
+        console.log('1', articleUrl);
+        console.log('1', check);
+
       // // Check if the url exist and check if you scraped it
       if (articleUrl && check?.length === 0) {
         // Execute in this order 1. Create new browser context 2. open new page 3. Go to new page
@@ -136,12 +139,12 @@ export async function cleanTechnicaScraper(
         };
 
         // insert the newArticle in the articles collection
-        const result = await collections?.news?.insertOne(newArticle);
+        // const result = await collections?.news?.insertOne(newArticle);
 
         // check if the result was succesfull and console log the isnerted ID. Else say that it was not successfull
-        if (result?.acknowledged)
-          console.log("Article added succesfully", result.insertedId);
-        else console.log(`Article was not succesfully added`);
+        // if (result?.acknowledged)
+        //   console.log("Article added succesfully", result.insertedId);
+        // else console.log(`Article was not succesfully added`);
 
         // close the article page
         await articlePage.close();

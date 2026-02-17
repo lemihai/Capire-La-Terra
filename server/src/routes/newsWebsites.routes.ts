@@ -25,23 +25,6 @@ newsWebsitesRouter.get("/newsWebsites", verifyToken, async (_req, res) => {
   }
 });
 
-// GET : 1
-
-newsWebsitesRouter.get("/newsWebsites/scrape/:name",verifyToken, async (req, res) => {
-  try {
-    const name = req?.params?.name;
-
-    // console.log(name);
-    // main_scraper();
-
-    res.status(200).json({
-        message: `Scraping process started on: ${name}`,
-        success: true,
-      });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
 
 // POST
 // Adding data to the DB

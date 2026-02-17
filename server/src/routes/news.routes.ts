@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ObjectId } from "mongodb";
 import cors from "cors";
 import { main_scraper } from "../scraper/main.js";
+import { scrapeSingleWebsite } from "../scraper/main.js";
 import { collections } from "../database.js";
 import { verifyToken } from "./auth.middleware.js";
 
@@ -48,16 +49,16 @@ newsRouter.get("/news/:id", verifyToken, async (_req, res) => {
 
 newsRouter.get("/scrape/:name", verifyToken, async (req, res) => {
   try {
-    // 2. Access the parameter using req.params
-    const scraperName = req.params.name;
+    const name = req?.params?.name;
 
-    // 3. Console log it
-    console.log("The scraper name is:", scraperName);
+    console.log(name);
+    scrapeSingleWebsite(name);
+        // main_scraper();
 
-    main_scraper();
-    const result = `Hello from the server, you requested ${scraperName}`;
-
-    res.status(200).send({ result });
+    res.status(200).json({
+      message: `Scraping process started on: ${name}`,
+      success: true,
+    });
   } catch (error) {
     res.status(500).send(error);
   }

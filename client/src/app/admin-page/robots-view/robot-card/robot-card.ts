@@ -26,6 +26,7 @@ export class RobotCard implements OnInit {
   ) {}
 
   ngOnInit() {}
+  
   startScraper(robot: string | undefined) {
     this.adminService.startScraper(robot).subscribe((data) => {
       console.log(data);

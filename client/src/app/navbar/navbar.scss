@@ -141,6 +141,12 @@ nav {
         z-index: 10;
       }
 
+      .nav-profile-wrapper {
+        app-profile-card {
+          
+        }
+      }
+
       li.language-button {
         display: flex;
         flex-direction: column;
@@ -558,6 +564,7 @@ nav {
               gap: 0.8rem;
               .nav-small-profile-wrapper {
                 app-profile-card {
+                  
                 }
               }
 

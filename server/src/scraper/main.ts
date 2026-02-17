@@ -76,7 +76,7 @@ export const main_scraper = async () => {
         case "aljazeera": {
           try {
             await aljazeeraScraper(URL, page, browser);
-            console.log(`Successfully scraped: aljazeera`);
+            // console.log(`Successfully scraped: aljazeera`);
 
             // 1. Define the query using the string name
             const query = { name: "aljazeera" };
@@ -85,9 +85,9 @@ export const main_scraper = async () => {
             const result = await collections.newsWebsites?.updateOne(query, {
               $set: { status: "active" },
             });
-            console.log(
-              `Updated aljazeera status to active. Modified count: ${result}`
-            );
+            // console.log(
+            //   `Updated aljazeera status to active. Modified count: ${result}`,
+            // );
           } catch (error) {
             console.error(`Error scraping aljazeera:`, error);
 
@@ -97,7 +97,7 @@ export const main_scraper = async () => {
               $set: { status: "inactive" },
             });
             console.log(
-              `Updated aljazeera status to inactive due to error. Modified count: ${result}`
+              `Updated aljazeera status to inactive due to error. Modified count: ${result}`,
             );
           }
           break;
@@ -246,6 +246,106 @@ export const main_scraper = async () => {
   //   Close the browser once the job is done
 };
 */
+
+// 1. Create the helper function
+export const scrapeSingleWebsite = async (website: string) => {
+  let URL = "";
+  try {
+    const newsWebsite = await collections?.newsWebsites
+      ?.find({ name: website })
+      ?.toArray();
+
+    if (!newsWebsite) {
+      return;
+    }
+
+    URL = newsWebsite[0].url;
+
+    const browser = await chromium.launch({ headless: true });
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    // /*
+    switch (website) {
+      case "aljazeera": {
+        const query = { name: "aljazeera" };
+        try {
+          await aljazeeraScraper(URL, page, browser);
+          // console.log(`Successfully scraped: aljazeera`);
+
+          // 1. Define the query using the string name
+
+          // 2. Define the update to set the status to 'active' on success
+          const result = await collections.newsWebsites?.updateOne(query, {
+            $set: { status: "active" },
+          });
+          // console.log(
+          //   `Updated aljazeera status to active. Modified count: ${result}`,
+          // );
+        } catch (error) {
+          console.error(`Error scraping aljazeera:`, error);
+
+          // On failure, set the status to 'inactive'
+
+          const result = await collections.newsWebsites?.updateOne(query, {
+            $set: { status: "inactive" },
+          });
+
+          // console.log(
+          //   `Updated aljazeera status to inactive due to error. Modified count: ${result}`,
+          // );
+        }
+        break;
+      }
+      case "climatelinks": {
+        await climatelinksScraper(URL, page, browser);
+        break;
+      }
+      case "cnnclimate": {
+        await cnnclimateScraper(URL, page, browser);
+        break;
+      }
+      case "cleantechnica": {
+        await cleanTechnicaScraper(URL, page, browser);
+        break;
+      }
+      case "euronews": {
+        await euronewsScraper(URL, page, browser);
+        break;
+      }
+      case "iea": {
+        await ieaScraper(URL, page, browser);
+        break;
+      }
+      case "mongabay": {
+        await mongabayScraper(URL, page, browser);
+        break;
+      }
+      case "natureclimatechange": {
+        await natureClimateChangeScraper(URL, page, browser);
+        break;
+      }
+      // case "theguardian": {
+      //   await theguardianScraper(URL, page, browser);
+      //   break;
+      // }
+      case "woodcentral": {
+        await woodcentralScraper(URL, page, browser);
+        break;
+      }
+      default:
+        console.log(`Scraper for ${website} not available`);
+    }
+
+    await page.close();
+    await browser.close();
+    await context.close();
+    // */
+    console.log(newsWebsite);
+  } catch (error) {
+    console.log(error);
+  }
+};
 // Error handling
 main_scraper().catch((error) => {
   console.log(`Error: ${error}`);
