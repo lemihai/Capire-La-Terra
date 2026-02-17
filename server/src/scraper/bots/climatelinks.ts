@@ -13,7 +13,7 @@ async function cleanText(input: string) {
   // Remove CSS styles and inline scripts
   const withoutStylesScripts = withoutTags.replace(
     /(\.pp-[^{]+{[^}]*})|(\s*\.[^ ]+\s*{[^}]*})|(\s*{[^}]*})/g,
-    ""
+    "",
   );
 
   // Remove extra whitespace, newlines, and tabs
@@ -61,7 +61,7 @@ async function parseDate(input: string) {
 export async function climatelinksScraper(
   URL: string,
   page: any,
-  browser: any
+  browser: any,
 ) {
   //  trimming the url according to the woodcentral template
   const baseURL = URL.split(".org")[0] + ".org";
@@ -143,14 +143,34 @@ export async function climatelinksScraper(
         const result = await collections?.news?.insertOne(newArticle);
 
         // check if the result was succesfull and console log the isnerted ID. Else say that it was not successfull
-        if (result?.acknowledged)
+        if (result?.acknowledged) {
+          await collections.newsWebsites?.updateOne(
+            { url: `${URL}` },
+            {
+              $set: { status: "active" },
+            },
+          );
           console.log("Article added succesfully", result.insertedId);
-        else console.log(`Article was not succesfully added`);
+        } else {
+          await collections.newsWebsites?.updateOne(
+            { url: `${URL}` },
+            {
+              $set: { status: "inactive" },
+            },
+          );
+          console.log(`Article was not succesfully added`);
+        }
 
         // close the article page
         await articlePage.close();
       }
     } catch (error) {
+      await collections.newsWebsites?.updateOne(
+        { url: `${URL}` },
+        {
+          $set: { status: "inactive" },
+        },
+      );
       console.log(`${error}`);
     }
   }

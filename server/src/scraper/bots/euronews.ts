@@ -196,14 +196,34 @@ export async function euronewsScraper(URL: string, page: any, browser: any) {
         const result = await collections?.news?.insertOne(newArticle);
 
         // check if the result was succesfull and console log the isnerted ID. Else say that it was not successfull
-        if (result?.acknowledged)
+        if (result?.acknowledged) {
+          await collections.newsWebsites?.updateOne(
+            { url: `${URL}` },
+            {
+              $set: { status: "active" },
+            },
+          );
           console.log("Article added succesfully", result.insertedId);
-        else console.log(`Article was not succesfully added`);
+        } else {
+          await collections.newsWebsites?.updateOne(
+            { url: `${URL}` },
+            {
+              $set: { status: "inactive" },
+            },
+          );
+          console.log(`Article was not succesfully added`);
+        }
 
         // close the article page
         await articlePage.close();
       }
     } catch (error) {
+      await collections.newsWebsites?.updateOne(
+            { url: `${URL}` },
+            {
+              $set: { status: "inactive" },
+            },
+          );
       console.log(error);
     }
   }

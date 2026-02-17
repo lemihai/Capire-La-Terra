@@ -313,7 +313,7 @@ export const scrapeSingleWebsite = async (website: string) => {
         await euronewsScraper(URL, page, browser);
         break;
       }
-      case "iea": {
+      case "ies": {
         await ieaScraper(URL, page, browser);
         break;
       }

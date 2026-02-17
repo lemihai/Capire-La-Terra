@@ -126,15 +126,35 @@ export async function aljazeeraScraper(URL: string, page: any, browser: any) {
         if (newArticle.text != "missing") {
           const result = await collections?.news?.insertOne(newArticle);
           // check if the result was succesfull and console log the isnerted ID. Else say that it was not successfull
-          if (result?.acknowledged)
+          if (result?.acknowledged) {
+            await collections.newsWebsites?.updateOne(
+              { url: `${URL}` },
+              {
+                $set: { status: "active" },
+              },
+            );
             console.log("Article added succesfully", result.insertedId);
-          else console.log(`Article was not succesfully added`);
+          } else {
+            await collections.newsWebsites?.updateOne(
+              { url: `${URL}` },
+              {
+                $set: { status: "inactive" },
+              },
+            );
+            console.log(`Article was not succesfully added`);
+          }
         }
 
         // close the article page
         await articlePage.close();
       }
     } catch (error) {
+      await collections.newsWebsites?.updateOne(
+        { url: `${URL}` },
+        {
+          $set: { status: "inactive" },
+        },
+      );
       // Catch the error from the script
       console.log(`${error}`);
     }

@@ -150,9 +150,23 @@ export async function cleanTechnicaScraper(
         const result = await collections?.news?.insertOne(newArticle);
 
         // check if the result was succesfull and console log the isnerted ID. Else say that it was not successfull
-        if (result?.acknowledged)
+        if (result?.acknowledged) {
+          await collections.newsWebsites?.updateOne(
+            { url: `${URL}` },
+            {
+              $set: { status: "active" },
+            },
+          );
           console.log("Article added succesfully", result.insertedId);
-        else console.log(`Article was not succesfully added`);
+        } else {
+          await collections.newsWebsites?.updateOne(
+            { url: `${URL}` },
+            {
+              $set: { status: "inactive" },
+            },
+          );
+          console.log(`Article was not succesfully added`);
+        }
 
         // close the article page
         await articlePage.close();
@@ -160,6 +174,12 @@ export async function cleanTechnicaScraper(
 
       // Retrieving the title, date, author and text of the article
     } catch (error) {
+      await collections.newsWebsites?.updateOne(
+        { url: `${URL}` },
+        {
+          $set: { status: "inactive" },
+        },
+      );
       console.log(`${error}`);
     }
   }
