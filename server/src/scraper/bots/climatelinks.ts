@@ -74,20 +74,30 @@ export async function climatelinksScraper(
     .locator("a")
     .all();
 
-  //   console.log(pages, URL);
+  if (pages.length < 1) {
+    const result = await collections.newsWebsites?.updateOne(
+      { url: `${URL}` },
+      {
+        $set: { status: "inactive" },
+      },
+    );
+  }
   // Iterating through the locators. For each of them, execute the scraping
   for (const article of pages) {
     try {
       // Extracting the href of each of the link elements from the main page
       let articleUrl = await article.getAttribute("href");
 
-      // Check if you already scraped this url
-      const check = await collections?.articles
-        ?.find({ url: articleUrl })
-        .toArray();
-      //   console.log(articleUrl, check);
+      const check = await collections?.news?.findOne({ url: articleUrl });
 
-      if (articleUrl && check?.length === 0) {
+      if (check) {
+        console.log("article not added");
+      } else if (check == null || undefined) {
+        console.log("article added");
+      }
+
+      // Check if the url exist and check if you scraped it
+      if ((articleUrl && check == null) || undefined) {
         // Execute in this order 1. Create new browser context 2. open new page 3. Go to new page
         const articleContext = await browser.newContext();
         const articlePage = await articleContext.newPage();

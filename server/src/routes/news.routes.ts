@@ -47,13 +47,24 @@ newsRouter.get("/news/:id", verifyToken, async (_req, res) => {
   }
 });
 
+newsRouter.get("/scrape", verifyToken, async (req, res) => {
+  try {
+    main_scraper();
+
+    res.status(200).json({
+      message: `Scraping process started on: ${name}`,
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 newsRouter.get("/scrape/:name", verifyToken, async (req, res) => {
   try {
     const name = req?.params?.name;
 
-    console.log(name);
     scrapeSingleWebsite(name);
-        // main_scraper();
 
     res.status(200).json({
       message: `Scraping process started on: ${name}`,

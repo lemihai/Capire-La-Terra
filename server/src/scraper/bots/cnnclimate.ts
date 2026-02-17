@@ -65,7 +65,14 @@ export async function cnnclimateScraper(URL: string, page: any, browser: any) {
 
   let pages = await page.locator('a[data-link-type="article"]').all();
 
-  console.log(pages);
+  if (pages.length < 1) {
+    const result = await collections.newsWebsites?.updateOne(
+      { url: `${URL}` },
+      {
+        $set: { status: "inactive" },
+      },
+    );
+  }
   //   console.log(typeof pages[0], pages[0]);
   for (const article of pages) {
     try {
@@ -73,17 +80,16 @@ export async function cnnclimateScraper(URL: string, page: any, browser: any) {
       let articleUrl = await article.getAttribute("href");
       articleUrl = baseURL + articleUrl;
 
-      // Check if you already scraped this url
-      // The selector for the pages returns two links. but this is handled by the checker
-      //   Because the link is scraped once, then the 2nd time it's no scraped because of the condition below
-      const check = await collections?.articles
-        ?.find({ url: articleUrl })
-        .toArray();
-      // console.log(check, "///", articleUrl);
+      const check = await collections?.news?.findOne({ url: articleUrl });
 
-      // The problem was that I edited the article URL before and it was read as being already scraped by the script
+      if (check) {
+        console.log("article not added");
+      } else if (check == null || undefined) {
+        console.log("article added");
+      }
 
-      if (articleUrl && check?.length === 0) {
+      // Check if the url exist and check if you scraped it
+      if ((articleUrl && check == null) || undefined) {
         // Execute in this order 1. Create new browser context 2. open new page 3. Go to new page
         const articleContext = await browser.newContext();
         const articlePage = await articleContext.newPage();

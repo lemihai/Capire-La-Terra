@@ -13,7 +13,7 @@ async function cleanText(input: string) {
   // Remove CSS styles and inline scripts
   const withoutStylesScripts = withoutTags.replace(
     /(\.pp-[^{]+{[^}]*})|(\s*\.[^ ]+\s*{[^}]*})|(\s*{[^}]*})/g,
-    ""
+    "",
   );
 
   // Remove extra whitespace, newlines, and tabs
@@ -38,24 +38,35 @@ export async function aljazeeraScraper(URL: string, page: any, browser: any) {
   /* I used this instead of the object entries approach because the 
   article pages were being closed before the attributes were read as the
   foreach loop is ignoring the async await function.
-
+  
   Keep the for of otherwise it won't work
   */
+
+  if (pages.length < 1) {
+    const result = await collections.newsWebsites?.updateOne(
+      { url: `${URL}` },
+      {
+        $set: { status: "inactive" },
+      },
+    );
+  }
   for (const article of pages) {
     // the first part of the for of starts as try.
     try {
       // The same process works as the article URL is built with the main url and the article URL
       let articleUrl = await article.getAttribute("href");
       articleUrl = baseURL + articleUrl;
-      console.log("TEST", articleUrl);
-
       // Check if you already scraped this url
-      const check = await collections?.articles
-        ?.find({ url: articleUrl })
-        .toArray();
+      const check = await collections?.news?.findOne({ url: articleUrl });
 
-      // // Check if the url exist and check if you scraped it
-      if (articleUrl && check?.length === 0) {
+      if (check) {
+        console.log("article not added");
+      } else if (check == null || undefined) {
+        console.log("article added");
+      }
+
+      // Check if the url exist and check if you scraped it
+      if ((articleUrl && check == null) || undefined) {
         // Execute in this order 1. Create new browser context 2. open new page 3. Go to new page
         const articleContext = await browser.newContext();
         const articlePage = await articleContext.newPage();

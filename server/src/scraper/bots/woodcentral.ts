@@ -44,6 +44,15 @@ export async function woodcentralScraper(URL: string, page: any, browser: any) {
   // merging the two loactors
   let pages = { ...pagesB, ...pagesA };
 
+  if (pages.length < 1) {
+    const result = await collections.newsWebsites?.updateOne(
+      { url: `${URL}` },
+      {
+        $set: { status: "inactive" },
+      },
+    );
+  }
+
   // Iterating through the locators. For each of them, execute the scraping
   Object.entries(pages).forEach(async ([key, article]: [string, any]) => {
     try {
@@ -51,12 +60,16 @@ export async function woodcentralScraper(URL: string, page: any, browser: any) {
       let articleUrl = await article.getAttribute("href");
 
       // Check if you already scraped this url
-      const check = await collections?.articles
-        ?.find({ url: articleUrl })
-        .toArray();
+      const check = await collections?.news?.findOne({ url: articleUrl });
 
-      // Check if the url exist and check if you scraped it
-      if (articleUrl && check?.length === 0) {
+      if (check) {
+        console.log("article not added");
+      } else if (check == null || undefined) {
+        console.log("article added");
+      }
+      // // Check if the url exist and check if you scraped it
+
+      if ((articleUrl && check == null) || undefined) {
         // Execute in this order 1. Create new browser context 2. open new page 3. Go to new page
         const articleContext = await browser.newContext();
         const articlePage = await articleContext.newPage();

@@ -69,7 +69,15 @@ export async function euronewsScraper(URL: string, page: any, browser: any) {
     .locator("article")
     .locator('a[class="m-object__title__link   "]')
     .all();
-  console.log(pages);
+  
+    if (pages.length < 1) {
+    const result = await collections.newsWebsites?.updateOne(
+      { url: `${URL}` },
+      {
+        $set: { status: "inactive" },
+      },
+    );
+  }
 
   for (const article of pages) {
     try {
@@ -78,14 +86,16 @@ export async function euronewsScraper(URL: string, page: any, browser: any) {
       articleUrl = baseURL + articleUrl;
       //   console.log(articleUrl);
 
-      // Check if you already scraped this url
-      // The selector for the pages returns two links. but this is handled by the checker
-      //   Because the link is scraped once, then the 2nd time it's no scraped because of the condition below
-      const check = await collections?.articles
-        ?.find({ url: articleUrl })
-        .toArray();
+      const check = await collections?.news?.findOne({ url: articleUrl });
 
-      if (articleUrl && check?.length === 0) {
+      if (check) {
+        console.log("article not added");
+      } else if (check == null || undefined) {
+        console.log("article added");
+      }
+
+      // Check if the url exist and check if you scraped it
+      if ((articleUrl && check == null) || undefined) {
         // Execute in this order 1. Create new browser context 2. open new page 3. Go to new page
         const articleContext = await browser.newContext();
         const articlePage = await articleContext.newPage();

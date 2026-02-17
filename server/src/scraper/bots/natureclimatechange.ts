@@ -13,7 +13,7 @@ async function cleanText(input: string) {
   // Remove CSS styles and inline scripts
   const withoutStylesScripts = withoutTags.replace(
     /(\.pp-[^{]+{[^}]*})|(\s*\.[^ ]+\s*{[^}]*})|(\s*{[^}]*})/g,
-    ""
+    "",
   );
 
   // Remove extra whitespace, newlines, and tabs
@@ -61,7 +61,7 @@ async function parseDate(input: string) {
 export async function natureClimateChangeScraper(
   URL: string,
   page: any,
-  browser: any
+  browser: any,
 ) {
   //  trimming the url according to the woodcentral template
   const baseURL = URL.split(".com")[0] + ".com";
@@ -73,7 +73,14 @@ export async function natureClimateChangeScraper(
     .locator("a")
     .all();
 
-  console.log(pages);
+  if (pages.length < 1) {
+    const result = await collections.newsWebsites?.updateOne(
+      { url: `${URL}` },
+      {
+        $set: { status: "inactive" },
+      },
+    );
+  }
 
   // Iterating through the locators. For each of them, execute the scraping
   for (const article of pages) {
@@ -82,15 +89,19 @@ export async function natureClimateChangeScraper(
       let articleUrl = await article.getAttribute("href");
       articleUrl = baseURL + articleUrl;
 
-      // Check if you already scraped this url
-      const check = await collections?.articles
-        ?.find({ url: articleUrl })
-        .toArray();
+      // console.log(articleUrl);
 
-      console.log(articleUrl);
+      // Check if you already scraped this url
+      const check = await collections?.news?.findOne({ url: articleUrl });
+
+      if (check) {
+        console.log("article not added");
+      } else if (check == null || undefined) {
+        console.log("article added");
+      }
       // // Check if the url exist and check if you scraped it
 
-      if (articleUrl && check?.length === 0) {
+      if ((articleUrl && check == null) || undefined) {
         // Execute in this order 1. Create new browser context 2. open new page 3. Go to new page
         const articleContext = await browser.newContext();
         const articlePage = await articleContext.newPage();
@@ -142,7 +153,7 @@ export async function natureClimateChangeScraper(
           "\n",
           articleAuthor,
           "\n",
-          articleText
+          articleText,
         );
 
         // Creatinga  new article object that follows the Article moldel described in the bakend.

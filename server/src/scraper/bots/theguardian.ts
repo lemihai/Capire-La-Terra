@@ -68,7 +68,14 @@ export async function theguardianScraper(URL: string, page: any, browser: any) {
     .locator("a")
     .all();
 
-  console.log(pages);
+  if (pages.length < 1) {
+    const result = await collections.newsWebsites?.updateOne(
+      { url: `${URL}` },
+      {
+        $set: { status: "inactive" },
+      },
+    );
+  }
 
   // Iterating through the locators. For each of them, execute the scraping
   for (const article of pages) {
@@ -78,14 +85,16 @@ export async function theguardianScraper(URL: string, page: any, browser: any) {
       articleUrl = baseURL + articleUrl;
 
       // Check if you already scraped this url
-      const check = await collections?.articles
-        ?.find({ url: articleUrl })
-        .toArray();
+      const check = await collections?.news?.findOne({ url: articleUrl });
 
-      console.log(articleUrl);
+      if (check) {
+        console.log("article not added");
+      } else if (check == null || undefined) {
+        console.log("article added");
+      }
       // // Check if the url exist and check if you scraped it
 
-      if (articleUrl && check?.length === 0) {
+      if ((articleUrl && check == null) || undefined) {
         // Execute in this order 1. Create new browser context 2. open new page 3. Go to new page
         const articleContext = await browser.newContext();
         const articlePage = await articleContext.newPage();

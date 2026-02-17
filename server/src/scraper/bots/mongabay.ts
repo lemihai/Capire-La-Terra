@@ -13,7 +13,7 @@ async function cleanText(input: string) {
   // Remove CSS styles and inline scripts
   const withoutStylesScripts = withoutTags.replace(
     /(\.pp-[^{]+{[^}]*})|(\s*\.[^ ]+\s*{[^}]*})|(\s*{[^}]*})/g,
-    ""
+    "",
   );
 
   // Remove extra whitespace, newlines, and tabs
@@ -69,7 +69,14 @@ export async function mongabayScraper(URL: string, page: any, browser: any) {
     .locator("a")
     .all();
 
-  console.log(pages);
+  if (pages.length < 1) {
+    const result = await collections.newsWebsites?.updateOne(
+      { url: `${URL}` },
+      {
+        $set: { status: "inactive" },
+      },
+    );
+  }
 
   for (const article of pages) {
     try {
@@ -78,15 +85,15 @@ export async function mongabayScraper(URL: string, page: any, browser: any) {
       //   articleUrl = baseURL + articleUrl;
 
       // Check if you already scraped this url
-      // The selector for the pages returns two links. but this is handled by the checker
-      //   Because the link is scraped once, then the 2nd time it's no scraped because of the condition below
-      const check = await collections?.articles
-        ?.find({ url: articleUrl })
-        .toArray();
+      const check = await collections?.news?.findOne({ url: articleUrl });
 
-      console.log(articleUrl);
+      if (check) {
+        console.log("article not added");
+      } else if (check == null || undefined) {
+        console.log("article added");
+      }
 
-      if (articleUrl && check?.length === 0) {
+      if ((articleUrl && check == null) || undefined) {
         // Execute in this order 1. Create new browser context 2. open new page 3. Go to new page
         const articleContext = await browser.newContext();
         const articlePage = await articleContext.newPage();

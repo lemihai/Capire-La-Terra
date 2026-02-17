@@ -14,7 +14,7 @@ async function cleanText(input: string) {
   // Remove CSS styles and inline scripts
   const withoutStylesScripts = withoutTags.replace(
     /(\.pp-[^{]+{[^}]*})|(\s*\.[^ ]+\s*{[^}]*})|(\s*{[^}]*})/g,
-    ""
+    "",
   );
 
   // Remove extra whitespace, newlines, and tabs
@@ -62,7 +62,7 @@ async function parseDate(input: string) {
 export async function cleanTechnicaScraper(
   URL: string,
   page: any,
-  browser: any
+  browser: any,
 ) {
   //  trimming the url according to the aljazeera template
   const baseURL = URL.split(".com")[0] + ".com";
@@ -75,7 +75,14 @@ export async function cleanTechnicaScraper(
     .locator("a")
     .all();
 
-  console.log(pages);
+  if (pages.length < 1) {
+    const result = await collections.newsWebsites?.updateOne(
+      { url: `${URL}` },
+      {
+        $set: { status: "inactive" },
+      },
+    );
+  }
 
   // Iterating through the locators. For each of them, execute the scraping
   for (const article of pages) {
@@ -83,18 +90,19 @@ export async function cleanTechnicaScraper(
       // Extracting the href of each of the link elements from the main page
       let articleUrl = await article.getAttribute("href");
 
-      console.log("TEST", articleUrl);
+      // console.log("TEST", articleUrl);
 
       // Check if you already scraped this url
-      const check = await collections?.articles
-        ?.find({ url: articleUrl })
-        .toArray();
+      const check = await collections?.news?.findOne({ url: articleUrl });
 
-        console.log('1', articleUrl);
-        console.log('1', check);
+      if (check) {
+        console.log("article not added");
+      } else if (check == null || undefined) {
+        console.log("article added");
+      }
 
-      // // Check if the url exist and check if you scraped it
-      if (articleUrl && check?.length === 0) {
+      // Check if the url exist and check if you scraped it
+      if ((articleUrl && check == null) || undefined) {
         // Execute in this order 1. Create new browser context 2. open new page 3. Go to new page
         const articleContext = await browser.newContext();
         const articlePage = await articleContext.newPage();
@@ -139,12 +147,12 @@ export async function cleanTechnicaScraper(
         };
 
         // insert the newArticle in the articles collection
-        // const result = await collections?.news?.insertOne(newArticle);
+        const result = await collections?.news?.insertOne(newArticle);
 
         // check if the result was succesfull and console log the isnerted ID. Else say that it was not successfull
-        // if (result?.acknowledged)
-        //   console.log("Article added succesfully", result.insertedId);
-        // else console.log(`Article was not succesfully added`);
+        if (result?.acknowledged)
+          console.log("Article added succesfully", result.insertedId);
+        else console.log(`Article was not succesfully added`);
 
         // close the article page
         await articlePage.close();
