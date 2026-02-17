@@ -3,11 +3,11 @@ import { AdminService } from '../service/admin-service';
 import { NewsWebsite, RobotsService } from '../service/robots-service/robots-service';
 import { Router, RouterOutlet } from '@angular/router';
 import { RobotCard } from './robot-card/robot-card';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-robots-view',
-  imports: [RouterOutlet, RobotCard, CommonModule],
+  imports: [RouterOutlet, RobotCard],
   templateUrl: './robots-view.html',
   styleUrl: './robots-view.scss',
 })
