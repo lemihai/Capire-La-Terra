@@ -17,7 +17,6 @@ services:
       - "--entrypoints.websecure.address=:443"
       # SSL Automation via Let's Encrypt
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=info@capirelaterra.it"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
       # Global HTTP -> HTTPS Redirection
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
@@ -66,8 +65,8 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      # - "traefik.http.routers.frontend.rule=Host(`capirelaterra.it`) || Host(`www.capirelaterra.it`)"
-      - "traefik.http.routers.frontend.rule=Host(`localhost:3000`) || Host(`localhost:3000`)"
+      - "traefik.http.routers.frontend.rule=Host(`capirelaterra.it`) || Host(`www.capirelaterra.it`)"
+      # - "traefik.http.routers.frontend.rule=Host(`localhost:3000`) || Host(`localhost:3000`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
