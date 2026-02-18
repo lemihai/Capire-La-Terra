@@ -14,9 +14,7 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.exposedbydefault=false"
-      # --- ADD THE LINE BELOW ---
-      - "--providers.docker.version=1.44" 
-      # --------------------------
+      # - "--providers.docker.version=1.44" 
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
