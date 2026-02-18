@@ -54,6 +54,13 @@ services:
     networks:
       - inner
       - traefik_net
+    labels:
+      - "traefik.enable=true"
+      # This captures any request starting with /api or specific episode routes
+      - "traefik.http.routers.backend.rule=Host(`capirelaterra.it`) && (PathPrefix(`/episodes`) || PathPrefix(`/lastEpisode`) || PathPrefix(`/postedEpisodes`))"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=myresolver"
+      - "traefik.http.services.backend.loadbalancer.server.port=3000"
 
   frontend:
     build:
