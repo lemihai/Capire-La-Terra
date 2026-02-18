@@ -151,11 +151,6 @@ episodeRouter.post("/episodes", verifyToken, async (req, res) => {
       });
     }
   } catch (error) {
-    // console.log(error);
-    // res.status(400).json({
-    //     message: error instanceof Error ? error.message : "Unknown Error",
-    //     success: true,
-    //   });
     res
       .status(400)
       .send(error instanceof Error ? error.message : "Unknown Error");

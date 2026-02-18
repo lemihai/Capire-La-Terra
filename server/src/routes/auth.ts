@@ -34,7 +34,6 @@ const loginHandler = async (req: Request, res: Response) => {
       .json({ success: false, message: "Database password format error" });
       return;
     }
-    console.log(salt, storedHash);
 
     const hashToVerify = scryptSync(password, salt, 64).toString("hex");
 

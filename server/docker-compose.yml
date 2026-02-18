@@ -1,11 +1,37 @@
-# THIS IS DOCKER.COMPOSE
+# ------------ PROD
+
 version: "3.8"
 
 services:
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: always
+    command:
+      - "--api.dashboard=false" # Security: disabled dashboard for prod
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      # SSL Automation via Let's Encrypt
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=info@capirelaterra.it"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      # Global HTTP -> HTTPS Redirection
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+    networks:
+      - traefik_net
+
   db:
     image: mongodb/mongodb-community-server:7.0.0-ubi8
-    ports:
-      - "27017:27017"
+    restart: always
     volumes:
       - mongodb_data:/data/db
     networks:
@@ -15,46 +41,98 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-    ports:
-      - "3000:3000"
+    restart: always
     environment:
       - DB_HOST=mongodb://db:27017/capirelaterra
-      # Optional: Add any environment variables needed for development, e.g., NODE_ENV=development
     env_file:
       - ./.env
     depends_on:
       - db
-    volumes:
-      - .:/app # Mount the backend code into the container
-      # This anonymous volume ensures node_modules inside the container
-      # doesn't get overwritten by a potentially different node_modules on the host.
-      # It also effectively caches node_modules, which speeds up rebuilds.
-      - /app/node_modules
-    command: npm run dev
     networks:
       - inner
-      - outer
+      - traefik_net
 
   frontend:
     build:
       context: ../client
       dockerfile: dockerfile
-    # Map container port 4200 to host port 4200
-    ports:
-      - "4200:4200"
+    restart: always
     depends_on:
-      # Still good to ensure backend starts first if frontend needs it for initial data
       - backend
-    volumes:
-      - ../client:/app # Mount the frontend code into the container
-      # Anonymous volume for node_modules
-      - /app/node_modules
     networks:
-      - outer
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      # - "traefik.http.routers.frontend.rule=Host(`capirelaterra.it`) || Host(`www.capirelaterra.it`)"
+      - "traefik.http.routers.frontend.rule=Host(`localhost:3000`) || Host(`localhost:3000`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=myresolver"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
 
 volumes:
   mongodb_data:
 
 networks:
   inner:
-  outer:
+  traefik_net:
+# ------------ DEV
+# # THIS IS DOCKER.COMPOSE
+# version: "3.8"
+
+# services:
+#   db:
+#     image: mongodb/mongodb-community-server:7.0.0-ubi8
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongodb_data:/data/db
+#     networks:
+#       - inner
+
+#   backend:
+#     build:
+#       context: .
+#       dockerfile: dockerfile
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       - DB_HOST=mongodb://db:27017/capirelaterra
+#       # Optional: Add any environment variables needed for development, e.g., NODE_ENV=development
+#     env_file:
+#       - ./.env
+#     depends_on:
+#       - db
+#     volumes:
+#       - .:/app # Mount the backend code into the container
+#       # This anonymous volume ensures node_modules inside the container
+#       # doesn't get overwritten by a potentially different node_modules on the host.
+#       # It also effectively caches node_modules, which speeds up rebuilds.
+#       - /app/node_modules
+#     command: npm run dev
+#     networks:
+#       - inner
+#       - outer
+
+#   frontend:
+#     build:
+#       context: ../client
+#       dockerfile: dockerfile
+#     # Map container port 4200 to host port 4200
+#     ports:
+#       - "4200:4200"
+#     depends_on:
+#       # Still good to ensure backend starts first if frontend needs it for initial data
+#       - backend
+#     volumes:
+#       - ../client:/app # Mount the frontend code into the container
+#       # Anonymous volume for node_modules
+#       - /app/node_modules
+#     networks:
+#       - outer
+
+# volumes:
+#   mongodb_data:
+
+# networks:
+#   inner:
+#   outer:

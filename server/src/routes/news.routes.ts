@@ -19,11 +19,7 @@ newsRouter.use(cors());
 newsRouter.get("/news", verifyToken, async (_req, res) => {
   try {
     // storing the result of the call in the articles cosntant
-    // let authorisationToke = _req.headers.authorization;
-    // console.log(_req.headers.authorization?.split(':')[1]);
-    // console.log(_req.headers);
     const articles = await collections?.news?.find({}).toArray();
-    // console.log(articles);
     // Handling results and sending it to the front-end
     res.status(200).send(articles);
   } catch (error) {
@@ -47,7 +43,6 @@ newsRouter.get("/news/:id", verifyToken, async (_req, res) => {
     const query = { _id: new ObjectId(id) }; // This looks correct for MongoDB
 
     const article = await collections?.news?.findOne(query);
-    // console.log(article);
 
     res.status(200).send(article);
   } catch (error) {

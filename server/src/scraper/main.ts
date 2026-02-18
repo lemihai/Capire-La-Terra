@@ -322,7 +322,7 @@ export const scrapeSingleWebsite = async (website: string) => {
         break;
       }
       case "natureclimatechange": {
-        console.log(URL);
+        // console.log(URL);
         await natureClimateChangeScraper(URL, page, browser);
         break;
       }

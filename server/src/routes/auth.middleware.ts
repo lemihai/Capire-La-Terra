@@ -6,8 +6,6 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
   const token = authHeader?.split(':')[1]; 
   const secret = process.env.JWT_SECRET;
 
-//   console.log(1, authHeader);
-//   console.log(2, token);
 
   if (!token || !secret) {
     res.status(401).json({ message: "Access Denied" });

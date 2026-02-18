@@ -1,46 +1,102 @@
-# Use the Playwright base image
-FROM mcr.microsoft.com/playwright:v1.54.0-noble
+# ------------ PROD
 
-# Set the working directory inside the container
+# --- Stage 1: Build (The "builder" stage) ---
+FROM mcr.microsoft.com/playwright:v1.54.0-noble AS builder
+
 WORKDIR /app
 
-# Copy package files first to leverage Docker cache
-COPY ./package*.json ./
+# Copy configuration and dependency files
+COPY package*.json ./
+COPY tsconfig.json ./
 
-# Update package lists and install system dependencies
-# Using a single RUN command to reduce layers and avoid cache issues
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    # Add any additional system dependencies here
-    && rm -rf /var/lib/apt/lists/*
+# Install all dependencies (including devDeps for the build)
+RUN npm ci
 
-# # Install and build TypeScript
-# RUN npm install -g typescript
-# RUN tsc --init
-# # RUN tsc 
-
-# Install Node.js dependencies
-RUN npm install
-
-# Initialize Playwright
-RUN npm init playwright@latest
-
-# Install Playwright browsers
-RUN npx playwright install --with-deps
-
-# Copy the rest of the application code
+# Copy source code and build
 COPY . .
-
 RUN npx tsc
 
-# Build the application (if needed)
-# RUN npm run build
 
-# Expose the port the app runs on
+# --- Stage 2: Production (The "runner" stage) ---
+FROM mcr.microsoft.com/playwright:v1.54.0-noble AS runner
+
+# Set environment to production
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+# 1. Fix permissions: Change ownership of the /app directory to pwuser
+RUN chown -R pwuser:pwuser /app
+
+# 2. Switch to the non-privileged user
+USER pwuser
+
+# 3. Copy files and ensure they are owned by pwuser
+# We reference "builder" here, which matches the name in Stage 1
+COPY --from=builder --chown=pwuser:pwuser /app/package*.json ./
+COPY --from=builder --chown=pwuser:pwuser /app/dist ./dist
+
+# 4. Install production dependencies only
+RUN npm ci --omit=dev
+
+# 5. Install dumb-init (requires root)
+USER root
+RUN apt-get update && apt-get install -y dumb-init && rm -rf /var/lib/apt/lists/*
+
+# 6. Switch back to pwuser for execution
+USER pwuser
+
 EXPOSE 3000
 
-# Command to run the applications
-# CMD ["npx", "ts-node", "--files", "src/server.ts"]
-# CMD ["npm", "start"]
-# CMD ["npx", "tsx", "src/server.ts"]
-CMD ["npm", "run", "dev"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["node", "dist/server.js"]
+
+
+
+# ------------ DEV
+# Use the Playwright base image
+# FROM mcr.microsoft.com/playwright:v1.54.0-noble
+
+# # Set the working directory inside the container
+# WORKDIR /app
+
+# # Copy package files first to leverage Docker cache
+# COPY ./package*.json ./
+
+# # Update package lists and install system dependencies
+# # Using a single RUN command to reduce layers and avoid cache issues
+# RUN apt-get update && \
+#     apt-get install -y --no-install-recommends \
+#     # Add any additional system dependencies here
+#     && rm -rf /var/lib/apt/lists/*
+
+# # # Install and build TypeScript
+# # RUN npm install -g typescript
+# # RUN tsc --init
+# # # RUN tsc 
+
+# # Install Node.js dependencies
+# RUN npm install
+
+# # Initialize Playwright
+# RUN npm init playwright@latest
+
+# # Install Playwright browsers
+# RUN npx playwright install --with-deps
+
+# # Copy the rest of the application code
+# COPY . .
+
+# RUN npx tsc
+
+# # Build the application (if needed)
+# # RUN npm run build
+
+# # Expose the port the app runs on
+# EXPOSE 3000
+
+# # Command to run the applications
+# # CMD ["npx", "ts-node", "--files", "src/server.ts"]
+# # CMD ["npm", "start"]
+# # CMD ["npx", "tsx", "src/server.ts"]
+# CMD ["npm", "run", "dev"]

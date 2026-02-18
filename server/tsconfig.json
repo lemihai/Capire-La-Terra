@@ -8,10 +8,11 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "./dist",
+    "rootDir": "./src",
     // "moduleResolution": "node",
     "resolveJsonModule": true
   },
-  "include": ["src/**/*", "../test/NSB"],
+  "include": ["src/**/*"],
   // "exclude": ["node_modules"],
   // "moduleResolution": "node",
   "exclude": ["node_modules"]

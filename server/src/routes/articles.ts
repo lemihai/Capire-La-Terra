@@ -27,7 +27,6 @@ articlesRouter.get("/articles", async (_req, res) => {
     res.status(200).send(articles);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Error";
-    // console.log(message);
     res.status(400).send(message);
   }
 });
@@ -38,12 +37,9 @@ articlesRouter.get("/articles/published", async (_req, res) => {
       ?.find({ posted: true })
       .toArray();
 
-    console.log(articles);
-
     res.status(200).send(articles);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Error";
-    // console.log(message);
     res.status(400).send(message);
   }
 });
@@ -56,7 +52,6 @@ articlesRouter.get("/articles/:id", async (req, res) => {
     const query = { _id: new ObjectId(id) }; // This looks correct for MongoDB
 
     const article = await collections?.articles?.findOne(query);
-    // console.log(article);
 
     res.status(200).send(article);
   } catch (error) {
@@ -71,7 +66,6 @@ articlesRouter.post("/articles", verifyToken, async (req, res) => {
   try {
     const article = req.body;
     delete article._id;
-    // console.log(article);
     const result = await collections?.articles?.insertOne(article);
 
     if (result?.acknowledged) {
@@ -249,7 +243,6 @@ articlesRouter.delete("/articles/:id", verifyToken, async (req, res) => {
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown Error";
-    // console.log(message);
     res.status(400).send(message);
   }
 });

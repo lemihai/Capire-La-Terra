@@ -38,7 +38,7 @@ export async function connectToDatabase() {
     await client.connect();
     // Send a ping to confirm a successful connection
     await database.command({ ping: 1 });
-    console.log(`Nom nom ${database.databaseName}`);
+    // console.log(`Nom nom ${database.databaseName}`);
     // Storing the database name
     dbName = database.databaseName;
 

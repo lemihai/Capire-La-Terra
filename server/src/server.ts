@@ -28,7 +28,7 @@ connectToDatabase()
   .then(() => {
     app.listen(3000, () => {
       console.log(
-        `Server running at http://localhost:3000... and connected to the database`
+        `Server running at http://localhost:3000...`
       );
     });
   })
