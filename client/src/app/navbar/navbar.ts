@@ -142,7 +142,7 @@ export class Navbar implements OnInit, AfterViewInit {
         }
         if (view == 'admin') {
           this.currentInFocus = 'admin';
-          this.isOnAdmin = 'nav-onAdmin'
+          this.isOnAdmin = 'nav-onAdmin';
 
           this.home = '';
           this.episodes = '';
@@ -241,7 +241,7 @@ export class Navbar implements OnInit, AfterViewInit {
         }
         if (view == 'admin') {
           this.currentInFocus = 'admin';
-          this.isOnAdmin = 'nav-onAdmin'
+          this.isOnAdmin = 'nav-onAdmin';
 
           this.home = '';
           this.episodes = '';
@@ -382,7 +382,44 @@ export class Navbar implements OnInit, AfterViewInit {
       });
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    this.ngZone.runOutsideAngular(() => {
+      setTimeout(() => {
+        // --------------------------
+        // Navigation
+        // --------------------------
+        gsap.to('.nav-logo-wrapper', {
+          translateX: '.8rem',
+          translateY: '.8rem',
+          opacity: 1,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: 'auto',
+        });
+        gsap.to('.nav-login-navigation', {
+          translateX: '-.8rem',
+          translateY: '.8rem',
+          opacity: 1,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: 'auto',
+        });
+      }, 2400);
+      setTimeout(() => {
+        // --------------------------
+        // Navigation
+        // --------------------------
+        gsap.to('.nav-main-navigation', {
+          translateX: '0rem',
+          translateY: '.8rem',
+          opacity: 1,
+          duration: this.time,
+          ease: this.ease,
+          overwrite: 'auto',
+        });
+      }, 3200);
+    });
+  }
 
   // Update logRouteInfo to accept the URL
   logRouteInfo(url: string) {}

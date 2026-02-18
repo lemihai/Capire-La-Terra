@@ -128,7 +128,9 @@
 .text-container {
   // position: fixed;
   position: absolute;
-  top: 64vh;
+  // top: 64vh;
+  top: 40vh;
+  // top: 64rem !important;
   left: 4vw;
   padding: 0rem 0rem 0rem 8rem;
   transition: 0.64s ease-out;

@@ -1,11 +1,10 @@
 import { ChangeDetectorRef, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../service/admin-service';
-import { Button } from '../../shared/buttons/button/button';
 
 @Component({
   selector: 'app-settings',
-  imports: [FormsModule, Button],
+  imports: [FormsModule],
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
 })

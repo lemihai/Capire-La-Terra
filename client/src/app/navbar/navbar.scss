@@ -41,6 +41,8 @@ nav {
   // ***************************
   .nav-logo-wrapper {
     min-width: fit-content;
+    transform: translate(-.8rem, -.8rem);
+    opacity: 0;
     ul {
       justify-content: flex-start;
       gap: 0.8rem;
@@ -82,6 +84,8 @@ nav {
     margin: 0rem 0rem 0rem 5.2rem;
     position: relative;
     overflow: hidden;
+    transform: translate(0rem, -.8rem);
+    opacity: 0;
     ul {
       overflow: hidden;
       justify-content: center;
@@ -130,6 +134,8 @@ nav {
   // ***************************
   .nav-login-navigation {
     overflow: hidden;
+    transform: translate(.8rem, -.8rem);
+    opacity: 0;
     ul {
       padding: 0.4rem 0.4rem 0.4rem 0.4rem !important;
       justify-content: flex-start;

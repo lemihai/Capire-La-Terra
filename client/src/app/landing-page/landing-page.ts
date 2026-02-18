@@ -60,8 +60,19 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.viewportWidth = window.innerWidth;
-    console.log(this.viewportWidth);
-    this.cdr.detectChanges();
+    // console.log(this.viewportWidth);
+    // this.cdr.detectChanges();
+    this.ngZone.run(() => {
+      this.cdr.detectChanges();
+
+      // Tell GSAP to recalculate everything after Angular updates the DOM
+      ScrollTrigger.refresh();
+
+      // If smoother exists, ensure it updates its bounds
+      if (this.smoother) {
+        this.smoother.refresh();
+      }
+    });
   }
 
   ngOnInit() {
@@ -145,7 +156,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         rotate: 0,
         duration: this.time,
         ease: this.ease,
-        overwrite: true,
+        overwrite: 'auto',
       });
       gsap.to('.episode-dash', {
         width: '1.6rem',
@@ -156,7 +167,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         rotate: 0,
         duration: this.time,
         ease: this.ease,
-        overwrite: true,
+        overwrite: 'auto',
       });
       gsap.to('.episode-title', {
         width: '100%',
@@ -168,7 +179,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         rotate: 0,
         duration: this.time,
         ease: this.ease,
-        overwrite: true,
+        overwrite: 'auto',
       });
       gsap.to('.app-profile-card-wrapper-for-transform', {
         width: 'auto',
@@ -181,7 +192,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         rotate: 0,
         duration: this.time,
         ease: this.ease,
-        overwrite: true,
+        overwrite: 'auto',
       });
       gsap.to('.audio-track-wrapper-large', {
         // width: '100%',
@@ -207,7 +218,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         rotate: 0,
         duration: this.time,
         ease: this.ease,
-        overwrite: true,
+        overwrite: 'auto',
       });
       gsap.to('.topic', {
         width: 'auto',
@@ -220,13 +231,13 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         rotate: 0,
         duration: this.time,
         ease: this.ease,
-        overwrite: true,
+        overwrite: 'auto',
       });
       gsap.to('.separator-line', {
         height: '1rem',
         duration: this.time,
         ease: this.ease,
-        overwrite: true,
+        overwrite: 'auto',
       });
       gsap.to('.bottom-container', {
         skewX: 0,
@@ -235,7 +246,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         rotate: 0,
         duration: this.time,
         ease: this.ease,
-        overwrite: true,
+        overwrite: 'auto',
       });
 
       gsap.to('.transition-A', {
@@ -249,7 +260,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
         rotate: 0,
         duration: this.time,
         ease: this.ease,
-        overwrite: true,
+        overwrite: 'auto',
       });
 
       if (this.viewportWidth < 1100) {
@@ -262,13 +273,13 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           translateX: '-.8rem',
           duration: this.time,
           ease: this.ease,
-          overwrite: true,
+          overwrite: 'auto',
         });
         gsap.to('.transition-horizontal-line', {
           width: '100%',
           duration: this.time,
           ease: this.ease,
-          overwrite: true,
+          overwrite: 'auto',
         });
       }
 
@@ -372,7 +383,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           scale: 1,
           duration: 0.8,
           ease: this.ease,
-          overwrite: true,
+          overwrite: 'auto',
         });
 
         // Initial state set in CSS should be removed.
@@ -555,7 +566,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 0,
               ease: this.ease,
-              overwrite: true, // Overwrite any existing animations on these elements
+              overwrite: 'auto', // Overwrite a'auto'xisting animations on these elements
             });
             gsap.to('.episodes-action-container-text', {
               height: '24px',
@@ -567,7 +578,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-button', {
               height: '40px',
@@ -580,7 +591,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-button-btn', {
               height: '40px',
@@ -593,7 +604,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
           onEnterBack: () => {
@@ -608,7 +619,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-text', {
               height: '24px',
@@ -620,7 +631,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-button', {
               height: '40px',
@@ -632,7 +643,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-button-btn', {
               height: '40px',
@@ -644,7 +655,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
           onLeave: () => {
@@ -659,7 +670,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-text', {
               height: '0px',
@@ -671,7 +682,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-button', {
               height: '0px',
@@ -683,7 +694,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-button-btn', {
               height: '0px',
@@ -697,7 +708,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
           onLeaveBack: () => {
@@ -712,7 +723,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-text', {
               height: '0px',
@@ -724,7 +735,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-button', {
               height: '0px',
@@ -736,7 +747,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.episodes-action-container-button-btn', {
               height: '0px',
@@ -749,7 +760,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
         });
@@ -772,7 +783,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               width: '500px',
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.latest-news-h1', {
               height: '120px',
@@ -785,7 +796,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true, // Overwrite any existing animations on these elements
+              overwrite: 'auto', // Overwrite a'auto'xisting animations on these elements
             });
             gsap.to('.news-action-container', {
               // x: 0,
@@ -800,7 +811,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-button', {
               height: '40px',
@@ -812,7 +823,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-button-btn', {
               height: '40px',
@@ -824,7 +835,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
           onEnterBack: () => {
@@ -832,7 +843,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               width: '500px',
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             // Play entering animation when entering from the bottom
             gsap.to('.latest-news-h1', {
@@ -845,7 +856,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-text', {
               height: '24px',
@@ -857,7 +868,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-button', {
               height: '40px',
@@ -869,7 +880,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-button-btn', {
               height: '40px',
@@ -881,7 +892,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
           onLeave: () => {
@@ -889,7 +900,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               width: '400px',
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             // Play exiting animation when leaving from the bottom
             gsap.to('.latest-news-h1', {
@@ -902,7 +913,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-text', {
               height: '0px',
@@ -914,7 +925,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-button', {
               height: '0px',
@@ -926,7 +937,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-button-btn', {
               height: '0px',
@@ -938,7 +949,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
           onLeaveBack: () => {
@@ -946,7 +957,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               width: '400px',
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             // Play exiting animation when leaving from the top
             gsap.to('.latest-news-h1', {
@@ -959,7 +970,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-text', {
               height: '0px',
@@ -971,7 +982,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-button', {
               height: '0px',
@@ -983,7 +994,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
             gsap.to('.news-action-container-button-btn', {
               height: '0px',
@@ -995,7 +1006,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               rotate: 0,
               duration: 1,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
         });
@@ -1015,7 +1026,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               borderRadius: '32px',
               duration: 2,
               ease: this.ease,
-              overwrite: true, // Overwrite any existing animations on these elements
+              overwrite: 'auto', // Overwrite a'auto'xisting animations on these elements
             });
           },
           onEnterBack: () => {
@@ -1025,7 +1036,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               borderRadius: '32px',
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
           onLeave: () => {
@@ -1034,7 +1045,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               height: '100px',
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
           onLeaveBack: () => {
@@ -1043,7 +1054,7 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
               height: '100px',
               duration: 2,
               ease: this.ease,
-              overwrite: true,
+              overwrite: 'auto',
             });
           },
         });
