@@ -12,6 +12,7 @@ services:
     command:
       - "--api.dashboard=false" # Security: disabled dashboard for prod
       - "--providers.docker=true"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
@@ -65,7 +66,6 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      # Match your actual domain
       - "traefik.http.routers.frontend.rule=Host(`capirelaterra.it`) || Host(`www.capirelaterra.it`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
