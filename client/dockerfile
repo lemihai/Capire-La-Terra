@@ -17,20 +17,24 @@ RUN npm run build --configuration=production
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
 
-# Security: Remove default nginx static assets
+# Remove default assets
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy your built app
 COPY --from=build /app/dist/client-0.2/browser /usr/share/nginx/html
 
-# Copy custom config (Crucial for Angular/React routing)
+# Copy custom config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Optional: Ensure permissions are correct for the nginx user
-RUN touch /var/run/nginx.pid && \
-    chown -R nginx:nginx /var/run/nginx.pid /usr/share/nginx/html /var/cache/nginx /var/log/nginx
+# Give the 'nginx' user ownership of the necessary directories
+RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx /etc/nginx/conf.d
+
+# Use a writable path for the PID file
+RUN touch /var/run/nginx.pid && chown nginx:nginx /var/run/nginx.pid
 
 USER nginx
+# If port 80 fails due to permissions, change this to 8080 
+# and update your traefik labels to match.
 EXPOSE 80
 
 # ------------ DEV
