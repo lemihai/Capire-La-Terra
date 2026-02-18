@@ -64,7 +64,7 @@ services:
     restart: always
     depends_on:
       - backend
-    mpfs:
+    tmpfs:
       - /var/cache/nginx
       - /var/run
     networks:
