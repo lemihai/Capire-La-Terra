@@ -25,13 +25,20 @@ newsWebsitesRouter.get("/newsWebsites", verifyToken, async (_req, res) => {
   }
 });
 
-
 // POST
 // Adding data to the DB
 
 newsWebsitesRouter.post("/newsWebsites:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
+
     const newsWebsite = req.body;
     const query = { _id: new ObjectId(id) };
     const result = await collections?.newsWebsites?.insertOne(newsWebsite);
@@ -51,6 +58,14 @@ newsWebsitesRouter.post("/newsWebsites:id", verifyToken, async (req, res) => {
 newsWebsitesRouter.put("/newsWebsites:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
+
     const newsWebsite = req.body;
     const query = { _id: new ObjectId(id) };
     const result = await collections?.newsWebsites?.updateOne(query, {
@@ -73,6 +88,14 @@ newsWebsitesRouter.put("/newsWebsites:id", verifyToken, async (req, res) => {
 newsWebsitesRouter.delete("/newsWebsites:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
+
     const query = { _id: new ObjectId(id) };
     const result = await collections?.newsWebsites?.deleteOne(query);
 

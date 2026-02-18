@@ -35,6 +35,14 @@ newsRouter.get("/news", verifyToken, async (_req, res) => {
 
 newsRouter.get("/news/:id", verifyToken, async (_req, res) => {
   const id = _req?.params?.id;
+
+  if (typeof id !== "string") {
+    return res.status(400).json({
+      message: "Invalid ID parameter",
+      success: false,
+    });
+  }
+
   try {
     const query = { _id: new ObjectId(id) }; // This looks correct for MongoDB
 
@@ -63,6 +71,13 @@ newsRouter.get("/scrape", verifyToken, async (req, res) => {
 newsRouter.get("/scrape/:name", verifyToken, async (req, res) => {
   try {
     const name = req?.params?.name;
+
+    if (typeof name !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
 
     scrapeSingleWebsite(name);
 
@@ -103,6 +118,14 @@ newsRouter.post("/news", verifyToken, async (req, res) => {
 newsRouter.put("/news/:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
+
     // Change the req body with the actual update of the article
     const article = req.body;
     const query = { _id: new ObjectId(id) };
@@ -131,6 +154,14 @@ newsRouter.put("/news/:id", verifyToken, async (req, res) => {
 newsRouter.delete("/news/:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
+
     // Defining the query form the article ID
     const query = { _id: new ObjectId(id) };
     const result = await collections?.news?.deleteOne(query);

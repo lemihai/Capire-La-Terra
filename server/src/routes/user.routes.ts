@@ -34,6 +34,14 @@ userRouter.get("/users", async (_req, res) => {
 userRouter.get("/users/:id", (async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
+
     if (!ObjectId.isValid(id)) {
       res.status(400).send("Invalid ID");
       return;
@@ -61,6 +69,14 @@ userRouter.get("/users/:id", (async (req: Request, res: Response) => {
 userRouter.put("/users/:id", (async (req: Request, res: Response) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
+
     const { name, email, profilePic } = req.body;
 
     if (!ObjectId.isValid(id)) {
@@ -95,6 +111,14 @@ userRouter.put("/users/:id", (async (req: Request, res: Response) => {
 userRouter.patch("/users/:id", (async (req: Request, res: Response) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
+
     const { password } = req.body;
 
     if (!password || password.length < 6) {

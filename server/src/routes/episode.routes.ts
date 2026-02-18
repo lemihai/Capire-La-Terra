@@ -38,7 +38,9 @@ episodeRouter.get("/episodes/published", async (_req, res) => {
   try {
     // the episode variable awaits for all the objects in the collection episodes and then makes them an array.
     // Then the response is being sent to the client
-    const episodes = await collections?.episodes?.find({posted: true}).toArray();
+    const episodes = await collections?.episodes
+      ?.find({ posted: true })
+      .toArray();
     // console.log(episodes);
 
     res.status(200).send(episodes);
@@ -48,7 +50,6 @@ episodeRouter.get("/episodes/published", async (_req, res) => {
       .send(error instanceof Error ? error.message : "Unknown Error");
   }
 });
-
 
 // GET all posted episodes
 
@@ -74,6 +75,13 @@ episodeRouter.get("/postedEpisodes", async (_req, res) => {
 episodeRouter.get("/episodes/:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
     const query = { _id: new ObjectId(id) };
     const episode = await collections?.episodes?.findOne(query);
 
@@ -163,6 +171,13 @@ episodeRouter.put("/episodes/:id", verifyToken, (async (
   // ^^^ Cast the entire async function to RequestHandler ^^^
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
     // Check if ID is a valid ObjectId format
     if (!ObjectId.isValid(id)) {
       return res.status(400).json({
@@ -216,6 +231,13 @@ episodeRouter.patch("/episodes/:id", verifyToken, (async (
 ) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
     const { posted } = req.body;
     if (typeof posted !== "boolean") {
       return res.status(400).json({
@@ -262,6 +284,13 @@ episodeRouter.patch("/episodes/:id", verifyToken, (async (
 episodeRouter.delete("/episodes/:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
     const query = { _id: new ObjectId(id) };
     const result = await collections?.episodes?.deleteOne(query);
 

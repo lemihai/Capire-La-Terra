@@ -38,7 +38,7 @@ articlesRouter.get("/articles/published", async (_req, res) => {
       ?.find({ posted: true })
       .toArray();
 
-      console.log(articles);
+    console.log(articles);
 
     res.status(200).send(articles);
   } catch (error) {
@@ -105,6 +105,13 @@ articlesRouter.put("/articles/:id", verifyToken, (async (
   // ^^^ Cast the entire async function to RequestHandler ^^^
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
     // Check if ID is a valid ObjectId format
     if (!ObjectId.isValid(id)) {
       return res.status(400).json({
@@ -168,6 +175,13 @@ articlesRouter.patch("/articles/:id", verifyToken, (async (
       });
     }
 
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
+
     if (!ObjectId.isValid(id)) {
       return res.status(400).json({
         message: `Invalid Article ID format: ${id}`,
@@ -206,6 +220,13 @@ articlesRouter.patch("/articles/:id", verifyToken, (async (
 articlesRouter.delete("/articles/:id", verifyToken, async (req, res) => {
   try {
     const id = req?.params?.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        message: "Invalid ID parameter",
+        success: false,
+      });
+    }
 
     const query = { _id: new ObjectId(id) };
     const result = await collections?.articles?.deleteOne(query);
