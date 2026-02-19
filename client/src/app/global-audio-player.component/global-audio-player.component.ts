@@ -31,7 +31,6 @@ import { EpisodesService } from '../../services/episodes-service/episodes-servic
   imports: [
     PlayButton,
     AudioTrack,
-    NgOptimizedImage,
     ProfileCard,
     OneBackwardButton,
     OneForwardButton,

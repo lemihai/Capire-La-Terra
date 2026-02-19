@@ -67,7 +67,7 @@
   } @else if (cardType === 'small') {
     <div class="news-card-wrapper" (click)="navigateToArticlePage()">
       <div class="card-image">
-        <img [src]="article.imageUrl" alt="Article Image" />
+        <img [src]="article?.imageUrl" alt="Article Image" />
       </div>
       <div class="card-container">
         <div class="card-title-wrapper">
@@ -134,7 +134,7 @@
     <div class="medium-news-card-wrapper" (click)="navigateToArticlePage()">
       <div class="medium-hovered-bar"></div>
       <div class="medium-card-image">
-        <img [src]="article.imageUrl" alt="Article Image" />
+        <img [src]="article?.imageUrl" alt="Article Image" />
       </div>
       <div class="medium-card-content">
         <!-- <div class="medium-title-wrapper"> -->
@@ -179,7 +179,7 @@
     <div class="news-card-wrapper" (click)="navigateToArticlePage()">
       <div class="hovered-bar"></div>
       <div class="card-image transition-image-A">
-        <img [src]="article.imageUrl" alt="Article Image" />
+        <img [src]="article?.imageUrl" alt="Article Image" />
       </div>
       <div class="card-content">
         <div class="title-wrapper">
@@ -241,7 +241,7 @@
     <div class="fp-news-card-wrapper" (click)="navigateToArticlePage()">
       <div class="fp-hovered-bar"></div>
       <div class="fp-card-image fp-transition-image-A">
-        <img [src]="article.imageUrl" alt="Article Image" />
+        <img [src]="article?.imageUrl" alt="Article Image" />
       </div>
       <div class="fp-card-content">
         <div class="fp-title-wrapper">
@@ -302,7 +302,7 @@
       <div class="hovered-bar"></div>
 
       <div class="image transition-image">
-        <img [src]="article.imageUrl" alt="Article Image" />
+        <img [src]="article?.imageUrl" alt="Article Image" />
       </div>
       <div class="content">
         <h1 class="title transition-A">{{ article.title }}</h1>

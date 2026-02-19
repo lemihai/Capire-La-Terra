@@ -33,7 +33,7 @@
 @if (cardType == 'medium') {
   <div class="episode medium" (click)="playEpisode()">
     <div class="episode-image" style="background-image: url('/assets/episode_placeholder.png')">
-      <img [src]="episode.imageUrl" alt="Episode Image" />
+      <img [src]="episode?.imageUrl" alt="Episode Image" />
       <div class="episode-image-filter"></div>
     </div>
     <div class="episode-content-wrapper">
@@ -72,7 +72,7 @@
   </div>
 }
 @if (cardType == 'large') {
-  <div class="episode large" [style.background-image]="'url(' + episode.imageUrl + ')'">
+  <div class="episode large" [style.background-image]="'url(' + episode?.imageUrl + ')'">
     <div class="episode-large-filter">
       <div class="episode-large-content-wrapper">
         <div class="top-container">

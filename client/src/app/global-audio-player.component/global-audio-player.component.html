@@ -67,7 +67,7 @@
               <div class="episode-details-container">
                 <div class="gplayer-image-wrapper">
                   <img
-                    [ngSrc]="episode.imageUrl"
+                    [src]="episode?.imageUrl"
                     height="40"
                     width="40"
                     alt="episode_image"
@@ -159,7 +159,7 @@
     <div class="mobile-player-details-wrapper">
       <div class="mobile-player-image-wrapper">
         <img
-          [ngSrc]="episode.imageUrl"
+          [src]="episode?.imageUrl"
           height="40"
           width="40"
           alt="episode_image"
