@@ -1,6 +1,6 @@
 <!-- I have added an audio player so that i can load the audio file in it -->
 <!-- Then, load it's metadata to get the lenghth of the audio file -->
-<audio #audioPlayer controls [src]="episode.audioUrl" class="audio-player-invisible"></audio>
+<audio #audioPlayer controls [src]="episode?.audioUrl" class="audio-player-invisible"></audio>
 
 @if (cardType == 'small') {
   <div class="episode small" (click)="playEpisode()">

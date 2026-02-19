@@ -50,7 +50,13 @@ services:
     networks:
       - inner
       - traefik_net
-
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`capirelaterra.it`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=myresolver"
+      - "traefik.http.routers.backend.priority=10" # Higher than frontend
+      - "traefik.http.services.backend.loadbalancer.server.port=3000"
 
   frontend:
     build:
