@@ -37,6 +37,6 @@ export class EpisodesService {
   }
   
   getLastEpisode():Observable<Episode> {
-    return this.http.get<Episode>(`http://localhost:3000/lastEpisode`);
+    return this.http.get<Episode>(`$${environment.apiUrl}/lastEpisode`);
   }
 }
