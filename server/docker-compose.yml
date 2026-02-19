@@ -66,7 +66,7 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`capirelaterra.it`) || Host(`www.capirelaterra.it`)"
+      - "traefik.http.routers.frontend.rule=Host(`capirelaterra.it`) || Host(`capirelaterra.it`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
       - "traefik.http.routers.frontend.priority=1" # Lower priority so backend wins on /api
