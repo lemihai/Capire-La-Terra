@@ -8,10 +8,10 @@
       <app-play-button />
     </div>
     <div class="episode-small-transition-wrapper">
-      <p class="episode-number">S{{ episode.season }} #{{ episode.number }}</p>
+      <p class="episode-number">S{{ episode?.season }} #{{ episode?.number }}</p>
     </div>
     <div class="episode-small-transition-wrapper">
-      <p class="episode-title">{{ episode.title }}</p>
+      <p class="episode-title">{{ episode?.title }}</p>
     </div>
     <div class="profile-card-wrapper">
       <app-profile-card
@@ -43,11 +43,11 @@
             <app-play-button />
           </div>
           @if (viewportWidth < 1100) {
-            <h2 class="episode-number">S{{ episode.season }}</h2>
+            <h2 class="episode-number">S{{ episode?.season }}</h2>
           }
-          <h2 class="episode-number">E{{ episode.number }} -</h2>
+          <h2 class="episode-number">E{{ episode?.number }} -</h2>
           <!-- <h2 class="episode-dash">-</h2> -->
-          <h2 class="episode-title">{{ episode.title }}</h2>
+          <h2 class="episode-title">{{ episode?.title }}</h2>
         </div>
       </div>
       <div class="bottom-container">
@@ -61,9 +61,9 @@
           </div>
         </div>
         <div class="separator-line"></div>
-        <p class="date">{{ episode.date }}</p>
+        <p class="date">{{ episode?.date }}</p>
 
-        <p class="episode-duration">{{ episode.season }}</p>
+        <p class="episode-duration">{{ episode?.season }}</p>
         <div class="audio-track-wrapper" #audioTrackWrapper>
           <app-audio-track [audioTrackWidth]="audioTrackWidth" [audioTime]="duration.initial" />
         </div>
@@ -78,13 +78,13 @@
         <div class="top-container">
           <div class="title-wrapper">
             @if (viewportWidth < 1100) {
-              <h2 class="episode-number">S{{ episode.season }} E{{ episode.number }} -</h2>
+              <h2 class="episode-number">S{{ episode?.season }} E{{ episode?.number }} -</h2>
             } @else {
-              <h2 class="episode-number">#{{ episode.number }} -</h2>
+              <h2 class="episode-number">#{{ episode?.number }} -</h2>
             }
 
             <div class="episode-title-wrapper">
-              <h2 class="episode-title">{{ episode.title }}</h2>
+              <h2 class="episode-title">{{ episode?.title }}</h2>
             </div>
           </div>
         </div>
@@ -95,7 +95,7 @@
             </div>
           </div>
           <div class="separator-line"></div>
-          <p class="date">{{ episode.date }}</p>
+          <p class="date">{{ episode?.date }}</p>
         </div>
         <div class="audio-track-wrapper-large" #audioTrackWrapper>
           <p class="episode-duration">{{ duration.minutes }}:{{ duration.seconds }}</p>
@@ -113,8 +113,8 @@
     <div class="play">
       <app-play-button />
     </div>
-    <p class="episode-number">#{{ episode.number }} -</p>
-    <p class="episode-title">{{ episode.title }}</p>
+    <p class="episode-number">#{{ episode?.number }} -</p>
+    <p class="episode-title">{{ episode?.title }}</p>
     <div class="profile-card-wrapper"></div>
     <p class="episode-duration">{{ duration.minutes }}:{{ duration.seconds }}</p>
 

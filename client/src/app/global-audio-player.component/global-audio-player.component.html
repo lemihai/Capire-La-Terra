@@ -76,11 +76,11 @@
                 </div>
 
                 <div class="gplayer-episode-title">
-                  <p>{{ episode.title }}</p>
+                  <p>{{ episode?.title }}</p>
                   <div class="episode-season-details-container">
-                    <p>S{{ episode.season }}</p>
+                    <p>S{{ episode?.season }}</p>
                     <!-- <div class="eps-separator-line"></div> -->
-                    <p>E{{ episode.number }}</p>
+                    <p>E{{ episode?.number }}</p>
                     <app-profile-card [profile]="episode.author" cardMode="small" />
                     <!-- <p>E12</p> -->
                     <!-- <div class="eps-separator-line"></div> -->
@@ -168,15 +168,15 @@
       </div>
       <div class="mobile-player-details-inner-wrapper">
         <div class="mobile-player-title-wrapper">
-          <h4 class="mobile-player-title">{{ episode.title }}</h4>
+          <h4 class="mobile-player-title">{{ episode?.title }}</h4>
         </div>
         <div class="mobile-player-episode-details">
-          <p class="mobile-player-episode-text">S{{ episode.season }}</p>
+          <p class="mobile-player-episode-text">S{{ episode?.season }}</p>
           <div class="mobile-player-vertical-separator-line"></div>
-          <p class="mobile-player-episode-text">E{{ episode.number }}</p>
+          <p class="mobile-player-episode-text">E{{ episode?.number }}</p>
           <div class="mobile-player-vertical-separator-line"></div>
           @if (viewportWidth > 418) {
-            <p class="mobile-player-episode-text">{{ episode.date }}</p>
+            <p class="mobile-player-episode-text">{{ episode?.date }}</p>
             <div class="mobile-player-vertical-separator-line"></div>
           } @else {}
           <div class="mobile-player-profile-card-wrapper">
@@ -213,7 +213,7 @@
           {{ duration.seconds }}
         </p>
       </div>
-      <audio #audioPlayer controls [src]="episode.audioUrl"></audio>
+      <audio #audioPlayer controls [src]="episode?.audioUrl"></audio>
     </div>
     <div class="mobile-player-controls-wrapper">
       <div class="mobile-player-button-wrapper">
