@@ -4,6 +4,41 @@
 // Global Reset;
 @use 'variables.scss' as *;
 
+/* Belanosima Font */
+@font-face {
+  font-family: 'Belanosima';
+  src: url('./assets/fonts/Belanosima-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Belanosima';
+  src: url('./assets/fonts/Belanosima-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Belanosima';
+  src: url('./assets/fonts/Belanosima-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Climate Crisis Font */
+@font-face {
+  font-family: 'Climate Crisis';
+  src: url('./assets/fonts/ClimateCrisis-Regular-VariableFont_YEAR.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -66,7 +101,6 @@ body {
   line-height: 1.6;
   color: var(--main-color);
   background-color: var(--main-color-light);
-  
 }
 
 // Resetting the links styling
