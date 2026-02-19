@@ -59,9 +59,6 @@ services:
     restart: always
     depends_on:
       - backend
-    tmpfs:
-    - /var/run
-    - /tmp
     networks:
       - traefik_net
     labels:

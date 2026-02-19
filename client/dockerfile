@@ -33,6 +33,7 @@ RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx /
 RUN touch /var/run/nginx.pid /run/nginx.pid \
     && chown nginx:nginx /var/run/nginx.pid /run/nginx.pid
 
+    
 USER nginx
 # If port 80 fails due to permissions, change this to 8080 
 # and update your traefik labels to match.
