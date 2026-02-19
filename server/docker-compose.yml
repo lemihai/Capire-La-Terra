@@ -60,8 +60,8 @@ services:
     depends_on:
       - backend
     tmpfs:
-      - /var/cache/nginx
-      - /var/run
+    - /var/run
+    - /tmp
     networks:
       - traefik_net
     labels:
