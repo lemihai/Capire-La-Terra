@@ -43,6 +43,9 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
   ) {}
 
   viewportWidth = window.innerWidth;
+  isTouchDevice = () => 
+  'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
 
   changeanimation = '';
   height = '100vh';
@@ -142,6 +145,8 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
 
   ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => {
+
+
       const hasLoaded = localStorage.getItem('landingPageLoaded');
 
       // --------------------------
@@ -289,8 +294,8 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
       this.smoother = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
-        smooth: 1,
-        effects: true,
+        smooth: this.isTouchDevice() ? 0 : 1,       
+        effects: !this.isTouchDevice(), 
         normalizeScroll: false,
         ignoreMobileResize: true,
         smoothTouch: false,

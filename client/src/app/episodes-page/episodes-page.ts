@@ -57,7 +57,6 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.viewportWidth = window.innerWidth;
-    console.log(this.viewportWidth);
     if (this.viewportWidth > 1100) {
       gsap.to('.hero-h1-A', {
         height: '120px',
@@ -142,35 +141,12 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
   sortedListView: any = [];
 
   ngOnInit() {
-    this.episodesService.getAllEpisodes().subscribe(
-      (data) => {
-        this.focuss1();
-        this.episodes = data;
-        console.log(data);
-        this.sort();
-        this.cdr.detectChanges();
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
+    
     this.cdr.detectChanges();
 
     // Register GSAP plugins here once
     this.ngZone.runOutsideAngular(() => {
       gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-      gsap.to('.hero-h1-A', {
-        height: '120px',
-        width: '48rem',
-        skewX: 0,
-        skewY: 0,
-        scale: 1,
-        rotate: 0,
-        duration: this.time,
-        ease: this.ease,
-        overwrite: true,
-      });
-      this.cdr.detectChanges();
     });
   }
 
@@ -187,6 +163,8 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
     this.cdr.detectChanges();
     // setTimeout(() => {
 
+    
+
     // }, 500);
     this.ngZone.runOutsideAngular(() => {
       // Create the smoother instance
@@ -199,6 +177,28 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
         ignoreMobileResize: true,
         smoothTouch: false,
       });
+
+      this.episodesService.getAllEpisodes().subscribe(
+      (data) => {
+        this.focuss1();
+        this.episodes = data;
+        this.sort();
+        this.cdr.detectChanges();
+      
+      
+
+      gsap.to('.hero-h1-A', {
+        height: '120px',
+        width: '48rem',
+        skewX: 0,
+        skewY: 0,
+        scale: 1,
+        rotate: 0,
+        duration: this.time,
+        ease: this.ease,
+        overwrite: true,
+      });
+      this.cdr.detectChanges();
       setTimeout(() => {
         // --------------------------------
         // TEXT SECTION
@@ -414,7 +414,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
           ease: this.ease,
           overwrite: 'auto',
         });
-      }, 640);
+      }, 800);
       this.cdr.detectChanges();
       setTimeout(() => {
         this.largeCards.forEach((cardRef, index) => {
@@ -430,7 +430,12 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
           });
           this.cdr.detectChanges();
         });
-      }, 500);
+      }, 600);
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
     });
   }
 

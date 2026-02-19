@@ -11,7 +11,7 @@
       <div class="hovered-bar"></div>
       <div class="card-content">
         <div class="title-wrapper">
-          <h2 class="title transition-A">{{ article.title }}</h2>
+          <h2 class="title transition-A">{{ article?.title }}</h2>
 
           <div class="title-icon">
             <svg
@@ -46,22 +46,22 @@
           </div>
         </div>
         <div class="article-details">
-          <app-profile-card [profile]="article.author" class="transition-A" />
+          <app-profile-card [profile]="article?.author" class="transition-A" />
 
           <div class="separator-line transition-vertical-line-inside-card"></div>
-          <p class="date transition-A">{{ article.date }}</p>
+          <p class="date transition-A">{{ article?.date }}</p>
           <div class="separator-line transition-vertical-line-inside-card"></div>
-          @if (article.sources.length > 1) {
-            @for (source of article.sources; track source) {
+          @if ((article?.sources?.length ?? 0) > 1) {
+            @for (source of article?.sources; track source) {
               <app-source class="transition-A" source="{{ source }}" size="no-image" />
             }
           } @else {
-            @for (source of article.sources; track source) {
+            @for (source of article?.sources; track source) {
               <app-source class="transition-A" source="{{ source }}" size="" />
             }
           }
         </div>
-        <p class="abstract transition-A">{{ article.text[0] + ' ' + article.text[1] }}</p>
+        <p class="abstract transition-A">{{ article?.text?.[0] + ' ' + article?.text?.[1] }}</p>
       </div>
     </div>
   } @else if (cardType === 'small') {
@@ -71,7 +71,7 @@
       </div>
       <div class="card-container">
         <div class="card-title-wrapper">
-          <h1 class="card-title transition-A">{{ article.title }}</h1>
+          <h1 class="card-title transition-A">{{ article?.title }}</h1>
           <div class="title-icon">
             <svg
               width="32"
@@ -106,23 +106,23 @@
         </div>
         <div class="separator-line"></div>
         <p class="article-text">
-          {{ article.text[0] }}
+          {{ article?.text?.[0] }}
         </p>
         <div class="card-details">
-          <div class="card-date transition-A">{{ article.date }}</div>
+          <div class="card-date transition-A">{{ article?.date }}</div>
           <div class="separator-line transition-vertical-line-inside-card"></div>
 
-          <app-profile-card [profile]="article.author" class="transition-A" />
+          <app-profile-card [profile]="article?.author" class="transition-A" />
 
           <div class="separator-line transition-vertical-line-inside-card"></div>
           <div class="sources class=transition-A">
             <p>Sources:</p>
-            @if (article.sources.length > 2) {
-              @for (source of article.sources; track source) {
+            @if ((article?.sources?.length ?? 0) > 2) {
+              @for (source of article?.sources; track source) {
                 <app-source class="transition-A" source="{{ source }}" size="no-image" />
               }
             } @else {
-              @for (source of article.sources; track source) {
+              @for (source of article?.sources; track source) {
                 <app-source class="transition-A" source="{{ source }}" size="" />
               }
             }
@@ -138,30 +138,30 @@
       </div>
       <div class="medium-card-content">
         <!-- <div class="medium-title-wrapper"> -->
-        <h2 class="medium-title">{{ article.title }}</h2>
+        <h2 class="medium-title">{{ article?.title }}</h2>
         <!-- </div> -->
         <div class="medium-card-details-wrapper">
           @if (viewportWidth < 760){
-            <app-profile-card [profile]="article.author" class="" cardMode="no-text"/>
+            <app-profile-card [profile]="article?.author" class="" cardMode="no-text"/>
 
           } @else {
 
-            <app-profile-card [profile]="article.author" class="" />
+            <app-profile-card [profile]="article?.author" class="" />
           }
           <div class="medium-separator-line"></div>
           <div class="medium-date-wrapper">
 
-            <p class="medium-date">{{ article.date }}</p>
+            <p class="medium-date">{{ article?.date }}</p>
           </div>
           <div class="medium-separator-line"></div>
           <div class="medium-card-source-parent-wrapper">
             <div class="medium-card-source-wrapper">
-              @if (article.sources.length > (viewportWidth >= 1000 ? 2 : 1)) {
-                @for (source of article.sources; track source) {
+              @if ((article?.sources?.length ?? 0) > (viewportWidth >= 1000 ? 2 : 1)) {
+                @for (source of article?.sources; track source) {
                   <app-source class="transition-A" source="{{ source }}" size="no-image" />
                 }
               } @else {
-                @for (source of article.sources; track source) {
+                @for (source of article?.sources; track source) {
                   <app-source class="transition-A" source="{{ source }}" size="" />
                 }
               }
@@ -170,7 +170,7 @@
         </div>
         <div class="medium-text-wrapper">
           <p class="medium-text">
-            {{ article.text[0] + ' ' + article.text[1] }}
+            {{ article?.text?.[0] + ' ' + article?.text?.[1] }}
           </p>
         </div>
       </div>
@@ -183,7 +183,7 @@
       </div>
       <div class="card-content">
         <div class="title-wrapper">
-          <h2 class="title transition-A">{{ article.title }}</h2>
+          <h2 class="title transition-A">{{ article?.title }}</h2>
           <div class="title-icon">
             <svg
               width="32"
@@ -217,24 +217,24 @@
           </div>
         </div>
         <div class="article-details">
-          <app-profile-card [profile]="article.author" class="transition-A" />
+          <app-profile-card [profile]="article?.author" class="transition-A" />
 
           <div class="separator-line transition-vertical-line-inside-card"></div>
-          <p class="date transition-A">{{ article.date }}</p>
+          <p class="date transition-A">{{ article?.date }}</p>
           <div class="separator-line transition-vertical-line-inside-card"></div>
           <div class="card-large-source-wrapper">
-            @if (article.sources.length > (viewportWidth >= 1400 ? 5 : 2)) {
-              @for (source of article.sources; track source) {
+            @if ((article?.sources?.length ?? 0) > (viewportWidth >= 1400 ? 5 : 2)) {
+              @for (source of article?.sources; track source) {
                 <app-source class="transition-A" source="{{ source }}" size="no-image" />
               }
             } @else {
-              @for (source of article.sources; track source) {
+              @for (source of article?.sources; track source) {
                 <app-source class="transition-A" source="{{ source }}" size="" />
               }
             }
           </div>
         </div>
-        <p class="abstract transition-A">{{ article.text[0] }}</p>
+        <p class="abstract transition-A">{{ article?.text?.[0] }}</p>
       </div>
     </div>
   } @else if (cardType === 'front-page') {
@@ -245,7 +245,7 @@
       </div>
       <div class="fp-card-content">
         <div class="fp-title-wrapper">
-          <h2 class="fp-title fp-transition-A">{{ article.title }}</h2>
+          <h2 class="fp-title fp-transition-A">{{ article?.title }}</h2>
           <div class="fp-title-icon">
             <svg
               width="32"
@@ -279,22 +279,22 @@
           </div>
         </div>
         <div class="fp-article-details">
-          <app-profile-card [profile]="article.author" class="fp-transition-A" />
+          <app-profile-card [profile]="article?.author" class="fp-transition-A" />
 
           <div class="fp-separator-line fp-transition-vertical-line-inside-card"></div>
-          <p class="fp-date fp-transition-A">{{ article.date }}</p>
+          <p class="fp-date fp-transition-A">{{ article?.date }}</p>
           <div class="fp-separator-line fp-transition-vertical-line-inside-card"></div>
-          @if (article.sources.length > 5) {
-            @for (source of article.sources; track source) {
+          @if ((article?.sources?.length ?? 0) > 5) {
+            @for (source of article?.sources; track source) {
               <app-source class="fp-transition-A" source="{{ source }}" size="no-image" />
             }
           } @else {
-            @for (source of article.sources; track source) {
+            @for (source of article?.sources; track source) {
               <app-source class="fp-transition-A" source="{{ source }}" size="" />
             }
           }
         </div>
-        <p class="fp-abstract fp-transition-A">{{ article.text[0] }}</p>
+        <p class="fp-abstract fp-transition-A">{{ article?.text?.[0] }}</p>
       </div>
     </div>
   } @else if (cardType === 'hero-card') {
@@ -305,32 +305,32 @@
         <img [src]="article?.imageUrl" alt="Article Image" />
       </div>
       <div class="content">
-        <h1 class="title transition-A">{{ article.title }}</h1>
+        <h1 class="title transition-A">{{ article?.title }}</h1>
         <div class="article-details">
           @if (viewportWidth <= 1264) {
-            <app-profile-card [profile]="article.author" class="transition-A" cardMode="no-text" />
+            <app-profile-card [profile]="article?.author" class="transition-A" cardMode="no-text" />
           } @else {
-            <app-profile-card [profile]="article.author" class="transition-A" />
+            <app-profile-card [profile]="article?.author" class="transition-A" />
           }
 
           <div class="separator-line transition-vertical-line-inside-card"></div>
-          <p class="date transition-A">{{ article.date }}</p>
+          <p class="date transition-A">{{ article?.date }}</p>
           <div class="separator-line transition-vertical-line-inside-card"></div>
-          @if (article.sources.length > 3) {
-            @for (source of article.sources; track source) {
+          @if ((article?.sources?.length ?? 0) > 3) {
+            @for (source of article?.sources; track source) {
               <app-source class="transition-A" source="{{ source }}" size="no-image" />
             }
           } @else if (viewportWidth <= 1264) {
-            @for (source of article.sources; track source) {
+            @for (source of article?.sources; track source) {
               <app-source class="transition-A" source="{{ source }}" size="no-image" />
             }
           } @else {
-            @for (source of article.sources; track source) {
+            @for (source of article?.sources; track source) {
               <app-source class="transition-A" source="{{ source }}" size="" />
             }
           }
         </div>
-        <p class="abstract transition-A">{{ article.text[0] + ' ' + article.text[1] }}</p>
+        <p class="abstract transition-A">{{ article?.text?.[0] + ' ' + article?.text?.[1] }}</p>
       </div>
     </div>
   } @else if (cardType === 'admin-small') {

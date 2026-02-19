@@ -10,6 +10,7 @@ services:
     command:
       - "--api.dashboard=false"
       - "--providers.docker=true"
+      - "--accesslog=true"
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
@@ -52,13 +53,21 @@ services:
       - traefik_net
     labels:
     - "traefik.enable=true"
+    - "traefik.docker.network=server_traefik_net"
     - "traefik.http.routers.backend.rule=Host(`capirelaterra.it`) && PathPrefix(`/api`)"
     - "traefik.http.routers.backend.entrypoints=websecure"
     - "traefik.http.routers.backend.tls.certresolver=myresolver"
     - "traefik.http.routers.backend.priority=10"
-    - "traefik.http.middlewares.strip-api.stripprefix.prefixes=/api"
-    - "traefik.http.routers.backend.middlewares=strip-api"
+    # - "traefik.http.middlewares.strip-api.stripprefix.prefixes=/api"
+    # - "traefik.http.routers.backend.middlewares=strip-api"
     - "traefik.http.services.backend.loadbalancer.server.port=3000"
+    # Allow List
+    - "traefik.http.routers.backend.middlewares=allowlist"
+    # Middleware
+    # - "traefik.http.middlewares.allowlist.ipallowlist.sourcerange=212.123.185.213/32"
+    # backend - remove the duplicate, keep only:
+    # - "traefik.http.middlewares.allowlist.ipallowlist.sourcerange=212.123.185.213/32,2a02:a476:c872::/64"
+    - "traefik.http.middlewares.allowlist.ipallowlist.sourcerange=212.123.185.213/32,2a02:a476:c872::/64,46.225.171.178/32"
 
   frontend:
     build:
@@ -71,11 +80,14 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=server_traefik_net"
       - "traefik.http.routers.frontend.rule=Host(`capirelaterra.it`) || Host(`capirelaterra.it`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
       - "traefik.http.routers.frontend.priority=1" # Lower priority so backend wins on /api
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
+      # Allow list
+      - "traefik.http.routers.frontend.middlewares=allowlist"
 
 volumes:
   mongodb_data:
@@ -83,6 +95,7 @@ volumes:
 networks:
   inner:
   traefik_net:
+    name: server_traefik_net
 # ------------ DEV
 # # THIS IS DOCKER.COMPOSE
 # version: "3.8"

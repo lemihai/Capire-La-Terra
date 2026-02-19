@@ -1,8 +1,6 @@
 // environment.prod.ts
 export const environment = {
-  production: false,
+  production: true,
   // apiUrl: '/api',
-  // apiUrl: 'http://localhost:3000'
   apiUrl: 'https://capirelaterra.it/api',
-
 };

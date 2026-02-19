@@ -13,12 +13,12 @@ import { articlesRouter } from "./routes/articles.js";
 // Later: make them
 
 export const router = Router();
-router.use("/", logInRouter)
-router.use("/", newsRouter);
-router.use("/", articlesRouter);
-router.use("/scrape", newsRouter);
-router.use("/", episodeRouter);
-router.use("/", newsWebsitesRouter);
-router.use("/", userRouter);
+router.use("/api", logInRouter);
+router.use("/api", newsRouter);
+router.use("/api", articlesRouter);
+router.use("/api/scrape", newsRouter);
+router.use("/api", episodeRouter);
+router.use("/api", newsWebsitesRouter);
+router.use("/api", userRouter);
 
 // secure the user's access. allow the people to access all the episodes. but keep the news, articles and episodes writing behind the user's login

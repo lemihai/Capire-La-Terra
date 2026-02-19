@@ -26,7 +26,20 @@ import { GlobalAudioPlayerService } from '../../../global-audio-player.component
   styleUrl: './episode-card.scss',
 })
 export class EpisodeCard implements OnChanges, OnInit, AfterViewInit {
-  @Input() episode!: Episode;
+  @Input() episode: Episode = {
+  _id: '',
+  title: '',
+  about: [],
+  author: '',
+  date: '',
+  number: 0,
+  season: 0,
+  imageUrl: '',
+  audioUrl: '',
+  sources: [],
+  transcript: '',
+  posted: false,
+};
   @Input() cardType = '';
   @ViewChild('playerWidth') playerWidth!: ElementRef<HTMLDivElement>;
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;

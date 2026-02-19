@@ -15,7 +15,7 @@
     </div>
     <div class="profile-card-wrapper">
       <app-profile-card
-        [profile]="episode.author"
+        [profile]="episode?.author"
         cardMode="no-text"
         class="small-card-profile-card-transition"
       />
@@ -54,9 +54,9 @@
         <div class="app-profile-card-wrapper">
           <div class="app-profile-card-wrapper-for-transform">
             @if (viewportWidth < 564) {
-              <app-profile-card [profile]="episode.author" cardMode="no-text" />
+              <app-profile-card [profile]="episode?.author" cardMode="no-text" />
             } @else {
-              <app-profile-card [profile]="episode.author" />
+              <app-profile-card [profile]="episode?.author" />
             }
           </div>
         </div>
@@ -91,7 +91,7 @@
         <div class="bottom-container">
           <div class="app-profile-card-wrapper">
             <div class="app-profile-card-wrapper-for-transform">
-              <app-profile-card [profile]="episode.author" />
+              <app-profile-card [profile]="episode?.author" />
             </div>
           </div>
           <div class="separator-line"></div>
