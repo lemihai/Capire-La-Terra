@@ -560,10 +560,17 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
           anticipatePin: 1,
           markers: false,
           onEnter: () => {
+            gsap.to('.line-container', {
+              width: '500px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: 'auto',
+            });
             // Play entering animation when entering from the top
             gsap.to('.episodes-text-h1', {
+              
               height: '120px',
-              width: '400px',
+              width: '500px',
               y: -60,
               skewX: 0,
               skewY: 0,
@@ -613,10 +620,17 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             });
           },
           onEnterBack: () => {
+            gsap.to('.line-container', {
+              width: '500px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: 'auto',
+            });
+            
             // Play entering animation when entering from the bottom
             gsap.to('.episodes-text-h1', {
               height: '120px',
-              width: '400px',
+              width: '500px',
               y: -60,
               skewX: 0,
               skewY: 0,
@@ -664,6 +678,13 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             });
           },
           onLeave: () => {
+            gsap.to('.line-container', {
+              width: '450px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: 'auto',
+            });
+            
             // Play exiting animation when leaving from the bottom
             gsap.to('.episodes-text-h1', {
               height: '0px',
@@ -717,6 +738,13 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
             });
           },
           onLeaveBack: () => {
+            gsap.to('.line-container', {
+              width: '450px',
+              duration: 2,
+              ease: this.ease,
+              overwrite: 'auto',
+            });
+            
             // Play exiting animation when leaving from the top
             gsap.to('.episodes-text-h1', {
               height: '0px',

@@ -21,7 +21,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 2.2rem 6.4rem .8rem 6.4rem;
+  padding: 1.6rem 6.4rem .8rem 6.4rem;
   gap: 6.4rem;
 
   // Max and min values
@@ -39,7 +39,7 @@
 
   .block {
     display: flex;
-    // gap: 0.8rem;
+    gap: 0.4rem;
     flex-direction: column;
     width: auto;
 
@@ -52,7 +52,14 @@
 
       gap:1.6rem;
 
+
+      .icon{
+
+      }
+
       svg{
+        height: 4rem;
+        width: 4rem;
         path{
           fill: var(--main-color)
         }
@@ -63,6 +70,7 @@
         font-weight: 400;
         color: var(--main-color-light);
         opacity: 0.8;
+        padding-bottom: .48rem;
       }
     }
 

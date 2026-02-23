@@ -18,9 +18,8 @@ nav {
   justify-content: space-between;
   align-items: center;
 
-  p{
-    text-decoration: none;
-    // color: var(--main-color-dark) !important;
+  a,button,p{
+    text-decoration: none !important;
   }
 
   header {

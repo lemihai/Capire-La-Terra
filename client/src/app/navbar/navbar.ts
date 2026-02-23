@@ -111,7 +111,7 @@ export class Navbar implements OnInit, AfterViewInit {
           this.news = '';
           this.admin = '';
           this.login = '';
-          this.backgroundWidth = '102.31px';
+          this.backgroundWidth = '90.94px';
           this.backgroundHeight = '3.2rem';
           this.backgroundLeft = 'calc(.8rem + 65.16px)';
 
@@ -130,9 +130,9 @@ export class Navbar implements OnInit, AfterViewInit {
           this.news = 'active';
           this.admin = '';
           this.login = '';
-          this.backgroundWidth = '82.44px';
+          this.backgroundWidth = '91.02px';
           this.backgroundHeight = '3.2rem';
-          this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px)';
+          this.backgroundLeft = 'calc(1.2rem + 65.16px + 70.94px)';
 
           this.loginBackgroundWidth = '0rem';
           this.loginBackgroundHeight = '3.2rem';
@@ -152,7 +152,7 @@ export class Navbar implements OnInit, AfterViewInit {
 
           this.backgroundWidth = '91.55px';
           this.backgroundHeight = '3.2rem';
-          this.backgroundLeft = 'calc(1.2rem + 65.16px + 82.44px + 60.04px)';
+          this.backgroundLeft = 'calc(1.2rem + 65.16px + 70.94px + 70.02px)';
 
           this.loginBackgroundWidth = '0rem';
           this.loginBackgroundHeight = '3.2rem';
@@ -190,7 +190,7 @@ export class Navbar implements OnInit, AfterViewInit {
             this.backgroundHeight = '.8rem';
           }
 
-          this.loginBackgroundWidth = '7.87rem';
+          this.loginBackgroundWidth = '87.94px';
           this.loginBackgroundHeight = '3.2rem';
           this.loginBackgroundLeft = '.4rem';
 

@@ -34,6 +34,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
   @ViewChild('largeCard') largeCard!: ElementRef<HTMLDivElement>;
   @ViewChildren('largeCard', { read: ElementRef }) largeCards!: QueryList<ElementRef>;
   @ViewChild('seasonComponent') seasonComponent!: ElementRef<HTMLDivElement>;
+  @ViewChild('footer') footer!: ElementRef<HTMLDivElement>;
 
   private observer: IntersectionObserver | null = null;
   private smoother: ScrollSmoother | null = null;
@@ -414,6 +415,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
           ease: this.ease,
           overwrite: 'auto',
         });
+        
       }, 800);
       this.cdr.detectChanges();
       setTimeout(() => {
@@ -428,8 +430,108 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
             onLeave: () => this.left(index),
             onLeaveBack: () => this.left(index),
           });
+          
           this.cdr.detectChanges();
         });
+        const last = this.largeCards.last.nativeElement
+        console.log(last);
+        // console.log(last);
+        
+        
+        ScrollTrigger.create({
+            trigger: last,
+            start: 'bottom 320px',
+            end: '+=300px 320px',
+            markers: true,
+            onEnter: () => {
+              gsap.to('.hero-h1-A', {
+                scale: 1,
+                rotate: 0,
+                duration: 2,
+                ease: this.ease,
+                overwrite: 'auto',
+              });
+            },
+            onEnterBack: () => {
+              gsap.to('.hero-h1-A', {
+                height: '107px',
+                y: 0,
+                skewX: 0,
+                skewY: 0,
+                scale: 1,
+                rotate: 0,
+                duration: 1,
+                ease: this.ease,
+                overwrite: 'auto',
+              });
+              gsap.to('.header-dropdown', {
+                height: '120px',
+                width: '20rem',
+                skewX: 0,
+                skewY: 0,
+                scale: 1,
+                rotate: 0,
+                duration: 1,
+                ease: this.ease,
+                overwrite: true,
+              });
+              gsap.to('.season-h1', {
+                height: '120px',
+                width: '128px',
+                skewX: 0,
+                skewY: 0,
+                scale: 1,
+                rotate: 0,
+                duration: 1,
+                ease: this.ease,
+                overwrite: true,
+              });
+            },
+            onLeave: () => {
+              gsap.to('.hero-h1-A', {
+                height: '0px',
+                y: -60,
+                skewX: 32,
+                skewY: 8,
+                scale: 1,
+                rotate: 0,
+                duration: 1,
+                ease: this.ease,
+                overwrite: 'auto',
+              });
+              gsap.to('.header-dropdown', {
+                height: '0px',
+                width: '0rem',
+                skewX: 24,
+                skewY: 8,
+                scale: 1,
+                rotate: 0,
+                duration: 1,
+                ease: this.ease,
+                overwrite: true,
+              });
+              gsap.to('.season-h1', {
+                height: '0px',
+                width: '0px',
+                skewX: 16,
+                skewY: 8,
+                scale: 1,
+                rotate: 0,
+                duration: 1,
+                ease: this.ease,
+                overwrite: true,
+              });
+            },
+            onLeaveBack: () => {
+              gsap.to('.hero-h1-A', {
+                scale: 1,
+                rotate: 0,
+                duration: 2,
+                ease: this.ease,
+                overwrite: 'auto',
+              });
+            },
+          });
       }, 600);
       },
       (error) => {
