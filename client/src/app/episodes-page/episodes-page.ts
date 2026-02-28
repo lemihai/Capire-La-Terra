@@ -442,7 +442,7 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
             trigger: last,
             start: 'bottom 320px',
             end: '+=300px 320px',
-            markers: true,
+            // markers: true,
             onEnter: () => {
               gsap.to('.hero-h1-A', {
                 scale: 1,

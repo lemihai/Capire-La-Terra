@@ -289,46 +289,46 @@ export class Navbar implements OnInit, AfterViewInit {
         case 'news':
           if (button == 'home') {
             if (flag == true) {
-              this.backgroundLeft = 'calc(1.2rem + 87.56px + 79.91px)';
+              this.backgroundLeft = 'calc(1.2rem + 87.56px + 70.94px)';
             }
             if (flag == false) {
-              this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px)';
+              this.backgroundLeft = 'calc(1.2rem + 65.16px + 70.94px)';
             }
           }
 
           if (button == 'episodes') {
             if (flag == true) {
-              this.backgroundLeft = 'calc(1.2rem + 65.16px + 102.31px)';
+              this.backgroundLeft = 'calc(1.2rem + 65.16px + 93.34px)';
             }
             if (flag == false) {
-              this.backgroundLeft = 'calc(1.2rem + 65.16px + 79.91px)';
+              this.backgroundLeft = 'calc(1.2rem + 65.16px + 70.94px)';
             }
           }
           break;
         case 'admin':
           if (button == 'home') {
             if (flag == true) {
-              this.backgroundLeft = 'calc(1.5rem + 87.56px + 79.91px + 60.04px)';
+              this.backgroundLeft = 'calc(1.5rem + 87.56px + 70.94px + 60.04px)';
             }
             if (flag == false) {
-              this.backgroundLeft = 'calc(1.5rem + 65.16px + 79.91px + 60.04px)';
+              this.backgroundLeft = 'calc(1.5rem + 65.16px + 70.94px + 60.04px)';
             }
           }
 
           if (button == 'episodes') {
             if (flag == true) {
-              this.backgroundLeft = 'calc(1.5rem + 65.16px + 102.31px + 60.04px)';
+              this.backgroundLeft = 'calc(1.5rem + 65.16px + 70.94px + 60.04px)';
             }
             if (flag == false) {
-              this.backgroundLeft = 'calc(1.5rem + 65.16px + 79.91px + 60.04px)';
+              this.backgroundLeft = 'calc(1.5rem + 65.16px + 70.94px + 60.04px)';
             }
           }
           if (button == 'news') {
             if (flag == true) {
-              this.backgroundLeft = 'calc(1.5rem + 65.16px + 79.91px + 82.44px)';
+              this.backgroundLeft = 'calc(1.5rem + 65.16px + 70.94px + 82.44px)';
             }
             if (flag == false) {
-              this.backgroundLeft = 'calc(1.5rem + 65.16px + 79.91px + 60.04px)';
+              this.backgroundLeft = 'calc(1.5rem + 65.16px +70.94px + 60.04px)';
             }
           }
           break;
