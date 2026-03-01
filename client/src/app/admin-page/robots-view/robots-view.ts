@@ -64,7 +64,6 @@ export class RobotsView implements OnInit, AfterViewInit {
 
   sort(key: string) {
     // 1. Determine the current direction and update the specific key flag
-    console.log(this.robots);
 
     this.sorting.sortUIupdate(key);
     // Reset all key sort flags except the current one

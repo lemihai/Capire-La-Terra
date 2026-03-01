@@ -155,7 +155,7 @@ this.sort('date');
 
     this.newsList = this.sorting.sortedListView;
 
-    console.log(`Sorted by ${key} in ${this.sorting.sortDirection} order.`);
+    // console.log(`Sorted by ${key} in ${this.sorting.sortDirection} order.`);
     this.cdr.detectChanges(); // Update the view after sorting
 }
 

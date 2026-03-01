@@ -192,7 +192,7 @@ export class EpisodesView {
       this.adminService.patchEpisodePostedStatus(episode._id, episode.posted).subscribe({
         next: (response) => {},
         error: (error) => {
-          console.log(error);
+          // console.log(error);
         },
       });
       // }

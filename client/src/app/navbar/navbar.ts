@@ -329,7 +329,7 @@ export class Navbar implements OnInit, AfterViewInit {
               this.backgroundLeft = 'calc(1.6rem + 65.16px + 70.94px + 93.42px)';
             }
             if (flag == false) {
-              this.backgroundLeft = 'calc(1.6rem + 65.16px +70.94px + 71.02px)';
+              this.backgroundLeft = 'calc(1.6rem + 65.16px + 70.94px + 71.02px)';
             }
           }
           break;

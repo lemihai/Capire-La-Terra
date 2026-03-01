@@ -238,7 +238,7 @@ export class MainView implements OnInit, AfterViewInit {
   deleteThisArticle(articleId: string) {
     this.adminService.deleteOneNewsArticle(articleId).subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
       },
       (error) => {
         // Error: Handle the error (e.g., show an error message)

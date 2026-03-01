@@ -57,7 +57,7 @@ export class EditBar implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.externalEditActivation);
+
 
     // USE THIS TO PASS INTO THE BUTTON
     this.route.queryParams.subscribe((params) => {
@@ -68,15 +68,15 @@ export class EditBar implements OnInit, OnChanges {
       let editModeFromState = editModeParam === 'true';
       this.externalEditActivation = editModeFromState;
 
-      console.log('IN EDIT BAR QUERY ', this.externalEditActivation);
+
 
       // Now you can safely use the 'this.editMode' property elsewhere.
     });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // console.log(348778, this.externalEditActivation);
-    // this.triggerEditMode();
+
+
 
     if (this.externalEditActivation == true) {
       this.editMode = 'editMode';
@@ -86,18 +86,10 @@ export class EditBar implements OnInit, OnChanges {
       this.editModeArticleStatus = 'statusNoEdit';
     }
 
-    // if (changes['componentData']) {
-    //   // console.log('componentData changed:', this.componentData);
-    //   // React to changes here (e.g., update internal state)
-    // }
-    // if (changes['externalEditActivation']) {
-    //   console.log('event received');
-    //   this.triggerEditMode();
-    // }
   }
 
   navigateToPage() {
-    // console.log('IURBVEIUBERV');
+
     window.open(this.componentData?.url, '_blank');
   }
 
@@ -111,7 +103,7 @@ export class EditBar implements OnInit, OnChanges {
       if (this.componentData?._id) {
         this.adminService.deleteOneNewsArticle(this.componentData?._id).subscribe(
           (response) => {
-            console.log(response);
+
           },
           (error) => {
             // Error: Handle the error (e.g., show an error message)
@@ -120,7 +112,7 @@ export class EditBar implements OnInit, OnChanges {
           }
         );
       }
-      console.log('nom nom', this.mode);
+
     }
   }
 
@@ -129,7 +121,7 @@ export class EditBar implements OnInit, OnChanges {
   }
 
   submitCurrentArticle() {
-    console.log('works');
+
     this.submitArticle.emit();
   }
 
@@ -153,15 +145,9 @@ export class EditBar implements OnInit, OnChanges {
   }
 
   emitEpisodeDetails() {
-    // 1. Get the values from the native HTML elements
     const seasonValue = this.seasonInputRef?.nativeElement?.textContent;
     const numberValue = this.numberInputRef?.nativeElement?.textContent;
 
-    // 2. Convert them to numbers (or handle empty strings/nulls)
-    // const season = seasonValue ? parseInt(seasonValue, 10) : this.componentData.season;
-    // const number = numberValue ? parseInt(numberValue, 10) : this.componentData.number;
-
-    // 3. Emit the event with the new values
     this.episodeDetailsUpdated.emit({
       season: seasonValue,
       number: numberValue,
@@ -173,9 +159,6 @@ export class EditBar implements OnInit, OnChanges {
     const HTMLNumberEl = this.numberInputRef?.nativeElement;
     // HTMLSeasonEl.preventDefault();
     // HTMLNumberEl.preventDefault();
-    console.log('438954983');
-    console.log(HTMLNumberEl.textContent);
-    console.log('438954983');
     if (field === 'season') {
       // Toggle the season field
       this.seasonEditMode = !this.seasonEditMode;
@@ -187,8 +170,6 @@ export class EditBar implements OnInit, OnChanges {
       this.numberEditMode = !this.numberEditMode;
       HTMLNumberEl?.focus();
     }
-
-    console.log('Season Mode:', this.seasonEditMode, 'Number Mode:', this.numberEditMode);
   }
 
   // --------------------------
@@ -200,7 +181,6 @@ export class EditBar implements OnInit, OnChanges {
   }
 
   submitCurrentEpisode() {
-    console.log('works');
     this.submitEpisode.emit();
   }
 

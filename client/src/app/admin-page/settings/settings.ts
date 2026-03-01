@@ -39,17 +39,17 @@ export class Settings implements OnInit {
     this.adminService.getUser('test').subscribe(
       (data) => {
         this.currentUser = data[0];
-        console.log(this.currentUser);
+        // console.log(this.currentUser);
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
       },
     );
     this.cdr.detectChanges();
   }
 
   focusInput(type: number) {
-    console.log('works');
+    // console.log('works');
     if (type === 1) {
       this.usernameFocused = 'focused';
       this.usernameInput.nativeElement.focus();
@@ -70,7 +70,7 @@ export class Settings implements OnInit {
 
   checkPassTyped() {
     const isFilled = this.password.trim().length > 0;
-    console.log(this.password, this.eyeClosedVisible);
+    // console.log(this.password, this.eyeClosedVisible);
     if (isFilled) {
       if (this.eyeClosedVisible === 'eye-open') {
         this.eyeClosedVisible = 'eye-open';
@@ -106,13 +106,13 @@ export class Settings implements OnInit {
     } else {
       this.eyeOpenParent = '';
     }
-    console.log(this.eyeOpenParent);
+    // console.log(this.eyeOpenParent);
   }
 
   updatePassword() {
     // Basic validation
     if (!this.password || this.password !== this.confirmPassword) {
-      console.log('Passwords do not match or are empty!');
+      // console.log('Passwords do not match or are empty!');
       return;
     }
 
@@ -123,7 +123,7 @@ export class Settings implements OnInit {
 
     this.adminService.updatePassword(this.currentUser._id, this.password).subscribe({
       next: (response) => {
-        console.log('Password updated successfully', response);
+        // console.log('Password updated successfully', response);
         // Clear fields after success
         this.password = '';
         this.confirmPassword = '';
@@ -150,7 +150,7 @@ export class Settings implements OnInit {
 
     this.adminService.updateDetails(this.currentUser._id, updateBody).subscribe({
       next: (response) => {
-        console.log('Profile updated successfully', response);
+        // console.log('Profile updated successfully', response);
         // Optional: Show a success toast/notification
       },
       error: (err) => {
@@ -162,7 +162,7 @@ export class Settings implements OnInit {
   triggerFileInput(){
     this.updateDetails();
     this.fileInput.nativeElement.click();
-    console.log('fweiuabfueiws');
+    // console.log('fweiuabfueiws');
   
   }
 
@@ -170,7 +170,7 @@ export class Settings implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      console.log(file);
+      // console.log(file);
 
       // Read the file as a Data URL for an immediate preview
       const reader = new FileReader();
