@@ -25,6 +25,10 @@ async function cleanText(input: string) {
   return withoutExtraWhitespace;
 }
 
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 // Main function
 export async function aljazeeraScraper(URL: string, page: any, browser: any) {
   //  trimming the url according to the aljazeera template
@@ -121,6 +125,9 @@ export async function aljazeeraScraper(URL: string, page: any, browser: any) {
           text: articleText,
           summary: "none",
         };
+
+        const randomDelay = Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000;
+        await delay(randomDelay);
 
         // insert the newArticle in the articles collection
         if (newArticle.text != "missing") {

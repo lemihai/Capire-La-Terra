@@ -192,7 +192,7 @@
 
 .container-details {
   opacity: 1;
-  left: 3.2rem;
+  left: 2.4rem;
   bottom: 8vh;
   width: auto;
   height: auto;
@@ -204,6 +204,7 @@
   scale: 1;
   transition: var(--transition-160);
   overflow: hidden;
+  z-index: 50;
 
   backdrop-filter: blur(16px) !important;
 
@@ -220,7 +221,7 @@
 
 .container-details-right {
   opacity: 1;
-  right: 3.2rem;
+  right: 2.4rem;
   bottom: 8vh;
   width: auto;
   height: auto;
@@ -232,6 +233,7 @@
   scale: 1;
   transition: var(--transition-160);
   overflow: hidden;
+   z-index: 50;
 
   backdrop-filter: blur(16px) !important;
 

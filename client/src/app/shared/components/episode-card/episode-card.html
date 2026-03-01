@@ -72,7 +72,7 @@
   </div>
 }
 @if (cardType == 'large') {
-  <div class="episode large" [style.background-image]="'url(' + episode?.imageUrl + ')'">
+  <div class="episode large" [style.background-image]="'url(' + episode?.imageUrl + ')'" (click)="playEpisode()">
     <div class="episode-large-filter">
       <div class="episode-large-content-wrapper">
         <div class="top-container">
@@ -109,7 +109,7 @@
   </div>
 }
 @if (cardType == 'admin-small') {
-  <div class="episode small">
+  <div class="episode small" >
     <div class="play">
       <app-play-button />
     </div>

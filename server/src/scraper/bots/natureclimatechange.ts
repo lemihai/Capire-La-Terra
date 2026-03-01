@@ -25,13 +25,17 @@ async function cleanText(input: string) {
   return withoutExtraWhitespace;
 }
 
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function parseDate(input: string) {
   // Parse the date
   const l = new Date(input);
 
   // Extract components
   const year = l.getFullYear(); // Gets the year
-  const month = l.getMonth() + 1; // Gets the month (0-based, so add 1)
+  const month = l.getMonth(); // Gets the month (0-based, so add 1)
   const date = l.getDate(); // Gets the day of the month
 
   // Array of month names
@@ -168,6 +172,9 @@ export async function natureClimateChangeScraper(
           text: articleText,
           summary: "none",
         };
+
+        const randomDelay = Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000;
+        await delay(randomDelay);
 
         // insert the newArticle in the articles collection
         const result = await collections?.news?.insertOne(newArticle);

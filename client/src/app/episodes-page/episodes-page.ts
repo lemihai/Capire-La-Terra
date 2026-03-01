@@ -169,12 +169,16 @@ export class EpisodesPage implements AfterViewInit, OnInit, OnDestroy, OnChanges
     // }, 500);
     this.ngZone.runOutsideAngular(() => {
       // Create the smoother instance
+        const isTouchDevice = () => 
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+
       this.smoother = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
-        smooth: 1,
-        effects: true,
-        normalizeScroll: true,
+        smooth: isTouchDevice() ? 0 : 1,       
+        effects: !isTouchDevice(), 
+        normalizeScroll: false,
         ignoreMobileResize: true,
         smoothTouch: false,
       });

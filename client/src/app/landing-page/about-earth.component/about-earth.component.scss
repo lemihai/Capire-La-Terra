@@ -87,5 +87,13 @@
       border-radius: 1rem;
       opacity: 0.32;
     }
+
+    @media (max-width: 1000px) {
+      
+    }
+  }
+
+  .block:nth-child(3){
+    background-color: red;
   }
 }

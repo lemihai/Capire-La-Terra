@@ -93,11 +93,16 @@ export class LoginPage implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit(): void {
     this.ngZone.runOutsideAngular(() => {
       // Create the smoother instance
+
+       const isTouchDevice = () => 
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+
       this.smoother = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
-        smooth: 1,
-        effects: true,
+        smooth: isTouchDevice() ? 0 : 1,       
+        effects: !isTouchDevice(), 
         normalizeScroll: false,
         ignoreMobileResize: true,
         smoothTouch: false,

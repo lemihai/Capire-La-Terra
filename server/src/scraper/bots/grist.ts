@@ -30,7 +30,7 @@ async function parseDate(input: string) {
 
   // Extract components
   const year = l.getFullYear(); // Gets the year
-  const month = l.getMonth() + 1; // Gets the month (0-based, so add 1)
+  const month = l.getMonth(); // Gets the month (0-based, so add 1)
   const date = l.getDate(); // Gets the day of the month
 
   // Array of month names

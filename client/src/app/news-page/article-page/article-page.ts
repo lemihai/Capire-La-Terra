@@ -79,15 +79,19 @@ export class ArticlePage {
           this.ngZone.runOutsideAngular(() => {
             gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-            this.smoother = ScrollSmoother.create({
-              wrapper: '#smooth-wrapper',
-              content: '#smooth-content',
-              smooth: 1,
-              effects: true,
-              normalizeScroll: false,
-              ignoreMobileResize: true,
-              smoothTouch: false,
-            });
+              const isTouchDevice = () => 
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+
+      this.smoother = ScrollSmoother.create({
+        wrapper: '#smooth-wrapper',
+        content: '#smooth-content',
+        smooth: isTouchDevice() ? 0 : 1,       
+        effects: !isTouchDevice(), 
+        normalizeScroll: false,
+        ignoreMobileResize: true,
+        smoothTouch: false,
+      });
 
             // --------------------------------
             // START FROM THE OTP OF THE PAGE NO MATTER WHERE YOU'RE COMING FROM

@@ -43,8 +43,6 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
   ) {}
 
   viewportWidth = window.innerWidth;
-  isTouchDevice = () => 
-  'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 
   changeanimation = '';
@@ -145,6 +143,10 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
 
   ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => {
+
+      
+      const isTouchDevice = () => 
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 
       const hasLoaded = localStorage.getItem('landingPageLoaded');
@@ -294,12 +296,19 @@ export class LandingPage implements AfterViewInit, OnInit, OnDestroy {
       this.smoother = ScrollSmoother.create({
         wrapper: '#smooth-wrapper',
         content: '#smooth-content',
-        smooth: this.isTouchDevice() ? 0 : 1,       
-        effects: !this.isTouchDevice(), 
+        smooth: isTouchDevice() ? 0 : 1,       
+        effects: !isTouchDevice(), 
         normalizeScroll: false,
         ignoreMobileResize: true,
         smoothTouch: false,
       });
+
+      if (isTouchDevice()) {
+  // Reset all parallax layer offsets
+  for (let i = 1; i <= 9; i++) {
+    gsap.set(`.svg-layer-${i}`, { clearProps: 'transform' });
+  }
+}
 
       ScrollTrigger.create({
         trigger: '#smooth-content',

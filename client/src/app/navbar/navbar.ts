@@ -152,7 +152,7 @@ export class Navbar implements OnInit, AfterViewInit {
 
           this.backgroundWidth = '91.55px';
           this.backgroundHeight = '3.2rem';
-          this.backgroundLeft = 'calc(1.2rem + 65.16px + 70.94px + 70.02px)';
+          this.backgroundLeft = 'calc(1.6rem + 65.16px + 70.94px + 70.02px)';
 
           this.loginBackgroundWidth = '0rem';
           this.loginBackgroundHeight = '3.2rem';
@@ -271,6 +271,7 @@ export class Navbar implements OnInit, AfterViewInit {
     },
 
     hovered(button: string, flag: boolean) {
+      
       switch (this.currentInFocus) {
         case 'home':
           break;
@@ -308,27 +309,27 @@ export class Navbar implements OnInit, AfterViewInit {
         case 'admin':
           if (button == 'home') {
             if (flag == true) {
-              this.backgroundLeft = 'calc(1.5rem + 87.56px + 70.94px + 60.04px)';
+              this.backgroundLeft = 'calc(1.6rem + 87.56px + 70.94px + 71.02px)';
             }
             if (flag == false) {
-              this.backgroundLeft = 'calc(1.5rem + 65.16px + 70.94px + 60.04px)';
+              this.backgroundLeft = 'calc(1.6rem + 65.16px + 70.94px + 71.02px)';
             }
           }
 
           if (button == 'episodes') {
             if (flag == true) {
-              this.backgroundLeft = 'calc(1.5rem + 65.16px + 70.94px + 60.04px)';
+              this.backgroundLeft = 'calc(1.6rem + 65.16px + 93.34px + 71.02px)';
             }
             if (flag == false) {
-              this.backgroundLeft = 'calc(1.5rem + 65.16px + 70.94px + 60.04px)';
+              this.backgroundLeft = 'calc(1.6rem + 65.16px + 70.94px + 71.02px)';
             }
           }
           if (button == 'news') {
             if (flag == true) {
-              this.backgroundLeft = 'calc(1.5rem + 65.16px + 70.94px + 82.44px)';
+              this.backgroundLeft = 'calc(1.6rem + 65.16px + 70.94px + 93.42px)';
             }
             if (flag == false) {
-              this.backgroundLeft = 'calc(1.5rem + 65.16px +70.94px + 60.04px)';
+              this.backgroundLeft = 'calc(1.6rem + 65.16px +70.94px + 71.02px)';
             }
           }
           break;
