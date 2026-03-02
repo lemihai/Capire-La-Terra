@@ -724,7 +724,7 @@ nav {
 // ********************
 
 .active {
-  color: var(--main-color);
+  color: var(--main-color) !important;
   gap: 0.64rem;
   background-color: var(--main-color-dark-16);
   border: 1px solid var(--main-color-dark-16);
@@ -744,6 +744,10 @@ nav {
         transition: var(--transition-160);
       }
     }
+  }
+
+  p{
+    color: var(--main-color) !important;
   }
 }
 
@@ -765,6 +769,7 @@ nav {
   border-radius: 0.8rem;
   padding: 0.4rem 1.2rem 0.4rem 0.64rem;
   background-color: var(--main-color-dark-invisible);
+  color: var(--main-color-dark);
   border: 1px solid var(--main-color-dark-invisible);
   transition: var(--transition-160);
   cursor: pointer;
@@ -793,6 +798,10 @@ nav {
         transition: var(--transition-160);
         stroke-width: 0.24rem;
       }
+    }
+
+    p{
+      color: var(--main-color-dark);
     }
   }
 
